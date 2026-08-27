@@ -4,7 +4,7 @@ Forge 1.20.1 mod providing the Better Content 52-card Threads catalogue and the 
 
 ## Trigger contract
 
-The bundled catalogue contains 52 exact identities: 45 live cards and seven intentionally future Fragility cards. Every live reveal and completion route declares a bounded `producer` and an `episode` correlation slot. There are exactly 96 route entries. Producers emit only completed, server-authoritative native actions:
+The bundled catalogue contains 52 exact identities: 45 live cards and seven intentionally future Fragility cards. Every live reveal and completion route declares a bounded `producer` and an `episode` correlation slot. There are exactly 94 route entries. Producers emit only completed, server-authoritative native actions:
 
 ```java
 ThreadSignals.emit(player, "native_action", "bounded_value", episodeToken);
@@ -18,4 +18,4 @@ No route may discover a card from login, elapsed play time, inventory presence, 
 
 The live-game tease is an input-transparent, panel-free glyph lockup centered at the top third. It uses a small code glyph close to single-line white text with a black border, followed by the localized reader hotkey. The exact reveal copy is `You've revealed the card: %s`. Its 3.2-second clock and bounded aspect/archive particles pause whenever another screen is open.
 
-Opening Threads is voluntary. Unread cards remain sealed until click or Space, then develop for 1.8 seconds through equal archive-structure, unique-pigment, and aspect-trace passes. Title, prose, doorway, and facsimile controls remain hidden until development completes; the first click during development only finishes the plate, and read state changes only at completion. The finished frame always uses the untouched full runtime image.
+Opening Threads is voluntary. Unread cards remain sealed until click or Space, then the untouched native illustration crossfades over the neutral archive plate for 800 ms. There is no separate aspect effect or generated development layer. Title, prose, doorway, and facsimile controls remain hidden until development completes; the first click during development only finishes the plate, and read state changes only at completion.
