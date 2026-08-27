@@ -14,6 +14,7 @@ public final class BetterContentThreads {
         ThreadNetwork.register();
         MinecraftForge.EVENT_BUS.register(ThreadEvents.class);
         MinecraftForge.EVENT_BUS.register(NativeAdvancementThreads.class);
+        MinecraftForge.EVENT_BUS.register(PackActionThreads.class);
         if (ModList.get().isLoaded("dynamictrees")) {
             try {
                 MinecraftForge.EVENT_BUS.register(Class.forName("com.bettercontent.threads.compat.DynamicTreeThreads"));
@@ -75,6 +76,13 @@ public final class BetterContentThreads {
                 MinecraftForge.EVENT_BUS.register(Class.forName("com.bettercontent.threads.compat.TConstructThreads"));
             } catch (ClassNotFoundException failure) {
                 throw new IllegalStateException("Tinkers' Construct compatibility was not packaged", failure);
+            }
+        }
+        if (ModList.get().isLoaded("relics")) {
+            try {
+                MinecraftForge.EVENT_BUS.register(Class.forName("com.bettercontent.threads.compat.RelicsThreads"));
+            } catch (ClassNotFoundException failure) {
+                throw new IllegalStateException("Relics compatibility was not packaged", failure);
             }
         }
     }

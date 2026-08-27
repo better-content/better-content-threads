@@ -750,7 +750,7 @@
         "label": "Power network",
         "type": "electric_network",
         "value": "connected",
-        "producer": "compat.electrodynamics",
+        "producer": "compat.powergrid",
         "correlation": "episode"
       }
     ],
@@ -760,7 +760,7 @@
         "label": "Powered work",
         "type": "electric_complete",
         "value": "generated_transmitted_consumed",
-        "producer": "compat.electrodynamics",
+        "producer": "compat.powergrid",
         "correlation": "episode"
       }
     ],
@@ -778,14 +778,14 @@
     "art": "better_content_threads:textures/gui/threads/machines_can_remember.png",
     "prose": "Information can survive the hand that entered it and return as matter or instruction.",
     "invitation": "Ask a machine to retain an intention.",
-    "action": "Complete an AE2 patterned autocraft or restore an OC2 file after reboot.",
+    "action": "Encode an AE2 pattern, then let the network finish its autocraft.",
     "reveal_routes": [
       {
         "id": "machine_memory",
         "label": "Machine memory online",
         "type": "machine_memory",
-        "value": "ae2|oc2",
-        "producer": "compat.ae2-oc2",
+        "value": "ae2",
+        "producer": "compat.ae2",
         "correlation": "episode"
       }
     ],
@@ -795,15 +795,7 @@
         "label": "Patterned autocraft",
         "type": "machine_recall",
         "value": "ae2",
-        "producer": "compat.ae2-oc2",
-        "correlation": "episode"
-      },
-      {
-        "id": "oc2_persistence",
-        "label": "Persistent program",
-        "type": "machine_recall",
-        "value": "oc2",
-        "producer": "compat.ae2-oc2",
+        "producer": "compat.ae2",
         "correlation": "episode"
       }
     ],
@@ -1039,14 +1031,14 @@
     "art": "better_content_threads:textures/gui/threads/spirits_honour_contracts.png",
     "prose": "Elsewhere does not answer freely. It recognizes form, offering, boundary, and obligation.",
     "invitation": "Complete the terms that opened the way.",
-    "action": "Finish an Occultism spirit task or a Hexerei covenant.",
+    "action": "Begin and finish one valid Occultism ritual.",
     "reveal_routes": [
       {
         "id": "binding_started",
         "label": "Binding begun",
         "type": "spirit_binding",
-        "value": "occultism|hexerei",
-        "producer": "compat.occultism-hexerei",
+        "value": "occultism",
+        "producer": "compat.occultism",
         "correlation": "episode"
       }
     ],
@@ -1056,15 +1048,7 @@
         "label": "Occultist contract",
         "type": "spirit_complete",
         "value": "occultism",
-        "producer": "compat.occultism-hexerei",
-        "correlation": "episode"
-      },
-      {
-        "id": "hexerei_covenant",
-        "label": "Hexerei covenant",
-        "type": "spirit_complete",
-        "value": "hexerei",
-        "producer": "compat.occultism-hexerei",
+        "producer": "compat.occultism",
         "correlation": "episode"
       }
     ],
@@ -1272,7 +1256,7 @@
         "label": "Relic answered",
         "type": "relic_activation",
         "value": "first",
-        "producer": "compat.artifacts",
+        "producer": "compat.relics",
         "correlation": "episode"
       }
     ],
@@ -1282,7 +1266,7 @@
         "label": "Relic remembered",
         "type": "relic_activation",
         "value": "correlated_second",
-        "producer": "compat.artifacts",
+        "producer": "compat.relics",
         "correlation": "episode"
       }
     ],
