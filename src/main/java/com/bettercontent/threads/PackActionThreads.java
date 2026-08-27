@@ -1,5 +1,6 @@
 package com.bettercontent.threads;
 
+import com.bettercontent.threads.compat.ValkyrienSkiesThreads;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -9,6 +10,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 
 import java.lang.reflect.Method;
 import java.util.Collection;
@@ -122,8 +124,8 @@ public final class PackActionThreads {
 
     private static void updateVessel(ServerPlayer player) {
         CompoundTag state = persisted(player).getCompound(VESSEL);
-        Object ship = shipManaging(player);
-        if (ship == null) {
+        VesselObservation vessel = observeVessel(player);
+        if (vessel == null) {
             if (state.getBoolean("aboard")) {
                 String token = state.getString("token");
                 if (state.getDouble("distance") >= 128.0 && token.equals(ThreadSignals.activeCorrelation(player, "vessel_becomes_place"))) {
@@ -134,51 +136,30 @@ public final class PackActionThreads {
             return;
         }
 
-        double[] position = shipPosition(ship);
-        if (position == null) return;
-        String shipId = shipId(ship);
+        String shipId = vessel.id();
         if (!state.getBoolean("aboard") || !shipId.equals(state.getString("ship"))) {
             String token = episode(player, "vessel:" + shipId);
             state = new CompoundTag();
             state.putBoolean("aboard", true);
             state.putString("ship", shipId);
             state.putString("token", token);
-            state.putDouble("startX", position[0]);
-            state.putDouble("startZ", position[1]);
+            state.putDouble("startX", vessel.x());
+            state.putDouble("startZ", vessel.z());
             ThreadSignals.emit(player, "vessel_assemble", shipId, token);
         } else {
-            double dx = position[0] - state.getDouble("startX");
-            double dz = position[1] - state.getDouble("startZ");
+            double dx = vessel.x() - state.getDouble("startX");
+            double dz = vessel.z() - state.getDouble("startZ");
             state.putDouble("distance", Math.max(state.getDouble("distance"), Math.sqrt(dx * dx + dz * dz)));
         }
         persisted(player).put(VESSEL, state);
     }
 
-    private static Object shipManaging(ServerPlayer player) {
+    private static VesselObservation observeVessel(ServerPlayer player) {
+        if (!ModList.get().isLoaded("valkyrienskies")) return null;
         try {
-            Class<?> utils = Class.forName("org.valkyrienskies.mod.common.VSGameUtilsKt");
-            return utils.getMethod("getShipManaging", net.minecraft.world.entity.Entity.class).invoke(null, player);
-        } catch (ReflectiveOperationException ignored) {
-            return null;
-        }
-    }
-
-    private static String shipId(Object ship) {
-        try {
-            return String.valueOf(ship.getClass().getMethod("getId").invoke(ship));
-        } catch (ReflectiveOperationException ignored) {
-            return Integer.toUnsignedString(System.identityHashCode(ship), 36);
-        }
-    }
-
-    private static double[] shipPosition(Object ship) {
-        try {
-            Object transform = ship.getClass().getMethod("getTransform").invoke(ship);
-            Object position = transform.getClass().getMethod("getPositionInWorld").invoke(transform);
-            double x = ((Number) position.getClass().getMethod("x").invoke(position)).doubleValue();
-            double z = ((Number) position.getClass().getMethod("z").invoke(position)).doubleValue();
-            return new double[]{x, z};
-        } catch (ReflectiveOperationException ignored) {
+            return ValkyrienSkiesThreads.observe(player);
+        } catch (LinkageError ignored) {
+            // The optional integration remains inert if a foreign binary API changes.
             return null;
         }
     }
@@ -221,4 +202,6 @@ public final class PackActionThreads {
     private record ElectricalObservation(boolean working, boolean consumer) {
         private static final ElectricalObservation NONE = new ElectricalObservation(false, false);
     }
+
+    public record VesselObservation(String id, double x, double z) {}
 }
