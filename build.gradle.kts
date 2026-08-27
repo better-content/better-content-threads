@@ -4,7 +4,10 @@ plugins {
     jacoco
     id("net.minecraftforge.gradle") version "[6.0.24,6.2)"
     id("org.parchmentmc.librarian.forgegradle") version "1.2.0"
+    id("org.spongepowered.mixin") version "0.7.+"
 }
+
+mixin { config("better_content_threads.mixins.json") }
 
 group = "com.bettercontent"
 version = property("mod_version") as String
@@ -71,6 +74,12 @@ dependencies {
     compileOnly(fg.deobf("curse.maven:curios-api-309927:6418456"))
     compileOnly(fg.deobf("curse.maven:mantle-74924:7563777"))
     compileOnly(fg.deobf("curse.maven:tinkers-construct-74072:7449219"))
+    compileOnly(fg.deobf("curse.maven:pneumaticcraft-repressurized-281849:7307654"))
+    compileOnly(fg.deobf("curse.maven:ars-nouveau-401955:6688854"))
+    compileOnly(fg.deobf("curse.maven:blood-magic-224791:7956981"))
+    compileOnly(fg.deobf("curse.maven:goety-586095:8087429"))
+    compileOnly(fg.deobf("com.ferreusveritas.dynamictrees:DynamicTrees-1.20.1:1.4.9"))
+    compileOnly(fg.deobf("curse.maven:serene-seasons-291874:6398227"))
     compileOnly(fg.deobf("curse.maven:polymorph-388800:6450982"))
     compileOnly(fg.deobf("curse.maven:architectury-api-419699:5137938"))
     compileOnly(fg.deobf("curse.maven:ftb-library-forge-404465:7296748"))
@@ -179,5 +188,3 @@ tasks.processResources {
         expand(props)
     }
 }
-
-

@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.function.Supplier;
 
 public final class ThreadNetwork {
-    private static final String VERSION="6";
+    private static final String VERSION="7";
     private static final SimpleChannel CHANNEL=NetworkRegistry.newSimpleChannel(new ResourceLocation(BetterContentThreads.MOD_ID,"threads"),()->VERSION,VERSION::equals,VERSION::equals);
     private static final Map<UUID,Long>lastIssue=new HashMap<>();private static int messageId;
     private ThreadNetwork(){}

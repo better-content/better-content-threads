@@ -1,7 +1,7 @@
 package com.bettercontent.threads;
 
 final class ThreadRevealState {
-    static final long DURATION_MS = 800L;
+    static final long DURATION_MS = 1_800L;
 
     enum Phase { SEALED, DEVELOPING, COMPLETE }
     enum Activation { STARTED, COMPLETED, IGNORED }
