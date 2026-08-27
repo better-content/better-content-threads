@@ -7,6 +7,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.*;
 import net.minecraftforge.network.simple.SimpleChannel;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 import java.util.*;
 import java.util.function.Supplier;
 
@@ -20,7 +22,11 @@ public final class ThreadNetwork {
     public static Notice notice(ThreadDefinition d,NoticeKind kind){return new Notice(kind,d.id(),d.title(),d.suit().id(),d.aspect().id());}
     public static void sync(ServerPlayer player,boolean open,List<Notice> notices){var state=ThreadPlayerState.get(player);var cards=ThreadDefinitions.INSTANCE.all().stream().sorted(Comparator.comparing((ThreadDefinition d)->d.suit().ordinal()).thenComparingInt(ThreadDefinition::order)).map(d->card(d,state)).toList();CHANNEL.send(PacketDistributor.PLAYER.with(()->player),new Sync(open,cards,notices));}
     private static Card card(ThreadDefinition d,ThreadPlayerState s){boolean known=s.known.contains(d.id()),active=s.active.contains(d.id());var doorway=d.doorway();return new Card(d.id(),d.title(),d.suit().id(),d.order(),d.aspect().id(),d.art().toString(),d.future(),known,known&&s.unread.contains(d.id()),active,s.completed.contains(d.id()),known&&!d.future()?d.prose():"",active&&!d.future()?d.invitation():"",active&&!d.future()?d.action():"",doorway==null?"":doorway.type(),doorway==null?"":doorway.target(),s.completionCounts.getOrDefault(d.id(),0),s.firstGeneration.getOrDefault(d.id(),-1L),s.lastGeneration.getOrDefault(d.id(),-1L),s.routeSummary(d.id()));}
-    public static void request(String action,String thread){CHANNEL.sendToServer(new Action(action,thread));}
+    public static void request(String action,String thread){DistExecutor.unsafeRunWhenOn(Dist.CLIENT,()->()->ClientAccess.send(action,thread));}
+
+    private static final class ClientAccess{
+        private static void send(String action,String thread){if(net.minecraft.client.Minecraft.getInstance().getConnection()!=null)CHANNEL.sendToServer(new Action(action,thread));}
+    }
 
     public record Card(String id,String title,String suit,int order,String aspect,String art,boolean future,boolean known,boolean unread,boolean active,boolean completed,String prose,String invitation,String action,String doorwayType,String doorwayTarget,int completionCount,long firstGeneration,long lastGeneration,String routeSummary){
         public Card{ThreadPacketValidation.id(id);ThreadPacketValidation.title(title);ThreadSuit.parse(suit);if(order<1||order>13)throw new IllegalArgumentException("invalid thread order");ThreadAspect.parse(aspect);ThreadPacketValidation.resource(art,"art");if(prose.length()>ThreadDefinition.MAX_TEXT||invitation.length()>160||action.length()>192||routeSummary.length()>512)throw new IllegalArgumentException("oversized thread card text");if(!doorwayType.isEmpty()&&!ThreadDefinition.Doorway.validType(doorwayType))throw new IllegalArgumentException("invalid doorway type");if(doorwayTarget.length()>128||completionCount<0||firstGeneration< -1||lastGeneration< -1)throw new IllegalArgumentException("invalid thread history");if(future&&(known||unread||active||completed||!prose.isEmpty()||!invitation.isEmpty()||!action.isEmpty()||!doorwayType.isEmpty()))throw new IllegalArgumentException("future card leaked content");}
