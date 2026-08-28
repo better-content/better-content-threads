@@ -3,6 +3,9 @@
   "message.better_content_threads.thread_revealed": "You've revealed the card: %s",
   "message.better_content_threads.thread_completed": "You've completed card %s",
   "message.better_content_threads.thread_reader_hint": "%1$s+%2$s · Open Threads",
+  "screen.better_content_threads.catalogue_status": "%s of 13 remembered",
+  "screen.better_content_threads.catalogue_status_unread": "%1$s of 13 remembered · %2$s to reveal",
+  "screen.better_content_threads.reveal_badge": "REVEAL",
   "key.better_content_threads.threads": "Open Threads",
   "key.categories.better_content_threads": "Better Content"
 }

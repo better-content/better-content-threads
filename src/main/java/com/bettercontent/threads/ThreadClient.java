@@ -15,7 +15,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.client.event.RenderGuiOverlayEvent;
+import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -36,6 +36,8 @@ public final class ThreadClient {
     static final int NOTICE_HINT_OFFSET_Y = 10;
     static final float NOTICE_HINT_SCALE = 0.58f;
     static final int ARCHIVE_GOLD = 0xC6A15B;
+    static final int ART_TEXTURE_WIDTH = 256;
+    static final int ART_TEXTURE_HEIGHT = 384;
     public static final KeyMapping OPEN = new KeyMapping("key.better_content_threads.threads", InputConstants.Type.KEYSYM,
         GLFW.GLFW_KEY_J, "key.categories.better_content_threads");
     private static final ThreadNoticeQueue<ThreadNetwork.Notice> NOTICES = new ThreadNoticeQueue<>(ThreadNetwork.Notice::identity);
@@ -73,7 +75,7 @@ public final class ThreadClient {
     }
 
     @SubscribeEvent
-    public static void render(RenderGuiOverlayEvent.Post event) {
+    public static void render(RenderGuiEvent.Post event) {
         var minecraft = Minecraft.getInstance();
         if (minecraft.player == null || minecraft.screen != null) {
             lastLiveFrame = 0L;
@@ -180,7 +182,8 @@ public final class ThreadClient {
 
     static void renderArt(GuiGraphics graphics, String art, int x, int y, int width, int height) {
         var id = ResourceLocation.tryParse(art);
-        if (id != null) graphics.blit(id, x, y, 0, 0, width, height, 256, 384);
+        if (id != null) graphics.blit(id, x, y, width, height, 0.0f, 0.0f,
+            ART_TEXTURE_WIDTH, ART_TEXTURE_HEIGHT, ART_TEXTURE_WIDTH, ART_TEXTURE_HEIGHT);
     }
 
     static void renderArt(GuiGraphics graphics, String art, int x, int y, int width, int height, float alpha) {
