@@ -10,7 +10,7 @@ The bundled catalogue contains 52 exact identities: 45 live cards and seven inte
 ThreadSignals.emit(player, "native_action", "bounded_value", episodeToken);
 ```
 
-The reveal stores the episode token in lineage player state. A completion is accepted only for the same active card and exact token; tokens persist across ordinary reloads and clear on completion or generation transition. The legacy three-argument overload remains binary-compatible but cannot satisfy correlated catalogue routes.
+The reveal stores the episode token in lineage player state. A completion is accepted only for the same active card and exact token; tokens persist across ordinary reloads and clear on completion or generation transition. Single-player saves use World Lifecycle Manager's durable bound lineage store, allowing a future successor to inherit card history without combining unrelated saves. When that lineage payload is initially empty, an older world-local Thread payload is imported on the next save. The legacy three-argument overload remains binary-compatible but cannot satisfy correlated catalogue routes.
 
 No route may discover a card from login, elapsed play time, inventory presence, or a synthetic objective. Contextual signals are queued one at a time and the automatic notice never captures input. Version-pinned adapters consume native mechanic evidence: action-backed Create criteria, live PneumaticCraft pressure, a launch-ready Creating Space rocket, matching Ars spell save/effect signatures, Blood Magic altar and soul-network events, Goety soul events, Tinkers' actual tool/alloy outputs, and vanilla enchantment effects.
 
