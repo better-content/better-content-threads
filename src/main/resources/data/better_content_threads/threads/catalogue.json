@@ -245,73 +245,73 @@
     }
   },
   {
-    "id": "deep_own_light",
-    "title": "The Deep Grows Its Own Light",
+    "id": "pollen_keeps_a_pantry",
+    "title": "Pollen Keeps a Pantry",
     "suit": "world",
     "order": 8,
     "aspect": "robustness",
     "art": "better_content_threads:textures/gui/threads/deep_own_light.png",
-    "prose": "The absence of a sky does not prevent a world from inventing color.",
-    "invitation": "Return with proof that darkness can grow.",
-    "action": "Return to the Overworld after entering the Undergarden.",
+    "prose": "A hive vast enough to become a country keeps every cultivated flavor alive.",
+    "invitation": "Return with a living seed from the pollen nurseries.",
+    "action": "Return to the Overworld after entering the Bumblezone.",
     "reveal_routes": [
       {
-        "id": "undergarden_arrival",
-        "label": "Undergarden arrival",
+        "id": "bumblezone_arrival",
+        "label": "Bumblezone arrival",
         "type": "dimension_enter",
-        "value": "undergarden:undergarden",
+        "value": "the_bumblezone:the_bumblezone",
         "producer": "better-content-threads",
         "correlation": "episode"
       }
     ],
     "completion_routes": [
       {
-        "id": "undergarden_return",
-        "label": "Undergarden return",
+        "id": "bumblezone_return",
+        "label": "Bumblezone return",
         "type": "dimension_return",
-        "value": "undergarden:undergarden",
+        "value": "the_bumblezone:the_bumblezone",
         "producer": "better-content-threads",
         "correlation": "episode"
       }
     ],
     "doorway": {
       "type": "ftb",
-      "target": "Undergarden"
+      "target": "Bumblezone"
     }
   },
   {
-    "id": "silence_has_teeth",
-    "title": "Silence Has Teeth",
+    "id": "logistics_has_ruins",
+    "title": "Logistics Has Ruins",
     "suit": "world",
     "order": 9,
     "aspect": "endurance",
     "art": "better_content_threads:textures/gui/threads/silence_has_teeth.png",
-    "prose": "A quiet place can still be actively hostile. Absence may be one of its hunting methods.",
-    "invitation": "Return before the silence closes.",
-    "action": "Return to the Overworld after entering the Otherside.",
+    "prose": "Old mechanisms remember roads, requests, and the small couriers that connected them.",
+    "invitation": "Return with a component that can organize movement at scale.",
+    "action": "Return to the Overworld after entering Ratlantis.",
     "reveal_routes": [
       {
-        "id": "otherside_arrival",
-        "label": "Otherside arrival",
+        "id": "ratlantis_arrival",
+        "label": "Ratlantis arrival",
         "type": "dimension_enter",
-        "value": "deeperdarker:otherside",
+        "value": "rats:ratlantis",
         "producer": "better-content-threads",
         "correlation": "episode"
       }
     ],
     "completion_routes": [
       {
-        "id": "otherside_return",
-        "label": "Otherside return",
+        "id": "ratlantis_return",
+        "label": "Ratlantis return",
         "type": "dimension_return",
-        "value": "deeperdarker:otherside",
+        "value": "rats:ratlantis",
         "producer": "better-content-threads",
         "correlation": "episode"
       }
     ],
     "doorway": {
       "type": "ftb",
-      "target": "Otherside"
+      "target": "Ratlantis"
     }
   },
   {

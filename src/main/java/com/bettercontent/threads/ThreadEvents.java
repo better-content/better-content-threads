@@ -29,7 +29,7 @@ public final class ThreadEvents {
     private static final Map<UUID,RuinVisit> RUINS=new HashMap<>();
     private static final Map<UUID,HostileCollision> COLLISIONS=new HashMap<>();
     private static final Set<String> MAJOR_STRUCTURE_WORDS=Set.of("ruin","temple","fortress","mansion","monument","mineshaft","stronghold","ancient_city","dungeon","citadel","palace","castle");
-    private static final Set<String> MAJOR_PORTALS=Set.of("minecraft:nether_portal","minecraft:end_portal","minecraft:end_gateway","aether:aether_portal","undergarden:undergarden_portal","deeperdarker:otherside_portal");
+    private static final Set<String> MAJOR_PORTALS=Set.of("minecraft:nether_portal","minecraft:end_portal","minecraft:end_gateway","aether:aether_portal");
     private static final String JOURNEY="BetterContentThreadsJourneyEpisode",HAZARD="BetterContentThreadsHazardEpisode",ENCHANT_TOKEN="BetterContentThreadsEnchantEpisode";
 
     private record CampaignEpisode(String state,String token){}
@@ -93,7 +93,7 @@ public final class ThreadEvents {
     private static void saveEpisode(ServerPlayer player,String key,net.minecraft.nbt.CompoundTag value){var persisted=player.getPersistentData().getCompound(net.minecraft.world.entity.player.Player.PERSISTED_NBT_TAG);persisted.put(key,value);player.getPersistentData().put(net.minecraft.world.entity.player.Player.PERSISTED_NBT_TAG,persisted);}
     private static void clearEpisode(ServerPlayer player,String key){var persisted=player.getPersistentData().getCompound(net.minecraft.world.entity.player.Player.PERSISTED_NBT_TAG);persisted.remove(key);player.getPersistentData().put(net.minecraft.world.entity.player.Player.PERSISTED_NBT_TAG,persisted);}
     private static String episode(ServerPlayer player,String kind){return player.getUUID()+":"+Integer.toUnsignedString(kind.hashCode(),36)+":"+player.server.getTickCount();}
-    private static String dimensionCard(String dimension){return switch(dimension){case "minecraft:the_nether"->"fire_has_country";case "aether:the_aether"->"sky_another_country";case "undergarden:undergarden"->"deep_own_light";case "deeperdarker:otherside"->"silence_has_teeth";default->"";};}
+    private static String dimensionCard(String dimension){return switch(dimension){case "minecraft:the_nether"->"fire_has_country";case "aether:the_aether"->"sky_another_country";case "the_bumblezone:the_bumblezone"->"pollen_keeps_a_pantry";case "rats:ratlantis"->"logistics_has_ruins";default->"";};}
     private static boolean isTerminal(String value){return value.equals("survived")||value.equals("resolved")||value.equals("retreated")||value.equals("target_dead")||value.equals("defeated");}
     private static boolean isDowned(ServerPlayer player){try{var api=Class.forName("com.bettercontent.downedplayerrevival.api.RevivalApi");return(boolean)api.getMethod("isDowned",net.minecraft.world.entity.player.Player.class).invoke(null,player);}catch(ReflectiveOperationException ignored){return false;}}
     private static String campaign(ServerPlayer player){try{var api=Class.forName("com.bettercontent.pillagercampaigns.api.CampaignStatusApi");return api.getMethod("state",ServerPlayer.class).invoke(null,player).toString().toLowerCase(Locale.ROOT);}catch(ReflectiveOperationException ignored){return "none";}}
