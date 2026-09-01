@@ -205,8 +205,8 @@
       }
     ],
     "doorway": {
-      "type": "ftb",
-      "target": "Nether"
+      "type": "font",
+      "target": "minecraft:the_nether"
     }
   },
   {
@@ -240,8 +240,8 @@
       }
     ],
     "doorway": {
-      "type": "ftb",
-      "target": "Aether"
+      "type": "font",
+      "target": "aether:the_aether"
     }
   },
   {
@@ -275,8 +275,8 @@
       }
     ],
     "doorway": {
-      "type": "ftb",
-      "target": "Bumblezone"
+      "type": "font",
+      "target": "the_bumblezone:the_bumblezone"
     }
   },
   {
@@ -310,8 +310,8 @@
       }
     ],
     "doorway": {
-      "type": "ftb",
-      "target": "Ratlantis"
+      "type": "font",
+      "target": "rats:ratlantis"
     }
   },
   {
@@ -555,8 +555,8 @@
       }
     ],
     "doorway": {
-      "type": "ftb",
-      "target": "Create"
+      "type": "ponder",
+      "target": "create:hand_crank"
     }
   },
   {
@@ -590,8 +590,8 @@
       }
     ],
     "doorway": {
-      "type": "ftb",
-      "target": "Create"
+      "type": "ponder",
+      "target": "create:large_water_wheel"
     }
   },
   {
@@ -625,8 +625,8 @@
       }
     ],
     "doorway": {
-      "type": "ftb",
-      "target": "Precision Mechanisms"
+      "type": "emi",
+      "target": "create:precision_mechanism"
     }
   },
   {
@@ -765,8 +765,8 @@
       }
     ],
     "doorway": {
-      "type": "ftb",
-      "target": "Electrical Age"
+      "type": "emi",
+      "target": "powergrid:generator_housing"
     }
   },
   {
@@ -835,8 +835,8 @@
       }
     ],
     "doorway": {
-      "type": "ftb",
-      "target": "Trains"
+      "type": "ponder",
+      "target": "create:track_station"
     }
   },
   {
@@ -870,8 +870,8 @@
       }
     ],
     "doorway": {
-      "type": "ftb",
-      "target": "Vessels"
+      "type": "emi",
+      "target": "vs_eureka:oak_ship_helm"
     }
   },
   {
@@ -905,8 +905,8 @@
       }
     ],
     "doorway": {
-      "type": "ftb",
-      "target": "Create: Creating Space"
+      "type": "emi",
+      "target": "creatingspace:rocket_controls"
     }
   },
   {
@@ -1444,11 +1444,7 @@
         "producer": "better-content-threads",
         "correlation": "episode"
       }
-    ],
-    "doorway": {
-      "type": "ftb",
-      "target": "Ruins"
-    }
+    ]
   },
   {
     "id": "enemies_no_cause",

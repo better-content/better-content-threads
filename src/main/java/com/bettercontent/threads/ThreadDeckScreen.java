@@ -263,7 +263,7 @@ public final class ThreadDeckScreen extends Screen {
         if (cardHeight >= 175 && !card.routeSummary().isEmpty()) {
             graphics.drawString(font, fit(card.routeSummary(), panelWidth), x, y + 124, 0xFF77736B, false);
         }
-        graphics.drawString(font, "Look closer  ›", x, y + cardHeight - 27, 0xFFAEBFD0, false);
+        if (!card.doorwayType().isEmpty()) graphics.drawString(font, "Look closer  ›", x, y + cardHeight - 27, 0xFFAEBFD0, false);
         graphics.drawString(font, "Issue signed facsimile", x, y + cardHeight - 14, 0xFFC9AE7A, false);
     }
 
@@ -320,7 +320,7 @@ public final class ThreadDeckScreen extends Screen {
         }
         if (!card.known()) return true;
         var layout = detailLayout(width, height);
-        if (mouseX >= layout.detailsX() && mouseY >= layout.cardY() + layout.cardHeight() - 32
+        if (!card.doorwayType().isEmpty() && mouseX >= layout.detailsX() && mouseY >= layout.cardY() + layout.cardHeight() - 32
             && mouseY < layout.cardY() + layout.cardHeight() - 18) {
             ThreadDoorways.open(card);
             return true;

@@ -53,6 +53,7 @@ repositories {
     maven("https://harleyoconnor.com/maven")
     maven("https://repo.spongepowered.org/repository/maven-public/")
     maven("https://maven.llamalad7.mixinextras.org/releases/")
+    maven("https://maven.createmod.net")
     maven("https://maven.valkyrienskies.org") { content { includeGroup("org.valkyrienskies.core") } }
     maven("https://www.cursemaven.com") { content { includeGroup("curse.maven") } }
     mavenCentral()
@@ -84,7 +85,8 @@ dependencies {
     compileOnly(fg.deobf("curse.maven:architectury-api-419699:5137938"))
     compileOnly(fg.deobf("curse.maven:ftb-library-forge-404465:7296748"))
     compileOnly(fg.deobf("curse.maven:ftb-teams-forge-404468:7499810"))
-    compileOnly(fg.deobf("curse.maven:ftb-quests-forge-289412:7909594"))
+    compileOnly(fg.deobf("curse.maven:emi-580555:8081375"))
+    compileOnly(fg.deobf("net.createmod.ponder:Ponder-Forge-1.20.1:1.0.92"))
     compileOnly(fg.deobf("curse.maven:epic-fight-mod-405076:8049910"))
     compileOnly(fg.deobf("curse.maven:valkyrien-skies-258371:7906689"))
     compileOnly(fg.deobf("curse.maven:relics-445274:7708970"))
@@ -100,7 +102,6 @@ dependencies {
     runtimeOnly(fg.deobf("curse.maven:ftb-library-forge-404465:7296748"))
     runtimeOnly(fg.deobf("curse.maven:ftb-teams-forge-404468:7499810"))
     runtimeOnly(fg.deobf("curse.maven:ftb-filter-system-943925:6466153"))
-    runtimeOnly(fg.deobf("curse.maven:ftb-quests-forge-289412:7909594"))
     runtimeOnly(fg.deobf("curse.maven:mantle-74924:7563777"))
     runtimeOnly(fg.deobf("curse.maven:tinkers-construct-74072:7449219"))
     runtimeOnly(fg.deobf("curse.maven:polymorph-388800:6450982"))
