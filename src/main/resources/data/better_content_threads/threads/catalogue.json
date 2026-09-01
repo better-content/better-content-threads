@@ -245,14 +245,14 @@
     }
   },
   {
-    "id": "pollen_keeps_a_pantry",
-    "title": "Pollen Keeps a Pantry",
+    "id": "deep_own_light",
+    "title": "The Deep Grows Its Own Light",
     "suit": "world",
     "order": 8,
     "aspect": "robustness",
-    "art": "better_content_threads:textures/gui/threads/pollen_keeps_a_pantry.png",
-    "prose": "A hive vast enough to become a country keeps every cultivated flavor alive.",
-    "invitation": "Return with a living seed from the pollen nurseries.",
+    "art": "better_content_threads:textures/gui/threads/deep_own_light.png",
+    "prose": "Under a roof of living comb, a whole country cultivates its own light.",
+    "invitation": "Return with proof that the hive can grow a dawn.",
     "action": "Return to the Overworld after entering the Bumblezone.",
     "reveal_routes": [
       {
@@ -280,14 +280,14 @@
     }
   },
   {
-    "id": "logistics_has_ruins",
-    "title": "Logistics Has Ruins",
+    "id": "silence_has_teeth",
+    "title": "Silence Has Teeth",
     "suit": "world",
     "order": 9,
     "aspect": "endurance",
-    "art": "better_content_threads:textures/gui/threads/logistics_has_ruins.png",
-    "prose": "Old mechanisms remember roads, requests, and the small couriers that connected them.",
-    "invitation": "Return with a component that can organize movement at scale.",
+    "art": "better_content_threads:textures/gui/threads/silence_has_teeth.png",
+    "prose": "Ratlantis is quiet only until its abandoned routes show their teeth.",
+    "invitation": "Return before the ruined machinery closes around you.",
     "action": "Return to the Overworld after entering Ratlantis.",
     "reveal_routes": [
       {
