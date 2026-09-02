@@ -13,12 +13,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -38,8 +36,8 @@ public final class ThreadClient {
     static final int ARCHIVE_GOLD = 0xC6A15B;
     static final int ART_TEXTURE_WIDTH = 256;
     static final int ART_TEXTURE_HEIGHT = 384;
-    public static final KeyMapping OPEN = new KeyMapping("key.better_content_threads.threads", InputConstants.Type.KEYSYM,
-        GLFW.GLFW_KEY_J, "key.categories.better_content_threads");
+    public static final KeyMapping OPEN = new KeyMapping("key.better_content_threads.open_reader", InputConstants.Type.KEYSYM,
+        GLFW.GLFW_KEY_M, "key.categories.better_content_threads");
     private static final ThreadNoticeQueue<ThreadNetwork.Notice> NOTICES = new ThreadNoticeQueue<>(ThreadNetwork.Notice::identity);
     private static List<ThreadNetwork.Card> cards = List.of();
     private static long lastLiveFrame;
@@ -55,14 +53,9 @@ public final class ThreadClient {
     @SubscribeEvent
     public static void tick(TickEvent.ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
+        if (OPEN.consumeClick()) ThreadNetwork.request("open", "");
         while (OPEN.consumeClick()) {}
         if (Minecraft.getInstance().screen != null) lastLiveFrame = 0L;
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void key(InputEvent.Key event) {
-        if (event.getAction() == GLFW.GLFW_PRESS && OPEN.matches(event.getKey(), event.getScanCode())
-            && (event.getModifiers() & GLFW.GLFW_MOD_CONTROL) != 0) ThreadNetwork.request("open", "");
     }
 
     @SubscribeEvent
@@ -103,7 +96,7 @@ public final class ThreadClient {
         float scale = Math.max(NOTICE_MIN_TEXT_SCALE,Math.min(NOTICE_TEXT_SCALE, (screenWidth - 24.0f) / Math.max(1, textWidth)));
         drawOutlinedCentered(graphics, message, centerX, centerY + NOTICE_TEXT_OFFSET_Y, scale, alpha);
         Component hint = Component.translatable("message.better_content_threads.thread_reader_hint",
-                Component.translatable("key.keyboard.left.control"), OPEN.getTranslatedKeyMessage());
+                OPEN.getTranslatedKeyMessage());
         int hintWidth = Minecraft.getInstance().font.width(hint);
         float hintScale = Math.min(NOTICE_HINT_SCALE, (screenWidth - 24.0f) / Math.max(1, hintWidth));
         drawOutlinedCentered(graphics, hint, centerX, centerY + NOTICE_HINT_OFFSET_Y, hintScale, alpha * 0.82f);
