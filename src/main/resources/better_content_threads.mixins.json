@@ -2,6 +2,7 @@
   "required": false,
   "minVersion": "0.8",
   "package": "com.bettercontent.threads.mixin",
+  "plugin": "com.bettercontent.threads.mixin.BetterContentThreadsMixinPlugin",
   "compatibilityLevel": "JAVA_17",
   "mixins": ["Ae2CraftingCpuMixin", "ArsSourceEnergyMixin", "ArsUpdateCasterMixin", "OccultismRitualBowlMixin", "TinkerAlloyMixin", "TinkerRepairResultMixin"],
   "injectors": {"defaultRequire": 1}
