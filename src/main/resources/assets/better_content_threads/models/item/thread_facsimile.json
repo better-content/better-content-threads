@@ -1,6 +1,6 @@
 {
   "parent":"minecraft:item/generated",
-  "textures":{"layer0":"minecraft:item/paper"},
+  "textures":{"layer0":"minecraft:item/paper","particle":"minecraft:item/paper"},
   "overrides":[
     {"predicate":{"better_content_threads:thread_index":1.0},"model":"better_content_threads:item/thread_cards/stone_makes_promises"},
     {"predicate":{"better_content_threads:thread_index":2.0},"model":"better_content_threads:item/thread_cards/world_remembers"},

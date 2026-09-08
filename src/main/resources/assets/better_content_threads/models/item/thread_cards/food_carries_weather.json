@@ -1,1 +1,1 @@
-{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:gui/threads/food_carries_weather"}}
+{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:item/thread_cards/food_carries_weather","particle":"better_content_threads:item/thread_cards/food_carries_weather"}}

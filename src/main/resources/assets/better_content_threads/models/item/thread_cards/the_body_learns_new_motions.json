@@ -1,1 +1,1 @@
-{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:gui/threads/the_body_learns_new_motions"}}
+{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:item/thread_cards/the_body_learns_new_motions","particle":"better_content_threads:item/thread_cards/the_body_learns_new_motions"}}

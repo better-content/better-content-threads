@@ -65,7 +65,11 @@ final class ThreadContractsTest {
         Path assets=Path.of("src/main/resources/assets");
         var dispatch=JsonParser.parseString(Files.readString(assets.resolve("better_content_threads/models/item/thread_facsimile.json"))).getAsJsonObject();
         var overrides=dispatch.getAsJsonArray("overrides");
-        Set<String> guiTextureCards=Set.of("coins_do_not_climb","food_carries_weather","hunger_is_not_nutrition","recipes_obey_this_world","sleep_is_not_an_anchor","the_body_learns_new_motions","the_end_is_not_a_door");
+        var fallback=dispatch.getAsJsonObject("textures");
+        assertEquals("minecraft:item/paper",fallback.get("layer0").getAsString());
+        assertEquals("minecraft:item/paper",fallback.get("particle").getAsString());
+        assertNotNull(getClass().getClassLoader().getResource("assets/better_content_threads/models/item/thread_facsimile.json"));
+        Set<String> newCards=Set.of("coins_do_not_climb","food_carries_weather","hunger_is_not_nutrition","recipes_obey_this_world","sleep_is_not_an_anchor","the_body_learns_new_motions","the_end_is_not_a_door");
         assertEquals(ThreadArt.IDS.size(),overrides.size());
         for(int index=0;index<ThreadArt.IDS.size();index++){
             String id=ThreadArt.IDS.get(index);
@@ -75,15 +79,24 @@ final class ThreadContractsTest {
 
             Path modelPath=assets.resolve("better_content_threads/models/item/thread_cards/"+id+".json");
             assertTrue(Files.isRegularFile(modelPath),id+" model");
+            assertNotNull(getClass().getClassLoader().getResource("assets/better_content_threads/models/item/thread_cards/"+id+".json"),id+" packaged model");
             var model=JsonParser.parseString(Files.readString(modelPath)).getAsJsonObject();
             assertEquals("minecraft:item/generated",model.get("parent").getAsString(),id);
-            String texture=model.getAsJsonObject("textures").get("layer0").getAsString();
-            String expectedDirectory=guiTextureCards.contains(id)?"gui/threads/":"item/thread_cards/";
-            assertEquals("better_content_threads:"+expectedDirectory+id,texture,id);
+            var textures=model.getAsJsonObject("textures");
+            String texture=textures.get("layer0").getAsString();
+            assertEquals("better_content_threads:item/thread_cards/"+id,texture,id+" atlas sprite");
+            assertEquals(texture,textures.has("particle")?textures.get("particle").getAsString():texture,id+" particle");
             String[] location=texture.split(":",2);
+            assertTrue(location[1].startsWith("item/")||location[1].startsWith("block/"),id+" must be admitted by the item/block atlas");
             Path texturePath=assets.resolve(location[0]).resolve("textures").resolve(location[1]+".png");
             assertTrue(Files.isRegularFile(texturePath),id+" texture: "+texturePath);
             assertNotNull(ImageIO.read(texturePath.toFile()),id+" readable texture");
+            String packagedTexture="assets/"+location[0]+"/textures/"+location[1]+".png";
+            assertNotNull(getClass().getClassLoader().getResource(packagedTexture),id+" packaged texture");
+            if(newCards.contains(id)){
+                Path canonical=assets.resolve("better_content_threads/textures/gui/threads/"+id+".png");
+                assertArrayEquals(Files.readAllBytes(canonical),Files.readAllBytes(texturePath),id+" canonical art copy");
+            }
         }
     }
 }
