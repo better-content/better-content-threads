@@ -1,1 +1,1 @@
-{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:item/thread_cards/traditions_can_cross"}}
+{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:gui/threads/traditions_can_cross"}}

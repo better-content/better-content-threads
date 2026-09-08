@@ -1,1 +1,1 @@
-{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:item/thread_cards/the_end_is_not_a_door"}}
+{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:gui/threads/the_end_is_not_a_door"}}

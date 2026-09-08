@@ -61,5 +61,27 @@ final class ThreadContractsTest {
     @Test void tinkerRepairCorrelatesActualWornUseAndReducedDamageOutput()throws Exception{String source=Files.readString(Path.of("src/main/java/com/bettercontent/threads/compat/TConstructThreads.java"));assertTrue(source.contains("TinkerToolEvent.ToolHarvestEvent"));assertTrue(source.contains("damage * 2 < total"));assertTrue(source.contains("ToolStack.from(output).getDamage() >= before"));assertTrue(source.contains("activeCorrelation(player, \"hands_learn_repair\")"));}
     @Test void tinkerAlloyRequiresNativeRecipeAndSameSmelteryOutput()throws Exception{String source=Files.readString(Path.of("src/main/java/com/bettercontent/threads/compat/TConstructThreads.java"));assertTrue(source.contains("getAlloyingModule().canAlloy()"));assertTrue(source.contains("position != state.getLong(\"position\")"));assertTrue(source.contains("activeCorrelation(player, \"materials_temperaments\")"));assertTrue(Files.readString(Path.of("src/main/java/com/bettercontent/threads/mixin/TinkerAlloyMixin.java")).contains("doAlloy"));}
     @Test void downedIntegrationUsesThePublishedPlayerSignature()throws Exception{String source=Files.readString(Path.of("src/main/java/com/bettercontent/threads/ThreadEvents.java"));assertTrue(source.contains("getMethod(\"isDowned\",net.minecraft.world.entity.player.Player.class)"));}
-    @Test void everyFacsimileModelExists()throws Exception{String dispatch=Files.readString(Path.of("src/main/resources/assets/better_content_threads/models/item/thread_facsimile.json"));for(String id:ThreadArt.IDS){assertTrue(Files.isRegularFile(Path.of("src/main/resources/assets/better_content_threads/models/item/thread_cards",id+".json")),id);assertTrue(dispatch.contains("thread_cards/"+id+"\""),id);}}
+    @Test void everyFacsimileOverrideResolvesToAPackagedCardTexture()throws Exception{
+        Path assets=Path.of("src/main/resources/assets");
+        var dispatch=JsonParser.parseString(Files.readString(assets.resolve("better_content_threads/models/item/thread_facsimile.json"))).getAsJsonObject();
+        var overrides=dispatch.getAsJsonArray("overrides");
+        assertEquals(ThreadArt.IDS.size(),overrides.size());
+        for(int index=0;index<ThreadArt.IDS.size();index++){
+            String id=ThreadArt.IDS.get(index);
+            var override=overrides.get(index).getAsJsonObject();
+            assertEquals(index+1,override.getAsJsonObject("predicate").get("better_content_threads:thread_index").getAsInt(),id);
+            assertEquals("better_content_threads:item/thread_cards/"+id,override.get("model").getAsString(),id);
+
+            Path modelPath=assets.resolve("better_content_threads/models/item/thread_cards/"+id+".json");
+            assertTrue(Files.isRegularFile(modelPath),id+" model");
+            var model=JsonParser.parseString(Files.readString(modelPath)).getAsJsonObject();
+            assertEquals("minecraft:item/generated",model.get("parent").getAsString(),id);
+            String texture=model.getAsJsonObject("textures").get("layer0").getAsString();
+            assertEquals("better_content_threads:gui/threads/"+id,texture,id);
+            String[] location=texture.split(":",2);
+            Path texturePath=assets.resolve(location[0]).resolve("textures").resolve(location[1]+".png");
+            assertTrue(Files.isRegularFile(texturePath),id+" texture: "+texturePath);
+            assertNotNull(ImageIO.read(texturePath.toFile()),id+" readable texture");
+        }
+    }
 }

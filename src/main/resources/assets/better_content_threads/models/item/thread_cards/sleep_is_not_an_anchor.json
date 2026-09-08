@@ -1,1 +1,1 @@
-{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:item/thread_cards/sleep_is_not_an_anchor"}}
+{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:gui/threads/sleep_is_not_an_anchor"}}

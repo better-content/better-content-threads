@@ -1,1 +1,1 @@
-{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:item/thread_cards/recipes_obey_this_world"}}
+{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:gui/threads/recipes_obey_this_world"}}

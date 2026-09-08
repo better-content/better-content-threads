@@ -1,1 +1,1 @@
-{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:item/thread_cards/life_reaches_tether"}}
+{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:gui/threads/life_reaches_tether"}}

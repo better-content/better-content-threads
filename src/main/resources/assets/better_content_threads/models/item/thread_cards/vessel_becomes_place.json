@@ -1,1 +1,1 @@
-{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:item/thread_cards/vessel_becomes_place"}}
+{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:gui/threads/vessel_becomes_place"}}

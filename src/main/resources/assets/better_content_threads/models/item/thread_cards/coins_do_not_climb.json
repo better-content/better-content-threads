@@ -1,1 +1,1 @@
-{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:item/thread_cards/coins_do_not_climb"}}
+{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:gui/threads/coins_do_not_climb"}}
