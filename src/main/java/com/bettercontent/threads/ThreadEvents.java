@@ -8,6 +8,7 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.TickEvent;
@@ -17,6 +18,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.AnvilRepairEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -48,6 +50,8 @@ public final class ThreadEvents {
     @SubscribeEvent public static void logout(PlayerEvent.PlayerLoggedOutEvent event){if(event.getEntity()instanceof ServerPlayer p){ThreadPlayerState.get(p).save(p);ThreadPlayerState.forget(p);DOWNED.remove(p.getUUID());CAMPAIGN.remove(p.getUUID());RUINS.remove(p.getUUID());COLLISIONS.remove(p.getUUID());}}
     @SubscribeEvent public static void changedDimension(PlayerEvent.PlayerChangedDimensionEvent event){if(event.getEntity()instanceof ServerPlayer p){String destination=event.getTo().location().toString(),source=event.getFrom().location().toString();if(destination.equals("creatingspace:earth_orbit")){String rocket=ThreadSignals.activeCorrelation(p,"leave_atmosphere");if(rocket!=null)ThreadSignals.emit(p,"orbit_reached",destination,rocket);}if(event.getTo()==net.minecraft.world.level.Level.OVERWORLD){String token=ThreadSignals.activeCorrelation(p,dimensionCard(source));if(token!=null)ThreadSignals.emit(p,"dimension_return",source,token);}else{ThreadSignals.emit(p,"dimension_enter",destination,episode(p,"dimension:"+destination));var journey=episodeTag(p,JOURNEY);String token=journey.getString("token");long fedAt=journey.getLong("fedAt");if(ThreadPlayerState.validCorrelation(token)&&fedAt>=0&&p.server.getTickCount()-fedAt<=20*120)ThreadSignals.emit(p,"fed_dimension_enter",destination,token);clearEpisode(p,JOURNEY);}}}
     @SubscribeEvent public static void pickedUp(PlayerEvent.ItemPickupEvent event){if(event.getEntity()instanceof ServerPlayer player){var visit=RUINS.get(player.getUUID());if(visit!=null&&!event.getStack().isEmpty())visit.acquired=true;}}
+    @SubscribeEvent public static void crafted(PlayerEvent.ItemCraftedEvent event){if(event.getEntity()instanceof ServerPlayer player){String token=ThreadSignals.activeCorrelation(player,"recipes_obey_this_world");if(token!=null)ThreadSignals.emit(player,"pack_recipe_crafted","registered",token);}}
+    @SubscribeEvent public static void usedEnderEye(PlayerInteractEvent.RightClickItem event){if(event.getEntity()instanceof ServerPlayer player&&event.getItemStack().is(Items.ENDER_EYE)){String active=ThreadSignals.activeCorrelation(player,"the_end_is_not_a_door");ThreadSignals.emit(player,"end_route_blocked","eye_or_portal",active==null?episode(player,"end-route"):active);}}
     @SubscribeEvent public static void enchantedAtAnvil(AnvilRepairEvent event){if(!(event.getEntity()instanceof ServerPlayer player))return;var before=EnchantmentHelper.getEnchantments(event.getLeft());var after=EnchantmentHelper.getEnchantments(event.getOutput());boolean added=after.entrySet().stream().anyMatch(entry->entry.getValue()>before.getOrDefault(entry.getKey(),0));if(!added)return;String token=episode(player,"enchant");event.getOutput().getOrCreateTag().putString(ENCHANT_TOKEN,token);ThreadSignals.emit(player,"enchant_apply","supported",token);}
     @SubscribeEvent public static void brokeBlock(BlockEvent.BreakEvent event){if(!(event.getPlayer()instanceof ServerPlayer player))return;ItemStack tool=player.getMainHandItem();if(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY,tool)>0&&player.hasCorrectToolForDrops(event.getState()))completeEnchant(player,tool);}
     @SubscribeEvent public static void death(LivingDeathEvent event){if(event.getEntity()instanceof ServerPlayer p){String token=ThreadSignals.activeCorrelation(p,"life_reaches_tether");if(token!=null)ThreadSignals.emit(p,"death","player",token);}}

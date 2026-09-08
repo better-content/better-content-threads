@@ -17,8 +17,13 @@ public final class ThreadDefinitions extends SimpleJsonResourceReloadListener {
         var loaded = new LinkedHashMap<String, ThreadDefinition>();
         resources.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> {
             JsonElement root = entry.getValue();
-            if (root.isJsonArray()) root.getAsJsonArray().forEach(e -> add(loaded, e.getAsJsonObject()));
-            else add(loaded, root.getAsJsonObject());
+            if (!root.isJsonObject()) throw new IllegalStateException("Threads v2 resources must be manifest objects: " + entry.getKey());
+            JsonObject manifest = root.getAsJsonObject();
+            if (!manifest.has("schema") || !"bc.threads.v2".equals(manifest.get("schema").getAsString()))
+                throw new IllegalStateException("Unsupported Threads catalogue schema: " + entry.getKey());
+            if (!manifest.has("threads") || !manifest.get("threads").isJsonArray())
+                throw new IllegalStateException("Threads v2 manifest has no thread array: " + entry.getKey());
+            manifest.getAsJsonArray("threads").forEach(e -> add(loaded, e.getAsJsonObject()));
         });
         // The reusable mod's isolated GameTest lane intentionally has no pack-owned catalogue.
         if (!loaded.isEmpty() && loaded.size() != 52) throw new IllegalStateException("Threads catalogue must contain exactly 52 definitions, found " + loaded.size());
@@ -32,7 +37,7 @@ public final class ThreadDefinitions extends SimpleJsonResourceReloadListener {
     private static void add(Map<String, ThreadDefinition> loaded, JsonObject json) {
         var definition = ThreadDefinition.parse(json);
         var approved=ThreadArt.BY_ID.get(definition.id());
-        if(approved==null||approved.aspect()!=definition.aspect()||approved.suit()!=definition.suit()||approved.order()!=definition.order()||approved.future()!=definition.future())
+        if(approved==null||approved.aspect()!=definition.aspect()||approved.suit()!=definition.suit()||approved.order()!=definition.order())
             throw new IllegalStateException("unapproved thread identity or assignment for " + definition.id());
         if (loaded.putIfAbsent(definition.id(), definition) != null) throw new IllegalStateException("duplicate thread " + definition.id());
     }

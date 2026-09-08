@@ -1,0 +1,77 @@
+{
+  "schema": "bc.loading_briefs.v1",
+  "briefs": [
+    {
+      "id": "threads",
+      "headline": "Your discoveries live in Threads",
+      "body": "When the world teaches you a changed rule, a small Threads reminder appears. Press the shown key — M by default — to read the rule and its evidence.",
+      "art": "better_content_threads:textures/gui/loading_briefs/threads.png"
+    },
+    {
+      "id": "recipes",
+      "headline": "Recipes obey this world",
+      "body": "Familiar recipes are often intentionally different or gated. Treat EMI as the local authority, then follow machines and materials backward until you find the first reachable step.",
+      "art": "better_content_threads:textures/gui/loading_briefs/recipes.png"
+    },
+    {
+      "id": "sleep",
+      "headline": "Sleep advances the world",
+      "body": "A bed is not a frozen checkpoint. Sleeping advances simulated time and may move weather, temperature, ecology, and active threats before you wake safely again.",
+      "art": "better_content_threads:textures/gui/loading_briefs/sleep.png"
+    },
+    {
+      "id": "water",
+      "headline": "Clear water is earned",
+      "body": "Thirst and water purity are separate constraints. Inspect the source, improve it when necessary, and keep a reliably purified reserve before distance turns uncertainty into danger.",
+      "art": "better_content_threads:textures/gui/loading_briefs/water.png"
+    },
+    {
+      "id": "nutrition",
+      "headline": "Full is not nourished",
+      "body": "Hunger measures immediate fuel, while nutrition rewards a varied diet over time. Repeating one excellent meal can still leave important food groups dangerously neglected afterward.",
+      "art": "better_content_threads:textures/gui/loading_briefs/nutrition.png"
+    },
+    {
+      "id": "temperature",
+      "headline": "Food carries weather",
+      "body": "Meals can carry thermal state as well as nutrition. Save warming and cooling foods for the conditions where their temperature matters, not merely when hunger appears.",
+      "art": "better_content_threads:textures/gui/loading_briefs/temperature.png"
+    },
+    {
+      "id": "tools",
+      "headline": "Tools are learned systems",
+      "body": "Early tools are assembled from parts whose materials change behavior. Read each component, repair what you understand, and expect improvement to come through construction rather than replacement.",
+      "art": "better_content_threads:textures/gui/loading_briefs/tools.png"
+    },
+    {
+      "id": "rotation",
+      "headline": "Rotation is a budget",
+      "body": "Create networks spend stress capacity and transmit speed through ratios. Diagnose stalled machines from the source outward: generation, direction, gearing, remaining capacity, then the working endpoint.",
+      "art": "better_content_threads:textures/gui/loading_briefs/rotation.png"
+    },
+    {
+      "id": "machines",
+      "headline": "Machines have roots",
+      "body": "Automation chains are dependency trees, not isolated recipes. Find the earliest resource, energy, pressure, or crafting boundary you can satisfy and build forward from that root.",
+      "art": "better_content_threads:textures/gui/loading_briefs/machines.png"
+    },
+    {
+      "id": "coins",
+      "headline": "Coins do not climb tiers",
+      "body": "Currency is meant to move through authored trades, not convert freely into a universal higher tier. Learn who accepts each coin before treating it as progression.",
+      "art": "better_content_threads:textures/gui/loading_briefs/coins.png"
+    },
+    {
+      "id": "dimensions",
+      "headline": "The End is not a door",
+      "body": "Vanilla eyes and portals do not define every route here. Dimension access follows the pack's authored paths; blocked landmarks are instructions to seek another doorway.",
+      "art": "better_content_threads:textures/gui/loading_briefs/dimensions.png"
+    },
+    {
+      "id": "downing",
+      "headline": "Defeat is not erasure",
+      "body": "Falling may begin a recoverable downed state before death. Read the rescue window, protect the body, and remember that lineage can preserve knowledge across a successor.",
+      "art": "better_content_threads:textures/gui/loading_briefs/downing.png"
+    }
+  ]
+}

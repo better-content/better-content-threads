@@ -7,6 +7,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.PauseScreen;
+import net.minecraft.client.gui.screens.ConnectScreen;
+import net.minecraft.client.gui.screens.LevelLoadingScreen;
+import net.minecraft.client.gui.screens.ReceivingLevelScreen;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
@@ -14,6 +17,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
+import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.event.TickEvent;
@@ -41,6 +46,9 @@ public final class ThreadClient {
     private static final ThreadNoticeQueue<ThreadNetwork.Notice> NOTICES = new ThreadNoticeQueue<>(ThreadNetwork.Notice::identity);
     private static List<ThreadNetwork.Card> cards = List.of();
     private static long lastLiveFrame;
+    private static LoadingBrief currentBrief;
+    private static LoadingBriefRotation.State briefState;
+    private static boolean arrivalPending;
 
     private ThreadClient() {}
 
@@ -53,9 +61,44 @@ public final class ThreadClient {
     @SubscribeEvent
     public static void tick(TickEvent.ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
+        var minecraft = Minecraft.getInstance();
+        if (arrivalPending && currentBrief != null && minecraft.player != null && minecraft.level != null && minecraft.screen == null) {
+            arrivalPending = false;
+            minecraft.setScreen(new LoadingBriefScreen(currentBrief, ThreadClient::dismissBrief));
+            return;
+        }
         if (OPEN.consumeClick()) ThreadNetwork.request("open", "");
         while (OPEN.consumeClick()) {}
-        if (Minecraft.getInstance().screen != null) lastLiveFrame = 0L;
+        if (minecraft.screen != null) lastLiveFrame = 0L;
+    }
+
+    @SubscribeEvent
+    public static void opening(ScreenEvent.Opening event) {
+        if (event.getNewScreen() != null && event.getNewScreen().getClass().getName().equals("dev.emi.emi.screen.RecipeScreen")) {
+            ThreadNetwork.request("recipe_viewed", "");
+        }
+        if (isInitialLoadScreen(event.getNewScreen()) && Minecraft.getInstance().level == null) {
+            if (event.getNewScreen() instanceof ConnectScreen || currentBrief == null) beginBrief();
+        }
+    }
+
+    @SubscribeEvent
+    public static void loadingRender(ScreenEvent.Render.Post event) {
+        if (currentBrief != null && isInitialLoadScreen(event.getScreen()) && Minecraft.getInstance().level == null) {
+            renderLoadingBrief(event.getGuiGraphics(), currentBrief, event.getScreen().width, event.getScreen().height, false);
+        }
+    }
+
+    @SubscribeEvent
+    public static void login(ClientPlayerNetworkEvent.LoggingIn event) {
+        if (currentBrief == null) beginBrief();
+        arrivalPending = true;
+    }
+
+    @SubscribeEvent
+    public static void logout(ClientPlayerNetworkEvent.LoggingOut event) {
+        currentBrief = null;
+        arrivalPending = false;
     }
 
     @SubscribeEvent
@@ -155,10 +198,71 @@ public final class ThreadClient {
         long count = cards.stream().filter(card->card.known()&&card.unread()).count();
         if (count == 0L) return;
         var card = cards.stream().filter(c->c.known()&&c.unread()).findFirst().orElseThrow();
-        int x = screenWidth - 31;
+        String binding = OPEN.getTranslatedKeyMessage().getString();
+        int keyWidth = Math.min(54, Math.max(14, Minecraft.getInstance().font.width(binding) + 8));
+        int totalWidth = 18 + 5 + keyWidth + 5;
+        int x = screenWidth - totalWidth - 6;
         int y = Math.max(36, screenHeight / 2 - 14);
         renderSealedPlate(graphics, x, y, 18, 27, ThreadSuit.parse(card.suit()).color(),ThreadAspect.parse(card.aspect()).color(), card.id().hashCode(), false);
         graphics.drawString(Minecraft.getInstance().font, Long.toString(count), x + 13, y + 19, 0xFFF0E5CE, true);
+        drawKeycap(graphics, binding, x + 23, y + 3, keyWidth);
+        graphics.drawString(Minecraft.getInstance().font, "Threads", x + 23, y + 18, 0xFFE0D4BB, true);
+    }
+
+    static void drawKeycap(GuiGraphics graphics,String binding,int x,int y,int width){
+        graphics.fill(x,y,x+width,y+13,0xE0C6A15B);
+        graphics.fill(x+1,y+1,x+width-1,y+12,0xF0121513);
+        String label=binding;
+        while(label.length()>1&&Minecraft.getInstance().font.width(label)>width-4)label=label.substring(0,label.length()-1);
+        graphics.drawCenteredString(Minecraft.getInstance().font,label,x+width/2,y+3,0xFFF0E5CE);
+    }
+
+    private static boolean isInitialLoadScreen(net.minecraft.client.gui.screens.Screen screen) {
+        return screen instanceof ConnectScreen || screen instanceof ReceivingLevelScreen || screen instanceof LevelLoadingScreen;
+    }
+
+    private static void beginBrief() {
+        briefState = LoadingBriefStore.load();
+        currentBrief = LoadingBriefRotation.select(LoadingBriefs.INSTANCE.all(), briefState);
+        arrivalPending = false;
+    }
+
+    private static void dismissBrief() {
+        if (currentBrief == null) return;
+        briefState = LoadingBriefRotation.commit(briefState == null ? LoadingBriefStore.load() : briefState,
+            currentBrief.id(), LoadingBriefs.INSTANCE.all().size());
+        LoadingBriefStore.save(briefState);
+        currentBrief = null;
+        arrivalPending = false;
+    }
+
+    static void renderLoadingBrief(GuiGraphics graphics, LoadingBrief brief, int screenWidth, int screenHeight, boolean arrival) {
+        int panelWidth = Math.min(620, screenWidth - 24);
+        int panelHeight = Math.min(220, screenHeight - 34);
+        int x = (screenWidth - panelWidth) / 2;
+        int y = (screenHeight - panelHeight) / 2;
+        graphics.fill(x - 2, y - 2, x + panelWidth + 2, y + panelHeight + 2, 0xD0C6A15B);
+        graphics.fill(x, y, x + panelWidth, y + panelHeight, 0xED101412);
+        int artWidth = Math.min(250, Math.max(112, panelWidth * 2 / 5));
+        int artHeight = panelHeight - 24;
+        graphics.blit(brief.art(), x + 12, y + 12, artWidth, artHeight, 0, 0, 512, 256, 512, 256);
+        int textX = x + artWidth + 26;
+        int textWidth = panelWidth - artWidth - 38;
+        graphics.drawString(Minecraft.getInstance().font, brief.headline(), textX, y + 22, 0xFFF0E2C5, true);
+        int lineY = y + 48;
+        for (var line : Minecraft.getInstance().font.split(Component.literal(brief.body()), textWidth)) {
+            graphics.drawString(Minecraft.getInstance().font, line, textX, lineY, 0xFFD2C9B5, false);
+            lineY += 11;
+        }
+        if (brief.id().equals("threads")) {
+            String binding = OPEN.getTranslatedKeyMessage().getString();
+            int keyWidth = Math.max(16, Minecraft.getInstance().font.width(binding) + 8);
+            drawKeycap(graphics, binding, textX, Math.min(y + panelHeight - 42, lineY + 12), keyWidth);
+            graphics.drawString(Minecraft.getInstance().font, "Threads", textX + keyWidth + 7,
+                Math.min(y + panelHeight - 39, lineY + 15), 0xFFE0D4BB, true);
+        }
+        if (!arrival) graphics.drawCenteredString(Minecraft.getInstance().font, "This lesson will remain after arrival",
+            x + panelWidth / 2, y + panelHeight - 14, 0xFF8E9A91);
     }
 
     static void renderSealedPlate(GuiGraphics graphics,int x,int y,int width,int height,int suitColor,int aspectColor,int seed,boolean selected) {
@@ -196,6 +300,11 @@ public final class ThreadClient {
         @SubscribeEvent
         public static void keys(RegisterKeyMappingsEvent event) {
             event.register(OPEN);
+        }
+
+        @SubscribeEvent
+        public static void reload(RegisterClientReloadListenersEvent event) {
+            event.registerReloadListener(LoadingBriefs.INSTANCE);
         }
 
         @SubscribeEvent

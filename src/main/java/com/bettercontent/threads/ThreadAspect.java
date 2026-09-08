@@ -3,14 +3,14 @@ package com.bettercontent.threads;
 import java.util.Arrays;
 
 public enum ThreadAspect {
-    IMPACT("impact", 0xE4717D),
-    TEMPO("tempo", 0xAA652B),
-    WORK("work", 0xCAA903),
-    MOBILITY("mobility", 0xC0E304),
-    ENDURANCE("endurance", 0x35BBD0),
-    ROBUSTNESS("robustness", 0x1175FC),
-    RENEWAL("renewal", 0x6FEDBA),
-    CONTROL("control", 0x8A6CB2);
+    IMPACT("impact", 0xFF4055),
+    TEMPO("tempo", 0x00A985),
+    WORK("work", 0xF0E2C5),
+    MOBILITY("mobility", 0xE0B01F),
+    ENDURANCE("endurance", 0x52606A),
+    ROBUSTNESS("robustness", 0xAF6A2F),
+    RENEWAL("renewal", 0x6CCAF0),
+    CONTROL("control", 0x8E5BB7);
 
     private final String id;
     private final int color;

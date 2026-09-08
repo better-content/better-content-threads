@@ -1,1668 +1,1993 @@
-[
-  {
-    "id": "stone_makes_promises",
-    "title": "Stone Makes Promises",
-    "suit": "world",
-    "order": 1,
-    "aspect": "work",
-    "art": "better_content_threads:textures/gui/threads/stone_makes_promises.png",
-    "prose": "The surface is not mute. A small sign can describe a body of stone far beneath it.",
-    "invitation": "Follow what the surface has admitted.",
-    "action": "Extract material from the deposit family you identified.",
-    "reveal_routes": [
-      {
-        "id": "read_deposit",
-        "label": "Readable geology",
-        "type": "deposit_read",
-        "value": "*",
-        "producer": "better-content-realistic-ores",
-        "correlation": "episode"
+{
+  "schema": "bc.threads.v2",
+  "threads": [
+    {
+      "id": "stone_makes_promises",
+      "concept_id": "world.stone_makes_promises",
+      "owner": "better-content-realistic-ores",
+      "title": "Stone Makes Promises",
+      "suit": "world",
+      "order": 1,
+      "aspect": "work",
+      "art": "better_content_threads:textures/gui/threads/stone_makes_promises.png",
+      "rule": "Surface deposit signs identify a larger underground ore family; read the marker first, then follow that same family below instead of mining blindly.",
+      "prose": "The surface is not mute. A small sign can describe a body of stone far beneath it.",
+      "invitation": "Follow what the surface has admitted.",
+      "action": "Extract material from the deposit family you identified.",
+      "reveal_routes": [
+        {
+          "id": "read_deposit",
+          "label": "Readable geology",
+          "type": "deposit_read",
+          "value": "*",
+          "producer": "better-content-realistic-ores",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "follow_deposit",
+          "label": "Followed promise",
+          "type": "deposit_extract",
+          "value": "*",
+          "producer": "better-content-realistic-ores",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "guideme",
+        "target": "realistic_ores:prospecting"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "follow_deposit",
-        "label": "Followed promise",
-        "type": "deposit_extract",
-        "value": "*",
-        "producer": "better-content-realistic-ores",
-        "correlation": "episode"
+    },
+    {
+      "id": "world_remembers",
+      "concept_id": "world.world_remembers",
+      "owner": "better-content-player-traces",
+      "title": "The World Remembers",
+      "suit": "world",
+      "order": 2,
+      "aspect": "control",
+      "art": "better_content_threads:textures/gui/threads/world_remembers.png",
+      "rule": "Player traces persist after you leave, so returning to a changed place can reveal where earlier movement and work actually happened.",
+      "prose": "A changed place keeps more than its new shape. Returning makes the earlier hand legible again.",
+      "invitation": "Leave a mark long enough to become history.",
+      "action": "Leave the traced place, then return to it later.",
+      "reveal_routes": [
+        {
+          "id": "trace_committed",
+          "label": "Committed trace",
+          "type": "trace_commit",
+          "value": "*",
+          "producer": "better-content-player-traces",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "trace_return",
+          "label": "Returned trace",
+          "type": "trace_return",
+          "value": "*",
+          "producer": "better-content-player-traces",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "trace_sight",
+        "target": "player_traces"
       }
-    ],
-    "doorway": {
-      "type": "guideme",
-      "target": "realistic_ores:prospecting"
-    }
-  },
-  {
-    "id": "world_remembers",
-    "title": "The World Remembers",
-    "suit": "world",
-    "order": 2,
-    "aspect": "control",
-    "art": "better_content_threads:textures/gui/threads/world_remembers.png",
-    "prose": "A changed place keeps more than its new shape. Returning makes the earlier hand legible again.",
-    "invitation": "Leave a mark long enough to become history.",
-    "action": "Leave the traced place, then return to it later.",
-    "reveal_routes": [
-      {
-        "id": "trace_committed",
-        "label": "Committed trace",
-        "type": "trace_commit",
-        "value": "*",
-        "producer": "better-content-player-traces",
-        "correlation": "episode"
+    },
+    {
+      "id": "seasons_turn_work",
+      "concept_id": "world.seasons_turn_work",
+      "owner": "compat.sereneseasons",
+      "title": "Seasons Turn the Work",
+      "suit": "world",
+      "order": 3,
+      "aspect": "tempo",
+      "art": "better_content_threads:textures/gui/threads/seasons_turn_work.png",
+      "rule": "Seasons change which crops are fertile now; the calendar affects successful farming work rather than serving as a purely visual cycle.",
+      "prose": "The calendar is not decoration. Each turning changes which labor the land will answer.",
+      "invitation": "Work with the season that arrived.",
+      "action": "Harvest a crop favored by the current season.",
+      "reveal_routes": [
+        {
+          "id": "season_changed",
+          "label": "Season turned",
+          "type": "season_change",
+          "value": "*",
+          "producer": "compat.sereneseasons",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "seasonal_harvest",
+          "label": "Seasonal harvest",
+          "type": "seasonal_harvest",
+          "value": "*",
+          "producer": "compat.sereneseasons",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "guideme",
+        "target": "sereneseasons"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "trace_return",
-        "label": "Returned trace",
-        "type": "trace_return",
-        "value": "*",
-        "producer": "better-content-player-traces",
-        "correlation": "episode"
+    },
+    {
+      "id": "forest_many_lives",
+      "concept_id": "world.forest_many_lives",
+      "owner": "compat.dynamictrees",
+      "title": "A Forest Is Many Lives",
+      "suit": "world",
+      "order": 4,
+      "aspect": "renewal",
+      "art": "better_content_threads:textures/gui/threads/forest_many_lives.png",
+      "rule": "Dynamic forests regenerate through compatible saplings; felling a mature natural tree creates an opening that should be replanted near its stump.",
+      "prose": "A tree can be timber. A forest is succession, shelter, seed, and the lives that arrive between them.",
+      "invitation": "Return one future to the opening you made.",
+      "action": "Plant a compatible sapling near the felled tree's stump.",
+      "reveal_routes": [
+        {
+          "id": "mature_tree_felled",
+          "label": "Felled tree",
+          "type": "tree_felled",
+          "value": "natural_mature",
+          "producer": "compat.dynamictrees",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "stump_replanted",
+          "label": "Replanted opening",
+          "type": "tree_replant",
+          "value": "compatible",
+          "producer": "compat.dynamictrees",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "guideme",
+        "target": "dynamictrees"
       }
-    ],
-    "doorway": {
-      "type": "trace_sight",
-      "target": "player_traces"
-    }
-  },
-  {
-    "id": "seasons_turn_work",
-    "title": "Seasons Turn the Work",
-    "suit": "world",
-    "order": 3,
-    "aspect": "tempo",
-    "art": "better_content_threads:textures/gui/threads/seasons_turn_work.png",
-    "prose": "The calendar is not decoration. Each turning changes which labor the land will answer.",
-    "invitation": "Work with the season that arrived.",
-    "action": "Harvest a crop favored by the current season.",
-    "reveal_routes": [
-      {
-        "id": "season_changed",
-        "label": "Season turned",
-        "type": "season_change",
-        "value": "*",
-        "producer": "compat.sereneseasons",
-        "correlation": "episode"
+    },
+    {
+      "id": "roads_make_neighbours",
+      "concept_id": "world.roads_make_neighbours",
+      "owner": "better-content-settlement-roads",
+      "title": "Roads Make Neighbours",
+      "suit": "world",
+      "order": 5,
+      "aspect": "mobility",
+      "art": "better_content_threads:textures/gui/threads/roads_make_neighbours.png",
+      "rule": "Registered roads connect wilderness to settlements as navigable infrastructure; following the recorded route matters more than merely crossing nearby terrain.",
+      "prose": "Distance becomes social only when a route survives repeated feet.",
+      "invitation": "Let a road finish its sentence.",
+      "action": "Follow a registered road from wilderness into a settlement.",
+      "reveal_routes": [
+        {
+          "id": "road_entered",
+          "label": "Found road",
+          "type": "road_enter",
+          "value": "wilderness",
+          "producer": "better-content-settlement-roads",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "road_arrival",
+          "label": "Settlement arrival",
+          "type": "road_arrival",
+          "value": "settlement",
+          "producer": "better-content-settlement-roads",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "guideme",
+        "target": "settlement_roads"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "seasonal_harvest",
-        "label": "Seasonal harvest",
-        "type": "seasonal_harvest",
-        "value": "*",
-        "producer": "compat.sereneseasons",
-        "correlation": "episode"
+    },
+    {
+      "id": "fire_has_country",
+      "concept_id": "world.fire_has_country",
+      "owner": "better-content-threads",
+      "title": "Fire Has a Country",
+      "suit": "world",
+      "order": 6,
+      "aspect": "impact",
+      "art": "better_content_threads:textures/gui/threads/fire_has_country.png",
+      "rule": "The Nether is an authored realm with distinct materials and hazards; entering it starts a journey that resolves only when you return safely.",
+      "prose": "Heat, distance, and life obey another settlement beneath the red ceiling.",
+      "invitation": "Carry the country back with you.",
+      "action": "Return to the Overworld after entering the Nether.",
+      "reveal_routes": [
+        {
+          "id": "nether_arrival",
+          "label": "Nether arrival",
+          "type": "dimension_enter",
+          "value": "minecraft:the_nether",
+          "producer": "better-content-threads",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "nether_return",
+          "label": "Nether return",
+          "type": "dimension_return",
+          "value": "minecraft:the_nether",
+          "producer": "better-content-threads",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "font",
+        "target": "minecraft:the_nether"
       }
-    ],
-    "doorway": {
-      "type": "guideme",
-      "target": "sereneseasons"
-    }
-  },
-  {
-    "id": "forest_many_lives",
-    "title": "A Forest Is Many Lives",
-    "suit": "world",
-    "order": 4,
-    "aspect": "renewal",
-    "art": "better_content_threads:textures/gui/threads/forest_many_lives.png",
-    "prose": "A tree can be timber. A forest is succession, shelter, seed, and the lives that arrive between them.",
-    "invitation": "Return one future to the opening you made.",
-    "action": "Plant a compatible sapling near the felled tree's stump.",
-    "reveal_routes": [
-      {
-        "id": "mature_tree_felled",
-        "label": "Felled tree",
-        "type": "tree_felled",
-        "value": "natural_mature",
-        "producer": "compat.dynamictrees",
-        "correlation": "episode"
+    },
+    {
+      "id": "sky_another_country",
+      "concept_id": "world.sky_another_country",
+      "owner": "better-content-threads",
+      "title": "The Sky Is Another Country",
+      "suit": "world",
+      "order": 7,
+      "aspect": "mobility",
+      "art": "better_content_threads:textures/gui/threads/sky_another_country.png",
+      "rule": "The Aether is a separate authored geography, not an Overworld sky biome; its journey completes only after you return from that realm.",
+      "prose": "Cloud and island form a geography with its own materials, weather, and distances.",
+      "invitation": "Bring the high country home in memory.",
+      "action": "Return to the Overworld after entering the Aether.",
+      "reveal_routes": [
+        {
+          "id": "aether_arrival",
+          "label": "Aether arrival",
+          "type": "dimension_enter",
+          "value": "aether:the_aether",
+          "producer": "better-content-threads",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "aether_return",
+          "label": "Aether return",
+          "type": "dimension_return",
+          "value": "aether:the_aether",
+          "producer": "better-content-threads",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "font",
+        "target": "aether:the_aether"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "stump_replanted",
-        "label": "Replanted opening",
-        "type": "tree_replant",
-        "value": "compatible",
-        "producer": "compat.dynamictrees",
-        "correlation": "episode"
+    },
+    {
+      "id": "deep_own_light",
+      "concept_id": "world.deep_own_light",
+      "owner": "better-content-threads",
+      "title": "The Deep Grows Its Own Light",
+      "suit": "world",
+      "order": 8,
+      "aspect": "robustness",
+      "art": "better_content_threads:textures/gui/threads/deep_own_light.png",
+      "rule": "The Bumblezone is a complete resource ecology inside living comb; entering and returning teaches which materials genuinely originate in that realm.",
+      "prose": "Under a roof of living comb, a whole country cultivates its own light.",
+      "invitation": "Return with proof that the hive can grow a dawn.",
+      "action": "Return to the Overworld after entering the Bumblezone.",
+      "reveal_routes": [
+        {
+          "id": "bumblezone_arrival",
+          "label": "Bumblezone arrival",
+          "type": "dimension_enter",
+          "value": "the_bumblezone:the_bumblezone",
+          "producer": "better-content-threads",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "bumblezone_return",
+          "label": "Bumblezone return",
+          "type": "dimension_return",
+          "value": "the_bumblezone:the_bumblezone",
+          "producer": "better-content-threads",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "font",
+        "target": "the_bumblezone:the_bumblezone"
       }
-    ],
-    "doorway": {
-      "type": "guideme",
-      "target": "dynamictrees"
-    }
-  },
-  {
-    "id": "roads_make_neighbours",
-    "title": "Roads Make Neighbours",
-    "suit": "world",
-    "order": 5,
-    "aspect": "mobility",
-    "art": "better_content_threads:textures/gui/threads/roads_make_neighbours.png",
-    "prose": "Distance becomes social only when a route survives repeated feet.",
-    "invitation": "Let a road finish its sentence.",
-    "action": "Follow a registered road from wilderness into a settlement.",
-    "reveal_routes": [
-      {
-        "id": "road_entered",
-        "label": "Found road",
-        "type": "road_enter",
-        "value": "wilderness",
-        "producer": "better-content-settlement-roads",
-        "correlation": "episode"
+    },
+    {
+      "id": "silence_has_teeth",
+      "concept_id": "world.silence_has_teeth",
+      "owner": "better-content-threads",
+      "title": "Silence Has Teeth",
+      "suit": "world",
+      "order": 9,
+      "aspect": "endurance",
+      "art": "better_content_threads:textures/gui/threads/silence_has_teeth.png",
+      "rule": "Ratlantis is a dangerous authored destination with abandoned logistics routes; exploration counts as a journey only when you return to the Overworld.",
+      "prose": "Ratlantis is quiet only until its abandoned routes show their teeth.",
+      "invitation": "Return before the ruined machinery closes around you.",
+      "action": "Return to the Overworld after entering Ratlantis.",
+      "reveal_routes": [
+        {
+          "id": "ratlantis_arrival",
+          "label": "Ratlantis arrival",
+          "type": "dimension_enter",
+          "value": "rats:ratlantis",
+          "producer": "better-content-threads",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "ratlantis_return",
+          "label": "Ratlantis return",
+          "type": "dimension_return",
+          "value": "rats:ratlantis",
+          "producer": "better-content-threads",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "font",
+        "target": "rats:ratlantis"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "road_arrival",
-        "label": "Settlement arrival",
-        "type": "road_arrival",
-        "value": "settlement",
-        "producer": "better-content-settlement-roads",
-        "correlation": "episode"
+    },
+    {
+      "id": "weather_has_momentum",
+      "concept_id": "world.weather_has_momentum",
+      "owner": "compat.weather2",
+      "title": "Weather Has Momentum",
+      "suit": "world",
+      "order": 10,
+      "aspect": "tempo",
+      "art": "better_content_threads:textures/gui/threads/weather_has_momentum.png",
+      "rule": "Weather2 storms move through the world and remain dangerous after shelter is reached; stay protected while the active storm continues outside.",
+      "prose": "A storm is not a texture on the sky. It arrives, crosses structures, and carries consequences with it.",
+      "invitation": "Respect the direction of the moving air.",
+      "action": "Reach shelter and remain protected while the storm continues.",
+      "reveal_routes": [
+        {
+          "id": "storm_exposure",
+          "label": "Storm exposure",
+          "type": "storm_exposure",
+          "value": "significant",
+          "producer": "compat.weather2",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "storm_shelter",
+          "label": "Sheltered from storm",
+          "type": "storm_shelter",
+          "value": "protected",
+          "producer": "compat.weather2",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "guideme",
+        "target": "weather2"
       }
-    ],
-    "doorway": {
-      "type": "guideme",
-      "target": "settlement_roads"
-    }
-  },
-  {
-    "id": "fire_has_country",
-    "title": "Fire Has a Country",
-    "suit": "world",
-    "order": 6,
-    "aspect": "impact",
-    "art": "better_content_threads:textures/gui/threads/fire_has_country.png",
-    "prose": "Heat, distance, and life obey another settlement beneath the red ceiling.",
-    "invitation": "Carry the country back with you.",
-    "action": "Return to the Overworld after entering the Nether.",
-    "reveal_routes": [
-      {
-        "id": "nether_arrival",
-        "label": "Nether arrival",
-        "type": "dimension_enter",
-        "value": "minecraft:the_nether",
-        "producer": "better-content-threads",
-        "correlation": "episode"
+    },
+    {
+      "id": "body_has_weather",
+      "concept_id": "world.body_has_weather",
+      "owner": "better-content-heat-sync",
+      "title": "The Body Has Weather",
+      "suit": "world",
+      "order": 11,
+      "aspect": "robustness",
+      "art": "better_content_threads:textures/gui/threads/body_has_weather.png",
+      "rule": "Body temperature is separate from ambient temperature; clothing, shelter, and place must restore your personal comfort band before exposure is resolved.",
+      "prose": "Climate continues beneath the skin. Comfort is a condition made between body, clothing, and place.",
+      "invitation": "Change the small climate you carry.",
+      "action": "Restore your temperature to the comfort band.",
+      "reveal_routes": [
+        {
+          "id": "temperature_stress",
+          "label": "Temperature stress",
+          "type": "temperature_stress",
+          "value": "hot|cold",
+          "producer": "better-content-heat-sync",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "temperature_restored",
+          "label": "Comfort restored",
+          "type": "temperature_comfort",
+          "value": "restored",
+          "producer": "better-content-heat-sync",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "guideme",
+        "target": "cold_sweat"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "nether_return",
-        "label": "Nether return",
-        "type": "dimension_return",
-        "value": "minecraft:the_nether",
-        "producer": "better-content-threads",
-        "correlation": "episode"
+    },
+    {
+      "id": "water_made_safe",
+      "concept_id": "world.water_made_safe",
+      "owner": "better-content-water-survival",
+      "title": "Water Must Be Made Safe",
+      "suit": "world",
+      "order": 12,
+      "aspect": "control",
+      "art": "better_content_threads:textures/gui/threads/water_made_safe.png",
+      "rule": "Thirst begins before water quality is obvious; only purity-three water is reliably safe, and thermal waterskins do not provide hydration.",
+      "prose": "Thirst makes every source look simple. The vessel remembers what the eye cannot see.",
+      "invitation": "Make the source answerable to the body.",
+      "action": "Purify and drink the unsafe water you collected.",
+      "reveal_routes": [
+        {
+          "id": "thirst_first_drop",
+          "label": "Thirst began",
+          "type": "thirst_loss",
+          "value": "first_drop",
+          "producer": "better-content-water-survival",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "purity_three_drunk",
+          "label": "Safe water drunk",
+          "type": "water_drink",
+          "value": "purity_3_correlated",
+          "producer": "better-content-water-survival",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "guideme",
+        "target": "thirst"
       }
-    ],
-    "doorway": {
-      "type": "font",
-      "target": "minecraft:the_nether"
-    }
-  },
-  {
-    "id": "sky_another_country",
-    "title": "The Sky Is Another Country",
-    "suit": "world",
-    "order": 7,
-    "aspect": "mobility",
-    "art": "better_content_threads:textures/gui/threads/sky_another_country.png",
-    "prose": "Cloud and island form a geography with its own materials, weather, and distances.",
-    "invitation": "Bring the high country home in memory.",
-    "action": "Return to the Overworld after entering the Aether.",
-    "reveal_routes": [
-      {
-        "id": "aether_arrival",
-        "label": "Aether arrival",
-        "type": "dimension_enter",
-        "value": "aether:the_aether",
-        "producer": "better-content-threads",
-        "correlation": "episode"
+    },
+    {
+      "id": "feast_before_journey",
+      "concept_id": "world.feast_before_journey",
+      "owner": "better-content-dimension-drink",
+      "title": "Feast Before the Journey",
+      "suit": "world",
+      "order": 13,
+      "aspect": "endurance",
+      "art": "better_content_threads:textures/gui/threads/feast_before_journey.png",
+      "rule": "Nutrition before travel matters independently of hunger; eat a substantial meal shortly before crossing a major realm threshold to prepare your body.",
+      "prose": "Travel begins before the threshold. A prepared body crosses differently from an empty one.",
+      "invitation": "Let departure begin at the table.",
+      "action": "Eat a nutritious meal, then enter another realm within two minutes.",
+      "reveal_routes": [
+        {
+          "id": "portal_approach",
+          "label": "Portal approached",
+          "type": "portal_approach",
+          "value": "major_realm",
+          "producer": "better-content-dimension-drink",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "fed_crossing",
+          "label": "Feasted crossing",
+          "type": "fed_dimension_enter",
+          "value": "*",
+          "producer": "better-content-dimension-drink",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "diet",
+        "target": "food_diversity"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "aether_return",
-        "label": "Aether return",
-        "type": "dimension_return",
-        "value": "aether:the_aether",
-        "producer": "better-content-threads",
-        "correlation": "episode"
+    },
+    {
+      "id": "hands_learn_repair",
+      "concept_id": "works.hands_learn_repair",
+      "owner": "compat.tconstruct",
+      "title": "Hands Learn by Repair",
+      "suit": "works",
+      "order": 1,
+      "aspect": "renewal",
+      "art": "better_content_threads:textures/gui/threads/hands_learn_repair.png",
+      "rule": "Tinkers tools are maintained rather than discarded; wear a specific tool through real work, then repair that same physical tool to learn it.",
+      "prose": "A tool becomes understood where wear meets attention.",
+      "invitation": "Answer use with care.",
+      "action": "Repair the same TConstruct tool that your work damaged.",
+      "reveal_routes": [
+        {
+          "id": "tool_worn",
+          "label": "Worn tool",
+          "type": "tool_worn",
+          "value": "tconstruct",
+          "producer": "compat.tconstruct",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "tool_repaired",
+          "label": "Native repair",
+          "type": "tool_repaired",
+          "value": "correlated",
+          "producer": "compat.tconstruct",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "tconstruct",
+        "target": "repair"
       }
-    ],
-    "doorway": {
-      "type": "font",
-      "target": "aether:the_aether"
-    }
-  },
-  {
-    "id": "deep_own_light",
-    "title": "The Deep Grows Its Own Light",
-    "suit": "world",
-    "order": 8,
-    "aspect": "robustness",
-    "art": "better_content_threads:textures/gui/threads/deep_own_light.png",
-    "prose": "Under a roof of living comb, a whole country cultivates its own light.",
-    "invitation": "Return with proof that the hive can grow a dawn.",
-    "action": "Return to the Overworld after entering the Bumblezone.",
-    "reveal_routes": [
-      {
-        "id": "bumblezone_arrival",
-        "label": "Bumblezone arrival",
-        "type": "dimension_enter",
-        "value": "the_bumblezone:the_bumblezone",
-        "producer": "better-content-threads",
-        "correlation": "episode"
+    },
+    {
+      "id": "materials_temperaments",
+      "concept_id": "works.materials_temperaments",
+      "owner": "compat.tconstruct",
+      "title": "Materials Have Temperaments",
+      "suit": "works",
+      "order": 2,
+      "aspect": "robustness",
+      "art": "better_content_threads:textures/gui/threads/materials_temperaments.png",
+      "rule": "Tinkers alloying depends on heat, fluid proportions, and a working smeltery; complete a real alloy and cast its resulting material deliberately.",
+      "prose": "Matter does not merely combine. Heat and proportion decide which character survives the meeting.",
+      "invitation": "Let two fluids negotiate a third nature.",
+      "action": "Cast a real alloy made in your smeltery.",
+      "reveal_routes": [
+        {
+          "id": "alloyable_fluids",
+          "label": "Alloyable fluids",
+          "type": "smeltery_alloyable",
+          "value": "*",
+          "producer": "compat.tconstruct",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "alloy_cast",
+          "label": "Cast alloy",
+          "type": "alloy_cast",
+          "value": "*",
+          "producer": "compat.tconstruct",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "tconstruct",
+        "target": "alloys"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "bumblezone_return",
-        "label": "Bumblezone return",
-        "type": "dimension_return",
-        "value": "the_bumblezone:the_bumblezone",
-        "producer": "better-content-threads",
-        "correlation": "episode"
+    },
+    {
+      "id": "motion_becomes_industry",
+      "concept_id": "works.motion_becomes_industry",
+      "owner": "compat.create",
+      "title": "Motion Becomes Industry",
+      "suit": "works",
+      "order": 3,
+      "aspect": "work",
+      "art": "better_content_threads:textures/gui/threads/motion_becomes_industry.png",
+      "rule": "Before renewable rotation, the Hand Crank is the only positive SU source; use its limited manual power to complete a Create process.",
+      "prose": "Rotation becomes infrastructure when effort crosses a machine instead of ending at the hand.",
+      "invitation": "Finish the motion you began yourself.",
+      "action": "Complete a Create process using manual crank power.",
+      "reveal_routes": [
+        {
+          "id": "manual_process",
+          "label": "Manual process",
+          "type": "create_manual_start",
+          "value": "*",
+          "producer": "compat.create",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "manual_completion",
+          "label": "Hand-powered work",
+          "type": "create_manual_complete",
+          "value": "*",
+          "producer": "compat.create",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "ponder",
+        "target": "create:hand_crank"
       }
-    ],
-    "doorway": {
-      "type": "font",
-      "target": "the_bumblezone:the_bumblezone"
-    }
-  },
-  {
-    "id": "silence_has_teeth",
-    "title": "Silence Has Teeth",
-    "suit": "world",
-    "order": 9,
-    "aspect": "endurance",
-    "art": "better_content_threads:textures/gui/threads/silence_has_teeth.png",
-    "prose": "Ratlantis is quiet only until its abandoned routes show their teeth.",
-    "invitation": "Return before the ruined machinery closes around you.",
-    "action": "Return to the Overworld after entering Ratlantis.",
-    "reveal_routes": [
-      {
-        "id": "ratlantis_arrival",
-        "label": "Ratlantis arrival",
-        "type": "dimension_enter",
-        "value": "rats:ratlantis",
-        "producer": "better-content-threads",
-        "correlation": "episode"
+    },
+    {
+      "id": "rivers_turn_work",
+      "concept_id": "works.rivers_turn_work",
+      "owner": "compat.create",
+      "title": "Rivers Can Turn Work",
+      "suit": "works",
+      "order": 4,
+      "aspect": "work",
+      "art": "better_content_threads:textures/gui/threads/rivers_turn_work.png",
+      "rule": "Create water wheels provide renewable rotation after the manual stage; connect one to machinery and finish an operation powered by flowing water.",
+      "prose": "A current becomes labor when a wheel gives it somewhere to go.",
+      "invitation": "Give moving water a useful consequence.",
+      "action": "Complete a process powered by renewable water rotation.",
+      "reveal_routes": [
+        {
+          "id": "water_rotation",
+          "label": "Water rotation",
+          "type": "kinetic_source",
+          "value": "water",
+          "producer": "compat.create",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "water_work",
+          "label": "River-powered work",
+          "type": "kinetic_complete",
+          "value": "water",
+          "producer": "compat.create",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "ponder",
+        "target": "create:large_water_wheel"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "ratlantis_return",
-        "label": "Ratlantis return",
-        "type": "dimension_return",
-        "value": "rats:ratlantis",
-        "producer": "better-content-threads",
-        "correlation": "episode"
+    },
+    {
+      "id": "precision_has_rhythm",
+      "concept_id": "works.precision_has_rhythm",
+      "owner": "compat.create",
+      "title": "Precision Has a Rhythm",
+      "suit": "works",
+      "order": 5,
+      "aspect": "tempo",
+      "art": "better_content_threads:textures/gui/threads/precision_has_rhythm.png",
+      "rule": "Precision Mechanisms require Create's ordered deployed sequence; preserving that sequence through successful completion reliably unlocks the pack's precision manufacturing stage.",
+      "prose": "Exactness is not stillness. It is repetition arriving in the correct order.",
+      "invitation": "Keep the sequence intact.",
+      "action": "Finish a Precision Mechanism successfully.",
+      "reveal_routes": [
+        {
+          "id": "precision_started",
+          "label": "Precision begun",
+          "type": "precision_start",
+          "value": "create:precision_mechanism",
+          "producer": "compat.create",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "precision_finished",
+          "label": "Precision completed",
+          "type": "precision_complete",
+          "value": "create:precision_mechanism",
+          "producer": "compat.create",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "emi",
+        "target": "create:precision_mechanism"
       }
-    ],
-    "doorway": {
-      "type": "font",
-      "target": "rats:ratlantis"
-    }
-  },
-  {
-    "id": "weather_has_momentum",
-    "title": "Weather Has Momentum",
-    "suit": "world",
-    "order": 10,
-    "aspect": "tempo",
-    "art": "better_content_threads:textures/gui/threads/weather_has_momentum.png",
-    "prose": "A storm is not a texture on the sky. It arrives, crosses structures, and carries consequences with it.",
-    "invitation": "Respect the direction of the moving air.",
-    "action": "Reach shelter and remain protected while the storm continues.",
-    "reveal_routes": [
-      {
-        "id": "storm_exposure",
-        "label": "Storm exposure",
-        "type": "storm_exposure",
-        "value": "significant",
-        "producer": "compat.weather2",
-        "correlation": "episode"
+    },
+    {
+      "id": "heat_go_somewhere",
+      "concept_id": "works.heat_go_somewhere",
+      "owner": "better-content-heat-sync",
+      "title": "Heat Must Go Somewhere",
+      "suit": "works",
+      "order": 6,
+      "aspect": "robustness",
+      "art": "better_content_threads:textures/gui/threads/heat_go_somewhere.png",
+      "rule": "Heat networks require an actual sink when process heat becomes excessive; transfer enough heat away to return the connected system to safety.",
+      "prose": "Every useful temperature is also a debt owed to somewhere else.",
+      "invitation": "Give excess heat a destination.",
+      "action": "Transfer process heat into a registered sink until the system is safe.",
+      "reveal_routes": [
+        {
+          "id": "excess_heat",
+          "label": "Excess process heat",
+          "type": "heat_excess",
+          "value": "*",
+          "producer": "better-content-heat-sync",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "heat_sunk",
+          "label": "Heat transferred",
+          "type": "heat_safe",
+          "value": "registered_sink",
+          "producer": "better-content-heat-sync",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "guideme",
+        "target": "heat_sync"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "storm_shelter",
-        "label": "Sheltered from storm",
-        "type": "storm_shelter",
-        "value": "protected",
-        "producer": "compat.weather2",
-        "correlation": "episode"
+    },
+    {
+      "id": "pressure_changes_matter",
+      "concept_id": "works.pressure_changes_matter",
+      "owner": "compat.pneumaticcraft",
+      "title": "Pressure Changes Matter",
+      "suit": "works",
+      "order": 7,
+      "aspect": "impact",
+      "art": "better_content_threads:textures/gui/threads/pressure_changes_matter.png",
+      "rule": "PneumaticCraft pressure processing requires active containment and usable pressure; complete a chamber operation without treating compressed air as decorative capacity.",
+      "prose": "Containment allows force to become a recipe instead of an accident.",
+      "invitation": "Hold the boundary while matter changes.",
+      "action": "Complete a pressure process without rupture.",
+      "reveal_routes": [
+        {
+          "id": "working_pressure",
+          "label": "Working pressure",
+          "type": "pressure_working",
+          "value": "*",
+          "producer": "compat.pneumaticcraft",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "safe_pressure_recipe",
+          "label": "Safe pressure process",
+          "type": "pressure_complete",
+          "value": "safe",
+          "producer": "compat.pneumaticcraft",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "guideme",
+        "target": "pneumaticcraft"
       }
-    ],
-    "doorway": {
-      "type": "guideme",
-      "target": "weather2"
-    }
-  },
-  {
-    "id": "body_has_weather",
-    "title": "The Body Has Weather",
-    "suit": "world",
-    "order": 11,
-    "aspect": "robustness",
-    "art": "better_content_threads:textures/gui/threads/body_has_weather.png",
-    "prose": "Climate continues beneath the skin. Comfort is a condition made between body, clothing, and place.",
-    "invitation": "Change the small climate you carry.",
-    "action": "Restore your temperature to the comfort band.",
-    "reveal_routes": [
-      {
-        "id": "temperature_stress",
-        "label": "Temperature stress",
-        "type": "temperature_stress",
-        "value": "hot|cold",
-        "producer": "better-content-heat-sync",
-        "correlation": "episode"
+    },
+    {
+      "id": "chemistry_remembers_sequence",
+      "concept_id": "works.chemistry_remembers_sequence",
+      "owner": "better-content-realistic-ores",
+      "title": "Chemistry Remembers Sequence",
+      "suit": "works",
+      "order": 8,
+      "aspect": "control",
+      "art": "better_content_threads:textures/gui/threads/chemistry_remembers_sequence.png",
+      "rule": "Ore families retain identity through processing; use an approved family-specific separation route so crushed feed becomes the intended concentrate rather than generic output.",
+      "prose": "The same substance can become waste or concentrate depending on the path taken through it.",
+      "invitation": "Keep the deposit's sequence legible.",
+      "action": "Produce concentrate through an approved family-specific separation route.",
+      "reveal_routes": [
+        {
+          "id": "deposit_feed",
+          "label": "Deposit feed",
+          "type": "chemistry_feed",
+          "value": "*",
+          "producer": "better-content-realistic-ores",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "concentrate_route",
+          "label": "Separated concentrate",
+          "type": "chemistry_concentrate",
+          "value": "*",
+          "producer": "better-content-realistic-ores",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "guideme",
+        "target": "realistic_ores:processing"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "temperature_restored",
-        "label": "Comfort restored",
-        "type": "temperature_comfort",
-        "value": "restored",
-        "producer": "better-content-heat-sync",
-        "correlation": "episode"
+    },
+    {
+      "id": "electricity_agreement",
+      "concept_id": "works.electricity_agreement",
+      "owner": "compat.powergrid",
+      "title": "Electricity Is an Agreement",
+      "suit": "works",
+      "order": 9,
+      "aspect": "work",
+      "art": "better_content_threads:textures/gui/threads/electricity_agreement.png",
+      "rule": "A PowerGrid network works only when generation, connected transmission, and consumption coincide; stored parts alone do not demonstrate a functioning electrical system.",
+      "prose": "Generation, transmission, and use must all consent to the same instant.",
+      "invitation": "Close the whole circuit of work.",
+      "action": "Generate, transmit, and consume power in one working network.",
+      "reveal_routes": [
+        {
+          "id": "power_network",
+          "label": "Power network",
+          "type": "electric_network",
+          "value": "connected",
+          "producer": "compat.powergrid",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "powered_recipe",
+          "label": "Powered work",
+          "type": "electric_complete",
+          "value": "generated_transmitted_consumed",
+          "producer": "compat.powergrid",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "emi",
+        "target": "powergrid:generator_housing"
       }
-    ],
-    "doorway": {
-      "type": "guideme",
-      "target": "cold_sweat"
-    }
-  },
-  {
-    "id": "water_made_safe",
-    "title": "Water Must Be Made Safe",
-    "suit": "world",
-    "order": 12,
-    "aspect": "control",
-    "art": "better_content_threads:textures/gui/threads/water_made_safe.png",
-    "prose": "Thirst makes every source look simple. The vessel remembers what the eye cannot see.",
-    "invitation": "Make the source answerable to the body.",
-    "action": "Purify and drink the unsafe water you collected.",
-    "reveal_routes": [
-      {
-        "id": "unsafe_water",
-        "label": "Unsafe water",
-        "type": "water_collect",
-        "value": "unsafe",
-        "producer": "better-content-water-survival",
-        "correlation": "episode"
+    },
+    {
+      "id": "machines_can_remember",
+      "concept_id": "works.machines_can_remember",
+      "owner": "compat.ae2",
+      "title": "Machines Can Remember",
+      "suit": "works",
+      "order": 10,
+      "aspect": "control",
+      "art": "better_content_threads:textures/gui/threads/machines_can_remember.png",
+      "rule": "AE2 patterns store manufacturing intent; encode a real pattern and let the network complete its autocraft instead of treating storage as automation.",
+      "prose": "Information can survive the hand that entered it and return as matter or instruction.",
+      "invitation": "Ask a machine to retain an intention.",
+      "action": "Encode an AE2 pattern, then let the network finish its autocraft.",
+      "reveal_routes": [
+        {
+          "id": "machine_memory",
+          "label": "Machine memory online",
+          "type": "machine_memory",
+          "value": "ae2",
+          "producer": "compat.ae2",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "ae2_autocraft",
+          "label": "Patterned autocraft",
+          "type": "machine_recall",
+          "value": "ae2",
+          "producer": "compat.ae2",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "emi",
+        "target": "ae2:controller"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "safe_water",
-        "label": "Water purified",
-        "type": "water_drink",
-        "value": "purified_correlated",
-        "producer": "better-content-water-survival",
-        "correlation": "episode"
+    },
+    {
+      "id": "rails_turn_distance",
+      "concept_id": "works.rails_turn_distance",
+      "owner": "compat.create",
+      "title": "Rails Turn Distance into Machinery",
+      "suit": "works",
+      "order": 11,
+      "aspect": "tempo",
+      "art": "better_content_threads:textures/gui/threads/rails_turn_distance.png",
+      "rule": "Create trains become transport infrastructure through stations and schedules; ride between player-built stations far enough apart to prove the route actually works.",
+      "prose": "A route becomes a machine when departure can reliably imply arrival.",
+      "invitation": "Let the timetable move you.",
+      "action": "Ride a scheduled train between two player-built stations at least 128 blocks apart.",
+      "reveal_routes": [
+        {
+          "id": "stations_linked",
+          "label": "Stations linked",
+          "type": "train_stations",
+          "value": "linked",
+          "producer": "compat.create",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "scheduled_ride",
+          "label": "Scheduled passage",
+          "type": "train_ride",
+          "value": "128",
+          "producer": "compat.create",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "ponder",
+        "target": "create:track_station"
       }
-    ],
-    "doorway": {
-      "type": "guideme",
-      "target": "thirst"
-    }
-  },
-  {
-    "id": "feast_before_journey",
-    "title": "Feast Before the Journey",
-    "suit": "world",
-    "order": 13,
-    "aspect": "endurance",
-    "art": "better_content_threads:textures/gui/threads/feast_before_journey.png",
-    "prose": "Travel begins before the threshold. A prepared body crosses differently from an empty one.",
-    "invitation": "Let departure begin at the table.",
-    "action": "Eat a nutritious meal, then enter another realm within two minutes.",
-    "reveal_routes": [
-      {
-        "id": "portal_approach",
-        "label": "Portal approached",
-        "type": "portal_approach",
-        "value": "major_realm",
-        "producer": "better-content-dimension-drink",
-        "correlation": "episode"
+    },
+    {
+      "id": "vessel_becomes_place",
+      "concept_id": "works.vessel_becomes_place",
+      "owner": "compat.valkyrienskies",
+      "title": "A Vessel Can Become a Place",
+      "suit": "works",
+      "order": 12,
+      "aspect": "mobility",
+      "art": "better_content_threads:textures/gui/threads/vessel_becomes_place.png",
+      "rule": "An assembled Valkyrien Skies vessel becomes mobile infrastructure only through travel; pilot it at least 128 blocks and make a real landfall.",
+      "prose": "Structure becomes location when it carries tools, shelter, and intention across the map.",
+      "invitation": "Move the place without abandoning it.",
+      "action": "Pilot your assembled vessel at least 128 blocks and make landfall.",
+      "reveal_routes": [
+        {
+          "id": "vessel_assembled",
+          "label": "Vessel assembled",
+          "type": "vessel_assemble",
+          "value": "*",
+          "producer": "compat.valkyrienskies",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "vessel_landfall",
+          "label": "Made landfall",
+          "type": "vessel_landfall",
+          "value": "128",
+          "producer": "compat.valkyrienskies",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "emi",
+        "target": "vs_eureka:oak_ship_helm"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "fed_crossing",
-        "label": "Feasted crossing",
-        "type": "fed_dimension_enter",
-        "value": "*",
-        "producer": "better-content-dimension-drink",
-        "correlation": "episode"
+    },
+    {
+      "id": "leave_atmosphere",
+      "concept_id": "works.leave_atmosphere",
+      "owner": "compat.creating-space",
+      "title": "Leave the Atmosphere",
+      "suit": "works",
+      "order": 13,
+      "aspect": "endurance",
+      "art": "better_content_threads:textures/gui/threads/leave_atmosphere.png",
+      "rule": "Creating Space rockets require a valid destination, thrust, and delta-v; reach Earth orbit in the same launch-ready vehicle you assembled.",
+      "prose": "A machine becomes a boundary-crossing argument when the sky stops containing it.",
+      "invitation": "Ask the finished vehicle for altitude.",
+      "action": "Reach orbit in the launch-ready rocket you assembled.",
+      "reveal_routes": [
+        {
+          "id": "rocket_ready",
+          "label": "Launch-ready rocket",
+          "type": "rocket_ready",
+          "value": "*",
+          "producer": "compat.creating-space",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "orbit_reached",
+          "label": "Reached orbit",
+          "type": "orbit_reached",
+          "value": "*",
+          "producer": "compat.creating-space",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "emi",
+        "target": "creatingspace:rocket_controls"
       }
-    ],
-    "doorway": {
-      "type": "diet",
-      "target": "food_diversity"
-    }
-  },
-  {
-    "id": "hands_learn_repair",
-    "title": "Hands Learn by Repair",
-    "suit": "works",
-    "order": 1,
-    "aspect": "renewal",
-    "art": "better_content_threads:textures/gui/threads/hands_learn_repair.png",
-    "prose": "A tool becomes understood where wear meets attention.",
-    "invitation": "Answer use with care.",
-    "action": "Repair the same TConstruct tool that your work damaged.",
-    "reveal_routes": [
-      {
-        "id": "tool_worn",
-        "label": "Worn tool",
-        "type": "tool_worn",
-        "value": "tconstruct",
-        "producer": "compat.tconstruct",
-        "correlation": "episode"
+    },
+    {
+      "id": "life_becomes_capable",
+      "concept_id": "powers.life_becomes_capable",
+      "owner": "better-content-rpg-stats",
+      "title": "A Life Becomes Capable",
+      "suit": "powers",
+      "order": 1,
+      "aspect": "renewal",
+      "art": "better_content_threads:textures/gui/threads/life_becomes_capable.png",
+      "rule": "RPG aspect points remain choices until allocated; spend an available point to make one capability real rather than leaving growth uncommitted.",
+      "prose": "A body can grow in directions that remain choices until they are lived.",
+      "invitation": "Choose one capacity to become real.",
+      "action": "Spend an unallocated Life aspect point.",
+      "reveal_routes": [
+        {
+          "id": "allocation_available",
+          "label": "Capacity available",
+          "type": "life_allocation",
+          "value": "available",
+          "producer": "better-content-rpg-stats",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "allocation_spent",
+          "label": "Capacity chosen",
+          "type": "life_allocation",
+          "value": "spent",
+          "producer": "better-content-rpg-stats",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "rpg",
+        "target": "allocations"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "tool_repaired",
-        "label": "Native repair",
-        "type": "tool_repaired",
-        "value": "correlated",
-        "producer": "compat.tconstruct",
-        "correlation": "episode"
+    },
+    {
+      "id": "blood_infrastructure",
+      "concept_id": "powers.blood_infrastructure",
+      "owner": "compat.bloodmagic",
+      "title": "Blood Can Become Infrastructure",
+      "suit": "powers",
+      "order": 2,
+      "aspect": "renewal",
+      "art": "better_content_threads:textures/gui/threads/blood_infrastructure.png",
+      "rule": "Blood Magic life essence becomes persistent infrastructure only through a working altar; contribute essence and produce an actual altar result with it.",
+      "prose": "Life offered to a structure can persist there as capacity, debt, and future work.",
+      "invitation": "Let sacrifice finish as construction.",
+      "action": "Produce an altar result using life essence you contributed.",
+      "reveal_routes": [
+        {
+          "id": "altar_bound",
+          "label": "Bound altar",
+          "type": "blood_altar",
+          "value": "bound",
+          "producer": "compat.bloodmagic",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "altar_result",
+          "label": "Life-powered work",
+          "type": "blood_complete",
+          "value": "player_lp",
+          "producer": "compat.bloodmagic",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "powers",
+        "target": "Blood Magic"
       }
-    ],
-    "doorway": {
-      "type": "tconstruct",
-      "target": "repair"
-    }
-  },
-  {
-    "id": "materials_temperaments",
-    "title": "Materials Have Temperaments",
-    "suit": "works",
-    "order": 2,
-    "aspect": "robustness",
-    "art": "better_content_threads:textures/gui/threads/materials_temperaments.png",
-    "prose": "Matter does not merely combine. Heat and proportion decide which character survives the meeting.",
-    "invitation": "Let two fluids negotiate a third nature.",
-    "action": "Cast a real alloy made in your smeltery.",
-    "reveal_routes": [
-      {
-        "id": "alloyable_fluids",
-        "label": "Alloyable fluids",
-        "type": "smeltery_alloyable",
-        "value": "*",
-        "producer": "compat.tconstruct",
-        "correlation": "episode"
+    },
+    {
+      "id": "dead_leave_work",
+      "concept_id": "powers.dead_leave_work",
+      "owner": "compat.malum-goety",
+      "title": "The Dead Leave Work Behind",
+      "suit": "powers",
+      "order": 3,
+      "aspect": "impact",
+      "art": "better_content_threads:textures/gui/threads/dead_leave_work.png",
+      "rule": "Malum and Goety treat soul resources as usable work; gain a real remnant, then spend it through a successful soul-powered operation.",
+      "prose": "Death can leave more than absence. Some traditions treat its remainder as labor waiting for form.",
+      "invitation": "Give a remnant a deliberate task.",
+      "action": "Spend a soul resource in a successful Malum or Goety operation.",
+      "reveal_routes": [
+        {
+          "id": "soul_acquired",
+          "label": "Soul acquired",
+          "type": "soul_resource",
+          "value": "malum|goety",
+          "producer": "compat.malum-goety",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "malum_work",
+          "label": "Malum soul-work",
+          "type": "soul_work",
+          "value": "malum",
+          "producer": "compat.malum-goety",
+          "correlation": "episode"
+        },
+        {
+          "id": "goety_work",
+          "label": "Goety soul-work",
+          "type": "soul_work",
+          "value": "goety",
+          "producer": "compat.malum-goety",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "powers",
+        "target": "Soul Work"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "alloy_cast",
-        "label": "Cast alloy",
-        "type": "alloy_cast",
-        "value": "*",
-        "producer": "compat.tconstruct",
-        "correlation": "episode"
+    },
+    {
+      "id": "spirits_honour_contracts",
+      "concept_id": "powers.spirits_honour_contracts",
+      "owner": "compat.occultism",
+      "title": "Spirits Honour Contracts",
+      "suit": "powers",
+      "order": 4,
+      "aspect": "control",
+      "art": "better_content_threads:textures/gui/threads/spirits_honour_contracts.png",
+      "rule": "Occultism rituals require valid form, offering, and completion; starting a binding is not enough until the same ritual finishes its contract.",
+      "prose": "Elsewhere does not answer freely. It recognizes form, offering, boundary, and obligation.",
+      "invitation": "Complete the terms that opened the way.",
+      "action": "Begin and finish one valid Occultism ritual.",
+      "reveal_routes": [
+        {
+          "id": "binding_started",
+          "label": "Binding begun",
+          "type": "spirit_binding",
+          "value": "occultism",
+          "producer": "compat.occultism",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "occultist_contract",
+          "label": "Occultist contract",
+          "type": "spirit_complete",
+          "value": "occultism",
+          "producer": "compat.occultism",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "powers",
+        "target": "Spirit Contracts"
       }
-    ],
-    "doorway": {
-      "type": "tconstruct",
-      "target": "alloys"
-    }
-  },
-  {
-    "id": "motion_becomes_industry",
-    "title": "Motion Becomes Industry",
-    "suit": "works",
-    "order": 3,
-    "aspect": "work",
-    "art": "better_content_threads:textures/gui/threads/motion_becomes_industry.png",
-    "prose": "Rotation becomes infrastructure when effort crosses a machine instead of ending at the hand.",
-    "invitation": "Finish the motion you began yourself.",
-    "action": "Complete a Create process using manual crank power.",
-    "reveal_routes": [
-      {
-        "id": "manual_process",
-        "label": "Manual process",
-        "type": "create_manual_start",
-        "value": "*",
-        "producer": "compat.create",
-        "correlation": "episode"
+    },
+    {
+      "id": "reality_has_grammar",
+      "concept_id": "powers.reality_has_grammar",
+      "owner": "compat.ars-nouveau",
+      "title": "Reality Has Grammar",
+      "suit": "powers",
+      "order": 5,
+      "aspect": "control",
+      "art": "better_content_threads:textures/gui/threads/reality_has_grammar.png",
+      "rule": "Ars Nouveau spells are ordered instructions; author a spell, cast it, and produce a non-cosmetic effect that proves the grammar executed.",
+      "prose": "A spell is not a force but a sentence whose order decides what the world understands.",
+      "invitation": "Write a sentence the world can perform.",
+      "action": "Cast your authored spell and produce a non-cosmetic effect.",
+      "reveal_routes": [
+        {
+          "id": "spell_authored",
+          "label": "Spell authored",
+          "type": "spell_authored",
+          "value": "ars_nouveau",
+          "producer": "compat.ars-nouveau",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "spell_effect",
+          "label": "Grammar enacted",
+          "type": "spell_effect",
+          "value": "ars_nouveau",
+          "producer": "compat.ars-nouveau",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "powers",
+        "target": "Ars Nouveau"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "manual_completion",
-        "label": "Hand-powered work",
-        "type": "create_manual_complete",
-        "value": "*",
-        "producer": "compat.create",
-        "correlation": "episode"
+    },
+    {
+      "id": "elements_change_sentence",
+      "concept_id": "powers.elements_change_sentence",
+      "owner": "compat.ars-elemental",
+      "title": "Elements Change the Sentence",
+      "suit": "powers",
+      "order": 6,
+      "aspect": "impact",
+      "art": "better_content_threads:textures/gui/threads/elements_change_sentence.png",
+      "rule": "An elemental modifier changes what an Ars spell can do; trigger a genuine elemental interaction from the same authored spell rather than recoloring it.",
+      "prose": "Element is not decoration added to grammar. It changes what the same words are permitted to mean.",
+      "invitation": "Let an element alter the result.",
+      "action": "Trigger an elemental interaction from your modified spell.",
+      "reveal_routes": [
+        {
+          "id": "element_added",
+          "label": "Element added",
+          "type": "spell_element",
+          "value": "added",
+          "producer": "compat.ars-elemental",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "element_triggered",
+          "label": "Element enacted",
+          "type": "spell_element",
+          "value": "triggered",
+          "producer": "compat.ars-elemental",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "powers",
+        "target": "Ars Elemental"
       }
-    ],
-    "doorway": {
-      "type": "ponder",
-      "target": "create:hand_crank"
-    }
-  },
-  {
-    "id": "rivers_turn_work",
-    "title": "Rivers Can Turn Work",
-    "suit": "works",
-    "order": 4,
-    "aspect": "work",
-    "art": "better_content_threads:textures/gui/threads/rivers_turn_work.png",
-    "prose": "A current becomes labor when a wheel gives it somewhere to go.",
-    "invitation": "Give moving water a useful consequence.",
-    "action": "Complete a process powered by renewable water rotation.",
-    "reveal_routes": [
-      {
-        "id": "water_rotation",
-        "label": "Water rotation",
-        "type": "kinetic_source",
-        "value": "water",
-        "producer": "compat.create",
-        "correlation": "episode"
+    },
+    {
+      "id": "doors_borrow_worlds",
+      "concept_id": "powers.doors_borrow_worlds",
+      "owner": "better-content-dimensional-font",
+      "title": "Doors Borrow Other Worlds",
+      "suit": "powers",
+      "order": 7,
+      "aspect": "mobility",
+      "art": "better_content_threads:textures/gui/threads/doors_borrow_worlds.png",
+      "rule": "Dimension Fonts create round-trip voyages to authored destinations; entering is only half the route, and the same Font journey must return.",
+      "prose": "A passage may owe its destination to a place that neither endpoint contains.",
+      "invitation": "Return by the borrowed route.",
+      "action": "Come back through the Dimensional Font after your voyage.",
+      "reveal_routes": [
+        {
+          "id": "font_departure",
+          "label": "Font departure",
+          "type": "font_transit",
+          "value": "depart",
+          "producer": "better-content-dimensional-font",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "font_return",
+          "label": "Font return",
+          "type": "font_transit",
+          "value": "return",
+          "producer": "better-content-dimensional-font",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "font",
+        "target": "dimensional_font"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "water_work",
-        "label": "River-powered work",
-        "type": "kinetic_complete",
-        "value": "water",
-        "producer": "compat.create",
-        "correlation": "episode"
+    },
+    {
+      "id": "power_needs_anchor",
+      "concept_id": "powers.power_needs_anchor",
+      "owner": "better-content-arcane-chunk-loaders",
+      "title": "Power Needs an Anchor",
+      "suit": "powers",
+      "order": 8,
+      "aspect": "robustness",
+      "art": "better_content_threads:textures/gui/threads/power_needs_anchor.png",
+      "rule": "Chunk anchors require a working power tradition and continue simulation beyond ordinary player range; verify the anchor remains supplied after you leave.",
+      "prose": "An influence that persists without its operator must be fastened to place and supplied with a reason to remain.",
+      "invitation": "Leave the anchor working behind you.",
+      "action": "Power an arcane chunk anchor and leave its normal simulation range.",
+      "reveal_routes": [
+        {
+          "id": "anchor_placed",
+          "label": "Anchor placed",
+          "type": "arcane_anchor",
+          "value": "placed",
+          "producer": "better-content-arcane-chunk-loaders",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "anchor_persisted",
+          "label": "Persistent anchor",
+          "type": "arcane_anchor",
+          "value": "ticket_verified",
+          "producer": "better-content-arcane-chunk-loaders",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "guideme",
+        "target": "arcane_chunk_loaders"
       }
-    ],
-    "doorway": {
-      "type": "ponder",
-      "target": "create:large_water_wheel"
-    }
-  },
-  {
-    "id": "precision_has_rhythm",
-    "title": "Precision Has a Rhythm",
-    "suit": "works",
-    "order": 5,
-    "aspect": "tempo",
-    "art": "better_content_threads:textures/gui/threads/precision_has_rhythm.png",
-    "prose": "Exactness is not stillness. It is repetition arriving in the correct order.",
-    "invitation": "Keep the sequence intact.",
-    "action": "Finish a Precision Mechanism successfully.",
-    "reveal_routes": [
-      {
-        "id": "precision_started",
-        "label": "Precision begun",
-        "type": "precision_start",
-        "value": "create:precision_mechanism",
-        "producer": "compat.create",
-        "correlation": "episode"
+    },
+    {
+      "id": "traditions_can_cross",
+      "concept_id": "powers.traditions_can_cross",
+      "owner": "compat.ars-addons",
+      "title": "Traditions Can Cross",
+      "suit": "powers",
+      "order": 9,
+      "aspect": "control",
+      "art": "better_content_threads:textures/gui/threads/traditions_can_cross.png",
+      "rule": "Selected magic systems share authored interoperability; complete an Ars Creo or Ars Energistique operation instead of assuming every tradition converts automatically.",
+      "prose": "Separate explanations of power can still discover a shared piece of machinery.",
+      "invitation": "Make one tradition answer another.",
+      "action": "Complete an Ars Creo or Ars Energistique cross-system operation.",
+      "reveal_routes": [
+        {
+          "id": "hybrid_constructed",
+          "label": "Hybrid constructed",
+          "type": "tradition_cross",
+          "value": "constructed",
+          "producer": "compat.ars-addons",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "ars_creo",
+          "label": "Ars Creo crossing",
+          "type": "tradition_cross",
+          "value": "ars_creo",
+          "producer": "compat.ars-addons",
+          "correlation": "episode"
+        },
+        {
+          "id": "ars_energistique",
+          "label": "Ars Energistique crossing",
+          "type": "tradition_cross",
+          "value": "ars_energistique",
+          "producer": "compat.ars-addons",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "powers",
+        "target": "Hybrid Traditions"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "precision_finished",
-        "label": "Precision completed",
-        "type": "precision_complete",
-        "value": "create:precision_mechanism",
-        "producer": "compat.create",
-        "correlation": "episode"
+    },
+    {
+      "id": "relics_remember_wearers",
+      "concept_id": "powers.relics_remember_wearers",
+      "owner": "compat.relics",
+      "title": "Relics Remember Their Wearers",
+      "suit": "powers",
+      "order": 10,
+      "aspect": "endurance",
+      "art": "better_content_threads:textures/gui/threads/relics_remember_wearers.png",
+      "rule": "Relics develop through use of the same physical object; trigger one relic in two qualifying contexts rather than swapping between equivalent items.",
+      "prose": "Repeated use makes an object feel less possessed than acquainted.",
+      "invitation": "Let the same relic answer twice.",
+      "action": "Trigger the same physical relic in a second qualifying context.",
+      "reveal_routes": [
+        {
+          "id": "relic_first",
+          "label": "Relic answered",
+          "type": "relic_activation",
+          "value": "first",
+          "producer": "compat.relics",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "relic_second",
+          "label": "Relic remembered",
+          "type": "relic_activation",
+          "value": "correlated_second",
+          "producer": "compat.relics",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "emi",
+        "target": "artifacts"
       }
-    ],
-    "doorway": {
-      "type": "emi",
-      "target": "create:precision_mechanism"
-    }
-  },
-  {
-    "id": "heat_go_somewhere",
-    "title": "Heat Must Go Somewhere",
-    "suit": "works",
-    "order": 6,
-    "aspect": "robustness",
-    "art": "better_content_threads:textures/gui/threads/heat_go_somewhere.png",
-    "prose": "Every useful temperature is also a debt owed to somewhere else.",
-    "invitation": "Give excess heat a destination.",
-    "action": "Transfer process heat into a registered sink until the system is safe.",
-    "reveal_routes": [
-      {
-        "id": "excess_heat",
-        "label": "Excess process heat",
-        "type": "heat_excess",
-        "value": "*",
-        "producer": "better-content-heat-sync",
-        "correlation": "episode"
+    },
+    {
+      "id": "source_becomes_machinery",
+      "concept_id": "powers.source_becomes_machinery",
+      "owner": "compat.ars-energistique",
+      "title": "Source Can Become Machinery",
+      "suit": "powers",
+      "order": 11,
+      "aspect": "work",
+      "art": "better_content_threads:textures/gui/threads/source_becomes_machinery.png",
+      "rule": "Ars Source can cross an authored converter into scheduled industrial work; the conversion matters only when it finishes a machine process.",
+      "prose": "What begins as magical capacity can cross a converter and become scheduled industrial work.",
+      "invitation": "Let Source finish as manufacture.",
+      "action": "Complete a machine process powered through Source conversion.",
+      "reveal_routes": [
+        {
+          "id": "source_connected",
+          "label": "Source connected",
+          "type": "source_machine",
+          "value": "connected",
+          "producer": "compat.ars-energistique",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "source_process",
+          "label": "Source-powered work",
+          "type": "source_machine",
+          "value": "complete",
+          "producer": "compat.ars-energistique",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "powers",
+        "target": "Ars Energistique"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "heat_sunk",
-        "label": "Heat transferred",
-        "type": "heat_safe",
-        "value": "registered_sink",
-        "producer": "better-content-heat-sync",
-        "correlation": "episode"
+    },
+    {
+      "id": "rules_adhere_matter",
+      "concept_id": "powers.rules_adhere_matter",
+      "owner": "better-content-threads",
+      "title": "Rules Can Adhere to Matter",
+      "suit": "powers",
+      "order": 12,
+      "aspect": "robustness",
+      "art": "better_content_threads:textures/gui/threads/rules_adhere_matter.png",
+      "rule": "Enchantments are conditional behavior attached to items; apply one through supported enchanting, then trigger its actual effect in the matching circumstance.",
+      "prose": "An enchantment is a conditional law attached to an object and waiting for its circumstance.",
+      "invitation": "Give the attached rule its condition.",
+      "action": "Trigger the actual behavior of an item you enchanted.",
+      "reveal_routes": [
+        {
+          "id": "item_enchanted",
+          "label": "Rule attached",
+          "type": "enchant_apply",
+          "value": "supported",
+          "producer": "better-content-threads",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "enchant_triggered",
+          "label": "Rule enacted",
+          "type": "enchant_effect",
+          "value": "correlated",
+          "producer": "better-content-threads",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "emi",
+        "target": "minecraft:enchanting_table"
       }
-    ],
-    "doorway": {
-      "type": "guideme",
-      "target": "heat_sync"
-    }
-  },
-  {
-    "id": "pressure_changes_matter",
-    "title": "Pressure Changes Matter",
-    "suit": "works",
-    "order": 7,
-    "aspect": "impact",
-    "art": "better_content_threads:textures/gui/threads/pressure_changes_matter.png",
-    "prose": "Containment allows force to become a recipe instead of an accident.",
-    "invitation": "Hold the boundary while matter changes.",
-    "action": "Complete a pressure process without rupture.",
-    "reveal_routes": [
-      {
-        "id": "working_pressure",
-        "label": "Working pressure",
-        "type": "pressure_working",
-        "value": "*",
-        "producer": "compat.pneumaticcraft",
-        "correlation": "episode"
+    },
+    {
+      "id": "body_borrow_state",
+      "concept_id": "powers.body_borrow_state",
+      "owner": "better-content-threads",
+      "title": "The Body Can Borrow a State",
+      "suit": "powers",
+      "order": 13,
+      "aspect": "tempo",
+      "art": "better_content_threads:textures/gui/threads/body_borrow_state.png",
+      "rule": "Temporary protections answer specific hazards rather than granting universal safety; use the matching borrowed state to resolve the environmental danger you encountered.",
+      "prose": "For a little while, a body may obey a rule that belongs to another creature, element, or place.",
+      "invitation": "Borrow the condition the hazard demands.",
+      "action": "Use a matching temporary protection to resolve an environmental hazard.",
+      "reveal_routes": [
+        {
+          "id": "hazard_met",
+          "label": "Hazard encountered",
+          "type": "effect_hazard",
+          "value": "fire|water|dark|temperature",
+          "producer": "better-content-threads",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "state_borrowed",
+          "label": "Borrowed protection",
+          "type": "effect_resolution",
+          "value": "correlated",
+          "producer": "better-content-threads",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "emi",
+        "target": "minecraft:potion"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "safe_pressure_recipe",
-        "label": "Safe pressure process",
-        "type": "pressure_complete",
-        "value": "safe",
-        "producer": "compat.pneumaticcraft",
-        "correlation": "episode"
+    },
+    {
+      "id": "life_reaches_tether",
+      "concept_id": "fragility.life_reaches_tether",
+      "owner": "better-content-threads",
+      "title": "A Life Reaches Its Tether",
+      "suit": "fragility",
+      "order": 1,
+      "aspect": "endurance",
+      "art": "better_content_threads:textures/gui/threads/life_reaches_tether.png",
+      "rule": "Downing is a recoverable state before death, not ordinary defeat; reaching death after becoming downed exposes the pack's full consequence boundary.",
+      "prose": "The body can stop before every consequence of the life inside it has finished.",
+      "invitation": "Some endings arrive only after the fall.",
+      "action": "Reach death after becoming downed.",
+      "reveal_routes": [
+        {
+          "id": "player_downed",
+          "label": "Reached the tether",
+          "type": "downed",
+          "value": "player",
+          "producer": "better-content-threads",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "bleed_out",
+          "label": "Bled out",
+          "type": "death",
+          "value": "player",
+          "producer": "better-content-threads",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "guideme",
+        "target": "downed_player_revival"
       }
-    ],
-    "doorway": {
-      "type": "guideme",
-      "target": "pneumaticcraft"
-    }
-  },
-  {
-    "id": "chemistry_remembers_sequence",
-    "title": "Chemistry Remembers Sequence",
-    "suit": "works",
-    "order": 8,
-    "aspect": "control",
-    "art": "better_content_threads:textures/gui/threads/chemistry_remembers_sequence.png",
-    "prose": "The same substance can become waste or concentrate depending on the path taken through it.",
-    "invitation": "Keep the deposit's sequence legible.",
-    "action": "Produce concentrate through an approved family-specific separation route.",
-    "reveal_routes": [
-      {
-        "id": "deposit_feed",
-        "label": "Deposit feed",
-        "type": "chemistry_feed",
-        "value": "*",
-        "producer": "better-content-realistic-ores",
-        "correlation": "episode"
+    },
+    {
+      "id": "ruins_are_instructions",
+      "concept_id": "fragility.ruins_are_instructions",
+      "owner": "better-content-threads",
+      "title": "Ruins Are Instructions",
+      "suit": "fragility",
+      "order": 2,
+      "aspect": "control",
+      "art": "better_content_threads:textures/gui/threads/ruins_are_instructions.png",
+      "rule": "Major ruins are dangerous information spaces; enter one, acquire something new inside, and leave alive before the exploration counts as recovered knowledge.",
+      "prose": "Failure leaves plans in negative: load-bearing walls, abandoned routes, and objects someone thought worth hiding.",
+      "invitation": "Carry one surviving fact back outside.",
+      "action": "Leave the ruin alive with something first acquired inside.",
+      "reveal_routes": [
+        {
+          "id": "ruin_entered",
+          "label": "Entered ruin",
+          "type": "structure_enter",
+          "value": "major_ruin",
+          "producer": "better-content-threads",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "ruin_evidence",
+          "label": "Recovered evidence",
+          "type": "structure_exit",
+          "value": "new_item_alive",
+          "producer": "better-content-threads",
+          "correlation": "episode"
+        }
+      ]
+    },
+    {
+      "id": "enemies_no_cause",
+      "concept_id": "fragility.enemies_no_cause",
+      "owner": "better-content-threads",
+      "title": "Enemies Do Not Share a Cause",
+      "suit": "fragility",
+      "order": 3,
+      "aspect": "tempo",
+      "art": "better_content_threads:textures/gui/threads/enemies_no_cause.png",
+      "rule": "Hostile factions are not allies merely because both attack you; position two different enemies so one damages the other during the encounter.",
+      "prose": "Hostility aimed in one direction is not alliance. Different hungers can still be placed in one another's path.",
+      "invitation": "Stand where two intentions cross.",
+      "action": "Manoeuvre one hostile faction into damaging another.",
+      "reveal_routes": [
+        {
+          "id": "factions_target",
+          "label": "Crossed hostilities",
+          "type": "hostile_collision",
+          "value": "targeted_by_two",
+          "producer": "better-content-threads",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "factions_collide",
+          "label": "Threats collided",
+          "type": "hostile_collision",
+          "value": "cross_damage",
+          "producer": "better-content-threads",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "guideme",
+        "target": "hostile_factions"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "concentrate_route",
-        "label": "Separated concentrate",
-        "type": "chemistry_concentrate",
-        "value": "*",
-        "producer": "better-content-realistic-ores",
-        "correlation": "episode"
+    },
+    {
+      "id": "copy_outlives_work",
+      "concept_id": "fragility.copy_outlives_work",
+      "owner": "better-content-world-lifecycle-manager",
+      "title": "A Copy Can Outlive the Work",
+      "suit": "fragility",
+      "order": 4,
+      "aspect": "robustness",
+      "art": "better_content_threads:textures/gui/threads/copy_outlives_work.png",
+      "rule": "Published schematics preserve a build across lineage resets; capture substantial work and publish it before assuming local blocks will survive another world.",
+      "prose": "Matter may be temporary while its arrangement remains recoverable elsewhere.",
+      "invitation": "Preserve the arrangement beyond its blocks.",
+      "action": "Publish the captured build to the lineage schematic library.",
+      "reveal_routes": [
+        {
+          "id": "schematic_captured",
+          "label": "Build captured",
+          "type": "schematic_capture",
+          "value": "substantial",
+          "producer": "better-content-world-lifecycle-manager",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "schematic_published",
+          "label": "Lineage copy",
+          "type": "schematic_publish",
+          "value": "correlated",
+          "producer": "better-content-world-lifecycle-manager",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "lifecycle",
+        "target": "schematic_library"
       }
-    ],
-    "doorway": {
-      "type": "guideme",
-      "target": "realistic_ores:processing"
-    }
-  },
-  {
-    "id": "electricity_agreement",
-    "title": "Electricity Is an Agreement",
-    "suit": "works",
-    "order": 9,
-    "aspect": "work",
-    "art": "better_content_threads:textures/gui/threads/electricity_agreement.png",
-    "prose": "Generation, transmission, and use must all consent to the same instant.",
-    "invitation": "Close the whole circuit of work.",
-    "action": "Generate, transmit, and consume power in one working network.",
-    "reveal_routes": [
-      {
-        "id": "power_network",
-        "label": "Power network",
-        "type": "electric_network",
-        "value": "connected",
-        "producer": "compat.powergrid",
-        "correlation": "episode"
+    },
+    {
+      "id": "army_walks_toward_you",
+      "concept_id": "fragility.army_walks_toward_you",
+      "owner": "better-content-pillager-campaigns",
+      "title": "An Army Walks Toward You",
+      "suit": "fragility",
+      "order": 5,
+      "aspect": "impact",
+      "art": "better_content_threads:textures/gui/threads/army_walks_toward_you.png",
+      "rule": "Pillager campaigns are directed threats with distinct terminal outcomes; a warning remains active until the campaign resolves, retreats, succeeds, or is defeated.",
+      "prose": "Organized danger has direction, patience, and an ending that need not resemble victory.",
+      "invitation": "See the campaign reach its answer.",
+      "action": "Reach any terminal outcome of the warned campaign.",
+      "reveal_routes": [
+        {
+          "id": "campaign_warned",
+          "label": "Campaign warned",
+          "type": "campaign_state",
+          "value": "gathering|approaching|materialized",
+          "producer": "better-content-pillager-campaigns",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "campaign_resolved",
+          "label": "Campaign resolved",
+          "type": "campaign_outcome",
+          "value": "survived|defeated",
+          "producer": "better-content-pillager-campaigns",
+          "correlation": "episode"
+        },
+        {
+          "id": "campaign_retreated",
+          "label": "Campaign retreated",
+          "type": "campaign_outcome",
+          "value": "retreated",
+          "producer": "better-content-pillager-campaigns",
+          "correlation": "episode"
+        },
+        {
+          "id": "campaign_target_dead",
+          "label": "Target fell",
+          "type": "campaign_outcome",
+          "value": "target_dead",
+          "producer": "better-content-pillager-campaigns",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "campaign",
+        "target": "status"
       }
-    ],
-    "completion_routes": [
-      {
-        "id": "powered_recipe",
-        "label": "Powered work",
-        "type": "electric_complete",
-        "value": "generated_transmitted_consumed",
-        "producer": "compat.powergrid",
-        "correlation": "episode"
+    },
+    {
+      "id": "world_can_be_condensed",
+      "concept_id": "fragility.world_can_be_condensed",
+      "owner": "better-content-world-lifecycle-manager",
+      "title": "A World Can Be Condensed",
+      "suit": "fragility",
+      "order": 6,
+      "aspect": "renewal",
+      "art": "better_content_threads:textures/gui/threads/world_can_be_condensed.png",
+      "rule": "The World Condenser begins an irreversible staged lineage reset; only a verified successor completes the operation and carries approved persistent knowledge forward.",
+      "prose": "A finished world may become an archive, a selection, and a verified beginning somewhere else.",
+      "invitation": "Let the machine carry its question beyond this world.",
+      "action": "Begin a verified successor through this World Condenser.",
+      "reveal_routes": [
+        {
+          "id": "condenser_formed",
+          "label": "Condenser formed",
+          "type": "condenser",
+          "value": "formed",
+          "producer": "better-content-world-lifecycle-manager",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "successor_verified",
+          "label": "Verified successor",
+          "type": "successor",
+          "value": "verified",
+          "producer": "better-content-world-lifecycle-manager",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "lifecycle",
+        "target": "world_condenser"
       }
-    ],
-    "doorway": {
-      "type": "emi",
-      "target": "powergrid:generator_housing"
-    }
-  },
-  {
-    "id": "machines_can_remember",
-    "title": "Machines Can Remember",
-    "suit": "works",
-    "order": 10,
-    "aspect": "control",
-    "art": "better_content_threads:textures/gui/threads/machines_can_remember.png",
-    "prose": "Information can survive the hand that entered it and return as matter or instruction.",
-    "invitation": "Ask a machine to retain an intention.",
-    "action": "Encode an AE2 pattern, then let the network finish its autocraft.",
-    "reveal_routes": [
-      {
-        "id": "machine_memory",
-        "label": "Machine memory online",
-        "type": "machine_memory",
-        "value": "ae2",
-        "producer": "compat.ae2",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "ae2_autocraft",
-        "label": "Patterned autocraft",
-        "type": "machine_recall",
-        "value": "ae2",
-        "producer": "compat.ae2",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "emi",
-      "target": "ae2:controller"
-    }
-  },
-  {
-    "id": "rails_turn_distance",
-    "title": "Rails Turn Distance into Machinery",
-    "suit": "works",
-    "order": 11,
-    "aspect": "tempo",
-    "art": "better_content_threads:textures/gui/threads/rails_turn_distance.png",
-    "prose": "A route becomes a machine when departure can reliably imply arrival.",
-    "invitation": "Let the timetable move you.",
-    "action": "Ride a scheduled train between two player-built stations at least 128 blocks apart.",
-    "reveal_routes": [
-      {
-        "id": "stations_linked",
-        "label": "Stations linked",
-        "type": "train_stations",
-        "value": "linked",
-        "producer": "compat.create",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "scheduled_ride",
-        "label": "Scheduled passage",
-        "type": "train_ride",
-        "value": "128",
-        "producer": "compat.create",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "ponder",
-      "target": "create:track_station"
-    }
-  },
-  {
-    "id": "vessel_becomes_place",
-    "title": "A Vessel Can Become a Place",
-    "suit": "works",
-    "order": 12,
-    "aspect": "mobility",
-    "art": "better_content_threads:textures/gui/threads/vessel_becomes_place.png",
-    "prose": "Structure becomes location when it carries tools, shelter, and intention across the map.",
-    "invitation": "Move the place without abandoning it.",
-    "action": "Pilot your assembled vessel at least 128 blocks and make landfall.",
-    "reveal_routes": [
-      {
-        "id": "vessel_assembled",
-        "label": "Vessel assembled",
-        "type": "vessel_assemble",
-        "value": "*",
-        "producer": "compat.valkyrienskies",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "vessel_landfall",
-        "label": "Made landfall",
-        "type": "vessel_landfall",
-        "value": "128",
-        "producer": "compat.valkyrienskies",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "emi",
-      "target": "vs_eureka:oak_ship_helm"
-    }
-  },
-  {
-    "id": "leave_atmosphere",
-    "title": "Leave the Atmosphere",
-    "suit": "works",
-    "order": 13,
-    "aspect": "endurance",
-    "art": "better_content_threads:textures/gui/threads/leave_atmosphere.png",
-    "prose": "A machine becomes a boundary-crossing argument when the sky stops containing it.",
-    "invitation": "Ask the finished vehicle for altitude.",
-    "action": "Reach orbit in the launch-ready rocket you assembled.",
-    "reveal_routes": [
-      {
-        "id": "rocket_ready",
-        "label": "Launch-ready rocket",
-        "type": "rocket_ready",
-        "value": "*",
-        "producer": "compat.creating-space",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "orbit_reached",
-        "label": "Reached orbit",
-        "type": "orbit_reached",
-        "value": "*",
-        "producer": "compat.creating-space",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "emi",
-      "target": "creatingspace:rocket_controls"
-    }
-  },
-  {
-    "id": "life_becomes_capable",
-    "title": "A Life Becomes Capable",
-    "suit": "powers",
-    "order": 1,
-    "aspect": "renewal",
-    "art": "better_content_threads:textures/gui/threads/life_becomes_capable.png",
-    "prose": "A body can grow in directions that remain choices until they are lived.",
-    "invitation": "Choose one capacity to become real.",
-    "action": "Spend an unallocated Life aspect point.",
-    "reveal_routes": [
-      {
-        "id": "allocation_available",
-        "label": "Capacity available",
-        "type": "life_allocation",
-        "value": "available",
-        "producer": "better-content-rpg-stats",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "allocation_spent",
-        "label": "Capacity chosen",
-        "type": "life_allocation",
-        "value": "spent",
-        "producer": "better-content-rpg-stats",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "rpg",
-      "target": "allocations"
-    }
-  },
-  {
-    "id": "blood_infrastructure",
-    "title": "Blood Can Become Infrastructure",
-    "suit": "powers",
-    "order": 2,
-    "aspect": "renewal",
-    "art": "better_content_threads:textures/gui/threads/blood_infrastructure.png",
-    "prose": "Life offered to a structure can persist there as capacity, debt, and future work.",
-    "invitation": "Let sacrifice finish as construction.",
-    "action": "Produce an altar result using life essence you contributed.",
-    "reveal_routes": [
-      {
-        "id": "altar_bound",
-        "label": "Bound altar",
-        "type": "blood_altar",
-        "value": "bound",
-        "producer": "compat.bloodmagic",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "altar_result",
-        "label": "Life-powered work",
-        "type": "blood_complete",
-        "value": "player_lp",
-        "producer": "compat.bloodmagic",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "powers",
-      "target": "Blood Magic"
-    }
-  },
-  {
-    "id": "dead_leave_work",
-    "title": "The Dead Leave Work Behind",
-    "suit": "powers",
-    "order": 3,
-    "aspect": "impact",
-    "art": "better_content_threads:textures/gui/threads/dead_leave_work.png",
-    "prose": "Death can leave more than absence. Some traditions treat its remainder as labor waiting for form.",
-    "invitation": "Give a remnant a deliberate task.",
-    "action": "Spend a soul resource in a successful Malum or Goety operation.",
-    "reveal_routes": [
-      {
-        "id": "soul_acquired",
-        "label": "Soul acquired",
-        "type": "soul_resource",
-        "value": "malum|goety",
-        "producer": "compat.malum-goety",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "malum_work",
-        "label": "Malum soul-work",
-        "type": "soul_work",
-        "value": "malum",
-        "producer": "compat.malum-goety",
-        "correlation": "episode"
+    },
+    {
+      "id": "sleep_is_not_an_anchor",
+      "concept_id": "survival.sleep_and_spawn",
+      "owner": "better-content-fixes",
+      "title": "Sleep Is Not an Anchor",
+      "suit": "fragility",
+      "order": 7,
+      "aspect": "control",
+      "rule": "Sleeping advances simulated world time but does not move your permanent spawn; waking proves the night passed while your lineage anchor remained unchanged.",
+      "prose": "Night can move while the place that receives you after death remains elsewhere.",
+      "invitation": "Let sleep pass without mistaking it for belonging.",
+      "action": "Sleep through a simulated night and wake at the same permanent spawn contract.",
+      "reveal_routes": [
+        {
+          "id": "sleep_started",
+          "label": "Sleep begun",
+          "type": "sleep_started",
+          "value": "night",
+          "producer": "better-content-fixes",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "sleep_finished",
+          "label": "Night simulated",
+          "type": "sleep_finished",
+          "value": "simulated_time",
+          "producer": "better-content-fixes",
+          "correlation": "episode"
+        }
+      ],
+      "art": "better_content_threads:textures/gui/threads/sleep_is_not_an_anchor.png"
+    },
+    {
+      "id": "hunger_is_not_nutrition",
+      "concept_id": "survival.hunger_and_nutrition",
+      "owner": "systemic-salience",
+      "title": "Hunger Is Not Nutrition",
+      "suit": "fragility",
+      "order": 8,
+      "aspect": "endurance",
+      "rule": "A full hunger bar does not guarantee nutritional readiness; varied food groups build separate capabilities that recover only through a qualifying balanced meal.",
+      "prose": "Satiety closes the mouth. Readiness is assembled more slowly from what the body has actually received.",
+      "invitation": "Feed more than the empty space.",
+      "action": "Recover from a nutrition warning by eating a qualifying balanced meal.",
+      "reveal_routes": [
+        {
+          "id": "nutrition_warning",
+          "label": "Nutrition warning",
+          "type": "nutrition_warning",
+          "value": "hunger_full_nutrition_low",
+          "producer": "systemic-salience",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "nutrition_recovered",
+          "label": "Balanced recovery",
+          "type": "nutrition_recovered",
+          "value": "balanced_meal",
+          "producer": "systemic-salience",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "diet",
+        "target": "systemic_salience"
       },
-      {
-        "id": "goety_work",
-        "label": "Goety soul-work",
-        "type": "soul_work",
-        "value": "goety",
-        "producer": "compat.malum-goety",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "powers",
-      "target": "Soul Work"
-    }
-  },
-  {
-    "id": "spirits_honour_contracts",
-    "title": "Spirits Honour Contracts",
-    "suit": "powers",
-    "order": 4,
-    "aspect": "control",
-    "art": "better_content_threads:textures/gui/threads/spirits_honour_contracts.png",
-    "prose": "Elsewhere does not answer freely. It recognizes form, offering, boundary, and obligation.",
-    "invitation": "Complete the terms that opened the way.",
-    "action": "Begin and finish one valid Occultism ritual.",
-    "reveal_routes": [
-      {
-        "id": "binding_started",
-        "label": "Binding begun",
-        "type": "spirit_binding",
-        "value": "occultism",
-        "producer": "compat.occultism",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "occultist_contract",
-        "label": "Occultist contract",
-        "type": "spirit_complete",
-        "value": "occultism",
-        "producer": "compat.occultism",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "powers",
-      "target": "Spirit Contracts"
-    }
-  },
-  {
-    "id": "reality_has_grammar",
-    "title": "Reality Has Grammar",
-    "suit": "powers",
-    "order": 5,
-    "aspect": "control",
-    "art": "better_content_threads:textures/gui/threads/reality_has_grammar.png",
-    "prose": "A spell is not a force but a sentence whose order decides what the world understands.",
-    "invitation": "Write a sentence the world can perform.",
-    "action": "Cast your authored spell and produce a non-cosmetic effect.",
-    "reveal_routes": [
-      {
-        "id": "spell_authored",
-        "label": "Spell authored",
-        "type": "spell_authored",
-        "value": "ars_nouveau",
-        "producer": "compat.ars-nouveau",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "spell_effect",
-        "label": "Grammar enacted",
-        "type": "spell_effect",
-        "value": "ars_nouveau",
-        "producer": "compat.ars-nouveau",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "powers",
-      "target": "Ars Nouveau"
-    }
-  },
-  {
-    "id": "elements_change_sentence",
-    "title": "Elements Change the Sentence",
-    "suit": "powers",
-    "order": 6,
-    "aspect": "impact",
-    "art": "better_content_threads:textures/gui/threads/elements_change_sentence.png",
-    "prose": "Element is not decoration added to grammar. It changes what the same words are permitted to mean.",
-    "invitation": "Let an element alter the result.",
-    "action": "Trigger an elemental interaction from your modified spell.",
-    "reveal_routes": [
-      {
-        "id": "element_added",
-        "label": "Element added",
-        "type": "spell_element",
-        "value": "added",
-        "producer": "compat.ars-elemental",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "element_triggered",
-        "label": "Element enacted",
-        "type": "spell_element",
-        "value": "triggered",
-        "producer": "compat.ars-elemental",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "powers",
-      "target": "Ars Elemental"
-    }
-  },
-  {
-    "id": "doors_borrow_worlds",
-    "title": "Doors Borrow Other Worlds",
-    "suit": "powers",
-    "order": 7,
-    "aspect": "mobility",
-    "art": "better_content_threads:textures/gui/threads/doors_borrow_worlds.png",
-    "prose": "A passage may owe its destination to a place that neither endpoint contains.",
-    "invitation": "Return by the borrowed route.",
-    "action": "Come back through the Dimensional Font after your voyage.",
-    "reveal_routes": [
-      {
-        "id": "font_departure",
-        "label": "Font departure",
-        "type": "font_transit",
-        "value": "depart",
-        "producer": "better-content-dimensional-font",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "font_return",
-        "label": "Font return",
-        "type": "font_transit",
-        "value": "return",
-        "producer": "better-content-dimensional-font",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "font",
-      "target": "dimensional_font"
-    }
-  },
-  {
-    "id": "power_needs_anchor",
-    "title": "Power Needs an Anchor",
-    "suit": "powers",
-    "order": 8,
-    "aspect": "robustness",
-    "art": "better_content_threads:textures/gui/threads/power_needs_anchor.png",
-    "prose": "An influence that persists without its operator must be fastened to place and supplied with a reason to remain.",
-    "invitation": "Leave the anchor working behind you.",
-    "action": "Power an arcane chunk anchor and leave its normal simulation range.",
-    "reveal_routes": [
-      {
-        "id": "anchor_placed",
-        "label": "Anchor placed",
-        "type": "arcane_anchor",
-        "value": "placed",
-        "producer": "better-content-arcane-chunk-loaders",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "anchor_persisted",
-        "label": "Persistent anchor",
-        "type": "arcane_anchor",
-        "value": "ticket_verified",
-        "producer": "better-content-arcane-chunk-loaders",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "guideme",
-      "target": "arcane_chunk_loaders"
-    }
-  },
-  {
-    "id": "traditions_can_cross",
-    "title": "Traditions Can Cross",
-    "suit": "powers",
-    "order": 9,
-    "aspect": "control",
-    "art": "better_content_threads:textures/gui/threads/traditions_can_cross.png",
-    "prose": "Separate explanations of power can still discover a shared piece of machinery.",
-    "invitation": "Make one tradition answer another.",
-    "action": "Complete an Ars Creo or Ars Energistique cross-system operation.",
-    "reveal_routes": [
-      {
-        "id": "hybrid_constructed",
-        "label": "Hybrid constructed",
-        "type": "tradition_cross",
-        "value": "constructed",
-        "producer": "compat.ars-addons",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "ars_creo",
-        "label": "Ars Creo crossing",
-        "type": "tradition_cross",
-        "value": "ars_creo",
-        "producer": "compat.ars-addons",
-        "correlation": "episode"
+      "art": "better_content_threads:textures/gui/threads/hunger_is_not_nutrition.png"
+    },
+    {
+      "id": "food_carries_weather",
+      "concept_id": "survival.food_thermal_state",
+      "owner": "heat-sync",
+      "title": "Food Carries Its Weather",
+      "suit": "fragility",
+      "order": 9,
+      "aspect": "robustness",
+      "rule": "Food stacks carry thermal state through storage and merging; thaw, serve, or consume food in an appropriate state instead of trusting its item name alone.",
+      "prose": "The meal remembers the cold room, the hot pan, and the other portions gathered into its stack.",
+      "invitation": "Read the state carried with the food.",
+      "action": "Correct a non-neutral food state before using or eating that food.",
+      "reveal_routes": [
+        {
+          "id": "food_state_changed",
+          "label": "Food changed state",
+          "type": "food_thermal_state",
+          "value": "non_neutral",
+          "producer": "heat-sync",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "food_state_resolved",
+          "label": "Food state resolved",
+          "type": "food_thermal_use",
+          "value": "appropriate",
+          "producer": "heat-sync",
+          "correlation": "episode"
+        }
+      ],
+      "art": "better_content_threads:textures/gui/threads/food_carries_weather.png"
+    },
+    {
+      "id": "coins_do_not_climb",
+      "concept_id": "economy.nonconvertible_coins",
+      "owner": "better-content-economy",
+      "title": "Coins Do Not Climb",
+      "suit": "fragility",
+      "order": 10,
+      "aspect": "work",
+      "rule": "Coin denominations never convert into one another; each tier has authored uses, and value is realized by spending it with supported traders.",
+      "prose": "No mint turns a pile of small promises into one larger promise. Each metal belongs to its own agreements.",
+      "invitation": "Find the hand that recognizes this denomination.",
+      "action": "Spend an earned coin through an authored trader offer.",
+      "reveal_routes": [
+        {
+          "id": "coin_acquired",
+          "label": "Coin earned",
+          "type": "coin_acquired",
+          "value": "*",
+          "producer": "better-content-economy",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "authored_trade",
+          "label": "Authored trade",
+          "type": "authored_trade",
+          "value": "coin_spent",
+          "producer": "better-content-economy",
+          "correlation": "episode"
+        }
+      ],
+      "art": "better_content_threads:textures/gui/threads/coins_do_not_climb.png"
+    },
+    {
+      "id": "the_end_is_not_a_door",
+      "concept_id": "world.authored_realm_access",
+      "owner": "better-content-dimension-access",
+      "title": "The End Is Not a Door",
+      "suit": "fragility",
+      "order": 11,
+      "aspect": "mobility",
+      "rule": "The vanilla End route is closed in this pack; use authored Dimension Fonts and return voyages to reach the ecologies progression actually supports.",
+      "prose": "An old destination has been removed from the map. Other doors remain, but each borrows a world on its own terms.",
+      "invitation": "Accept the route that this world still supports.",
+      "action": "After finding the closed End route, complete a round trip through a Dimension Font.",
+      "reveal_routes": [
+        {
+          "id": "end_route_blocked",
+          "label": "Closed End route",
+          "type": "end_route_blocked",
+          "value": "eye_or_portal",
+          "producer": "better-content-dimension-access",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "font_route_completed",
+          "label": "Font voyage",
+          "type": "font_route_completed",
+          "value": "returned",
+          "producer": "better-content-dimension-drink",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "font",
+        "target": "aether:the_aether"
       },
-      {
-        "id": "ars_energistique",
-        "label": "Ars Energistique crossing",
-        "type": "tradition_cross",
-        "value": "ars_energistique",
-        "producer": "compat.ars-addons",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "powers",
-      "target": "Hybrid Traditions"
-    }
-  },
-  {
-    "id": "relics_remember_wearers",
-    "title": "Relics Remember Their Wearers",
-    "suit": "powers",
-    "order": 10,
-    "aspect": "endurance",
-    "art": "better_content_threads:textures/gui/threads/relics_remember_wearers.png",
-    "prose": "Repeated use makes an object feel less possessed than acquainted.",
-    "invitation": "Let the same relic answer twice.",
-    "action": "Trigger the same physical relic in a second qualifying context.",
-    "reveal_routes": [
-      {
-        "id": "relic_first",
-        "label": "Relic answered",
-        "type": "relic_activation",
-        "value": "first",
-        "producer": "compat.relics",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "relic_second",
-        "label": "Relic remembered",
-        "type": "relic_activation",
-        "value": "correlated_second",
-        "producer": "compat.relics",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "emi",
-      "target": "artifacts"
-    }
-  },
-  {
-    "id": "source_becomes_machinery",
-    "title": "Source Can Become Machinery",
-    "suit": "powers",
-    "order": 11,
-    "aspect": "work",
-    "art": "better_content_threads:textures/gui/threads/source_becomes_machinery.png",
-    "prose": "What begins as magical capacity can cross a converter and become scheduled industrial work.",
-    "invitation": "Let Source finish as manufacture.",
-    "action": "Complete a machine process powered through Source conversion.",
-    "reveal_routes": [
-      {
-        "id": "source_connected",
-        "label": "Source connected",
-        "type": "source_machine",
-        "value": "connected",
-        "producer": "compat.ars-energistique",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "source_process",
-        "label": "Source-powered work",
-        "type": "source_machine",
-        "value": "complete",
-        "producer": "compat.ars-energistique",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "powers",
-      "target": "Ars Energistique"
-    }
-  },
-  {
-    "id": "rules_adhere_matter",
-    "title": "Rules Can Adhere to Matter",
-    "suit": "powers",
-    "order": 12,
-    "aspect": "robustness",
-    "art": "better_content_threads:textures/gui/threads/rules_adhere_matter.png",
-    "prose": "An enchantment is a conditional law attached to an object and waiting for its circumstance.",
-    "invitation": "Give the attached rule its condition.",
-    "action": "Trigger the actual behavior of an item you enchanted.",
-    "reveal_routes": [
-      {
-        "id": "item_enchanted",
-        "label": "Rule attached",
-        "type": "enchant_apply",
-        "value": "supported",
-        "producer": "better-content-threads",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "enchant_triggered",
-        "label": "Rule enacted",
-        "type": "enchant_effect",
-        "value": "correlated",
-        "producer": "better-content-threads",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "emi",
-      "target": "minecraft:enchanting_table"
-    }
-  },
-  {
-    "id": "body_borrow_state",
-    "title": "The Body Can Borrow a State",
-    "suit": "powers",
-    "order": 13,
-    "aspect": "tempo",
-    "art": "better_content_threads:textures/gui/threads/body_borrow_state.png",
-    "prose": "For a little while, a body may obey a rule that belongs to another creature, element, or place.",
-    "invitation": "Borrow the condition the hazard demands.",
-    "action": "Use a matching temporary protection to resolve an environmental hazard.",
-    "reveal_routes": [
-      {
-        "id": "hazard_met",
-        "label": "Hazard encountered",
-        "type": "effect_hazard",
-        "value": "fire|water|dark|temperature",
-        "producer": "better-content-threads",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "state_borrowed",
-        "label": "Borrowed protection",
-        "type": "effect_resolution",
-        "value": "correlated",
-        "producer": "better-content-threads",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "emi",
-      "target": "minecraft:potion"
-    }
-  },
-  {
-    "id": "life_reaches_tether",
-    "title": "A Life Reaches Its Tether",
-    "suit": "fragility",
-    "order": 1,
-    "aspect": "endurance",
-    "art": "better_content_threads:textures/gui/threads/life_reaches_tether.png",
-    "prose": "The body can stop before every consequence of the life inside it has finished.",
-    "invitation": "Some endings arrive only after the fall.",
-    "action": "Reach death after becoming downed.",
-    "reveal_routes": [
-      {
-        "id": "player_downed",
-        "label": "Reached the tether",
-        "type": "downed",
-        "value": "player",
-        "producer": "better-content-threads",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "bleed_out",
-        "label": "Bled out",
-        "type": "death",
-        "value": "player",
-        "producer": "better-content-threads",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "guideme",
-      "target": "downed_player_revival"
-    }
-  },
-  {
-    "id": "ruins_are_instructions",
-    "title": "Ruins Are Instructions",
-    "suit": "fragility",
-    "order": 2,
-    "aspect": "control",
-    "art": "better_content_threads:textures/gui/threads/ruins_are_instructions.png",
-    "prose": "Failure leaves plans in negative: load-bearing walls, abandoned routes, and objects someone thought worth hiding.",
-    "invitation": "Carry one surviving fact back outside.",
-    "action": "Leave the ruin alive with something first acquired inside.",
-    "reveal_routes": [
-      {
-        "id": "ruin_entered",
-        "label": "Entered ruin",
-        "type": "structure_enter",
-        "value": "major_ruin",
-        "producer": "better-content-threads",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "ruin_evidence",
-        "label": "Recovered evidence",
-        "type": "structure_exit",
-        "value": "new_item_alive",
-        "producer": "better-content-threads",
-        "correlation": "episode"
-      }
-    ]
-  },
-  {
-    "id": "enemies_no_cause",
-    "title": "Enemies Do Not Share a Cause",
-    "suit": "fragility",
-    "order": 3,
-    "aspect": "tempo",
-    "art": "better_content_threads:textures/gui/threads/enemies_no_cause.png",
-    "prose": "Hostility aimed in one direction is not alliance. Different hungers can still be placed in one another's path.",
-    "invitation": "Stand where two intentions cross.",
-    "action": "Manoeuvre one hostile faction into damaging another.",
-    "reveal_routes": [
-      {
-        "id": "factions_target",
-        "label": "Crossed hostilities",
-        "type": "hostile_collision",
-        "value": "targeted_by_two",
-        "producer": "better-content-threads",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "factions_collide",
-        "label": "Threats collided",
-        "type": "hostile_collision",
-        "value": "cross_damage",
-        "producer": "better-content-threads",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "guideme",
-      "target": "hostile_factions"
-    }
-  },
-  {
-    "id": "copy_outlives_work",
-    "title": "A Copy Can Outlive the Work",
-    "suit": "fragility",
-    "order": 4,
-    "aspect": "robustness",
-    "art": "better_content_threads:textures/gui/threads/copy_outlives_work.png",
-    "prose": "Matter may be temporary while its arrangement remains recoverable elsewhere.",
-    "invitation": "Preserve the arrangement beyond its blocks.",
-    "action": "Publish the captured build to the lineage schematic library.",
-    "reveal_routes": [
-      {
-        "id": "schematic_captured",
-        "label": "Build captured",
-        "type": "schematic_capture",
-        "value": "substantial",
-        "producer": "better-content-world-lifecycle-manager",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "schematic_published",
-        "label": "Lineage copy",
-        "type": "schematic_publish",
-        "value": "correlated",
-        "producer": "better-content-world-lifecycle-manager",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "lifecycle",
-      "target": "schematic_library"
-    }
-  },
-  {
-    "id": "army_walks_toward_you",
-    "title": "An Army Walks Toward You",
-    "suit": "fragility",
-    "order": 5,
-    "aspect": "impact",
-    "art": "better_content_threads:textures/gui/threads/army_walks_toward_you.png",
-    "prose": "Organized danger has direction, patience, and an ending that need not resemble victory.",
-    "invitation": "See the campaign reach its answer.",
-    "action": "Reach any terminal outcome of the warned campaign.",
-    "reveal_routes": [
-      {
-        "id": "campaign_warned",
-        "label": "Campaign warned",
-        "type": "campaign_state",
-        "value": "gathering|approaching|materialized",
-        "producer": "better-content-pillager-campaigns",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "campaign_resolved",
-        "label": "Campaign resolved",
-        "type": "campaign_outcome",
-        "value": "survived|defeated",
-        "producer": "better-content-pillager-campaigns",
-        "correlation": "episode"
+      "art": "better_content_threads:textures/gui/threads/the_end_is_not_a_door.png"
+    },
+    {
+      "id": "recipes_obey_this_world",
+      "concept_id": "crafting.emi_authority",
+      "owner": "better-content-pack",
+      "title": "Recipes Obey This World",
+      "suit": "fragility",
+      "order": 12,
+      "aspect": "control",
+      "rule": "Pack-authored recipes replace familiar vanilla and mod defaults; consult EMI for the live graph, then craft through the displayed supported route.",
+      "prose": "Memory carries recipes from other worlds. This world's materials obey the arrangements written here.",
+      "invitation": "Ask the live graph instead of memory.",
+      "action": "Look up a recipe in EMI, then craft an output whose route this pack replaced.",
+      "reveal_routes": [
+        {
+          "id": "recipe_viewed",
+          "label": "Recipe consulted",
+          "type": "recipe_viewed",
+          "value": "emi",
+          "producer": "better-content-threads",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "pack_recipe_crafted",
+          "label": "Pack recipe crafted",
+          "type": "pack_recipe_crafted",
+          "value": "registered",
+          "producer": "better-content-pack",
+          "correlation": "episode"
+        }
+      ],
+      "doorway": {
+        "type": "emi",
+        "target": "minecraft:crafting_table"
       },
-      {
-        "id": "campaign_retreated",
-        "label": "Campaign retreated",
-        "type": "campaign_outcome",
-        "value": "retreated",
-        "producer": "better-content-pillager-campaigns",
-        "correlation": "episode"
-      },
-      {
-        "id": "campaign_target_dead",
-        "label": "Target fell",
-        "type": "campaign_outcome",
-        "value": "target_dead",
-        "producer": "better-content-pillager-campaigns",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "campaign",
-      "target": "status"
+      "art": "better_content_threads:textures/gui/threads/recipes_obey_this_world.png"
+    },
+    {
+      "id": "the_body_learns_new_motions",
+      "concept_id": "controls.pack_specific_actions",
+      "owner": "better-content-fixes",
+      "title": "The Body Learns New Motions",
+      "suit": "fragility",
+      "order": 13,
+      "aspect": "tempo",
+      "rule": "Better Content changes familiar movement and combat inputs; perform the configured actions themselves instead of relying on remembered vanilla key assumptions.",
+      "prose": "The old reflex arrives first. The changed body answers only after a new rhythm is practiced.",
+      "invitation": "Let the configured motion replace remembered habit.",
+      "action": "Perform two distinct qualifying Better Content movement or combat actions.",
+      "reveal_routes": [
+        {
+          "id": "custom_control_used",
+          "label": "New motion used",
+          "type": "custom_control_used",
+          "value": "*",
+          "producer": "better-content-fixes",
+          "correlation": "episode"
+        }
+      ],
+      "completion_routes": [
+        {
+          "id": "custom_control_mastered",
+          "label": "New motions practiced",
+          "type": "custom_control_mastered",
+          "value": "distinct_second",
+          "producer": "better-content-fixes",
+          "correlation": "episode"
+        }
+      ],
+      "art": "better_content_threads:textures/gui/threads/the_body_learns_new_motions.png"
     }
-  },
-  {
-    "id": "world_can_be_condensed",
-    "title": "A World Can Be Condensed",
-    "suit": "fragility",
-    "order": 6,
-    "aspect": "renewal",
-    "art": "better_content_threads:textures/gui/threads/world_can_be_condensed.png",
-    "prose": "A finished world may become an archive, a selection, and a verified beginning somewhere else.",
-    "invitation": "Let the machine carry its question beyond this world.",
-    "action": "Begin a verified successor through this World Condenser.",
-    "reveal_routes": [
-      {
-        "id": "condenser_formed",
-        "label": "Condenser formed",
-        "type": "condenser",
-        "value": "formed",
-        "producer": "better-content-world-lifecycle-manager",
-        "correlation": "episode"
-      }
-    ],
-    "completion_routes": [
-      {
-        "id": "successor_verified",
-        "label": "Verified successor",
-        "type": "successor",
-        "value": "verified",
-        "producer": "better-content-world-lifecycle-manager",
-        "correlation": "episode"
-      }
-    ],
-    "doorway": {
-      "type": "lifecycle",
-      "target": "world_condenser"
-    }
-  },
-  {
-    "id": "world_can_be_wagered",
-    "title": "A World Can Be Wagered",
-    "suit": "fragility",
-    "order": 7,
-    "aspect": "impact",
-    "art": "better_content_threads:textures/gui/threads/world_can_be_wagered.png",
-    "future": true
-  },
-  {
-    "id": "severity_has_yield",
-    "title": "Severity Has a Yield",
-    "suit": "fragility",
-    "order": 8,
-    "aspect": "endurance",
-    "art": "better_content_threads:textures/gui/threads/severity_has_yield.png",
-    "future": true
-  },
-  {
-    "id": "disaster_has_agenda",
-    "title": "Disaster Can Have an Agenda",
-    "suit": "fragility",
-    "order": 9,
-    "aspect": "control",
-    "art": "better_content_threads:textures/gui/threads/disaster_has_agenda.png",
-    "future": true
-  },
-  {
-    "id": "apocalypses_disagree",
-    "title": "Apocalypses Can Disagree",
-    "suit": "fragility",
-    "order": 10,
-    "aspect": "tempo",
-    "art": "better_content_threads:textures/gui/threads/apocalypses_disagree.png",
-    "future": true
-  },
-  {
-    "id": "other_hands_built_caches",
-    "title": "Other Hands Have Built Caches",
-    "suit": "fragility",
-    "order": 11,
-    "aspect": "robustness",
-    "art": "better_content_threads:textures/gui/threads/other_hands_built_caches.png",
-    "future": true
-  },
-  {
-    "id": "recognition_changes_both",
-    "title": "Recognition Changes Both Sides",
-    "suit": "fragility",
-    "order": 12,
-    "aspect": "control",
-    "art": "better_content_threads:textures/gui/threads/recognition_changes_both.png",
-    "future": true
-  },
-  {
-    "id": "defeat_not_erasure",
-    "title": "Defeat Need Not Be Erasure",
-    "suit": "fragility",
-    "order": 13,
-    "aspect": "renewal",
-    "art": "better_content_threads:textures/gui/threads/defeat_not_erasure.png",
-    "future": true
-  }
-]
+  ]
+}

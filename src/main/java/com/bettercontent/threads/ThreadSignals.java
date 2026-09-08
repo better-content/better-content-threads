@@ -13,7 +13,7 @@ public final class ThreadSignals {
         if(player==null||type==null||value==null||!type.matches("[a-z0-9_]{1,32}")||value.length()>160||(correlationToken!=null&&!ThreadPlayerState.validCorrelation(correlationToken)))return;
         var state=ThreadPlayerState.get(player);var notices=new ArrayList<ThreadNetwork.Notice>();boolean dirty=false;
         for(var definition:ThreadDefinitions.INSTANCE.all()){
-            if(definition.future())continue;boolean wasActive=state.active.contains(definition.id());
+            boolean wasActive=state.active.contains(definition.id());
             var reveal=matching(definition.revealRoutes(),type,value);
             if(!wasActive&&reveal!=null&&correlationToken!=null&&state.reveal(definition.id(),correlationToken)){notices.add(ThreadNetwork.notice(definition,ThreadNetwork.NoticeKind.REVEAL));dirty=true;}
             else if(wasActive&&reveal!=null&&correlationToken!=null&&state.bindCorrelation(definition.id(),correlationToken))dirty=true;

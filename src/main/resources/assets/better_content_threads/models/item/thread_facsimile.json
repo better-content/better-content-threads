@@ -47,12 +47,12 @@
     {"predicate":{"better_content_threads:thread_index":43.0},"model":"better_content_threads:item/thread_cards/copy_outlives_work"},
     {"predicate":{"better_content_threads:thread_index":44.0},"model":"better_content_threads:item/thread_cards/army_walks_toward_you"},
     {"predicate":{"better_content_threads:thread_index":45.0},"model":"better_content_threads:item/thread_cards/world_can_be_condensed"},
-    {"predicate":{"better_content_threads:thread_index":46.0},"model":"better_content_threads:item/thread_cards/world_can_be_wagered"},
-    {"predicate":{"better_content_threads:thread_index":47.0},"model":"better_content_threads:item/thread_cards/severity_has_yield"},
-    {"predicate":{"better_content_threads:thread_index":48.0},"model":"better_content_threads:item/thread_cards/disaster_has_agenda"},
-    {"predicate":{"better_content_threads:thread_index":49.0},"model":"better_content_threads:item/thread_cards/apocalypses_disagree"},
-    {"predicate":{"better_content_threads:thread_index":50.0},"model":"better_content_threads:item/thread_cards/other_hands_built_caches"},
-    {"predicate":{"better_content_threads:thread_index":51.0},"model":"better_content_threads:item/thread_cards/recognition_changes_both"},
-    {"predicate":{"better_content_threads:thread_index":52.0},"model":"better_content_threads:item/thread_cards/defeat_not_erasure"}
+    {"predicate":{"better_content_threads:thread_index":46.0},"model":"better_content_threads:item/thread_cards/sleep_is_not_an_anchor"},
+    {"predicate":{"better_content_threads:thread_index":47.0},"model":"better_content_threads:item/thread_cards/hunger_is_not_nutrition"},
+    {"predicate":{"better_content_threads:thread_index":48.0},"model":"better_content_threads:item/thread_cards/food_carries_weather"},
+    {"predicate":{"better_content_threads:thread_index":49.0},"model":"better_content_threads:item/thread_cards/coins_do_not_climb"},
+    {"predicate":{"better_content_threads:thread_index":50.0},"model":"better_content_threads:item/thread_cards/the_end_is_not_a_door"},
+    {"predicate":{"better_content_threads:thread_index":51.0},"model":"better_content_threads:item/thread_cards/recipes_obey_this_world"},
+    {"predicate":{"better_content_threads:thread_index":52.0},"model":"better_content_threads:item/thread_cards/the_body_learns_new_motions"}
   ]
 }

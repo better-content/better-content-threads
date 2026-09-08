@@ -212,9 +212,7 @@ public final class ThreadDeckScreen extends Screen {
     private void renderLocked(GuiGraphics graphics, ThreadNetwork.Card card, int x, int y) {
         graphics.drawString(font, card.title(), x, y + 4, 0xFFF0E5CE, false);
         graphics.drawString(font, capital(card.suit()) + " · " + capital(card.aspect()), x, y + 19, 0xFF9A948B, false);
-        graphics.drawString(font, card.future()
-            ? "This plate belongs to a system beyond this world."
-            : "The plate has not answered yet.", x, y + 48, 0xFF756F68, false);
+        graphics.drawString(font, "The plate has not answered yet.", x, y + 48, 0xFF756F68, false);
     }
 
     private void renderCard(GuiGraphics graphics, ThreadNetwork.Card card, int x, int y, int cardWidth, int cardHeight) {
@@ -241,27 +239,35 @@ public final class ThreadDeckScreen extends Screen {
         graphics.drawString(font, fit(card.title(), panelWidth), x, y + 2, 0xFFF0E5CE, false);
         graphics.drawString(font, capital(card.suit()) + " · " + capital(card.aspect()), x, y + 14, 0xFF9A948B, false);
         int lineY = y + 28;
-        for (var line : font.split(Component.literal(card.prose()), panelWidth)) {
-            if (lineY > y + 70) break;
-            graphics.drawString(font, line, x, lineY, 0xFFC8C0B0, false);
+        graphics.drawString(font, "RULE", x, lineY, ThreadAspect.parse(card.aspect()).color() | 0xFF000000, false);
+        lineY += 12;
+        for (var line : font.split(Component.literal(card.rule()), panelWidth)) {
+            if (lineY > y + 72) break;
+            graphics.drawString(font, line, x, lineY, 0xFFF0E5CE, false);
             lineY += 11;
         }
+        lineY += 3;
+        for (var line : font.split(Component.literal(card.prose()), panelWidth)) {
+            if (lineY > y + 105) break;
+            graphics.drawString(font, line, x, lineY, 0xFFAAA294, false);
+            lineY += 10;
+        }
         if (card.active()) {
-            graphics.drawString(font, fit(card.invitation(), panelWidth), x, y + 76, 0xFFA99573, false);
+            graphics.drawString(font, fit(card.invitation(), panelWidth), x, y + 112, 0xFFA99573, false);
             for (var line : font.split(Component.literal(card.action()), panelWidth)) {
-                graphics.drawString(font, line, x, y + 88, 0xFFF0E5CE, false);
+                graphics.drawString(font, line, x, y + 124, 0xFFF0E5CE, false);
                 break;
             }
         } else {
-            graphics.drawString(font, "Remembered in an earlier world", x, y + 76, 0xFF7F796F, false);
+            graphics.drawString(font, "Remembered in an earlier world", x, y + 112, 0xFF7F796F, false);
         }
-        if (card.completed()) graphics.drawString(font, "Completed in this world", x, y + 101, 0xFF9BB59B, false);
+        if (card.completed()) graphics.drawString(font, "Completed in this world", x, y + 137, 0xFF9BB59B, false);
         if (card.completionCount() > 0) {
             graphics.drawString(font, "Remembered " + card.completionCount() + " time"
-                + (card.completionCount() == 1 ? "" : "s"), x, y + 112, 0xFF928B80, false);
+                + (card.completionCount() == 1 ? "" : "s"), x, y + 148, 0xFF928B80, false);
         }
-        if (cardHeight >= 175 && !card.routeSummary().isEmpty()) {
-            graphics.drawString(font, fit(card.routeSummary(), panelWidth), x, y + 124, 0xFF77736B, false);
+        if (cardHeight >= 205 && !card.routeSummary().isEmpty()) {
+            graphics.drawString(font, fit(card.routeSummary(), panelWidth), x, y + 160, 0xFF77736B, false);
         }
         if (!card.doorwayType().isEmpty()) graphics.drawString(font, "Look closer  ›", x, y + cardHeight - 27, 0xFFAEBFD0, false);
         graphics.drawString(font, "Issue signed facsimile", x, y + cardHeight - 14, 0xFFC9AE7A, false);
