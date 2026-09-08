@@ -65,6 +65,7 @@ final class ThreadContractsTest {
         Path assets=Path.of("src/main/resources/assets");
         var dispatch=JsonParser.parseString(Files.readString(assets.resolve("better_content_threads/models/item/thread_facsimile.json"))).getAsJsonObject();
         var overrides=dispatch.getAsJsonArray("overrides");
+        Set<String> guiTextureCards=Set.of("coins_do_not_climb","food_carries_weather","hunger_is_not_nutrition","recipes_obey_this_world","sleep_is_not_an_anchor","the_body_learns_new_motions","the_end_is_not_a_door");
         assertEquals(ThreadArt.IDS.size(),overrides.size());
         for(int index=0;index<ThreadArt.IDS.size();index++){
             String id=ThreadArt.IDS.get(index);
@@ -77,7 +78,8 @@ final class ThreadContractsTest {
             var model=JsonParser.parseString(Files.readString(modelPath)).getAsJsonObject();
             assertEquals("minecraft:item/generated",model.get("parent").getAsString(),id);
             String texture=model.getAsJsonObject("textures").get("layer0").getAsString();
-            assertEquals("better_content_threads:gui/threads/"+id,texture,id);
+            String expectedDirectory=guiTextureCards.contains(id)?"gui/threads/":"item/thread_cards/";
+            assertEquals("better_content_threads:"+expectedDirectory+id,texture,id);
             String[] location=texture.split(":",2);
             Path texturePath=assets.resolve(location[0]).resolve("textures").resolve(location[1]+".png");
             assertTrue(Files.isRegularFile(texturePath),id+" texture: "+texturePath);

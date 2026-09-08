@@ -1,1 +1,1 @@
-{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:gui/threads/doors_borrow_worlds"}}
+{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:item/thread_cards/doors_borrow_worlds"}}

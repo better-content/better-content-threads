@@ -1,1 +1,1 @@
-{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:gui/threads/pressure_changes_matter"}}
+{"parent":"minecraft:item/generated","textures":{"layer0":"better_content_threads:item/thread_cards/pressure_changes_matter"}}
