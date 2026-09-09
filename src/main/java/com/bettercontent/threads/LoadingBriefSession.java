@@ -7,6 +7,7 @@ final class LoadingBriefSession {
     private final List<LoadingBrief> briefs;
     private final LinkedHashSet<String> viewed = new LinkedHashSet<>();
     private int index;
+    private boolean keepReading;
 
     LoadingBriefSession(List<LoadingBrief> briefs, LoadingBriefRotation.State state) {
         this.briefs = briefs.isEmpty() ? List.of(LoadingBriefs.FALLBACK) : List.copyOf(briefs);
@@ -29,6 +30,15 @@ final class LoadingBriefSession {
 
     List<String> viewed() {
         return List.copyOf(viewed);
+    }
+
+    boolean keepReading() {
+        return keepReading;
+    }
+
+    boolean toggleKeepReading() {
+        keepReading = !keepReading;
+        return keepReading;
     }
 
     LoadingBrief move(int delta) {

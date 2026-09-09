@@ -14,7 +14,14 @@
   "screen.better_content_threads.loading_previous": "Previous",
   "screen.better_content_threads.loading_next": "Next",
   "screen.better_content_threads.loading_continue": "Continue",
-  "screen.better_content_threads.lesson_remains": "This lesson will remain after arrival.",
+  "screen.better_content_threads.keep_reading": "Keep Reading",
+  "screen.better_content_threads.keep_reading_selected": "Keep Reading ✓",
+  "screen.better_content_threads.enter_world": "Enter World",
+  "screen.better_content_threads.cards": "Cards",
+  "screen.better_content_threads.lessons": "Lessons",
+  "screen.better_content_threads.lesson_seen": "SEEN THIS CYCLE",
+  "screen.better_content_threads.related_thread": "Related Thread",
+  "screen.better_content_threads.open_guide": "Open Guide",
   "key.better_content_threads.open_reader": "Open Threads",
   "key.categories.better_content_threads": "Better Content"
 }

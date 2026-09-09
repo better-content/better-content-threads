@@ -1,8 +1,10 @@
 {
-  "schema": "bc.loading_briefs.v2",
+  "schema": "bc.loading_briefs.v3",
   "briefs": [
     {
       "id": "threads",
+      "concept_id": "learning.threads",
+      "owner": "better-content-threads",
       "category": "Discovery",
       "headline": "Your discoveries live in Threads",
       "body": "When the world teaches you a changed rule, a small Threads reminder appears. Press the shown key — M by default — to read the rule and its evidence.",
@@ -11,6 +13,8 @@
     },
     {
       "id": "hud",
+      "concept_id": "survival.hud_visibility",
+      "owner": "better-content-dynamic-survival-hud",
       "category": "Awareness",
       "headline": "Quiet meters are still watching",
       "body": "Survival meters fade when their values are calm, leaving the view uncluttered. Hold Sneak whenever you need to reveal every managed meter and assess your condition.",
@@ -19,6 +23,9 @@
     },
     {
       "id": "water",
+      "concept_id": "world.water_made_safe",
+      "owner": "better-content-water-survival",
+      "related_thread": "water_made_safe",
       "category": "Hydration",
       "headline": "Clear water is earned",
       "body": "Thirst and water purity are separate constraints. Collect rain, melt snow near a campfire, and carry bottles in Curios slots; purity level three is safe to drink.",
@@ -27,6 +34,9 @@
     },
     {
       "id": "nutrition",
+      "concept_id": "survival.hunger_and_nutrition",
+      "owner": "systemic-salience",
+      "related_thread": "hunger_is_not_nutrition",
       "category": "Nutrition",
       "headline": "Full is not nourished",
       "body": "Hunger measures immediate fuel, while nutrition tracks six food groups over time. Repeating one excellent meal can still leave neglected groups dangerously low afterward.",
@@ -35,6 +45,8 @@
     },
     {
       "id": "variety",
+      "concept_id": "survival.food_variety",
+      "owner": "slice-of-life-carrot",
       "category": "Health",
       "headline": "New foods build lasting health",
       "body": "A varied menu does more than balance nutrients. Eating enough distinct foods permanently raises maximum health, so unfamiliar ingredients are valuable milestones instead of disposable curiosities.",
@@ -43,6 +55,8 @@
     },
     {
       "id": "metabolism",
+      "concept_id": "survival.metabolic_load",
+      "owner": "systemic-salience",
       "category": "Metabolism",
       "headline": "Borrowed speed leaves a debt",
       "body": "Sugar can quicken your cadence, but it accelerates nutrient expenditure and leaves debt behind. Alcohol offers a moderate composure window; excess turns the bargain against you.",
@@ -51,6 +65,9 @@
     },
     {
       "id": "temperature",
+      "concept_id": "world.body_has_weather",
+      "owner": "better-content-heat-sync",
+      "related_thread": "body_has_weather",
       "category": "Climate",
       "headline": "Your body has weather",
       "body": "World temperature and body temperature are different pressures. Clothing, shelter, biome, season, and thermal foods can push the balance, so prepare before entering an extreme climate.",
@@ -59,14 +76,20 @@
     },
     {
       "id": "movement",
+      "concept_id": "controls.pack_specific_actions",
+      "owner": "better-content-fixes",
+      "related_thread": "the_body_learns_new_motions",
       "category": "Movement",
       "headline": "Your body has more motions",
-      "body": "Advanced movement spends stamina and rewards deliberate inputs. Fast run uses Shift, contextual movement uses Mouse 5, direct dodge uses R, and directional double taps also dodge.",
+      "body": "Advanced movement spends stamina and rewards deliberate inputs. Fast run uses Shift, contextual movement uses Mouse 5, and direct dodge uses R; directional double-tap dodging is disabled.",
       "action": "Practice movement before danger finds you.",
       "art": "better_content_threads:textures/gui/loading_briefs/movement.png"
     },
     {
       "id": "sleep",
+      "concept_id": "survival.sleep_and_spawn",
+      "owner": "better-content-fixes",
+      "related_thread": "sleep_is_not_an_anchor",
       "category": "Rest",
       "headline": "Sleep advances the world",
       "body": "A bed is not a frozen checkpoint. Sleep simulates the passing hours quickly, advancing weather, ecology, temperature, and active threats while your vulnerable world continues moving.",
@@ -75,6 +98,9 @@
     },
     {
       "id": "downing",
+      "concept_id": "fragility.life_reaches_tether",
+      "owner": "better-content-downed-player-revival",
+      "related_thread": "life_reaches_tether",
       "category": "Recovery",
       "headline": "Defeat is not immediate death",
       "body": "Falling can begin a recoverable downed state. A companion revives by holding Use while aiming at you; hold Sneak only when you intend to give up.",
@@ -83,6 +109,9 @@
     },
     {
       "id": "life",
+      "concept_id": "powers.life_becomes_capable",
+      "owner": "better-content-rpg-stats",
+      "related_thread": "life_becomes_capable",
       "category": "Growth",
       "headline": "A life chooses what it becomes",
       "body": "Life stats create irreversible strengths within one lifetime and reset on death. Constitution helps conserve hunger, thirst, and stamina, while other choices shape different long-term capabilities.",
@@ -91,6 +120,9 @@
     },
     {
       "id": "seasons",
+      "concept_id": "world.seasons_turn_work",
+      "owner": "compat.sereneseasons",
+      "related_thread": "seasons_turn_work",
       "category": "Seasons",
       "headline": "Seasons turn the work",
       "body": "The calendar changes which crops and trees grow well. Observe seasonal feedback, preserve surplus from productive months, and expect familiar land to demand a different plan later.",
@@ -99,6 +131,9 @@
     },
     {
       "id": "weather",
+      "concept_id": "world.weather_has_momentum",
+      "owner": "compat.weather2",
+      "related_thread": "weather_has_momentum",
       "category": "Weather",
       "headline": "Weather has momentum",
       "body": "Storms are systems with motion, not decorative flashes. Watch the sky, listen for escalation, and keep a defensible route indoors before severe weather overtakes exposed work.",
@@ -107,6 +142,8 @@
     },
     {
       "id": "pollution",
+      "concept_id": "world.pollution_transport",
+      "owner": "compat.pollution-of-the-realms",
       "category": "Industry",
       "headline": "Industry changes the air",
       "body": "Pollution moves with the world and can harm living things. Detect it, protect yourself, route emitters through chimneys and filters, then clean contamination instead of abandoning it.",
@@ -115,6 +152,8 @@
     },
     {
       "id": "physics",
+      "concept_id": "building.structural_support",
+      "owner": "compat.realistic-block-physics",
       "category": "Building",
       "headline": "Structures need support",
       "body": "Blocks carry structural expectations beyond gravity. Foundations, spans, and material support profiles matter, so ambitious construction should grow from a sound load path instead of floating convenience.",
@@ -123,6 +162,9 @@
     },
     {
       "id": "campaigns",
+      "concept_id": "fragility.army_walks_toward_you",
+      "owner": "better-content-pillager-campaigns",
+      "related_thread": "army_walks_toward_you",
       "category": "Threats",
       "headline": "Warnings mean someone is coming",
       "body": "Pillager scouts appear often, but full assaults are rarer and announced. Treat each warning as preparation time: fortify approaches, gather allies, and choose where the fight happens.",

@@ -1,6 +1,7 @@
 package com.bettercontent.threads;
 
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import org.lwjgl.glfw.GLFW;
@@ -30,8 +31,23 @@ public final class ThreadDeckScreen extends Screen {
     private long lastFrame;
 
     ThreadDeckScreen(List<ThreadNetwork.Card> cards) {
+        this(cards, "");
+    }
+
+    ThreadDeckScreen(List<ThreadNetwork.Card> cards, String focusId) {
         super(Component.literal("Threads"));
         this.cards = new ArrayList<>(cards);
+        if (focusId != null && !focusId.isEmpty()) {
+            for (var card : cards) {
+                if (!card.id().equals(focusId)) continue;
+                suit = ThreadSuit.parse(card.suit());
+                selected = card.order() - 1;
+                scrollRow = selected / CATALOGUE_COLUMNS;
+                detail = true;
+                selectCurrent();
+                return;
+            }
+        }
         for (var card : cards) {
             if (card.known() && card.unread()) {
                 suit = ThreadSuit.parse(card.suit());
@@ -41,6 +57,13 @@ public final class ThreadDeckScreen extends Screen {
             }
         }
         selectCurrent();
+    }
+
+    @Override
+    protected void init() {
+        addRenderableWidget(Button.builder(Component.translatable("screen.better_content_threads.lessons"),
+                button -> minecraft.setScreen(new LearningLibraryScreen(cards)))
+            .bounds(8, 8, 68, 20).build());
     }
 
     @Override

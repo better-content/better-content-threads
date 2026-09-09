@@ -22,7 +22,7 @@ final class LoadingBriefScreen extends Screen {
         var layout = LoadingBriefLayout.calculate(width, height, false);
         addRenderableWidget(Button.builder(Component.translatable("screen.better_content_threads.loading_previous"), button -> session.move(-1))
             .bounds(width / 2 - 146, layout.controlsY(), 88, 20).build());
-        addRenderableWidget(Button.builder(Component.translatable("screen.better_content_threads.loading_continue"), button -> closeBrief())
+        addRenderableWidget(Button.builder(Component.translatable("screen.better_content_threads.enter_world"), button -> closeBrief())
             .bounds(width / 2 - 50, layout.controlsY(), 100, 20).build());
         addRenderableWidget(Button.builder(Component.translatable("screen.better_content_threads.loading_next"), button -> session.move(1))
             .bounds(width / 2 + 58, layout.controlsY(), 88, 20).build());
@@ -49,11 +49,13 @@ final class LoadingBriefScreen extends Screen {
             closeBrief();
             return true;
         }
-        if (keyCode == GLFW.GLFW_KEY_ESCAPE) return true;
+        if (keyCode == GLFW.GLFW_KEY_ESCAPE) {
+            closeBrief();
+            return true;
+        }
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
-    @Override public boolean shouldCloseOnEsc() { return false; }
     @Override public boolean isPauseScreen() { return true; }
 
     private void closeBrief() {

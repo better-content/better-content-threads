@@ -66,7 +66,11 @@ public final class ThreadClient {
         var minecraft = Minecraft.getInstance();
         if (arrivalPending && currentBriefs != null && minecraft.player != null && minecraft.level != null && minecraft.screen == null) {
             arrivalPending = false;
-            minecraft.setScreen(new LoadingBriefScreen(currentBriefs, ThreadClient::dismissBrief));
+            if (currentBriefs.keepReading()) {
+                minecraft.setScreen(new LoadingBriefScreen(currentBriefs, ThreadClient::dismissBrief));
+            } else {
+                dismissBrief();
+            }
             return;
         }
         if (OPEN.consumeClick()) ThreadNetwork.request("open", "");
@@ -115,11 +119,28 @@ public final class ThreadClient {
 
     @SubscribeEvent
     public static void screen(ScreenEvent.Init.Post event) {
-        if (!(event.getScreen() instanceof PauseScreen)) return;
-        int x = event.getScreen().width / 2 + 104;
-        int y = event.getScreen().height / 4 + 120;
-        event.addListener(Button.builder(Component.literal("Threads"), button -> ThreadNetwork.request("open", ""))
-            .bounds(x, y, 72, 20).build());
+        if (event.getScreen() instanceof PauseScreen) {
+            int x = event.getScreen().width / 2 + 104;
+            int y = event.getScreen().height / 4 + 120;
+            event.addListener(Button.builder(Component.literal("Threads"), button -> ThreadNetwork.request("open", ""))
+                .bounds(x, y, 72, 20).build());
+            return;
+        }
+        if (currentBriefs == null || Minecraft.getInstance().level != null
+                || !isInitialLoadScreen(event.getScreen())
+                || event.getScreen() instanceof LearningLevelLoadingScreen) return;
+        var layout = LoadingBriefLayout.calculate(event.getScreen().width, event.getScreen().height, false);
+        event.addListener(Button.builder(Component.translatable("screen.better_content_threads.loading_previous"),
+                button -> currentBriefs.move(-1))
+            .bounds(event.getScreen().width / 2 - 146, layout.controlsY(), 88, 20).build());
+        event.addListener(Button.builder(keepReadingLabel(currentBriefs), button -> {
+                currentBriefs.toggleKeepReading();
+                button.setMessage(keepReadingLabel(currentBriefs));
+            })
+            .bounds(event.getScreen().width / 2 - 50, layout.controlsY(), 100, 20).build());
+        event.addListener(Button.builder(Component.translatable("screen.better_content_threads.loading_next"),
+                button -> currentBriefs.move(1))
+            .bounds(event.getScreen().width / 2 + 58, layout.controlsY(), 88, 20).build());
     }
 
     @SubscribeEvent
@@ -280,12 +301,9 @@ public final class ThreadClient {
                                             int screenWidth, int screenHeight) {
         var layout = LoadingBriefLayout.calculate(screenWidth, screenHeight, false);
         renderLessonCard(graphics, session, layout);
-        graphics.drawCenteredString(Minecraft.getInstance().font,
-            Component.translatable("screen.better_content_threads.lesson_remains"), screenWidth / 2,
-            Math.min(screenHeight - 10, layout.panelY() + layout.panelHeight() + 3), 0xFF8E9A91);
     }
 
-    private static void renderLessonCard(GuiGraphics graphics, LoadingBriefSession session, LoadingBriefLayout layout) {
+    static void renderLessonCard(GuiGraphics graphics, LoadingBriefSession session, LoadingBriefLayout layout) {
         LoadingBrief brief = session.current();
         graphics.fill(layout.panelX() - 2, layout.panelY() - 2,
             layout.panelX() + layout.panelWidth() + 2, layout.panelY() + layout.panelHeight() + 2, 0xFFC6A15B);
@@ -317,6 +335,12 @@ public final class ThreadClient {
             actionY += 10;
         }
         graphics.disableScissor();
+    }
+
+    static Component keepReadingLabel(LoadingBriefSession session) {
+        return Component.translatable(session.keepReading()
+            ? "screen.better_content_threads.keep_reading_selected"
+            : "screen.better_content_threads.keep_reading");
     }
 
     static void renderSealedPlate(GuiGraphics graphics,int x,int y,int width,int height,int suitColor,int aspectColor,int seed,boolean selected) {
