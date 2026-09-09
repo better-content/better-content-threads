@@ -1,6 +1,7 @@
 package com.bettercontent.threads;
 
 import com.bettercontent.threads.BetterContentThreads;
+import com.bettercontent.threads.mixin.LevelLoadingScreenAccessor;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -15,6 +16,7 @@ import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
@@ -46,7 +48,7 @@ public final class ThreadClient {
     private static final ThreadNoticeQueue<ThreadNetwork.Notice> NOTICES = new ThreadNoticeQueue<>(ThreadNetwork.Notice::identity);
     private static List<ThreadNetwork.Card> cards = List.of();
     private static long lastLiveFrame;
-    private static LoadingBrief currentBrief;
+    private static LoadingBriefSession currentBriefs;
     private static LoadingBriefRotation.State briefState;
     private static boolean arrivalPending;
 
@@ -62,9 +64,9 @@ public final class ThreadClient {
     public static void tick(TickEvent.ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
         var minecraft = Minecraft.getInstance();
-        if (arrivalPending && currentBrief != null && minecraft.player != null && minecraft.level != null && minecraft.screen == null) {
+        if (arrivalPending && currentBriefs != null && minecraft.player != null && minecraft.level != null && minecraft.screen == null) {
             arrivalPending = false;
-            minecraft.setScreen(new LoadingBriefScreen(currentBrief, ThreadClient::dismissBrief));
+            minecraft.setScreen(new LoadingBriefScreen(currentBriefs, ThreadClient::dismissBrief));
             return;
         }
         if (OPEN.consumeClick()) ThreadNetwork.request("open", "");
@@ -77,27 +79,37 @@ public final class ThreadClient {
         if (event.getNewScreen() != null && event.getNewScreen().getClass().getName().equals("dev.emi.emi.screen.RecipeScreen")) {
             ThreadNetwork.request("recipe_viewed", "");
         }
+        if (event.getNewScreen() instanceof LevelLoadingScreen levelLoading
+                && !(levelLoading instanceof LearningLevelLoadingScreen)
+                && Minecraft.getInstance().level == null) {
+            if (currentBriefs == null) beginBrief();
+            var progress = ((LevelLoadingScreenAccessor) levelLoading).betterContentThreads$progressListener();
+            event.setNewScreen(new LearningLevelLoadingScreen(progress, currentBriefs));
+            return;
+        }
         if (isInitialLoadScreen(event.getNewScreen()) && Minecraft.getInstance().level == null) {
-            if (event.getNewScreen() instanceof ConnectScreen || currentBrief == null) beginBrief();
+            if (event.getNewScreen() instanceof ConnectScreen || currentBriefs == null) beginBrief();
         }
     }
 
     @SubscribeEvent
     public static void loadingRender(ScreenEvent.Render.Post event) {
-        if (currentBrief != null && isInitialLoadScreen(event.getScreen()) && Minecraft.getInstance().level == null) {
-            renderLoadingBrief(event.getGuiGraphics(), currentBrief, event.getScreen().width, event.getScreen().height, false);
+        if (currentBriefs != null && isInitialLoadScreen(event.getScreen())
+                && !(event.getScreen() instanceof LevelLoadingScreen)
+                && Minecraft.getInstance().level == null) {
+            renderLoadingBrief(event.getGuiGraphics(), currentBriefs, event.getScreen().width, event.getScreen().height);
         }
     }
 
     @SubscribeEvent
     public static void login(ClientPlayerNetworkEvent.LoggingIn event) {
-        if (currentBrief == null) beginBrief();
+        if (currentBriefs == null) beginBrief();
         arrivalPending = true;
     }
 
     @SubscribeEvent
     public static void logout(ClientPlayerNetworkEvent.LoggingOut event) {
-        currentBrief = null;
+        currentBriefs = null;
         arrivalPending = false;
     }
 
@@ -223,46 +235,88 @@ public final class ThreadClient {
 
     private static void beginBrief() {
         briefState = LoadingBriefStore.load();
-        currentBrief = LoadingBriefRotation.select(LoadingBriefs.INSTANCE.all(), briefState);
+        currentBriefs = new LoadingBriefSession(LoadingBriefs.INSTANCE.all(), briefState);
         arrivalPending = false;
     }
 
     private static void dismissBrief() {
-        if (currentBrief == null) return;
+        if (currentBriefs == null) return;
         briefState = LoadingBriefRotation.commit(briefState == null ? LoadingBriefStore.load() : briefState,
-            currentBrief.id(), LoadingBriefs.INSTANCE.all().size());
+            currentBriefs.viewed(), LoadingBriefs.INSTANCE.all());
         LoadingBriefStore.save(briefState);
-        currentBrief = null;
+        currentBriefs = null;
         arrivalPending = false;
     }
 
-    static void renderLoadingBrief(GuiGraphics graphics, LoadingBrief brief, int screenWidth, int screenHeight, boolean arrival) {
-        int panelWidth = Math.min(620, screenWidth - 24);
-        int panelHeight = Math.min(220, screenHeight - 34);
-        int x = (screenWidth - panelWidth) / 2;
-        int y = (screenHeight - panelHeight) / 2;
-        graphics.fill(x - 2, y - 2, x + panelWidth + 2, y + panelHeight + 2, 0xD0C6A15B);
-        graphics.fill(x, y, x + panelWidth, y + panelHeight, 0xED101412);
-        int artWidth = Math.min(250, Math.max(112, panelWidth * 2 / 5));
-        int artHeight = panelHeight - 24;
-        graphics.blit(brief.art(), x + 12, y + 12, artWidth, artHeight, 0, 0, 512, 256, 512, 256);
-        int textX = x + artWidth + 26;
-        int textWidth = panelWidth - artWidth - 38;
-        graphics.drawString(Minecraft.getInstance().font, brief.headline(), textX, y + 22, 0xFFF0E2C5, true);
-        int lineY = y + 48;
-        for (var line : Minecraft.getInstance().font.split(Component.literal(brief.body()), textWidth)) {
-            graphics.drawString(Minecraft.getInstance().font, line, textX, lineY, 0xFFD2C9B5, false);
-            lineY += 11;
+    static void renderWorldGenerationBrief(GuiGraphics graphics, LoadingBriefSession session, int progress,
+                                             int screenWidth, int screenHeight) {
+        graphics.fill(0, 0, screenWidth, screenHeight, 0xFF0B0E0C);
+        var layout = LoadingBriefLayout.calculate(screenWidth, screenHeight, true);
+        graphics.drawCenteredString(Minecraft.getInstance().font,
+            Component.translatable("screen.better_content_threads.generating_world"), screenWidth / 2,
+            layout.headerY(), 0xFFF0E2C5);
+        int percent = Mth.clamp(progress, 0, 100);
+        graphics.fill(layout.barX() - 1, layout.barY() - 1, layout.barX() + layout.barWidth() + 1,
+            layout.barY() + 9, 0xFFC6A15B);
+        graphics.fill(layout.barX(), layout.barY(), layout.barX() + layout.barWidth(), layout.barY() + 8, 0xFF222923);
+        graphics.fill(layout.barX(), layout.barY(), layout.barX() + Math.round(layout.barWidth() * percent / 100.0f),
+            layout.barY() + 8, 0xFF8E5BB7);
+        graphics.drawCenteredString(Minecraft.getInstance().font,
+            Component.translatable("screen.better_content_threads.building_spawn", percent), screenWidth / 2,
+            layout.barY() + 11, 0xFFD2C9B5);
+        renderLessonCard(graphics, session, layout);
+    }
+
+    static void renderArrivalBrief(GuiGraphics graphics, LoadingBriefSession session, int screenWidth, int screenHeight) {
+        graphics.fill(0, 0, screenWidth, screenHeight, 0xFF0B0E0C);
+        var layout = LoadingBriefLayout.calculate(screenWidth, screenHeight, false);
+        graphics.drawCenteredString(Minecraft.getInstance().font,
+            Component.translatable("screen.better_content_threads.world_ready"), screenWidth / 2,
+            layout.headerY(), 0xFFF0E2C5);
+        renderLessonCard(graphics, session, layout);
+    }
+
+    private static void renderLoadingBrief(GuiGraphics graphics, LoadingBriefSession session,
+                                            int screenWidth, int screenHeight) {
+        var layout = LoadingBriefLayout.calculate(screenWidth, screenHeight, false);
+        renderLessonCard(graphics, session, layout);
+        graphics.drawCenteredString(Minecraft.getInstance().font,
+            Component.translatable("screen.better_content_threads.lesson_remains"), screenWidth / 2,
+            Math.min(screenHeight - 10, layout.panelY() + layout.panelHeight() + 3), 0xFF8E9A91);
+    }
+
+    private static void renderLessonCard(GuiGraphics graphics, LoadingBriefSession session, LoadingBriefLayout layout) {
+        LoadingBrief brief = session.current();
+        graphics.fill(layout.panelX() - 2, layout.panelY() - 2,
+            layout.panelX() + layout.panelWidth() + 2, layout.panelY() + layout.panelHeight() + 2, 0xFFC6A15B);
+        graphics.fill(layout.panelX(), layout.panelY(), layout.panelX() + layout.panelWidth(),
+            layout.panelY() + layout.panelHeight(), 0xFF101412);
+        if (layout.showArt()) {
+            graphics.blit(brief.art(), layout.artX(), layout.artY(), layout.artWidth(), layout.artHeight(),
+                0, 0, 512, 256, 512, 256);
         }
-        if (brief.id().equals("threads")) {
-            String binding = OPEN.getTranslatedKeyMessage().getString();
-            int keyWidth = Math.max(16, Minecraft.getInstance().font.width(binding) + 8);
-            drawKeycap(graphics, binding, textX, Math.min(y + panelHeight - 42, lineY + 12), keyWidth);
-            graphics.drawString(Minecraft.getInstance().font, "Threads", textX + keyWidth + 7,
-                Math.min(y + panelHeight - 39, lineY + 15), 0xFFE0D4BB, true);
+        var font = Minecraft.getInstance().font;
+        graphics.enableScissor(layout.textX(), layout.panelY() + 6,
+            layout.textX() + layout.textWidth(), layout.panelY() + layout.panelHeight() - 6);
+        graphics.drawString(font,
+            Component.translatable("screen.better_content_threads.lesson_count", brief.category().toUpperCase(),
+                session.index() + 1, session.size()),
+            layout.textX(), layout.textY(), 0xFF9FA996, false);
+        graphics.drawString(font, brief.headline(), layout.textX(), layout.textY() + 14, 0xFFF0E2C5, true);
+        int lineY = layout.textY() + 32;
+        var actionLines = font.split(Component.translatable("screen.better_content_threads.loading_remember", brief.action()),
+            layout.textWidth());
+        int actionY = layout.panelY() + layout.panelHeight() - 10 - actionLines.size() * 10;
+        for (var line : font.split(Component.literal(brief.body()), layout.textWidth())) {
+            if (lineY + 9 > actionY - 5) break;
+            graphics.drawString(font, line, layout.textX(), lineY, 0xFFD2C9B5, false);
+            lineY += 10;
         }
-        if (!arrival) graphics.drawCenteredString(Minecraft.getInstance().font, "This lesson will remain after arrival",
-            x + panelWidth / 2, y + panelHeight - 14, 0xFF8E9A91);
+        for (var line : actionLines) {
+            graphics.drawString(font, line, layout.textX(), actionY, 0xFFC6A15B, false);
+            actionY += 10;
+        }
+        graphics.disableScissor();
     }
 
     static void renderSealedPlate(GuiGraphics graphics,int x,int y,int width,int height,int suitColor,int aspectColor,int seed,boolean selected) {

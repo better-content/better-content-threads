@@ -6,6 +6,15 @@
   "screen.better_content_threads.catalogue_status": "%s of 13 remembered",
   "screen.better_content_threads.catalogue_status_unread": "%1$s of 13 remembered · %2$s to reveal",
   "screen.better_content_threads.reveal_badge": "REVEAL",
+  "screen.better_content_threads.generating_world": "GENERATING WORLD",
+  "screen.better_content_threads.building_spawn": "Building spawn area · %s%%",
+  "screen.better_content_threads.world_ready": "WORLD READY",
+  "screen.better_content_threads.lesson_count": "%1$s · LESSON %2$s OF %3$s",
+  "screen.better_content_threads.loading_remember": "REMEMBER: %s",
+  "screen.better_content_threads.loading_previous": "Previous",
+  "screen.better_content_threads.loading_next": "Next",
+  "screen.better_content_threads.loading_continue": "Continue",
+  "screen.better_content_threads.lesson_remains": "This lesson will remain after arrival.",
   "key.better_content_threads.open_reader": "Open Threads",
   "key.categories.better_content_threads": "Better Content"
 }

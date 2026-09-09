@@ -1,77 +1,133 @@
 {
-  "schema": "bc.loading_briefs.v1",
+  "schema": "bc.loading_briefs.v2",
   "briefs": [
     {
       "id": "threads",
+      "category": "Discovery",
       "headline": "Your discoveries live in Threads",
       "body": "When the world teaches you a changed rule, a small Threads reminder appears. Press the shown key — M by default — to read the rule and its evidence.",
+      "action": "Open Threads when its glyph appears.",
       "art": "better_content_threads:textures/gui/loading_briefs/threads.png"
     },
     {
-      "id": "recipes",
-      "headline": "Recipes obey this world",
-      "body": "Familiar recipes are often intentionally different or gated. Treat EMI as the local authority, then follow machines and materials backward until you find the first reachable step.",
-      "art": "better_content_threads:textures/gui/loading_briefs/recipes.png"
-    },
-    {
-      "id": "sleep",
-      "headline": "Sleep advances the world",
-      "body": "A bed is not a frozen checkpoint. Sleeping advances simulated time and may move weather, temperature, ecology, and active threats before you wake safely again.",
-      "art": "better_content_threads:textures/gui/loading_briefs/sleep.png"
+      "id": "hud",
+      "category": "Awareness",
+      "headline": "Quiet meters are still watching",
+      "body": "Survival meters fade when their values are calm, leaving the view uncluttered. Hold Sneak whenever you need to reveal every managed meter and assess your condition.",
+      "action": "Hold Sneak for a full status check.",
+      "art": "better_content_threads:textures/gui/loading_briefs/hud.png"
     },
     {
       "id": "water",
+      "category": "Hydration",
       "headline": "Clear water is earned",
-      "body": "Thirst and water purity are separate constraints. Inspect the source, improve it when necessary, and keep a reliably purified reserve before distance turns uncertainty into danger.",
+      "body": "Thirst and water purity are separate constraints. Collect rain, melt snow near a campfire, and carry bottles in Curios slots; purity level three is safe to drink.",
+      "action": "Purify a reserve before traveling.",
       "art": "better_content_threads:textures/gui/loading_briefs/water.png"
     },
     {
       "id": "nutrition",
+      "category": "Nutrition",
       "headline": "Full is not nourished",
-      "body": "Hunger measures immediate fuel, while nutrition rewards a varied diet over time. Repeating one excellent meal can still leave important food groups dangerously neglected afterward.",
+      "body": "Hunger measures immediate fuel, while nutrition tracks six food groups over time. Repeating one excellent meal can still leave neglected groups dangerously low afterward.",
+      "action": "Inspect all six food groups.",
       "art": "better_content_threads:textures/gui/loading_briefs/nutrition.png"
     },
     {
+      "id": "variety",
+      "category": "Health",
+      "headline": "New foods build lasting health",
+      "body": "A varied menu does more than balance nutrients. Eating enough distinct foods permanently raises maximum health, so unfamiliar ingredients are valuable milestones instead of disposable curiosities.",
+      "action": "Try foods you have never eaten.",
+      "art": "better_content_threads:textures/gui/loading_briefs/variety.png"
+    },
+    {
+      "id": "metabolism",
+      "category": "Metabolism",
+      "headline": "Borrowed speed leaves a debt",
+      "body": "Sugar can quicken your cadence, but it accelerates nutrient expenditure and leaves debt behind. Alcohol offers a moderate composure window; excess turns the bargain against you.",
+      "action": "Treat stimulants as planned resources.",
+      "art": "better_content_threads:textures/gui/loading_briefs/metabolism.png"
+    },
+    {
       "id": "temperature",
-      "headline": "Food carries weather",
-      "body": "Meals can carry thermal state as well as nutrition. Save warming and cooling foods for the conditions where their temperature matters, not merely when hunger appears.",
+      "category": "Climate",
+      "headline": "Your body has weather",
+      "body": "World temperature and body temperature are different pressures. Clothing, shelter, biome, season, and thermal foods can push the balance, so prepare before entering an extreme climate.",
+      "action": "Pack for the temperature ahead.",
       "art": "better_content_threads:textures/gui/loading_briefs/temperature.png"
     },
     {
-      "id": "tools",
-      "headline": "Tools are learned systems",
-      "body": "Early tools are assembled from parts whose materials change behavior. Read each component, repair what you understand, and expect improvement to come through construction rather than replacement.",
-      "art": "better_content_threads:textures/gui/loading_briefs/tools.png"
+      "id": "movement",
+      "category": "Movement",
+      "headline": "Your body has more motions",
+      "body": "Advanced movement spends stamina and rewards deliberate inputs. Fast run uses Shift, contextual movement uses Mouse 5, direct dodge uses R, and directional double taps also dodge.",
+      "action": "Practice movement before danger finds you.",
+      "art": "better_content_threads:textures/gui/loading_briefs/movement.png"
     },
     {
-      "id": "rotation",
-      "headline": "Rotation is a budget",
-      "body": "Create networks spend stress capacity and transmit speed through ratios. Diagnose stalled machines from the source outward: generation, direction, gearing, remaining capacity, then the working endpoint.",
-      "art": "better_content_threads:textures/gui/loading_briefs/rotation.png"
-    },
-    {
-      "id": "machines",
-      "headline": "Machines have roots",
-      "body": "Automation chains are dependency trees, not isolated recipes. Find the earliest resource, energy, pressure, or crafting boundary you can satisfy and build forward from that root.",
-      "art": "better_content_threads:textures/gui/loading_briefs/machines.png"
-    },
-    {
-      "id": "coins",
-      "headline": "Coins do not climb tiers",
-      "body": "Currency is meant to move through authored trades, not convert freely into a universal higher tier. Learn who accepts each coin before treating it as progression.",
-      "art": "better_content_threads:textures/gui/loading_briefs/coins.png"
-    },
-    {
-      "id": "dimensions",
-      "headline": "The End is not a door",
-      "body": "Vanilla eyes and portals do not define every route here. Dimension access follows the pack's authored paths; blocked landmarks are instructions to seek another doorway.",
-      "art": "better_content_threads:textures/gui/loading_briefs/dimensions.png"
+      "id": "sleep",
+      "category": "Rest",
+      "headline": "Sleep advances the world",
+      "body": "A bed is not a frozen checkpoint. Sleep simulates the passing hours quickly, advancing weather, ecology, temperature, and active threats while your vulnerable world continues moving.",
+      "action": "Secure the area before sleeping.",
+      "art": "better_content_threads:textures/gui/loading_briefs/sleep.png"
     },
     {
       "id": "downing",
-      "headline": "Defeat is not erasure",
-      "body": "Falling may begin a recoverable downed state before death. Read the rescue window, protect the body, and remember that lineage can preserve knowledge across a successor.",
+      "category": "Recovery",
+      "headline": "Defeat is not immediate death",
+      "body": "Falling can begin a recoverable downed state. A companion revives by holding Use while aiming at you; hold Sneak only when you intend to give up.",
+      "action": "Protect downed allies and hold Use.",
       "art": "better_content_threads:textures/gui/loading_briefs/downing.png"
+    },
+    {
+      "id": "life",
+      "category": "Growth",
+      "headline": "A life chooses what it becomes",
+      "body": "Life stats create irreversible strengths within one lifetime and reset on death. Constitution helps conserve hunger, thirst, and stamina, while other choices shape different long-term capabilities.",
+      "action": "Choose each life stat deliberately.",
+      "art": "better_content_threads:textures/gui/loading_briefs/life.png"
+    },
+    {
+      "id": "seasons",
+      "category": "Seasons",
+      "headline": "Seasons turn the work",
+      "body": "The calendar changes which crops and trees grow well. Observe seasonal feedback, preserve surplus from productive months, and expect familiar land to demand a different plan later.",
+      "action": "Plant for the present season.",
+      "art": "better_content_threads:textures/gui/loading_briefs/seasons.png"
+    },
+    {
+      "id": "weather",
+      "category": "Weather",
+      "headline": "Weather has momentum",
+      "body": "Storms are systems with motion, not decorative flashes. Watch the sky, listen for escalation, and keep a defensible route indoors before severe weather overtakes exposed work.",
+      "action": "Read the sky before committing.",
+      "art": "better_content_threads:textures/gui/loading_briefs/weather.png"
+    },
+    {
+      "id": "pollution",
+      "category": "Industry",
+      "headline": "Industry changes the air",
+      "body": "Pollution moves with the world and can harm living things. Detect it, protect yourself, route emitters through chimneys and filters, then clean contamination instead of abandoning it.",
+      "action": "Vent, filter, measure, and clean.",
+      "art": "better_content_threads:textures/gui/loading_briefs/pollution.png"
+    },
+    {
+      "id": "physics",
+      "category": "Building",
+      "headline": "Structures need support",
+      "body": "Blocks carry structural expectations beyond gravity. Foundations, spans, and material support profiles matter, so ambitious construction should grow from a sound load path instead of floating convenience.",
+      "action": "Trace support before extending a span.",
+      "art": "better_content_threads:textures/gui/loading_briefs/physics.png"
+    },
+    {
+      "id": "campaigns",
+      "category": "Threats",
+      "headline": "Warnings mean someone is coming",
+      "body": "Pillager scouts appear often, but full assaults are rarer and announced. Treat each warning as preparation time: fortify approaches, gather allies, and choose where the fight happens.",
+      "action": "Prepare when an assault is warned.",
+      "art": "better_content_threads:textures/gui/loading_briefs/campaigns.png"
     }
   ]
 }

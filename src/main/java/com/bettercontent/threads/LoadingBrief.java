@@ -3,19 +3,27 @@ package com.bettercontent.threads;
 import com.google.gson.JsonObject;
 import net.minecraft.resources.ResourceLocation;
 
-record LoadingBrief(String id, String headline, String body, ResourceLocation art) {
+record LoadingBrief(String id, String category, String headline, String body, String action, ResourceLocation art) {
     LoadingBrief {
         if (!id.matches("[a-z0-9_]{3,48}")) throw new IllegalArgumentException("invalid loading brief id");
+        if (!category.matches("[A-Za-z ]{3,24}")) throw new IllegalArgumentException("invalid loading brief category");
         if (headline.isBlank() || headline.length() > 54) throw new IllegalArgumentException("invalid loading brief headline");
         int words = body.trim().split("\\s+").length;
-        if (words < 25 || words > 40) throw new IllegalArgumentException("loading brief body must contain 25-40 words");
+        if (words < 24 || words > 48) throw new IllegalArgumentException("loading brief body must contain 24-48 words");
+        int actionWords = action.trim().split("\\s+").length;
+        if (actionWords < 3 || actionWords > 16 || action.length() > 96) {
+            throw new IllegalArgumentException("loading brief action must contain 3-16 words and at most 96 characters");
+        }
+        if (art == null) throw new IllegalArgumentException("invalid loading brief art");
     }
 
     static LoadingBrief parse(JsonObject json) {
         return new LoadingBrief(
             json.get("id").getAsString(),
+            json.get("category").getAsString(),
             json.get("headline").getAsString(),
             json.get("body").getAsString(),
+            json.get("action").getAsString(),
             ResourceLocation.tryParse(json.get("art").getAsString())
         );
     }

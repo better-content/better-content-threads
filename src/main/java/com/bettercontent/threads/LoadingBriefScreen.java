@@ -8,30 +8,43 @@ import net.minecraft.network.chat.Component;
 import org.lwjgl.glfw.GLFW;
 
 final class LoadingBriefScreen extends Screen {
-    private final LoadingBrief brief;
+    private final LoadingBriefSession session;
     private final Runnable dismiss;
 
-    LoadingBriefScreen(LoadingBrief brief, Runnable dismiss) {
-        super(Component.literal(brief.headline()));
-        this.brief = brief;
+    LoadingBriefScreen(LoadingBriefSession session, Runnable dismiss) {
+        super(Component.literal(session.current().headline()));
+        this.session = session;
         this.dismiss = dismiss;
     }
 
     @Override
     protected void init() {
-        addRenderableWidget(Button.builder(Component.literal("Continue"), button -> closeBrief())
-            .bounds(width / 2 - 50, Math.min(height - 32, height / 2 + 96), 100, 20).build());
+        var layout = LoadingBriefLayout.calculate(width, height, false);
+        addRenderableWidget(Button.builder(Component.translatable("screen.better_content_threads.loading_previous"), button -> session.move(-1))
+            .bounds(width / 2 - 146, layout.controlsY(), 88, 20).build());
+        addRenderableWidget(Button.builder(Component.translatable("screen.better_content_threads.loading_continue"), button -> closeBrief())
+            .bounds(width / 2 - 50, layout.controlsY(), 100, 20).build());
+        addRenderableWidget(Button.builder(Component.translatable("screen.better_content_threads.loading_next"), button -> session.move(1))
+            .bounds(width / 2 + 58, layout.controlsY(), 88, 20).build());
     }
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         renderBackground(graphics);
-        ThreadClient.renderLoadingBrief(graphics, brief, width, height, true);
+        ThreadClient.renderArrivalBrief(graphics, session, width, height);
         super.render(graphics, mouseX, mouseY, partialTick);
     }
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if (keyCode == GLFW.GLFW_KEY_LEFT) {
+            session.move(-1);
+            return true;
+        }
+        if (keyCode == GLFW.GLFW_KEY_RIGHT) {
+            session.move(1);
+            return true;
+        }
         if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER || keyCode == GLFW.GLFW_KEY_SPACE) {
             closeBrief();
             return true;
