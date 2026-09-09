@@ -1,3 +1,5 @@
+import java.util.zip.ZipFile
+
 plugins {
     idea
     `maven-publish`
@@ -7,7 +9,10 @@ plugins {
     id("org.spongepowered.mixin") version "0.7.+"
 }
 
-mixin { config("better_content_threads.mixins.json") }
+mixin {
+    add(sourceSets.main.get(), "better_content_threads.refmap.json")
+    config("better_content_threads.mixins.json")
+}
 
 group = "com.bettercontent"
 version = property("mod_version") as String
@@ -96,11 +101,17 @@ dependencies {
     testRuntimeOnly(fg.deobf("curse.maven:rehooked-1096531:6341096"))
     compileOnly(fg.deobf("curse.maven:patchouli-306770:7731017"))
     compileOnly("org.valkyrienskies.core:api:1.1.0+cf208d8b56")
+    annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
     testImplementation("com.google.code.gson:gson:2.10.1")
 }
 
 tasks.named<Jar>("jar") {
+    dependsOn(tasks.named("compileJava"))
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from(layout.buildDirectory.file("tmp/compileJava/compileJava-refmap.json")) {
+        rename { "better_content_threads.refmap.json" }
+    }
     finalizedBy("reobfJar")
 }
 
@@ -121,6 +132,10 @@ tasks.named("assemble") {
 
 tasks.withType<JavaCompile>().configureEach {
     options.release.set(17)
+}
+
+tasks.named<JavaCompile>("compileJava") {
+    outputs.file(layout.buildDirectory.file("tmp/compileJava/compileJava-refmap.json"))
 }
 
 tasks.test {
@@ -145,6 +160,28 @@ tasks.register("verifyFull") {
     description = "Runs the full verification lane including headless Forge game tests."
     dependsOn(tasks.named("verifyFast"))
     dependsOn(tasks.named("headlessGameTest"))
+    dependsOn("verifyRuntimeJar")
+}
+
+val verifyRuntimeJar by tasks.registering {
+    group = "verification"
+    description = "Rejects a runtime JAR with a missing LevelLoadingScreen accessor refmap."
+    dependsOn(stageRuntimeJar)
+
+    val runtimeJar = layout.buildDirectory.file("libs/${base.archivesName.get()}-$version.jar")
+    inputs.file(runtimeJar)
+
+    doLast {
+        ZipFile(runtimeJar.get().asFile).use { zip ->
+            val refmap = zip.getEntry("better_content_threads.refmap.json")
+                ?: throw GradleException("Runtime JAR is missing better_content_threads.refmap.json")
+            val refmapText = zip.getInputStream(refmap).bufferedReader().use { it.readText() }
+            check(refmapText.contains("LevelLoadingScreenAccessor") &&
+                refmapText.contains("\"progressListener\": \"f_96138_")) {
+                "Runtime refmap lacks the LevelLoadingScreen progress-listener accessor mapping"
+            }
+        }
+    }
 }
 
 val resetGameTestMods = tasks.register<Delete>("resetGameTestMods") {
