@@ -64,8 +64,29 @@ repositories {
     mavenCentral()
 }
 
+val betterContentApiJars = files(
+    "../downed-player-revival/build/libs/downed-player-revival-1.0.0.jar",
+    "../pillager-campaigns/build/libs/pillager-campaigns-0.5.4.jar",
+    "../world-lifecycle-manager/build/libs/world-lifecycle-manager-0.1.0.jar",
+    "../dimension-drink/build/libs/dimension-drink-1.0.0.jar",
+    "../rpg-stats/build/libs/rpg-stats-1.0.1.jar",
+    "../arcane-chunk-loaders/build/libs/arcane-chunk-loaders-0.1.0.jar",
+    "../better-content-economy/build/libs/better-content-economy-1.0.1.jar",
+    "../heat-sync/build/libs/heat-sync-0.1.0.jar",
+    "../settlement-roads/build/libs/settlement-roads-0.1.0.jar",
+    "../water-survival/build/libs/water-survival-1.1.0.jar",
+    "../better-content-fixes/build/libs/better-content-fixes-0.1.7.jar",
+    "../player-traces/build/libs/player-traces-0.1.0.jar",
+    "../systemic-salience/build/libs/systemic-salience-0.1.1.jar",
+    "../realistic-ores/build/libs/realistic-ores-0.2.0.jar"
+)
+
 dependencies {
     minecraft("net.minecraftforge:forge:${property("minecraft_version")}-${property("forge_version")}")
+    compileOnly(betterContentApiJars)
+    testCompileOnly(betterContentApiJars)
+    testRuntimeOnly(betterContentApiJars)
+    testRuntimeOnly("org.jetbrains.kotlin:kotlin-stdlib:2.0.0")
     compileOnly(fg.deobf("curse.maven:hyle-609850:7736352"))
     compileOnly(fg.deobf("curse.maven:thirst-was-taken-679270:6660408"))
     compileOnly(fg.deobf("curse.maven:cold-sweat-506194:7893262"))
@@ -84,7 +105,12 @@ dependencies {
     compileOnly(fg.deobf("curse.maven:ars-nouveau-401955:6688854"))
     compileOnly(fg.deobf("curse.maven:blood-magic-224791:7956981"))
     compileOnly(fg.deobf("curse.maven:goety-586095:8087429"))
-    compileOnly(fg.deobf("com.ferreusveritas.dynamictrees:DynamicTrees-1.20.1:1.4.9"))
+    compileOnly(fg.deobf("curse.maven:applied-energistics-2-223794:7148487"))
+    compileOnly(fg.deobf("curse.maven:ars-energistique-905641:5504444"))
+    compileOnly(fg.deobf("curse.maven:create-creating-space-858897:7850072"))
+    compileOnly(fg.deobf("curse.maven:power-grid-1321420:7714613"))
+    compileOnly(fg.deobf("com.simibubi.create:create-${property("minecraft_version")}:6.0.8-291:slim"))
+    compileOnly(fg.deobf("com.ferreusveritas.dynamictrees:DynamicTrees-1.20.1:1.4.10"))
     compileOnly(fg.deobf("curse.maven:serene-seasons-291874:6398227"))
     compileOnly(fg.deobf("curse.maven:polymorph-388800:6450982"))
     compileOnly(fg.deobf("curse.maven:architectury-api-419699:5137938"))
@@ -141,6 +167,37 @@ tasks.named<JavaCompile>("compileJava") {
 tasks.test {
     useJUnitPlatform()
     finalizedBy(tasks.jacocoTestReport)
+}
+
+val verifyNoReflection by tasks.registering {
+    group = "verification"
+    description = "Rejects Java/Kotlin source that uses runtime reflection."
+    val sourceTree = fileTree("src") {
+        include("**/*.java", "**/*.kt", "**/*.kts")
+    }
+    inputs.files(sourceTree)
+    doLast {
+        val forbidden = listOf(
+            "java.lang.reflect", "kotlin.reflect", "Class.forName(",
+            ".getDeclaredField(", ".getDeclaredMethod(", ".getDeclaredConstructor(",
+            ".getField(", ".getMethod(", ".setAccessible(", ".trySetAccessible(",
+            "Proxy.newProxyInstance(", "MethodHandles", "VarHandle", "sun.misc.Unsafe"
+        )
+        val violations = sourceTree.files.sorted().flatMap { source ->
+            source.readLines().mapIndexedNotNull { index, line ->
+                forbidden.firstOrNull(line::contains)?.let { token ->
+                    "${source.relativeTo(projectDir)}:${index + 1}: $token"
+                }
+            }
+        }
+        check(violations.isEmpty()) {
+            "Runtime reflection is forbidden:\n${violations.joinToString("\n")}"
+        }
+    }
+}
+
+tasks.named("check") {
+    dependsOn(verifyNoReflection)
 }
 
 tasks.register("headlessGameTest") {

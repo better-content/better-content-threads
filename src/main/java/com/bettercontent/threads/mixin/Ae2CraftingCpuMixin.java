@@ -1,6 +1,7 @@
 package com.bettercontent.threads.mixin;
 
 import com.bettercontent.threads.PackActionThreads;
+import appeng.me.cluster.implementations.CraftingCPUCluster;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,6 +13,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class Ae2CraftingCpuMixin {
     @Inject(method = "done", at = @At("TAIL"), remap = false)
     private void threads$jobFinished(CallbackInfo callback) {
-        PackActionThreads.ae2CraftFinished(this);
+        CraftingCPUCluster cpu = (CraftingCPUCluster) (Object) this;
+        if (cpu.getLevel() instanceof net.minecraft.server.level.ServerLevel level) {
+            PackActionThreads.ae2CraftFinished(level, cpu.getBoundsMin());
+        }
     }
 }

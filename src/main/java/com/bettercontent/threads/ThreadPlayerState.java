@@ -1,9 +1,12 @@
 package com.bettercontent.threads;
 
+import com.bettercontent.threads.compat.bettercontent.WorldLifecycleThreads;
 import net.minecraft.nbt.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.fml.ModList;
+import java.io.IOException;
 import java.util.*;
 
 public final class ThreadPlayerState {
@@ -50,6 +53,6 @@ public final class ThreadPlayerState {
     private static CompoundTag strings(Map<String,String> values){var out=new CompoundTag();values.forEach((key,value)->{if(ThreadArt.BY_ID.containsKey(key)&&validCorrelation(value))out.putString(key,value);});return out;}
     static boolean validCorrelation(String value){return value!=null&&!value.isBlank()&&value.length()<=128&&value.chars().allMatch(c->c>=0x21&&c<=0x7e);}
     static CompoundTag preferLineageState(CompoundTag lineage,CompoundTag worldLocal){return lineage.isEmpty()&&!worldLocal.isEmpty()?worldLocal:lineage;}
-    private static CompoundTag readLineage(ServerPlayer player){var worldLocal=player.getPersistentData().getCompound(Player.PERSISTED_NBT_TAG).getCompound(KEY);try{var api=Class.forName("com.bettercontent.worldlifecyclemanager.api.LineagePlayerDataApi");var lineage=(CompoundTag)api.getMethod("read",net.minecraft.server.MinecraftServer.class,ResourceLocation.class,UUID.class).invoke(null,player.server,LINEAGE_KEY,player.getUUID());return preferLineageState(lineage,worldLocal);}catch(ClassNotFoundException|NoSuchMethodException ignored){return worldLocal;}catch(ReflectiveOperationException failure){throw new IllegalStateException("Could not read lineage Thread state",failure);}}
-    private static boolean writeLineage(ServerPlayer player,CompoundTag root){try{var api=Class.forName("com.bettercontent.worldlifecyclemanager.api.LineagePlayerDataApi");api.getMethod("write",net.minecraft.server.MinecraftServer.class,ResourceLocation.class,UUID.class,CompoundTag.class).invoke(null,player.server,LINEAGE_KEY,player.getUUID(),root);return true;}catch(ClassNotFoundException|NoSuchMethodException ignored){return false;}catch(ReflectiveOperationException failure){throw new IllegalStateException("Could not write lineage Thread state",failure);}}
+    private static CompoundTag readLineage(ServerPlayer player){var worldLocal=player.getPersistentData().getCompound(Player.PERSISTED_NBT_TAG).getCompound(KEY);if(!ModList.get().isLoaded("world_lifecycle_manager"))return worldLocal;try{return preferLineageState(WorldLifecycleThreads.readPlayerData(player.server,LINEAGE_KEY,player.getUUID()),worldLocal);}catch(IOException failure){throw new IllegalStateException("Could not read lineage Thread state",failure);}}
+    private static boolean writeLineage(ServerPlayer player,CompoundTag root){if(!ModList.get().isLoaded("world_lifecycle_manager"))return false;try{WorldLifecycleThreads.writePlayerData(player.server,LINEAGE_KEY,player.getUUID(),root);return true;}catch(IOException failure){throw new IllegalStateException("Could not write lineage Thread state",failure);}}
 }

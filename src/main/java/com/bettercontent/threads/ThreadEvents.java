@@ -1,5 +1,7 @@
 package com.bettercontent.threads;
 
+import com.bettercontent.threads.compat.bettercontent.PillagerCampaignThreads;
+import com.bettercontent.threads.compat.bettercontent.WorldLifecycleThreads;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Mob;
@@ -21,12 +23,13 @@ import net.minecraftforge.event.entity.player.AnvilRepairEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.io.IOException;
 import java.util.*;
 
 public final class ThreadEvents {
-    private static final Map<UUID,Boolean> DOWNED=new HashMap<>();
     private static final Map<UUID,CampaignEpisode> CAMPAIGN=new HashMap<>();
     private static final Map<UUID,RuinVisit> RUINS=new HashMap<>();
     private static final Map<UUID,HostileCollision> COLLISIONS=new HashMap<>();
@@ -47,7 +50,7 @@ public final class ThreadEvents {
         if(pending){state.active.add("world_can_be_condensed");state.correlations.put("world_can_be_condensed",pendingToken);if(state.complete("world_can_be_condensed","Verified successor",current)){var definition=ThreadDefinitions.INSTANCE.get("world_can_be_condensed");if(definition!=null)notices.add(ThreadNetwork.notice(definition,ThreadNetwork.NoticeKind.COMPLETE));}state.pendingCondenserGeneration=-1L;state.pendingCondenserCorrelation=null;}
         state.save(player);ThreadNetwork.sync(player,false,notices);
     }
-    @SubscribeEvent public static void logout(PlayerEvent.PlayerLoggedOutEvent event){if(event.getEntity()instanceof ServerPlayer p){ThreadPlayerState.get(p).save(p);ThreadPlayerState.forget(p);DOWNED.remove(p.getUUID());CAMPAIGN.remove(p.getUUID());RUINS.remove(p.getUUID());COLLISIONS.remove(p.getUUID());}}
+    @SubscribeEvent public static void logout(PlayerEvent.PlayerLoggedOutEvent event){if(event.getEntity()instanceof ServerPlayer p){ThreadPlayerState.get(p).save(p);ThreadPlayerState.forget(p);CAMPAIGN.remove(p.getUUID());RUINS.remove(p.getUUID());COLLISIONS.remove(p.getUUID());}}
     @SubscribeEvent public static void changedDimension(PlayerEvent.PlayerChangedDimensionEvent event){if(event.getEntity()instanceof ServerPlayer p){String destination=event.getTo().location().toString(),source=event.getFrom().location().toString();if(destination.equals("creatingspace:earth_orbit")){String rocket=ThreadSignals.activeCorrelation(p,"leave_atmosphere");if(rocket!=null)ThreadSignals.emit(p,"orbit_reached",destination,rocket);}if(event.getTo()==net.minecraft.world.level.Level.OVERWORLD){String token=ThreadSignals.activeCorrelation(p,dimensionCard(source));if(token!=null)ThreadSignals.emit(p,"dimension_return",source,token);}else{ThreadSignals.emit(p,"dimension_enter",destination,episode(p,"dimension:"+destination));var journey=episodeTag(p,JOURNEY);String token=journey.getString("token");long fedAt=journey.getLong("fedAt");if(ThreadPlayerState.validCorrelation(token)&&fedAt>=0&&p.server.getTickCount()-fedAt<=20*120)ThreadSignals.emit(p,"fed_dimension_enter",destination,token);clearEpisode(p,JOURNEY);}}}
     @SubscribeEvent public static void pickedUp(PlayerEvent.ItemPickupEvent event){if(event.getEntity()instanceof ServerPlayer player){var visit=RUINS.get(player.getUUID());if(visit!=null&&!event.getStack().isEmpty())visit.acquired=true;}}
     @SubscribeEvent public static void crafted(PlayerEvent.ItemCraftedEvent event){if(event.getEntity()instanceof ServerPlayer player){String token=ThreadSignals.activeCorrelation(player,"recipes_obey_this_world");if(token!=null)ThreadSignals.emit(player,"pack_recipe_crafted","registered",token);}}
@@ -74,7 +77,6 @@ public final class ThreadEvents {
         if(event.phase!=TickEvent.Phase.END||event.getServer().getTickCount()%5!=0)return;
         for(var player:event.getServer().getPlayerList().getPlayers()){
             if(event.getServer().getTickCount()%10==0){updateJourney(player);updateHazard(player);}
-            boolean downed=isDowned(player),before=DOWNED.getOrDefault(player.getUUID(),false);DOWNED.put(player.getUUID(),downed);if(downed&&!before)ThreadSignals.emit(player,"downed","player",episode(player,"downed"));
             if(event.getServer().getTickCount()%20==0){updateCampaign(player);updateRuin(player);var collision=COLLISIONS.get(player.getUUID());if(collision!=null&&event.getServer().getTickCount()-collision.lastTargetTick>20*45)COLLISIONS.remove(player.getUUID());}
         }
     }
@@ -99,7 +101,6 @@ public final class ThreadEvents {
     private static String episode(ServerPlayer player,String kind){return player.getUUID()+":"+Integer.toUnsignedString(kind.hashCode(),36)+":"+player.server.getTickCount();}
     private static String dimensionCard(String dimension){return switch(dimension){case "minecraft:the_nether"->"fire_has_country";case "aether:the_aether"->"sky_another_country";case "the_bumblezone:the_bumblezone"->"deep_own_light";case "rats:ratlantis"->"silence_has_teeth";default->"";};}
     private static boolean isTerminal(String value){return value.equals("survived")||value.equals("resolved")||value.equals("retreated")||value.equals("target_dead")||value.equals("defeated");}
-    private static boolean isDowned(ServerPlayer player){try{var api=Class.forName("com.bettercontent.downedplayerrevival.api.RevivalApi");return(boolean)api.getMethod("isDowned",net.minecraft.world.entity.player.Player.class).invoke(null,player);}catch(ReflectiveOperationException ignored){return false;}}
-    private static String campaign(ServerPlayer player){try{var api=Class.forName("com.bettercontent.pillagercampaigns.api.CampaignStatusApi");return api.getMethod("state",ServerPlayer.class).invoke(null,player).toString().toLowerCase(Locale.ROOT);}catch(ReflectiveOperationException ignored){return "none";}}
-    private static long generation(ServerPlayer player){try{var api=Class.forName("com.bettercontent.worldlifecyclemanager.PrestigeService");var lineage=api.getMethod("lineage",net.minecraft.server.MinecraftServer.class).invoke(null,player.server);return((Number)lineage.getClass().getMethod("generation").invoke(lineage)).longValue();}catch(ReflectiveOperationException ignored){return 0L;}}
+    private static String campaign(ServerPlayer player){return ModList.get().isLoaded("pillager_campaigns")?PillagerCampaignThreads.state(player):"none";}
+    private static long generation(ServerPlayer player){if(!ModList.get().isLoaded("world_lifecycle_manager"))return 0L;try{return WorldLifecycleThreads.generation(player.server);}catch(IOException ignored){return 0L;}}
 }

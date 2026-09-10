@@ -1,6 +1,7 @@
 package com.bettercontent.threads.mixin;
 
 import com.bettercontent.threads.PackActionThreads;
+import gripe._90.arseng.me.misc.SourceEnergyAdaptor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class ArsSourceEnergyMixin {
     @Inject(method = "addSource", at = @At("RETURN"), remap = false)
     private void threads$sourceConverted(int amount, CallbackInfoReturnable<Integer> callback) {
-        PackActionThreads.sourceConverted(this, amount);
+        SourceEnergyAdaptor adaptor = (SourceEnergyAdaptor) (Object) this;
+        PackActionThreads.sourceConverted(adaptor.sink(), amount);
     }
 }
