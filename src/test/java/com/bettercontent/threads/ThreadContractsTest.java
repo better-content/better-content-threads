@@ -73,7 +73,7 @@ final class ThreadContractsTest {
             Map.entry("ae2","[15.4.10]"),Map.entry("arseng","[1.2.0]"),
             Map.entry("creatingspace","[1.20.1_1.7.13]"),Map.entry("powergrid","[0.5.4]"),
             Map.entry("dynamictrees","[1.20.1-1.4.10]"),Map.entry("sereneseasons","[9.1.0.2]"),
-            Map.entry("weather2","[1.20.1-2.8.3]"),Map.entry("pneumaticcraft","[6.0.22]"),
+            Map.entry("weather2","[1.20.1-2.8.3]"),Map.entry("pneumaticcraft","[6.0.22+mc1.20.1]"),
             Map.entry("ars_nouveau","[4.12.7]"),Map.entry("bloodmagic","[3.3.7-49]"),
             Map.entry("goety","[2.5.53.1]"),Map.entry("tconstruct","[3.11.2.166]"),
             Map.entry("relics","[0.8.0.13]"),Map.entry("valkyrienskies","[2.4.11]"),
