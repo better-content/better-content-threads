@@ -77,8 +77,8 @@ final class ThreadContractsTest {
             Map.entry("ars_nouveau","[4.12.7]"),Map.entry("bloodmagic","[3.3.7-49]"),
             Map.entry("goety","[2.5.53.1]"),Map.entry("tconstruct","[3.11.2.166]"),
             Map.entry("relics","[0.8.0.13]"),Map.entry("valkyrienskies","[2.4.11]"),
-            Map.entry("occultism","[1.157.0]"),Map.entry("emi","[1.1.24]"),
-            Map.entry("ponder","[1.0.92]"),Map.entry("create","[6.0.8]"));
+            Map.entry("occultism","[1.157.0]"),Map.entry("emi","[1.1.24+1.20.1+forge]"),
+            Map.entry("ponder","[1.0.91]"),Map.entry("create","[6.0.8]"));
         expected.forEach((id,range)->assertEquals(1,blocks.stream().filter(block->block.contains("modId=\""+id+"\"")&&block.contains("mandatory=false")&&block.contains("versionRange=\""+range+"\"")).count(),id));
     }
     @Test void pressureRouteRequiresAWorkingPressurizedCompressor()throws Exception{String source=Files.readString(Path.of("src/main/java/com/bettercontent/threads/compat/PneumaticThreads.java"));assertTrue(source.contains("compressor.isActive()"));assertTrue(source.contains("compressor.getPressure() <= 0.1f"));assertTrue(Files.readString(Path.of("src/main/java/com/bettercontent/threads/NativeAdvancementThreads.java")).contains("pneumaticcraft:pressure_chamber"));}
