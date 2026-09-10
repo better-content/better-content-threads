@@ -1847,21 +1847,21 @@
     },
     {
       "id": "coins_do_not_climb",
-      "concept_id": "economy.nonconvertible_coins",
+      "concept_id": "economy.spirits_remember_kills",
       "owner": "better-content-economy",
-      "title": "Coins Do Not Climb",
+      "title": "Spirits Remember the Hand",
       "suit": "fragility",
       "order": 10,
       "aspect": "work",
-      "rule": "Coin denominations never convert into one another; each tier has authored uses, and value is realized by spending it with supported traders.",
-      "prose": "No mint turns a pile of small promises into one larger promise. Each metal belongs to its own agreements.",
-      "invitation": "Find the hand that recognizes this denomination.",
-      "action": "Spend an earned coin through an authored trader offer.",
+      "rule": "Only a player-credited kill releases commerce spirits; the seven ordinary colors buy only from their matching village market, while Eldritch remains outside trade.",
+      "prose": "The departing soul remembers who ended its story. Villages read that memory by color, and no mint or mine can imitate it.",
+      "invitation": "Follow one floating spirit to the market that shares its color.",
+      "action": "Collect a spirit released by your kill, then spend it with its matching villager or wandering trader.",
       "reveal_routes": [
         {
-          "id": "coin_acquired",
-          "label": "Coin earned",
-          "type": "coin_acquired",
+          "id": "spirit_acquired",
+          "label": "Kill spirit collected",
+          "type": "spirit_acquired",
           "value": "*",
           "producer": "better-content-economy",
           "correlation": "episode"
@@ -1872,7 +1872,7 @@
           "id": "authored_trade",
           "label": "Authored trade",
           "type": "authored_trade",
-          "value": "coin_spent",
+          "value": "matching_spirit_spent",
           "producer": "better-content-economy",
           "correlation": "episode"
         }
