@@ -19,7 +19,7 @@ final class LoadingBriefScreen extends Screen {
 
     @Override
     protected void init() {
-        var layout = LoadingBriefLayout.calculate(width, height, false);
+        var layout = LoadingBriefBackdropLayout.calculate(width, height, false);
         addRenderableWidget(Button.builder(Component.translatable("screen.better_content_threads.loading_previous"), button -> session.move(-1))
             .bounds(width / 2 - 146, layout.controlsY(), 88, 20).build());
         addRenderableWidget(Button.builder(Component.translatable("screen.better_content_threads.enter_world"), button -> closeBrief())

@@ -18,7 +18,7 @@ final class LearningLevelLoadingScreen extends net.minecraft.client.gui.screens.
 
     @Override
     protected void init() {
-        var layout = LoadingBriefLayout.calculate(width, height, true);
+        var layout = LoadingBriefBackdropLayout.calculate(width, height, true);
         addRenderableWidget(Button.builder(net.minecraft.network.chat.Component.translatable("screen.better_content_threads.loading_previous"),
                 button -> session.move(-1))
             .bounds(width / 2 - 146, layout.controlsY(), 88, 20).build());

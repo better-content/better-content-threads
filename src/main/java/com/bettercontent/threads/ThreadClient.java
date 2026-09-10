@@ -17,6 +17,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
@@ -97,6 +98,18 @@ public final class ThreadClient {
     }
 
     @SubscribeEvent
+    public static void loadingBackground(ScreenEvent.BackgroundRendered event) {
+        if (currentBriefs != null && isInitialLoadScreen(event.getScreen())
+                && !(event.getScreen() instanceof LevelLoadingScreen)
+                && Minecraft.getInstance().level == null) {
+            var layout = LoadingBriefBackdropLayout.calculate(event.getScreen().width, event.getScreen().height,
+                false, nativeControlRows(event.getScreen()));
+            renderLoadingBackdrop(event.getGuiGraphics(), currentBriefs, layout,
+                event.getScreen().width, event.getScreen().height);
+        }
+    }
+
+    @SubscribeEvent
     public static void loadingRender(ScreenEvent.Render.Post event) {
         if (currentBriefs != null && isInitialLoadScreen(event.getScreen())
                 && !(event.getScreen() instanceof LevelLoadingScreen)
@@ -129,7 +142,8 @@ public final class ThreadClient {
         if (currentBriefs == null || Minecraft.getInstance().level != null
                 || !isInitialLoadScreen(event.getScreen())
                 || event.getScreen() instanceof LearningLevelLoadingScreen) return;
-        var layout = LoadingBriefLayout.calculate(event.getScreen().width, event.getScreen().height, false);
+        var layout = LoadingBriefBackdropLayout.calculate(event.getScreen().width, event.getScreen().height,
+            false, nativeControlRows(event.getScreen()));
         event.addListener(Button.builder(Component.translatable("screen.better_content_threads.loading_previous"),
                 button -> currentBriefs.move(-1))
             .bounds(event.getScreen().width / 2 - 146, layout.controlsY(), 88, 20).build());
@@ -254,6 +268,10 @@ public final class ThreadClient {
         return screen instanceof ConnectScreen || screen instanceof ReceivingLevelScreen || screen instanceof LevelLoadingScreen;
     }
 
+    private static int nativeControlRows(net.minecraft.client.gui.screens.Screen screen) {
+        return screen instanceof ConnectScreen ? 2 : 1;
+    }
+
     private static void beginBrief() {
         briefState = LoadingBriefStore.load();
         currentBriefs = new LoadingBriefSession(LoadingBriefs.INSTANCE.all(), briefState);
@@ -271,36 +289,83 @@ public final class ThreadClient {
 
     static void renderWorldGenerationBrief(GuiGraphics graphics, LoadingBriefSession session, int progress,
                                              int screenWidth, int screenHeight) {
-        graphics.fill(0, 0, screenWidth, screenHeight, 0xFF0B0E0C);
-        var layout = LoadingBriefLayout.calculate(screenWidth, screenHeight, true);
-        graphics.drawCenteredString(Minecraft.getInstance().font,
+        var layout = LoadingBriefBackdropLayout.calculate(screenWidth, screenHeight, true);
+        renderLoadingBackdrop(graphics, session, layout, screenWidth, screenHeight);
+        drawOutlinedCentered(graphics,
             Component.translatable("screen.better_content_threads.generating_world"), screenWidth / 2,
-            layout.headerY(), 0xFFF0E2C5);
+            layout.headerY(), 1.0f, 1.0f);
         int percent = Mth.clamp(progress, 0, 100);
         graphics.fill(layout.barX() - 1, layout.barY() - 1, layout.barX() + layout.barWidth() + 1,
             layout.barY() + 9, 0xFFC6A15B);
         graphics.fill(layout.barX(), layout.barY(), layout.barX() + layout.barWidth(), layout.barY() + 8, 0xFF222923);
         graphics.fill(layout.barX(), layout.barY(), layout.barX() + Math.round(layout.barWidth() * percent / 100.0f),
             layout.barY() + 8, 0xFF8E5BB7);
-        graphics.drawCenteredString(Minecraft.getInstance().font,
+        drawOutlinedCentered(graphics,
             Component.translatable("screen.better_content_threads.building_spawn", percent), screenWidth / 2,
-            layout.barY() + 11, 0xFFD2C9B5);
-        renderLessonCard(graphics, session, layout);
+            layout.barY() + 11, 1.0f, 1.0f);
+        renderLoadingCaption(graphics, session, layout);
     }
 
     static void renderArrivalBrief(GuiGraphics graphics, LoadingBriefSession session, int screenWidth, int screenHeight) {
-        graphics.fill(0, 0, screenWidth, screenHeight, 0xFF0B0E0C);
-        var layout = LoadingBriefLayout.calculate(screenWidth, screenHeight, false);
-        graphics.drawCenteredString(Minecraft.getInstance().font,
+        var layout = LoadingBriefBackdropLayout.calculate(screenWidth, screenHeight, false);
+        renderLoadingBackdrop(graphics, session, layout, screenWidth, screenHeight);
+        drawOutlinedCentered(graphics,
             Component.translatable("screen.better_content_threads.world_ready"), screenWidth / 2,
-            layout.headerY(), 0xFFF0E2C5);
-        renderLessonCard(graphics, session, layout);
+            layout.headerY(), 1.0f, 1.0f);
+        renderLoadingCaption(graphics, session, layout);
     }
 
     private static void renderLoadingBrief(GuiGraphics graphics, LoadingBriefSession session,
                                             int screenWidth, int screenHeight) {
-        var layout = LoadingBriefLayout.calculate(screenWidth, screenHeight, false);
-        renderLessonCard(graphics, session, layout);
+        var layout = LoadingBriefBackdropLayout.calculate(screenWidth, screenHeight, false,
+            nativeControlRows(Minecraft.getInstance().screen));
+        renderLoadingCaption(graphics, session, layout);
+    }
+
+    private static void renderLoadingBackdrop(GuiGraphics graphics, LoadingBriefSession session,
+                                               LoadingBriefBackdropLayout layout, int screenWidth,
+                                               int screenHeight) {
+        graphics.fill(0, 0, screenWidth, screenHeight, 0xFF0B0E0C);
+        graphics.blit(session.current().art(), layout.artX(), layout.artY(), layout.artWidth(), layout.artHeight(),
+            0, 0, 512, 256, 512, 256);
+    }
+
+    private static void renderLoadingCaption(GuiGraphics graphics, LoadingBriefSession session,
+                                              LoadingBriefBackdropLayout layout) {
+        LoadingBrief brief = session.current();
+        graphics.fill(layout.captionX(), layout.captionY(), layout.captionX() + layout.captionWidth(),
+            layout.captionY() + layout.captionHeight(), 0xB8101412);
+        var font = Minecraft.getInstance().font;
+        graphics.enableScissor(layout.textX(), layout.captionY() + 6,
+            layout.textX() + layout.textWidth(), layout.captionY() + layout.captionHeight() - 6);
+        drawOutlined(graphics,
+            Component.translatable("screen.better_content_threads.lesson_count", brief.category().toUpperCase(),
+                session.index() + 1, session.size()).getVisualOrderText(),
+            layout.textX(), layout.textY());
+        drawOutlined(graphics, Component.literal(brief.headline()).getVisualOrderText(),
+            layout.textX(), layout.textY() + 14);
+        int lineY = layout.textY() + 32;
+        var actionLines = font.split(Component.translatable("screen.better_content_threads.loading_remember", brief.action()),
+            layout.textWidth());
+        int actionY = layout.captionY() + layout.captionHeight() - 10 - actionLines.size() * 10;
+        for (var line : font.split(Component.literal(brief.body()), layout.textWidth())) {
+            if (lineY + 9 > actionY - 5) break;
+            drawOutlined(graphics, line, layout.textX(), lineY);
+            lineY += 10;
+        }
+        for (var line : actionLines) {
+            drawOutlined(graphics, line, layout.textX(), actionY);
+            actionY += 10;
+        }
+        graphics.disableScissor();
+    }
+
+    private static void drawOutlined(GuiGraphics graphics, FormattedCharSequence text, int x, int y) {
+        var font = Minecraft.getInstance().font;
+        for (int ox = -1; ox <= 1; ox++) for (int oy = -1; oy <= 1; oy++) {
+            if (ox != 0 || oy != 0) graphics.drawString(font, text, x + ox, y + oy, 0xFF000000, false);
+        }
+        graphics.drawString(font, text, x, y, 0xFFFFFFFF, false);
     }
 
     static void renderLessonCard(GuiGraphics graphics, LoadingBriefSession session, LoadingBriefLayout layout) {
