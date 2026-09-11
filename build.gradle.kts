@@ -4,9 +4,9 @@ plugins {
     idea
     `maven-publish`
     jacoco
-    id("net.minecraftforge.gradle") version "[6.0.24,6.2)"
+    id("net.minecraftforge.gradle") version "6.0.54"
     id("org.parchmentmc.librarian.forgegradle") version "1.2.0"
-    id("org.spongepowered.mixin") version "0.7.+"
+    id("org.spongepowered.mixin") version "0.7.38"
 }
 
 mixin {
@@ -53,6 +53,18 @@ minecraft {
     }
 }
 
+// CI and fresh-release builds provide verified runtime JARs explicitly.
+// Ordinary local builds retain the canonical sibling build/libs convention.
+fun betterContentJar(repository: String, artifact: String): java.io.File {
+    val directory = providers.environmentVariable("BC_CUSTOM_MOD_JAR_DIR").orNull
+    require(directory == null || directory.isNotBlank()) { "BC_CUSTOM_MOD_JAR_DIR must not be blank" }
+    val jar = if (directory == null) file("../$repository/build/libs/$artifact") else file(directory).resolve(artifact)
+    require(jar.isFile) {
+        "Missing Better Content provider $artifact at $jar; prepare BC_CUSTOM_MOD_JAR_DIR or build $repository first"
+    }
+    return jar
+}
+
 repositories {
     maven("https://maven.minecraftforge.net")
     maven("https://harleyoconnor.com/maven")
@@ -65,20 +77,20 @@ repositories {
 }
 
 val betterContentApiJars = files(
-    "../downed-player-revival/build/libs/downed-player-revival-1.0.0.jar",
-    "../pillager-campaigns/build/libs/pillager-campaigns-0.5.4.jar",
-    "../world-lifecycle-manager/build/libs/world-lifecycle-manager-0.1.0.jar",
-    "../dimension-drink/build/libs/dimension-drink-1.0.0.jar",
-    "../rpg-stats/build/libs/rpg-stats-1.0.1.jar",
-    "../arcane-chunk-loaders/build/libs/arcane-chunk-loaders-0.1.0.jar",
-    "../better-content-economy/build/libs/better-content-economy-1.0.1.jar",
-    "../heat-sync/build/libs/heat-sync-0.1.0.jar",
-    "../settlement-roads/build/libs/settlement-roads-0.1.0.jar",
-    "../water-survival/build/libs/water-survival-1.1.0.jar",
-    "../better-content-fixes/build/libs/better-content-fixes-0.1.7.jar",
-    "../player-traces/build/libs/player-traces-0.1.0.jar",
-    "../systemic-salience/build/libs/systemic-salience-0.1.1.jar",
-    "../realistic-ores/build/libs/realistic-ores-0.2.0.jar"
+    betterContentJar("downed-player-revival", "downed-player-revival-1.0.0.jar"),
+    betterContentJar("pillager-campaigns", "pillager-campaigns-0.5.4.jar"),
+    betterContentJar("world-lifecycle-manager", "world-lifecycle-manager-0.1.0.jar"),
+    betterContentJar("dimension-drink", "dimension-drink-1.0.0.jar"),
+    betterContentJar("rpg-stats", "rpg-stats-1.0.1.jar"),
+    betterContentJar("arcane-chunk-loaders", "arcane-chunk-loaders-0.1.0.jar"),
+    betterContentJar("better-content-economy", "better-content-economy-1.0.1.jar"),
+    betterContentJar("heat-sync", "heat-sync-0.1.0.jar"),
+    betterContentJar("settlement-roads", "settlement-roads-0.1.0.jar"),
+    betterContentJar("water-survival", "water-survival-1.1.0.jar"),
+    betterContentJar("better-content-fixes", "better-content-fixes-0.1.7.jar"),
+    betterContentJar("player-traces", "player-traces-0.1.0.jar"),
+    betterContentJar("systemic-salience", "systemic-salience-0.1.1.jar"),
+    betterContentJar("realistic-ores", "realistic-ores-0.2.0.jar")
 )
 
 dependencies {
