@@ -25,3 +25,18 @@ Top-level world and server joins provide an opaque learning surface with an expl
 Loading lessons never impose mandatory onboarding. The world opens immediately when ready unless the player explicitly selects Keep Reading; that choice carries the exact lesson into a voluntary paused plate with an Enter World control. Disconnects do not consume the episode, and dimension transitions do not create new episodes.
 
 The Threads reader includes all sixteen spoiler-free lessons as a permanent reference alongside, but distinct from, the 52-card archive. Each `bc.loading_briefs.v3` lesson declares a stable concept, authoritative owner, and optional related Thread. Known related cards and their precise native guide, Ponder, EMI, or system doorway remain one click away without leaking an unknown card's teaching copy.
+
+## Verification
+
+Run `./gradlew verifyFull stageRuntimeJar` before committing. The full lane includes four
+server GameTests against the loaded production catalogue: correlated reveal/completion,
+rejection of another episode, duplicate signal delivery, and persisted player NBT reload
+after clearing the in-memory cache. These use Forge server players without a connected
+client; they do not verify rendering or the optional World Lifecycle Manager disk store.
+
+`gametest/profiles/full.txt` lists the required runtime test IDs. Each invocation retains
+an isolated fixture under `build/gametest/<run-token>/`, including `execution.json`,
+world files, and logs. Verification requires the current token, a finished report, and
+exactly the expected discovered and successfully executed tests. Failed fixtures remain
+available until explicitly removed; `clean` removes build artifacts. The fast lane also
+checks rejection of missing, incomplete, stale, malformed, duplicate, or failed evidence.

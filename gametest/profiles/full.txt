@@ -1,0 +1,4 @@
+signals_reveal_and_complete
+wrong_correlation_does_not_complete
+repeated_signals_complete_once
+player_state_survives_reload
