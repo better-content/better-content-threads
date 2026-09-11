@@ -162,10 +162,10 @@
       "order": 5,
       "aspect": "mobility",
       "art": "better_content_threads:textures/gui/threads/roads_make_neighbours.png",
-      "rule": "Registered roads connect wilderness to settlements as navigable infrastructure; following the recorded route matters more than merely crossing nearby terrain.",
+      "rule": "Roads provide a route from wilderness into settlements. Follow a road toward its destination when you need to find neighbours rather than searching at random.",
       "prose": "Distance becomes social only when a route survives repeated feet.",
       "invitation": "Let a road finish its sentence.",
-      "action": "Follow a registered road from wilderness into a settlement.",
+      "action": "Follow a road from the wilderness into a settlement.",
       "reveal_routes": [
         {
           "id": "road_entered",
@@ -200,10 +200,10 @@
       "order": 6,
       "aspect": "impact",
       "art": "better_content_threads:textures/gui/threads/fire_has_country.png",
-      "rule": "The Nether is an authored realm with distinct materials and hazards; entering it starts a journey that resolves only when you return safely.",
+      "rule": "The Nether has its own materials and environmental hazards. Prepare for the destination before entering, and keep track of how you will return to the Overworld.",
       "prose": "Heat, distance, and life obey another settlement beneath the red ceiling.",
       "invitation": "Carry the country back with you.",
-      "action": "Return to the Overworld after entering the Nether.",
+      "action": "Explore the Nether with a return route and supplies ready.",
       "reveal_routes": [
         {
           "id": "nether_arrival",
@@ -238,10 +238,10 @@
       "order": 7,
       "aspect": "mobility",
       "art": "better_content_threads:textures/gui/threads/sky_another_country.png",
-      "rule": "The Aether is a separate authored geography, not an Overworld sky biome; its journey completes only after you return from that realm.",
+      "rule": "The Aether is a separate realm with its own landscape and resources. Prepare for a journey there rather than treating it as an Overworld sky biome.",
       "prose": "Cloud and island form a geography with its own materials, weather, and distances.",
       "invitation": "Bring the high country home in memory.",
-      "action": "Return to the Overworld after entering the Aether.",
+      "action": "Explore the Aether and return with what you have learned.",
       "reveal_routes": [
         {
           "id": "aether_arrival",
@@ -276,10 +276,10 @@
       "order": 8,
       "aspect": "robustness",
       "art": "better_content_threads:textures/gui/threads/deep_own_light.png",
-      "rule": "The Bumblezone is a complete resource ecology inside living comb; entering and returning teaches which materials genuinely originate in that realm.",
+      "rule": "The Bumblezone has its own resources and living comb landscape. Explore what grows there, collect useful materials, and keep a route back to the Overworld.",
       "prose": "Under a roof of living comb, a whole country cultivates its own light.",
       "invitation": "Return with proof that the hive can grow a dawn.",
-      "action": "Return to the Overworld after entering the Bumblezone.",
+      "action": "Explore the Bumblezone and bring useful materials home.",
       "reveal_routes": [
         {
           "id": "bumblezone_arrival",
@@ -314,10 +314,10 @@
       "order": 9,
       "aspect": "endurance",
       "art": "better_content_threads:textures/gui/threads/silence_has_teeth.png",
-      "rule": "Ratlantis is a dangerous authored destination with abandoned logistics routes; exploration counts as a journey only when you return to the Overworld.",
+      "rule": "Ratlantis combines dangerous ruins with abandoned machinery and transport routes. Explore carefully, look for useful resources, and plan a return to the Overworld.",
       "prose": "Ratlantis is quiet only until its abandoned routes show their teeth.",
       "invitation": "Return before the ruined machinery closes around you.",
-      "action": "Return to the Overworld after entering Ratlantis.",
+      "action": "Explore Ratlantis with enough supplies to return safely.",
       "reveal_routes": [
         {
           "id": "ratlantis_arrival",
@@ -428,10 +428,10 @@
       "order": 12,
       "aspect": "control",
       "art": "better_content_threads:textures/gui/threads/water_made_safe.png",
-      "rule": "Thirst begins before water quality is obvious; only purity-three water is reliably safe, and thermal waterskins do not provide hydration.",
+      "rule": "Purity-three water is safe to drink; lower purity can make you ill. Cold Sweat waterskins change temperature but do not refill your thirst meter.",
       "prose": "Thirst makes every source look simple. The vessel remembers what the eye cannot see.",
       "invitation": "Make the source answerable to the body.",
-      "action": "Purify and drink the unsafe water you collected.",
+      "action": "Purify collected water to level three before drinking it.",
       "reveal_routes": [
         {
           "id": "thirst_first_drop",
@@ -466,10 +466,10 @@
       "order": 13,
       "aspect": "endurance",
       "art": "better_content_threads:textures/gui/threads/feast_before_journey.png",
-      "rule": "Nutrition before travel matters independently of hunger; eat a substantial meal shortly before crossing a major realm threshold to prepare your body.",
+      "rule": "Hunger and nutrition are separate preparations. Eat a balanced meal before entering another realm so your body has more than a full hunger bar.",
       "prose": "Travel begins before the threshold. A prepared body crosses differently from an empty one.",
       "invitation": "Let departure begin at the table.",
-      "action": "Eat a nutritious meal, then enter another realm within two minutes.",
+      "action": "Eat a nutritious meal shortly before entering another realm.",
       "reveal_routes": [
         {
           "id": "portal_approach",
@@ -694,10 +694,10 @@
       "order": 6,
       "aspect": "robustness",
       "art": "better_content_threads:textures/gui/threads/heat_go_somewhere.png",
-      "rule": "Heat networks require an actual sink when process heat becomes excessive; transfer enough heat away to return the connected system to safety.",
+      "rule": "A heat network needs somewhere to send excess heat. Connect a heat sink and watch the system cool before adding more heat to it.",
       "prose": "Every useful temperature is also a debt owed to somewhere else.",
       "invitation": "Give excess heat a destination.",
-      "action": "Transfer process heat into a registered sink until the system is safe.",
+      "action": "Connect a heat sink and bring the network back to a safe temperature.",
       "reveal_routes": [
         {
           "id": "excess_heat",
@@ -732,10 +732,10 @@
       "order": 7,
       "aspect": "impact",
       "art": "better_content_threads:textures/gui/threads/pressure_changes_matter.png",
-      "rule": "PneumaticCraft pressure processing requires active containment and usable pressure; complete a chamber operation without treating compressed air as decorative capacity.",
+      "rule": "The Pressure Chamber needs both a complete enclosure and enough pressure for its recipe. Check the chamber and pressure before starting the process.",
       "prose": "Containment allows force to become a recipe instead of an accident.",
       "invitation": "Hold the boundary while matter changes.",
-      "action": "Complete a pressure process without rupture.",
+      "action": "Build the chamber, check its pressure, and complete a recipe safely.",
       "reveal_routes": [
         {
           "id": "working_pressure",
@@ -770,10 +770,10 @@
       "order": 8,
       "aspect": "control",
       "art": "better_content_threads:textures/gui/threads/chemistry_remembers_sequence.png",
-      "rule": "Ore families retain identity through processing; use an approved family-specific separation route so crushed feed becomes the intended concentrate rather than generic output.",
+      "rule": "Different ore families need different separation processes. Look up the crushed feed in EMI and follow its route to the concentrate you want.",
       "prose": "The same substance can become waste or concentrate depending on the path taken through it.",
       "invitation": "Keep the deposit's sequence legible.",
-      "action": "Produce concentrate through an approved family-specific separation route.",
+      "action": "Use EMI to choose a separation process for your crushed ore.",
       "reveal_routes": [
         {
           "id": "deposit_feed",
@@ -808,10 +808,10 @@
       "order": 9,
       "aspect": "work",
       "art": "better_content_threads:textures/gui/threads/electricity_agreement.png",
-      "rule": "A PowerGrid network works only when generation, connected transmission, and consumption coincide; stored parts alone do not demonstrate a functioning electrical system.",
+      "rule": "Electrical generation needs a connected wire network and a machine that uses the power. Assembling the parts alone does not make a working supply.",
       "prose": "Generation, transmission, and use must all consent to the same instant.",
       "invitation": "Close the whole circuit of work.",
-      "action": "Generate, transmit, and consume power in one working network.",
+      "action": "Connect a generator to a machine and confirm that the machine receives power.",
       "reveal_routes": [
         {
           "id": "power_network",
@@ -1158,10 +1158,10 @@
       "order": 5,
       "aspect": "control",
       "art": "better_content_threads:textures/gui/threads/reality_has_grammar.png",
-      "rule": "Ars Nouveau spells are ordered instructions; author a spell, cast it, and produce a non-cosmetic effect that proves the grammar executed.",
+      "rule": "Ars Nouveau spells execute an ordered sequence of glyphs. Write a spell, cast it on a suitable target, and observe what the sequence actually does.",
       "prose": "A spell is not a force but a sentence whose order decides what the world understands.",
       "invitation": "Write a sentence the world can perform.",
-      "action": "Cast your authored spell and produce a non-cosmetic effect.",
+      "action": "Write a spell and try it on a target where its effect can work.",
       "reveal_routes": [
         {
           "id": "spell_authored",
@@ -1196,10 +1196,10 @@
       "order": 6,
       "aspect": "impact",
       "art": "better_content_threads:textures/gui/threads/elements_change_sentence.png",
-      "rule": "An elemental modifier changes what an Ars spell can do; trigger a genuine elemental interaction from the same authored spell rather than recoloring it.",
+      "rule": "An elemental modifier changes how an Ars spell interacts with its target. Try the modified spell in a situation where that element can matter.",
       "prose": "Element is not decoration added to grammar. It changes what the same words are permitted to mean.",
       "invitation": "Let an element alter the result.",
-      "action": "Trigger an elemental interaction from your modified spell.",
+      "action": "Try your elemental spell on a suitable target and observe the interaction.",
       "reveal_routes": [
         {
           "id": "element_added",
@@ -1272,10 +1272,10 @@
       "order": 8,
       "aspect": "robustness",
       "art": "better_content_threads:textures/gui/threads/power_needs_anchor.png",
-      "rule": "Chunk anchors require a working power tradition and continue simulation beyond ordinary player range; verify the anchor remains supplied after you leave.",
+      "rule": "An arcane chunk anchor keeps an area running beyond your normal simulation range, but it must remain supplied by its own power tradition.",
       "prose": "An influence that persists without its operator must be fastened to place and supplied with a reason to remain.",
       "invitation": "Leave the anchor working behind you.",
-      "action": "Power an arcane chunk anchor and leave its normal simulation range.",
+      "action": "Supply the anchor, then leave the area and check that its work continues.",
       "reveal_routes": [
         {
           "id": "anchor_placed",
@@ -1356,10 +1356,10 @@
       "order": 10,
       "aspect": "endurance",
       "art": "better_content_threads:textures/gui/threads/relics_remember_wearers.png",
-      "rule": "Relics develop through use of the same physical object; trigger one relic in two qualifying contexts rather than swapping between equivalent items.",
+      "rule": "A relic develops as you use that particular item. Keep using the same relic in different situations instead of replacing it with another copy.",
       "prose": "Repeated use makes an object feel less possessed than acquainted.",
       "invitation": "Let the same relic answer twice.",
-      "action": "Trigger the same physical relic in a second qualifying context.",
+      "action": "Use the same relic again in a different situation where it can gain experience.",
       "reveal_routes": [
         {
           "id": "relic_first",
@@ -1508,10 +1508,10 @@
       "order": 1,
       "aspect": "endurance",
       "art": "better_content_threads:textures/gui/threads/life_reaches_tether.png",
-      "rule": "Downing is a recoverable state before death, not ordinary defeat; reaching death after becoming downed exposes the pack's full consequence boundary.",
+      "rule": "Downing gives nearby allies a chance to revive you before the bleed-out timer expires. Death ends that chance and resets your life stats.",
       "prose": "The body can stop before every consequence of the life inside it has finished.",
       "invitation": "Some endings arrive only after the fall.",
-      "action": "Reach death after becoming downed.",
+      "action": "Stay near help and watch the revival instructions; you do not need to die to learn this rule.",
       "reveal_routes": [
         {
           "id": "player_downed",
@@ -1546,10 +1546,10 @@
       "order": 2,
       "aspect": "control",
       "art": "better_content_threads:textures/gui/threads/ruins_are_instructions.png",
-      "rule": "Major ruins are dangerous information spaces; enter one, acquire something new inside, and leave alive before the exploration counts as recovered knowledge.",
+      "rule": "A ruin can teach through its layout, threats, and contents. Explore carefully and leave alive with something you found inside before risking another expedition.",
       "prose": "Failure leaves plans in negative: load-bearing walls, abandoned routes, and objects someone thought worth hiding.",
       "invitation": "Carry one surviving fact back outside.",
-      "action": "Leave the ruin alive with something first acquired inside.",
+      "action": "Leave the ruin alive with an item you first found inside.",
       "reveal_routes": [
         {
           "id": "ruin_entered",
@@ -1656,10 +1656,10 @@
       "order": 5,
       "aspect": "impact",
       "art": "better_content_threads:textures/gui/threads/army_walks_toward_you.png",
-      "rule": "Pillager campaigns are directed threats with distinct terminal outcomes; a warning remains active until the campaign resolves, retreats, succeeds, or is defeated.",
+      "rule": "A pillager assault is announced before it arrives. Use that warning to gather allies, defend an approach, or move away from exposed work.",
       "prose": "Organized danger has direction, patience, and an ending that need not resemble victory.",
       "invitation": "See the campaign reach its answer.",
-      "action": "Reach any terminal outcome of the warned campaign.",
+      "action": "Prepare shelter and a defensible approach when an assault is announced.",
       "reveal_routes": [
         {
           "id": "campaign_warned",
@@ -1710,10 +1710,10 @@
       "order": 6,
       "aspect": "renewal",
       "art": "better_content_threads:textures/gui/threads/world_can_be_condensed.png",
-      "rule": "The World Condenser begins an irreversible staged lineage reset; only a verified successor completes the operation and carries approved persistent knowledge forward.",
+      "rule": "The World Condenser starts an irreversible world reset. Read its native interface carefully and preserve your supported lineage knowledge before committing to a successor world.",
       "prose": "A finished world may become an archive, a selection, and a verified beginning somewhere else.",
       "invitation": "Let the machine carry its question beyond this world.",
-      "action": "Begin a verified successor through this World Condenser.",
+      "action": "Review the World Condenser interface and commit only when you intend to replace this world.",
       "reveal_routes": [
         {
           "id": "condenser_formed",
@@ -1747,10 +1747,10 @@
       "suit": "fragility",
       "order": 7,
       "aspect": "control",
-      "rule": "Sleeping advances simulated world time but does not move your permanent spawn; waking proves the night passed while your lineage anchor remained unchanged.",
+      "rule": "Sleeping advances the world simulation: time-dependent systems keep working while the night passes. A bed does not replace your permanent spawn point.",
       "prose": "Night can move while the place that receives you after death remains elsewhere.",
       "invitation": "Let sleep pass without mistaking it for belonging.",
-      "action": "Sleep through a simulated night and wake at the same permanent spawn contract.",
+      "action": "Check your machines and surroundings before sleeping; your permanent spawn will stay unchanged.",
       "reveal_routes": [
         {
           "id": "sleep_started",
@@ -1781,10 +1781,10 @@
       "suit": "fragility",
       "order": 8,
       "aspect": "endurance",
-      "rule": "A full hunger bar does not guarantee nutritional readiness; varied food groups build separate capabilities that recover only through a qualifying balanced meal.",
+      "rule": "A full hunger bar can hide low nutrition. Check all six groups in the nutrition screen, then choose foods that replenish the missing groups.",
       "prose": "Satiety closes the mouth. Readiness is assembled more slowly from what the body has actually received.",
       "invitation": "Feed more than the empty space.",
-      "action": "Recover from a nutrition warning by eating a qualifying balanced meal.",
+      "action": "Open nutrition and eat foods that replenish your lowest groups.",
       "reveal_routes": [
         {
           "id": "nutrition_warning",
@@ -1819,10 +1819,10 @@
       "suit": "fragility",
       "order": 9,
       "aspect": "robustness",
-      "rule": "Food stacks carry thermal state through storage and merging; thaw, serve, or consume food in an appropriate state instead of trusting its item name alone.",
+      "rule": "Food keeps its temperature state through storage and stack merging. Check its tooltip and thaw or prepare it appropriately before relying on the meal.",
       "prose": "The meal remembers the cold room, the hot pan, and the other portions gathered into its stack.",
       "invitation": "Read the state carried with the food.",
-      "action": "Correct a non-neutral food state before using or eating that food.",
+      "action": "Check the food tooltip and correct its temperature state before eating or using it.",
       "reveal_routes": [
         {
           "id": "food_state_changed",
@@ -1925,10 +1925,10 @@
       "suit": "fragility",
       "order": 12,
       "aspect": "control",
-      "rule": "Pack-authored recipes replace familiar vanilla and mod defaults; consult EMI for the live graph, then craft through the displayed supported route.",
+      "rule": "Recipes in this pack can differ from vanilla and mod defaults. Look up the item in EMI, check its ingredients, and follow the displayed process.",
       "prose": "Memory carries recipes from other worlds. This world's materials obey the arrangements written here.",
       "invitation": "Ask the live graph instead of memory.",
-      "action": "Look up a recipe in EMI, then craft an output whose route this pack replaced.",
+      "action": "Look up the item in EMI before gathering ingredients or building its machines.",
       "reveal_routes": [
         {
           "id": "recipe_viewed",
@@ -1963,10 +1963,10 @@
       "suit": "fragility",
       "order": 13,
       "aspect": "tempo",
-      "rule": "Better Content changes familiar movement and combat inputs; perform the configured actions themselves instead of relying on remembered vanilla key assumptions.",
+      "rule": "Fast run, vaulting, and dodging use their own configured inputs and spend stamina. Check the Movement lesson for your current keys before practicing on safe ground.",
       "prose": "The old reflex arrives first. The changed body answers only after a new rhythm is practiced.",
       "invitation": "Let the configured motion replace remembered habit.",
-      "action": "Perform two distinct qualifying Better Content movement or combat actions.",
+      "action": "Try two different movements, such as vaulting and dodging, away from danger.",
       "reveal_routes": [
         {
           "id": "custom_control_used",

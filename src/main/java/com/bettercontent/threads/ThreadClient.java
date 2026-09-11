@@ -332,74 +332,62 @@ public final class ThreadClient {
 
     private static void renderLoadingCaption(GuiGraphics graphics, LoadingBriefSession session,
                                               LoadingBriefBackdropLayout layout) {
-        LoadingBrief brief = session.current();
-        graphics.fill(layout.captionX(), layout.captionY(), layout.captionX() + layout.captionWidth(),
-            layout.captionY() + layout.captionHeight(), 0xB8101412);
+        session.observe(net.minecraft.Util.getMillis());
         var font = Minecraft.getInstance().font;
-        graphics.enableScissor(layout.textX(), layout.captionY() + 6,
-            layout.textX() + layout.textWidth(), layout.captionY() + layout.captionHeight() - 6);
-        drawOutlined(graphics,
-            Component.translatable("screen.better_content_threads.lesson_count", brief.category().toUpperCase(),
-                session.index() + 1, session.size()).getVisualOrderText(),
-            layout.textX(), layout.textY());
-        drawOutlined(graphics, Component.literal(brief.headline()).getVisualOrderText(),
-            layout.textX(), layout.textY() + 14);
-        int lineY = layout.textY() + 32;
-        var actionLines = font.split(Component.translatable("screen.better_content_threads.loading_remember", brief.action()),
-            layout.textWidth());
-        int actionY = layout.captionY() + layout.captionHeight() - 10 - actionLines.size() * 10;
-        for (var line : font.split(Component.literal(brief.body()), layout.textWidth())) {
-            if (lineY + 9 > actionY - 5) break;
-            drawOutlined(graphics, line, layout.textX(), lineY);
-            lineY += 10;
-        }
-        for (var line : actionLines) {
-            drawOutlined(graphics, line, layout.textX(), actionY);
-            actionY += 10;
-        }
-        graphics.disableScissor();
+        var brief = session.current();
+        var title = font.split(Component.literal(brief.headline()), layout.textWidth());
+        var body = font.split(Component.literal(lessonBody(brief)), layout.textWidth());
+        var action = font.split(Component.literal("TRY THIS: " + brief.action()), layout.textWidth());
+        int needed = 34 + (title.size() + body.size() + action.size()) * 10;
+        int bottom = layout.captionY() + layout.captionHeight();
+        int top = Math.max(layout.barY() > 0 ? layout.barY() + 28 : 26, bottom - needed);
+        graphics.fill(layout.captionX(), top, layout.captionX() + layout.captionWidth(), bottom, 0xEC101412);
+        int lineY = top + 8;
+        graphics.drawString(font, Component.translatable("screen.better_content_threads.lesson_count",
+            brief.category().toUpperCase(), session.index() + 1, session.size()), layout.textX(), lineY, 0xFFBAB8AB, false);
+        lineY += 14;
+        for (var line : title) { graphics.drawString(font, line, layout.textX(), lineY, 0xFFF0E5CE, false); lineY += 10; }
+        lineY += 4;
+        for (var line : body) { graphics.drawString(font, line, layout.textX(), lineY, 0xFFF0E5CE, false); lineY += 10; }
+        lineY += 4;
+        for (var line : action) { graphics.drawString(font, line, layout.textX(), lineY, 0xFFE7CA8B, false); lineY += 10; }
     }
 
-    private static void drawOutlined(GuiGraphics graphics, FormattedCharSequence text, int x, int y) {
-        var font = Minecraft.getInstance().font;
-        for (int ox = -1; ox <= 1; ox++) for (int oy = -1; oy <= 1; oy++) {
-            if (ox != 0 || oy != 0) graphics.drawString(font, text, x + ox, y + oy, 0xFF000000, false);
-        }
-        graphics.drawString(font, text, x, y, 0xFFFFFFFF, false);
+    static String lessonBody(LoadingBrief brief) {
+        if (!brief.id().equals("movement")) return brief.body();
+        return brief.body().replace("uses Shift", "uses " + keyLabel("key.parcool.FastRun", "Shift"))
+            .replace("uses Mouse 5", "uses " + keyLabel("key.parcool.Vault", "Mouse 5"))
+            .replace("uses R;", "uses " + keyLabel("key.parcool.Dodge", "R") + ";");
     }
 
-    static void renderLessonCard(GuiGraphics graphics, LoadingBriefSession session, LoadingBriefLayout layout) {
-        LoadingBrief brief = session.current();
-        graphics.fill(layout.panelX() - 2, layout.panelY() - 2,
-            layout.panelX() + layout.panelWidth() + 2, layout.panelY() + layout.panelHeight() + 2, 0xFFC6A15B);
+    private static String keyLabel(String name, String fallback) {
+        for (var key : Minecraft.getInstance().options.keyMappings)
+            if (key.getName().equals(name)) return key.isUnbound() ? "an unbound key (set it in Controls)" : key.getTranslatedKeyMessage().getString();
+        return fallback;
+    }
+
+    static ReadingText lessonText(LoadingBriefSession session, int width) {
+        var brief = session.current();
+        var text = new ReadingText(Minecraft.getInstance().font, width);
+        text.add(brief.category().toUpperCase() + " · LESSON " + (session.index() + 1) + " OF " + session.size(), 0xFFBAB8AB);
+        text.gap();
+        text.add(brief.headline(), 0xFFF0E5CE);
+        text.gap();
+        text.add(lessonBody(brief), 0xFFF0E5CE);
+        text.gap();
+        text.add("TRY THIS: " + brief.action(), 0xFFE7CA8B);
+        return text;
+    }
+
+    static void renderLessonCard(GuiGraphics graphics, LoadingBriefSession session, LoadingBriefLayout layout, int scroll) {
+        graphics.fill(layout.panelX() - 1, layout.panelY() - 1,
+            layout.panelX() + layout.panelWidth() + 1, layout.panelY() + layout.panelHeight() + 1, 0xFF746344);
         graphics.fill(layout.panelX(), layout.panelY(), layout.panelX() + layout.panelWidth(),
             layout.panelY() + layout.panelHeight(), 0xFF101412);
-        if (layout.showArt()) {
-            graphics.blit(brief.art(), layout.artX(), layout.artY(), layout.artWidth(), layout.artHeight(),
-                0, 0, 512, 256, 512, 256);
-        }
-        var font = Minecraft.getInstance().font;
-        graphics.enableScissor(layout.textX(), layout.panelY() + 6,
-            layout.textX() + layout.textWidth(), layout.panelY() + layout.panelHeight() - 6);
-        graphics.drawString(font,
-            Component.translatable("screen.better_content_threads.lesson_count", brief.category().toUpperCase(),
-                session.index() + 1, session.size()),
-            layout.textX(), layout.textY(), 0xFF9FA996, false);
-        graphics.drawString(font, brief.headline(), layout.textX(), layout.textY() + 14, 0xFFF0E2C5, true);
-        int lineY = layout.textY() + 32;
-        var actionLines = font.split(Component.translatable("screen.better_content_threads.loading_remember", brief.action()),
-            layout.textWidth());
-        int actionY = layout.panelY() + layout.panelHeight() - 10 - actionLines.size() * 10;
-        for (var line : font.split(Component.literal(brief.body()), layout.textWidth())) {
-            if (lineY + 9 > actionY - 5) break;
-            graphics.drawString(font, line, layout.textX(), lineY, 0xFFD2C9B5, false);
-            lineY += 10;
-        }
-        for (var line : actionLines) {
-            graphics.drawString(font, line, layout.textX(), actionY, 0xFFC6A15B, false);
-            actionY += 10;
-        }
-        graphics.disableScissor();
+        if (layout.showArt()) graphics.blit(session.current().art(), layout.artX(), layout.artY(), layout.artWidth(), layout.artHeight(),
+            0, 0, 512, 256, 512, 256);
+        lessonText(session, layout.textWidth() - 8).render(graphics, layout.textX(), layout.textY(),
+            layout.textWidth(), layout.panelHeight() - 24, scroll);
     }
 
     static Component keepReadingLabel(LoadingBriefSession session) {

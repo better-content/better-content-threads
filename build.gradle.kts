@@ -24,6 +24,14 @@ java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
 
+// Isolated real-client review; never included in the runtime JAR.
+val learningVisual by sourceSets.creating {
+    compileClasspath += sourceSets.main.get().output
+    runtimeClasspath += sourceSets.main.get().output
+}
+configurations[learningVisual.implementationConfigurationName].extendsFrom(configurations.implementation.get())
+configurations[learningVisual.runtimeOnlyConfigurationName].extendsFrom(configurations.runtimeOnly.get())
+
 minecraft {
     mappings("official", property("minecraft_version") as String)
     copyIdeResources = true
@@ -41,7 +49,13 @@ minecraft {
                 }
             }
         }
-        create("client")
+        val baseClient = create("client")
+        create("learningVisual") {
+            parent(baseClient)
+            workingDirectory(project.file("build/learning-visual"))
+            args("--width", "1280", "--height", providers.gradleProperty("learningVisualHeight").orElse("720").get())
+            mods { getByName(property("mod_id") as String).source(learningVisual) }
+        }
         create("server") { arg("--nogui") }
         create("gameTestServer") {
             workingDirectory(project.file("run-gametest"))

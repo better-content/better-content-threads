@@ -7,8 +7,8 @@
       "owner": "better-content-threads",
       "category": "Discovery",
       "headline": "Your discoveries live in Threads",
-      "body": "When the world teaches you a changed rule, a small Threads reminder appears. Press the shown key — M by default — to read the rule and its evidence.",
-      "action": "Open Threads when its glyph appears.",
+      "body": "Threads keeps the rules you discover through play. Open it with the shown key, M by default. Its Lessons button also holds every survival lesson from the start.",
+      "action": "Open Lessons whenever you need a survival reminder.",
       "art": "better_content_threads:textures/gui/loading_briefs/threads.png"
     },
     {
@@ -40,7 +40,7 @@
       "category": "Nutrition",
       "headline": "Full is not nourished",
       "body": "Hunger measures immediate fuel, while nutrition tracks six food groups over time. Repeating one excellent meal can still leave neglected groups dangerously low afterward.",
-      "action": "Inspect all six food groups.",
+      "action": "Open nutrition and choose foods for your lowest groups.",
       "art": "better_content_threads:textures/gui/loading_briefs/nutrition.png"
     },
     {
@@ -81,7 +81,7 @@
       "related_thread": "the_body_learns_new_motions",
       "category": "Movement",
       "headline": "Your body has more motions",
-      "body": "Advanced movement spends stamina and rewards deliberate inputs. Fast run uses Shift, contextual movement uses Mouse 5, and direct dodge uses R; directional double-tap dodging is disabled.",
+      "body": "Advanced movement spends stamina. Fast run uses Shift, vault uses Mouse 5, and direct dodge uses R; directional double-tap dodging is disabled. Practice these actions on safe ground.",
       "action": "Practice movement before danger finds you.",
       "art": "better_content_threads:textures/gui/loading_briefs/movement.png"
     },
@@ -156,8 +156,8 @@
       "owner": "compat.realistic-block-physics",
       "category": "Building",
       "headline": "Structures need support",
-      "body": "Blocks carry structural expectations beyond gravity. Foundations, spans, and material support profiles matter, so ambitious construction should grow from a sound load path instead of floating convenience.",
-      "action": "Trace support before extending a span.",
+      "body": "Buildings need support from the ground through their walls, columns, and spans. Add supports as you build outward; a large floating platform may not hold together.",
+      "action": "Support a new span before extending it farther.",
       "art": "better_content_threads:textures/gui/loading_briefs/physics.png"
     },
     {

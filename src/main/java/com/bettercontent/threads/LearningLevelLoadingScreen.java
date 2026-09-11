@@ -9,6 +9,7 @@ final class LearningLevelLoadingScreen extends net.minecraft.client.gui.screens.
     private final StoringChunkProgressListener progressListener;
     private final LoadingBriefSession session;
     private Button keepReading;
+    private long lastProgressNarration;
 
     LearningLevelLoadingScreen(StoringChunkProgressListener progressListener, LoadingBriefSession session) {
         super(progressListener);
@@ -34,7 +35,13 @@ final class LearningLevelLoadingScreen extends net.minecraft.client.gui.screens.
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        super.render(graphics, mouseX, mouseY, partialTick);
+        long now = net.minecraft.Util.getMillis();
+        if (now - lastProgressNarration > 2_000L) {
+            lastProgressNarration = now;
+            triggerImmediateNarration(true);
+        }
+        // This screen owns the complete loading presentation; the vanilla percentage
+        // otherwise survives above the illustration as a second progress label.
         ThreadClient.renderWorldGenerationBrief(graphics, session, progressListener.getProgress(), width, height);
         for (var renderable : renderables) renderable.render(graphics, mouseX, mouseY, partialTick);
     }

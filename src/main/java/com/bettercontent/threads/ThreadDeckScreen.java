@@ -12,10 +12,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public final class ThreadDeckScreen extends Screen {
+public class ThreadDeckScreen extends Screen {
     private static final int CATALOGUE_TOP = 62;
     private static final int CATALOGUE_ROW_HEIGHT = 34;
-    private static final int CATALOGUE_COLUMNS = 2;
+    private int columns() { return width < 500 ? 1 : 2; }
+    private int catalogueRows() { return (13 + columns() - 1) / columns(); }
     private static final int DETAIL_MARGIN = 12;
     private static final int DETAIL_GAP = 18;
     private static final int DETAIL_MIN_PANEL_WIDTH = 96;
@@ -28,6 +29,10 @@ public final class ThreadDeckScreen extends Screen {
     private int selected;
     private int scrollRow;
     private boolean detail;
+    private int textScroll;
+    private int textMaximumScroll;
+    private Button doorwayButton;
+    private Button facsimileButton;
     private long lastFrame;
 
     ThreadDeckScreen(List<ThreadNetwork.Card> cards) {
@@ -42,7 +47,7 @@ public final class ThreadDeckScreen extends Screen {
                 if (!card.id().equals(focusId)) continue;
                 suit = ThreadSuit.parse(card.suit());
                 selected = card.order() - 1;
-                scrollRow = selected / CATALOGUE_COLUMNS;
+                scrollRow = selected / columns();
                 detail = true;
                 selectCurrent();
                 return;
@@ -52,7 +57,7 @@ public final class ThreadDeckScreen extends Screen {
             if (card.known() && card.unread()) {
                 suit = ThreadSuit.parse(card.suit());
                 selected = card.order() - 1;
-                scrollRow = selected / CATALOGUE_COLUMNS;
+                scrollRow = selected / columns();
                 break;
             }
         }
@@ -63,7 +68,14 @@ public final class ThreadDeckScreen extends Screen {
     protected void init() {
         addRenderableWidget(Button.builder(Component.translatable("screen.better_content_threads.lessons"),
                 button -> minecraft.setScreen(new LearningLibraryScreen(cards)))
-            .bounds(8, 8, 68, 20).build());
+            .bounds(8, 2, 68, 20).build());
+        doorwayButton = addRenderableWidget(Button.builder(Component.literal("Look closer"),
+            button -> { var card = current(); if (card != null) ThreadDoorways.open(card); })
+            .bounds(0, 0, 100, 20).build());
+        facsimileButton = addRenderableWidget(Button.builder(Component.literal("Issue facsimile"),
+            button -> { var card = current(); if (card != null) ThreadNetwork.request("issue", card.id()); })
+            .bounds(0, 0, 100, 20).build());
+        doorwayButton.visible = facsimileButton.visible = false;
     }
 
     @Override
@@ -109,7 +121,7 @@ public final class ThreadDeckScreen extends Screen {
     private void selectSuit(ThreadSuit candidate) {
         suit = candidate;
         selected = firstUnreadIndex(suitCards());
-        scrollRow = selected / CATALOGUE_COLUMNS;
+        scrollRow = selected / columns();
         detail = false;
         selectCurrent();
     }
@@ -118,6 +130,7 @@ public final class ThreadDeckScreen extends Screen {
         var card = current();
         reveal.select(card != null && unread(card));
         lastFrame = System.currentTimeMillis();
+        textScroll = 0;
     }
 
     @Override
@@ -128,6 +141,8 @@ public final class ThreadDeckScreen extends Screen {
         var card = current();
         if (detail && card != null && reveal.advance(delta)) finishDevelopment(card);
         renderBackground(graphics);
+        graphics.fill(0, 0, width, height, 0xEF101412);
+        doorwayButton.visible = facsimileButton.visible = false;
         graphics.drawCenteredString(font, "THREADS", width / 2, 10, 0xFFF0E5CE);
         renderTabs(graphics);
         if (detail) renderDetail(graphics, card);
@@ -164,19 +179,20 @@ public final class ThreadDeckScreen extends Screen {
         Component status = unread > 0
             ? Component.translatable("screen.better_content_threads.catalogue_status_unread", remembered, unread)
             : Component.translatable("screen.better_content_threads.catalogue_status", remembered);
-        graphics.drawCenteredString(font, status, width / 2, 48, 0xFF928B80);
+        graphics.drawCenteredString(font, status, width / 2, 48, 0xFFBAB8AB);
 
-        int cellWidth = Math.min(250, (width - 24) / CATALOGUE_COLUMNS);
-        int startX = (width - cellWidth * CATALOGUE_COLUMNS) / 2;
+        int cellWidth = Math.min(500, (width - 24) / columns());
+        int startX = (width - cellWidth * columns()) / 2;
         int visibleRows = Math.max(1, (height - CATALOGUE_TOP - 14) / CATALOGUE_ROW_HEIGHT);
-        scrollRow = Math.max(0, Math.min(scrollRow, Math.max(0, 7 - visibleRows)));
+        scrollRow = Math.max(0, Math.min(scrollRow, Math.max(0, catalogueRows() - visibleRows)));
+        graphics.drawCenteredString(font, "↑ ↓ Select · Enter Read · Scroll for more", width / 2, height - 10, 0xFFBAB8AB);
         Component revealLabel = Component.translatable("screen.better_content_threads.reveal_badge");
         int revealWidth = font.width(revealLabel) + 6;
 
         for (int index = 0; index < list.size(); index++) {
-            int row = index / CATALOGUE_COLUMNS - scrollRow;
+            int row = index / columns() - scrollRow;
             if (row < 0 || row >= visibleRows) continue;
-            int column = index % CATALOGUE_COLUMNS;
+            int column = index % columns();
             int x = startX + column * cellWidth;
             int y = CATALOGUE_TOP + row * CATALOGUE_ROW_HEIGHT;
             var card = list.get(index);
@@ -189,8 +205,9 @@ public final class ThreadDeckScreen extends Screen {
             int color = card.known() ? 0xFFF0E5CE : 0xFF9A948B;
             int titleWidth = cellWidth - 29 - (needsReveal ? revealWidth + 8 : 0);
             graphics.drawString(font, fit(card.title(), titleWidth), x + 26, y + 7, color, false);
-            graphics.drawString(font, capital(card.aspect()), x + 26, y + 19,
-                ThreadAspect.parse(card.aspect()).color() | 0xFF000000, false);
+            graphics.fill(x + 26, y + 20, x + 30, y + 25, ThreadAspect.parse(card.aspect()).color() | 0xFF000000);
+            graphics.drawString(font, capital(card.aspect()), x + 34, y + 19, 0xFFBAB8AB, false);
+            if (index == selected) graphics.fill(x, y + CATALOGUE_ROW_HEIGHT - 3, x + cellWidth - 3, y + CATALOGUE_ROW_HEIGHT - 2, 0xFFC6A15B);
             if (needsReveal) {
                 int badgeX = x + cellWidth - revealWidth - 4;
                 graphics.fill(badgeX, y + 5, badgeX + revealWidth, y + 16, 0xE0C6A15B);
@@ -225,17 +242,15 @@ public final class ThreadDeckScreen extends Screen {
             ThreadClient.renderSealedPlate(graphics, layout.cardX(), layout.cardY(), layout.cardWidth(), layout.cardHeight(),
                 ThreadSuit.parse(card.suit()).color(), ThreadAspect.parse(card.aspect()).color(),
                 card.id().hashCode(), true);
-            renderLocked(graphics, card, layout.detailsX(), layout.cardY());
+            var locked = new ReadingText(font, layout.panelWidth() - 8);
+            locked.add(card.title(), 0xFFF0E5CE);
+            locked.gap();
+            locked.add("Discover this Thread through play. Lessons are available from the start.", 0xFFBAB8AB);
+            locked.render(graphics, layout.detailsX(), layout.cardY(), layout.panelWidth(), layout.cardHeight(), 0);
             return;
         }
         renderCard(graphics, card, layout.cardX(), layout.cardY(), layout.cardWidth(), layout.cardHeight());
         renderDetails(graphics, card, layout.detailsX(), layout.cardY(), layout.panelWidth(), layout.cardHeight());
-    }
-
-    private void renderLocked(GuiGraphics graphics, ThreadNetwork.Card card, int x, int y) {
-        graphics.drawString(font, card.title(), x, y + 4, 0xFFF0E5CE, false);
-        graphics.drawString(font, capital(card.suit()) + " · " + capital(card.aspect()), x, y + 19, 0xFF9A948B, false);
-        graphics.drawString(font, "The plate has not answered yet.", x, y + 48, 0xFF756F68, false);
     }
 
     private void renderCard(GuiGraphics graphics, ThreadNetwork.Card card, int x, int y, int cardWidth, int cardHeight) {
@@ -252,48 +267,48 @@ public final class ThreadDeckScreen extends Screen {
     }
 
     private void renderDetails(GuiGraphics graphics, ThreadNetwork.Card card, int x, int y, int panelWidth, int cardHeight) {
+        var text = new ReadingText(font, panelWidth - 8);
         if (reveal.phase() == ThreadRevealState.Phase.SEALED) {
-            graphics.drawString(font, "Let the plate develop", x, y + Math.min(80, cardHeight / 2), 0xFFA99573, false);
-            graphics.drawString(font, "Click or Space to remember", x,
-                y + Math.min(94, cardHeight / 2 + 14), 0xFF7F796F, false);
-            return;
-        }
-        if (reveal.phase() != ThreadRevealState.Phase.COMPLETE) return;
-        graphics.drawString(font, fit(card.title(), panelWidth), x, y + 2, 0xFFF0E5CE, false);
-        graphics.drawString(font, capital(card.suit()) + " · " + capital(card.aspect()), x, y + 14, 0xFF9A948B, false);
-        int lineY = y + 28;
-        graphics.drawString(font, "RULE", x, lineY, ThreadAspect.parse(card.aspect()).color() | 0xFF000000, false);
-        lineY += 12;
-        for (var line : font.split(Component.literal(card.rule()), panelWidth)) {
-            if (lineY > y + 72) break;
-            graphics.drawString(font, line, x, lineY, 0xFFF0E5CE, false);
-            lineY += 11;
-        }
-        lineY += 3;
-        for (var line : font.split(Component.literal(card.prose()), panelWidth)) {
-            if (lineY > y + 105) break;
-            graphics.drawString(font, line, x, lineY, 0xFFAAA294, false);
-            lineY += 10;
-        }
-        if (card.active()) {
-            graphics.drawString(font, fit(card.invitation(), panelWidth), x, y + 112, 0xFFA99573, false);
-            for (var line : font.split(Component.literal(card.action()), panelWidth)) {
-                graphics.drawString(font, line, x, y + 124, 0xFFF0E5CE, false);
-                break;
+            text.add("Let the plate develop", 0xFFF0E5CE);
+            text.gap();
+            text.add("Click or Space to remember", 0xFFC6A15B);
+        } else if (reveal.phase() == ThreadRevealState.Phase.COMPLETE) {
+            text.add(card.title(), 0xFFF0E5CE);
+            text.add(capital(card.suit()) + " · " + capital(card.aspect()), 0xFFBAB8AB);
+            text.gap();
+            text.add("RULE", 0xFFC6A15B);
+            text.add(card.rule(), 0xFFF0E5CE);
+            if (card.active()) {
+                text.gap();
+                text.add("TRY THIS", 0xFFC6A15B);
+                text.add(card.action(), 0xFFF0E5CE);
+                text.add(card.invitation(), 0xFFBAB8AB);
             }
-        } else {
-            graphics.drawString(font, "Remembered in an earlier world", x, y + 112, 0xFF7F796F, false);
-        }
-        if (card.completed()) graphics.drawString(font, "Completed in this world", x, y + 137, 0xFF9BB59B, false);
-        if (card.completionCount() > 0) {
-            graphics.drawString(font, "Remembered " + card.completionCount() + " time"
-                + (card.completionCount() == 1 ? "" : "s"), x, y + 148, 0xFF928B80, false);
-        }
-        if (cardHeight >= 205 && !card.routeSummary().isEmpty()) {
-            graphics.drawString(font, fit(card.routeSummary(), panelWidth), x, y + 160, 0xFF77736B, false);
-        }
-        if (!card.doorwayType().isEmpty()) graphics.drawString(font, "Look closer  ›", x, y + cardHeight - 27, 0xFFAEBFD0, false);
-        graphics.drawString(font, "Issue signed facsimile", x, y + cardHeight - 14, 0xFFC9AE7A, false);
+            text.gap();
+            text.add(card.prose(), 0xFFBAB8AB);
+            text.gap();
+            if (card.completed()) text.add("Completed in this world", 0xFFACCEAC);
+            else if (!card.active()) text.add("Remembered in an earlier world", 0xFFBAB8AB);
+            if (card.completionCount() > 0) text.add("Remembered " + card.completionCount() + " time"
+                + (card.completionCount() == 1 ? "" : "s"), 0xFFBAB8AB);
+            if (!card.routeSummary().isEmpty()) text.add(card.routeSummary(), 0xFFBAB8AB);
+            boolean available = ThreadDoorways.available(card);
+            doorwayButton.visible = available;
+            doorwayButton.setMessage(ThreadDoorways.label(card));
+            doorwayButton.setX(x);
+            doorwayButton.setY(y + cardHeight - 44);
+            doorwayButton.setWidth(panelWidth);
+            facsimileButton.visible = true;
+            facsimileButton.setX(x);
+            facsimileButton.setY(y + cardHeight - 20);
+            facsimileButton.setWidth(panelWidth);
+        } else return;
+        int footerHeight = doorwayButton.visible ? 60 : 36;
+        int viewportHeight = Math.max(12, cardHeight - footerHeight);
+        textMaximumScroll = text.maximumScroll(viewportHeight);
+        textScroll = Math.max(0, Math.min(textScroll, textMaximumScroll));
+        text.render(graphics, x, y, panelWidth, viewportHeight, textScroll);
+        if (textMaximumScroll > 0) graphics.drawString(font, "Scroll · ↑ ↓", x, y + cardHeight - footerHeight + 4, 0xFFBAB8AB, false);
     }
 
     private String fit(String text, int maxWidth) {
@@ -310,6 +325,7 @@ public final class ThreadDeckScreen extends Screen {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        if (super.mouseClicked(mouseX, mouseY, button)) return true;
         int total = Math.min(width - 20, 320);
         int tabWidth = total / 4;
         int start = (width - total) / 2;
@@ -319,12 +335,12 @@ public final class ThreadDeckScreen extends Screen {
         }
         if (!detail) {
             var list = suitCards();
-            int cellWidth = Math.min(250, (width - 24) / CATALOGUE_COLUMNS);
-            int startX = (width - cellWidth * CATALOGUE_COLUMNS) / 2;
+            int cellWidth = Math.min(500, (width - 24) / columns());
+            int startX = (width - cellWidth * columns()) / 2;
             int visibleRows = Math.max(1, (height - CATALOGUE_TOP - 14) / CATALOGUE_ROW_HEIGHT);
             for (int index = 0; index < list.size(); index++) {
-                int row = index / CATALOGUE_COLUMNS - scrollRow;
-                int column = index % CATALOGUE_COLUMNS;
+                int row = index / columns() - scrollRow;
+                int column = index % columns();
                 int x = startX + column * cellWidth;
                 int y = CATALOGUE_TOP + row * CATALOGUE_ROW_HEIGHT;
                 if (row >= 0 && row < visibleRows && mouseX >= x && mouseX < x + cellWidth
@@ -348,18 +364,7 @@ public final class ThreadDeckScreen extends Screen {
             return true;
         }
         if (!card.known()) return true;
-        var layout = detailLayout(width, height);
-        if (!card.doorwayType().isEmpty() && mouseX >= layout.detailsX() && mouseY >= layout.cardY() + layout.cardHeight() - 32
-            && mouseY < layout.cardY() + layout.cardHeight() - 18) {
-            ThreadDoorways.open(card);
-            return true;
-        }
-        if (mouseX >= layout.detailsX() && mouseY >= layout.cardY() + layout.cardHeight() - 18
-            && mouseY < layout.cardY() + layout.cardHeight()) {
-            ThreadNetwork.request("issue", card.id());
-            return true;
-        }
-        return super.mouseClicked(mouseX, mouseY, button);
+        return true;
     }
 
     private void activateReveal(ThreadNetwork.Card card) {
@@ -374,6 +379,23 @@ public final class ThreadDeckScreen extends Screen {
     @Override
     public boolean keyPressed(int key, int scan, int mods) {
         var card = current();
+        if ((key == GLFW.GLFW_KEY_ENTER || key == GLFW.GLFW_KEY_SPACE) && getFocused() instanceof Button)
+            return super.keyPressed(key, scan, mods);
+        if (detail && (key == GLFW.GLFW_KEY_UP || key == GLFW.GLFW_KEY_DOWN || key == GLFW.GLFW_KEY_PAGE_UP || key == GLFW.GLFW_KEY_PAGE_DOWN)) {
+            int amount = (key == GLFW.GLFW_KEY_PAGE_UP || key == GLFW.GLFW_KEY_PAGE_DOWN) ? 72 : 12;
+            textScroll = Math.max(0, Math.min(textMaximumScroll, textScroll + ((key == GLFW.GLFW_KEY_UP || key == GLFW.GLFW_KEY_PAGE_UP) ? -amount : amount)));
+            return true;
+        }
+        if (!detail && (key == GLFW.GLFW_KEY_LEFT || key == GLFW.GLFW_KEY_RIGHT || key == GLFW.GLFW_KEY_UP || key == GLFW.GLFW_KEY_DOWN)) {
+            setFocused(null);
+            int step = (key == GLFW.GLFW_KEY_UP || key == GLFW.GLFW_KEY_DOWN) ? columns() : 1;
+            selected = Math.floorMod(selected + ((key == GLFW.GLFW_KEY_LEFT || key == GLFW.GLFW_KEY_UP) ? -step : step), 13);
+            int visible = Math.max(1, (height - CATALOGUE_TOP - 14) / CATALOGUE_ROW_HEIGHT);
+            scrollRow = Math.max(0, Math.min(scrollRow, selected / columns()));
+            if (selected / columns() >= scrollRow + visible) scrollRow = selected / columns() - visible + 1;
+            selectCurrent();
+            return true;
+        }
         if (!detail && (key == GLFW.GLFW_KEY_ENTER || key == GLFW.GLFW_KEY_SPACE)) {
             detail = true;
             selectCurrent();
@@ -398,18 +420,17 @@ public final class ThreadDeckScreen extends Screen {
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
         if (detail) {
-            selected = Math.floorMod(selected + (delta < 0 ? 1 : -1), 13);
-            selectCurrent();
+            textScroll = Math.max(0, Math.min(textMaximumScroll, textScroll + (delta < 0 ? 24 : -24)));
             return true;
         }
         int visibleRows = Math.max(1, (height - CATALOGUE_TOP - 14) / CATALOGUE_ROW_HEIGHT);
-        scrollRow = Math.max(0, Math.min(Math.max(0, 7 - visibleRows), scrollRow + (delta < 0 ? 1 : -1)));
+        scrollRow = Math.max(0, Math.min(Math.max(0, catalogueRows() - visibleRows), scrollRow + (delta < 0 ? 1 : -1)));
         return true;
     }
 
     static DetailLayout detailLayout(int screenWidth, int screenHeight) {
         int availableWidth = Math.max(1, screenWidth - DETAIL_MARGIN * 2);
-        int availableHeight = Math.max(1, screenHeight - 92);
+        int availableHeight = Math.max(1, screenHeight - 102);
         int maximumCardWidth = Math.max(1, availableWidth - DETAIL_GAP - DETAIL_MIN_PANEL_WIDTH);
         int maximumCardHeightFromWidth = Math.max(1, maximumCardWidth * 3 / 2);
         int cardHeight = Math.max(1, Math.min(300, Math.min(availableHeight, maximumCardHeightFromWidth)));
@@ -417,7 +438,7 @@ public final class ThreadDeckScreen extends Screen {
         int panelWidth = Math.max(1, Math.min(DETAIL_MAX_PANEL_WIDTH, availableWidth - cardWidth - DETAIL_GAP));
         int contentWidth = cardWidth + DETAIL_GAP + panelWidth;
         int cardX = Math.max(0, (screenWidth - contentWidth) / 2);
-        return new DetailLayout(cardX, 56, cardWidth, cardHeight, cardX + cardWidth + DETAIL_GAP, panelWidth);
+        return new DetailLayout(cardX, 66, cardWidth, cardHeight, cardX + cardWidth + DETAIL_GAP, panelWidth);
     }
 
     record DetailLayout(int cardX, int cardY, int cardWidth, int cardHeight, int detailsX, int panelWidth) {}

@@ -14,7 +14,7 @@ import java.util.Set;
 final class LearningLibraryScreen extends Screen {
     private static final int LIST_TOP = 48;
     private static final int ROW_HEIGHT = 34;
-    private static final int COLUMNS = 2;
+    private int columns() { return width < 500 ? 1 : 2; }
 
     private final List<ThreadNetwork.Card> cards;
     private final List<LoadingBrief> briefs;
@@ -23,6 +23,8 @@ final class LearningLibraryScreen extends Screen {
     private Set<String> seen;
     private int scrollRow;
     private boolean detail;
+    private int textScroll;
+    private int textMaximumScroll;
     private Button previous;
     private Button back;
     private Button next;
@@ -36,7 +38,18 @@ final class LearningLibraryScreen extends Screen {
         this.state = LoadingBriefStore.load();
         this.seen = new HashSet<>(state.seen());
         this.session = new LoadingBriefSession(briefs, state);
-        this.scrollRow = session.index() / COLUMNS;
+        this.scrollRow = session.index() / columns();
+    }
+
+    LearningLibraryScreen(List<ThreadNetwork.Card> cards, String lessonId) {
+        this(cards);
+        for (int index = 0; index < briefs.size(); index++) {
+            if (!briefs.get(index).id().equals(lessonId)) continue;
+            session.move(index - session.index());
+            detail = true;
+            markViewed();
+            break;
+        }
     }
 
     @Override
@@ -71,6 +84,7 @@ final class LearningLibraryScreen extends Screen {
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         renderBackground(graphics);
+        graphics.fill(0, 0, width, height, 0xEF101412);
         graphics.drawCenteredString(font, detail ? "THREADS · LESSON" : "THREADS · LESSONS", width / 2, 14, 0xFFF0E5CE);
         if (detail) renderDetail(graphics);
         else renderList(graphics);
@@ -78,15 +92,16 @@ final class LearningLibraryScreen extends Screen {
     }
 
     private void renderList(GuiGraphics graphics) {
-        graphics.drawCenteredString(font, "Spoiler-free fundamentals · all lessons available", width / 2, 34, 0xFF928B80);
-        int cellWidth = Math.min(280, Math.max(1, (width - 24) / COLUMNS));
-        int startX = (width - cellWidth * COLUMNS) / 2;
+        graphics.drawCenteredString(font, "Spoiler-free fundamentals · all lessons available", width / 2, 34, 0xFFBAB8AB);
+        int cellWidth = Math.min(560, Math.max(1, (width - 24) / columns()));
+        int startX = (width - cellWidth * columns()) / 2;
         int visibleRows = visibleRows();
+        graphics.drawCenteredString(font, "↑ ↓ Select · Enter Read · Scroll for more", width / 2, height - 10, 0xFFBAB8AB);
         scrollRow = Math.max(0, Math.min(scrollRow, maximumScroll(visibleRows)));
         for (int index = 0; index < briefs.size(); index++) {
-            int row = index / COLUMNS - scrollRow;
+            int row = index / columns() - scrollRow;
             if (row < 0 || row >= visibleRows) continue;
-            int column = index % COLUMNS;
+            int column = index % columns();
             int x = startX + column * cellWidth;
             int y = LIST_TOP + row * ROW_HEIGHT;
             var brief = briefs.get(index);
@@ -104,19 +119,27 @@ final class LearningLibraryScreen extends Screen {
 
     private void renderDetail(GuiGraphics graphics) {
         var layout = LoadingBriefLayout.calculate(width, height, false, 2);
-        ThreadClient.renderLessonCard(graphics, session, layout);
+        var text = ThreadClient.lessonText(session, layout.textWidth() - 8);
+        // Prefer the complete lesson at normal font size over a decorative side image.
+        if (text.height() > layout.panelHeight() - 24 && layout.showArt()) {
+            layout = LoadingBriefLayout.calculate(width, height, false, 2, false);
+            text = ThreadClient.lessonText(session, layout.textWidth() - 8);
+        }
+        textMaximumScroll = text.maximumScroll(layout.panelHeight() - 24);
+        textScroll = Math.max(0, Math.min(textScroll, textMaximumScroll));
+        ThreadClient.renderLessonCard(graphics, session, layout, textScroll);
     }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if (super.mouseClicked(mouseX, mouseY, button)) return true;
         if (detail) return true;
-        int cellWidth = Math.min(280, Math.max(1, (width - 24) / COLUMNS));
-        int startX = (width - cellWidth * COLUMNS) / 2;
+        int cellWidth = Math.min(560, Math.max(1, (width - 24) / columns()));
+        int startX = (width - cellWidth * columns()) / 2;
         int visibleRows = visibleRows();
         for (int index = 0; index < briefs.size(); index++) {
-            int row = index / COLUMNS - scrollRow;
-            int column = index % COLUMNS;
+            int row = index / columns() - scrollRow;
+            int column = index % columns();
             int x = startX + column * cellWidth;
             int y = LIST_TOP + row * ROW_HEIGHT;
             if (row >= 0 && row < visibleRows && mouseX >= x && mouseX < x + cellWidth
@@ -131,15 +154,22 @@ final class LearningLibraryScreen extends Screen {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if ((keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_SPACE) && getFocused() instanceof Button)
+            return super.keyPressed(keyCode, scanCode, modifiers);
         if (detail) {
+            if (keyCode == GLFW.GLFW_KEY_UP || keyCode == GLFW.GLFW_KEY_DOWN || keyCode == GLFW.GLFW_KEY_PAGE_UP || keyCode == GLFW.GLFW_KEY_PAGE_DOWN) {
+                int amount = (keyCode == GLFW.GLFW_KEY_PAGE_UP || keyCode == GLFW.GLFW_KEY_PAGE_DOWN) ? 72 : 12;
+                textScroll = Math.max(0, Math.min(textMaximumScroll, textScroll + ((keyCode == GLFW.GLFW_KEY_UP || keyCode == GLFW.GLFW_KEY_PAGE_UP) ? -amount : amount)));
+                return true;
+            }
             if (keyCode == GLFW.GLFW_KEY_LEFT) { move(-1, true); return true; }
             if (keyCode == GLFW.GLFW_KEY_RIGHT) { move(1, true); return true; }
             if (keyCode == GLFW.GLFW_KEY_ESCAPE) { showList(); return true; }
         } else {
             if (keyCode == GLFW.GLFW_KEY_LEFT) { move(-1, false); return true; }
             if (keyCode == GLFW.GLFW_KEY_RIGHT) { move(1, false); return true; }
-            if (keyCode == GLFW.GLFW_KEY_UP) { move(-COLUMNS, false); return true; }
-            if (keyCode == GLFW.GLFW_KEY_DOWN) { move(COLUMNS, false); return true; }
+            if (keyCode == GLFW.GLFW_KEY_UP) { move(-columns(), false); return true; }
+            if (keyCode == GLFW.GLFW_KEY_DOWN) { move(columns(), false); return true; }
             if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER || keyCode == GLFW.GLFW_KEY_SPACE) {
                 showDetail();
                 return true;
@@ -150,7 +180,8 @@ final class LearningLibraryScreen extends Screen {
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
-        move(delta < 0 ? (detail ? 1 : COLUMNS) : (detail ? -1 : -COLUMNS), detail);
+        if (detail) textScroll = Math.max(0, Math.min(textMaximumScroll, textScroll + (delta < 0 ? 24 : -24)));
+        else move(delta < 0 ? columns() : -columns(), false);
         return true;
     }
 
@@ -161,6 +192,7 @@ final class LearningLibraryScreen extends Screen {
 
     private void move(int delta, boolean mark) {
         session.move(delta);
+        textScroll = 0;
         ensureVisible();
         if (mark) markViewed();
         updateButtons();
@@ -168,6 +200,7 @@ final class LearningLibraryScreen extends Screen {
 
     private void showDetail() {
         detail = true;
+        textScroll = 0;
         markViewed();
         updateButtons();
     }
@@ -196,7 +229,7 @@ final class LearningLibraryScreen extends Screen {
 
     private void openGuide() {
         var card = relatedCard();
-        if (card != null && card.known() && !card.doorwayType().isEmpty()) ThreadDoorways.open(card);
+        if (card != null && card.known() && ThreadDoorways.available(card)) ThreadDoorways.open(card);
     }
 
     private void updateButtons() {
@@ -206,7 +239,8 @@ final class LearningLibraryScreen extends Screen {
         next.visible = detail;
         var card = relatedCard();
         related.visible = detail && card != null && card.known();
-        guide.visible = detail && card != null && card.known() && !card.doorwayType().isEmpty();
+        guide.visible = detail && card != null && card.known() && ThreadDoorways.available(card);
+        if (card != null) guide.setMessage(ThreadDoorways.label(card));
         if (related.visible && !guide.visible) related.setX(width / 2 - 50);
         else related.setX(width / 2 - 104);
         if (guide.visible && !related.visible) guide.setX(width / 2 - 50);
@@ -214,18 +248,18 @@ final class LearningLibraryScreen extends Screen {
     }
 
     private void ensureVisible() {
-        int row = session.index() / COLUMNS;
+        int row = session.index() / columns();
         int visible = visibleRows();
         if (row < scrollRow) scrollRow = row;
         if (row >= scrollRow + visible) scrollRow = row - visible + 1;
     }
 
     private int visibleRows() {
-        return Math.max(1, (height - LIST_TOP - 12) / ROW_HEIGHT);
+        return Math.max(1, (height - LIST_TOP - 18) / ROW_HEIGHT);
     }
 
     private int maximumScroll(int visibleRows) {
-        return Math.max(0, (briefs.size() + COLUMNS - 1) / COLUMNS - visibleRows);
+        return Math.max(0, (briefs.size() + columns() - 1) / columns() - visibleRows);
     }
 
     private String fit(String text, int maxWidth) {

@@ -14,35 +14,65 @@ import net.minecraftforge.fml.ModList;
 
 final class ThreadDoorways {
     private ThreadDoorways() {}
-    static void open(ThreadNetwork.Card card){
-        var mc=Minecraft.getInstance();mc.setScreen(null);
-        if(card.doorwayType().equals("emi")&&openEmi(card.doorwayTarget()))return;
-        if(card.doorwayType().equals("ponder")&&openPonder(mc,card.doorwayTarget()))return;
-        String needle=switch(card.doorwayType()){case"trace_sight"->"traces";case"diet"->"diet";case"rpg"->"rpg";case"tconstruct"->"tconstruct";default->card.doorwayType();};
-        for(KeyMapping key:mc.options.keyMappings)if(key.getName().toLowerCase(java.util.Locale.ROOT).contains(needle)){KeyMapping.click(key.getKey());return;}
-        if(mc.player!=null)mc.player.displayClientMessage(Component.literal("Look closer: "+card.doorwayTarget()),true);
+    static boolean available(ThreadNetwork.Card card) {
+        if (!card.known()) return false;
+        return switch (card.doorwayType()) {
+            case "emi" -> ModList.get().isLoaded("emi") && !targetStack(card.doorwayTarget()).isEmpty();
+            case "ponder" -> ModList.get().isLoaded("ponder") && !targetStack(card.doorwayTarget()).isEmpty();
+            default -> nativeKey(card.doorwayType()) != null;
+        };
     }
 
-    private static boolean openEmi(String target){
-        if(!ModList.get().isLoaded("emi"))return false;
-        ItemStack stack=targetStack(target);
-        if(stack.isEmpty())return false;
-        EmiApi.displayRecipes(EmiStack.of(stack));
-        return true;
+    static Component label(ThreadNetwork.Card card) {
+        return Component.literal(switch (card.doorwayType()) {
+            case "emi" -> "View recipes";
+            case "ponder" -> "Ponder apparatus";
+            case "diet" -> "Open nutrition";
+            case "rpg" -> "Open life stats";
+            case "trace_sight" -> "Use Trace Sight";
+            default -> "Look closer";
+        });
     }
 
-    private static boolean openPonder(Minecraft minecraft,String target){
-        if(!ModList.get().isLoaded("ponder"))return false;
-        ItemStack stack=targetStack(target);
-        if(stack.isEmpty())return false;
-        minecraft.setScreen(PonderUI.of(stack));
-        return true;
+    private static KeyMapping nativeKey(String type) {
+        String name = switch (type) {
+            case "diet" -> "key.diet.open.desc";
+            case "rpg" -> "key.rpg_stats.open_stats";
+            case "trace_sight" -> "key.traces.reveal";
+            default -> "";
+        };
+        if (name.isEmpty()) return null;
+        for (KeyMapping key : Minecraft.getInstance().options.keyMappings)
+            if (key.getName().equals(name) && !key.isUnbound()) return key;
+        return null;
     }
 
-    private static ItemStack targetStack(String target){
-        ResourceLocation id=ResourceLocation.tryParse(target);
-        if(id==null)return ItemStack.EMPTY;
-        var item=BuiltInRegistries.ITEM.get(id);
-        return item==Items.AIR?ItemStack.EMPTY:new ItemStack(item);
+    static void open(ThreadNetwork.Card card) {
+        if (!available(card)) return;
+        var mc = Minecraft.getInstance();
+        if (card.doorwayType().equals("emi")) { EmiDoorway.open(card.doorwayTarget()); return; }
+        if (card.doorwayType().equals("ponder")) { PonderDoorway.open(mc, card.doorwayTarget()); return; }
+        var key = nativeKey(card.doorwayType());
+        if (key != null) { mc.setScreen(null); KeyMapping.click(key.getKey()); }
+    }
+
+    // Keep optional API types out of the outer class verifier when a mod is absent.
+    private static final class EmiDoorway {
+        static void open(String target) {
+            EmiApi.displayRecipes(EmiStack.of(targetStack(target)));
+        }
+    }
+
+    private static final class PonderDoorway {
+        static void open(Minecraft minecraft, String target) {
+            minecraft.setScreen(PonderUI.of(targetStack(target)));
+        }
+    }
+
+    private static ItemStack targetStack(String target) {
+        ResourceLocation id = ResourceLocation.tryParse(target);
+        if (id == null) return ItemStack.EMPTY;
+        var item = BuiltInRegistries.ITEM.get(id);
+        return item == Items.AIR ? ItemStack.EMPTY : new ItemStack(item);
     }
 }

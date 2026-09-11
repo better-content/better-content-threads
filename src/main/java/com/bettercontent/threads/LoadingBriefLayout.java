@@ -24,6 +24,10 @@ record LoadingBriefLayout(
     }
 
     static LoadingBriefLayout calculate(int screenWidth, int screenHeight, boolean progress, int controlRows) {
+        return calculate(screenWidth, screenHeight, progress, controlRows, true);
+    }
+
+    static LoadingBriefLayout calculate(int screenWidth, int screenHeight, boolean progress, int controlRows, boolean allowArt) {
         int margin = 12;
         int headerY = 12;
         int barWidth = Math.min(560, Math.max(80, screenWidth - 40));
@@ -36,7 +40,7 @@ record LoadingBriefLayout(
         int panelHeight = Math.min(260, availableHeight);
         int panelWidth = Math.min(700, Math.max(120, screenWidth - margin * 2));
         int panelX = (screenWidth - panelWidth) / 2;
-        boolean showArt = panelWidth >= 356 && panelHeight >= 112;
+        boolean showArt = allowArt && panelWidth >= 356 && panelHeight >= 112;
         int artWidth = showArt ? 2 * (Math.min(280, Math.max(112, panelWidth * 2 / 5 - 12)) / 2) : 0;
         int artHeight = artWidth / 2;
         int artX = panelX + 12;
