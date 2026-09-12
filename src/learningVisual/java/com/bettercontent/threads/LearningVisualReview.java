@@ -75,6 +75,15 @@ public final class LearningVisualReview {
     }
 
     private static void prepare() throws Exception {
+        for (int scale : new int[]{4, 3, 2}) {
+            for (String id : List.of("purity_three", "revive_use", "body_and_air", "orbit_possible")) {
+                var hint = DeathHints.INSTANCE.all().stream().filter(h -> h.id().equals(id)).findFirst().orElseThrow();
+                frames.add(new Frame("death-" + id + "-scale-" + scale, scale, () -> new DeathHintVisualScreen(hint, false)));
+            }
+            frames.add(new Frame("death-hardcore-scale-" + scale, scale,
+                () -> new DeathHintVisualScreen(DeathHints.FALLBACK, true)));
+        }
+        if (Boolean.getBoolean("bc.learningVisual.deathHintsOnly")) return;
         var json = JsonParser.parseString(Files.readString(Path.of("../../src/main/resources/data/better_content_threads/threads/catalogue.json")));
         var cards = new ArrayList<ThreadNetwork.Card>();
         for (var row : json.getAsJsonObject().getAsJsonArray("threads")) {

@@ -13,12 +13,27 @@ import java.util.*;
 import java.util.function.Supplier;
 
 public final class ThreadNetwork {
-    private static final String VERSION="9";
+    private static final String VERSION="10";
     private static final SimpleChannel CHANNEL=NetworkRegistry.newSimpleChannel(new ResourceLocation(BetterContentThreads.MOD_ID,"threads"),()->VERSION,VERSION::equals,VERSION::equals);
     private static final Map<UUID,Long>lastIssue=new HashMap<>();private static int messageId;
     private ThreadNetwork(){}
     public enum NoticeKind{REVEAL,COMPLETE}
-    public static void register(){CHANNEL.messageBuilder(Sync.class,messageId++,NetworkDirection.PLAY_TO_CLIENT).encoder(Sync::encode).decoder(Sync::decode).consumerMainThread(Sync::handle).add();CHANNEL.messageBuilder(Action.class,messageId++,NetworkDirection.PLAY_TO_SERVER).encoder(Action::encode).decoder(Action::decode).consumerMainThread(Action::handle).add();}
+    public static void register(){CHANNEL.messageBuilder(Sync.class,messageId++,NetworkDirection.PLAY_TO_CLIENT).encoder(Sync::encode).decoder(Sync::decode).consumerMainThread(Sync::handle).add();CHANNEL.messageBuilder(Action.class,messageId++,NetworkDirection.PLAY_TO_SERVER).encoder(Action::encode).decoder(Action::decode).consumerMainThread(Action::handle).add();CHANNEL.messageBuilder(DeathContext.class,messageId++,NetworkDirection.PLAY_TO_CLIENT).encoder(DeathContext::encode).decoder(DeathContext::decode).consumerMainThread(DeathContext::handle).add();}
+    public static void deathHint(ServerPlayer player, String context) {
+        CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new DeathContext(player.getUUID(), context));
+    }
+    public record DeathContext(UUID player, String context) {
+        public DeathContext {
+            Objects.requireNonNull(player);
+            if (!DeathHintContext.CATEGORIES.contains(context)) throw new IllegalArgumentException("invalid death context");
+        }
+        void encode(FriendlyByteBuf buffer) { buffer.writeUUID(player); buffer.writeUtf(context, 16); }
+        static DeathContext decode(FriendlyByteBuf buffer) { return new DeathContext(buffer.readUUID(), buffer.readUtf(16)); }
+        static void handle(DeathContext message, Supplier<NetworkEvent.Context> context) {
+            context.get().enqueueWork(() -> DeathHintClient.receive(message.player(), message.context()));
+            context.get().setPacketHandled(true);
+        }
+    }
     public static Notice notice(ThreadDefinition d,NoticeKind kind){return new Notice(kind,d.id(),d.title(),d.suit().id(),d.aspect().id());}
     public static void sync(ServerPlayer player,boolean open,List<Notice> notices){var state=ThreadPlayerState.get(player);var cards=ThreadDefinitions.INSTANCE.all().stream().sorted(Comparator.comparing((ThreadDefinition d)->d.suit().ordinal()).thenComparingInt(ThreadDefinition::order)).map(d->card(d,state)).toList();CHANNEL.send(PacketDistributor.PLAYER.with(()->player),new Sync(open,cards,notices));}
     private static Card card(ThreadDefinition d,ThreadPlayerState s){boolean known=s.known.contains(d.id()),active=s.active.contains(d.id());var doorway=d.doorway();return new Card(d.id(),d.conceptId(),d.title(),d.suit().id(),d.order(),d.aspect().id(),d.art().toString(),known,known&&s.unread.contains(d.id()),active,s.completed.contains(d.id()),known?d.rule():"",active?d.action():"",doorway==null?"":doorway.type(),doorway==null?"":doorway.target(),s.completionCounts.getOrDefault(d.id(),0),s.firstGeneration.getOrDefault(d.id(),-1L),s.lastGeneration.getOrDefault(d.id(),-1L),s.routeSummary(d.id()));}

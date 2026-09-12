@@ -1,4 +1,5 @@
 {
+  "screen.better_content_threads.death_hint": "Hint",
   "item.better_content_threads.thread_facsimile": "Thread Card Copy",
   "message.better_content_threads.thread_revealed": "Card unlocked: %s",
   "message.better_content_threads.thread_completed": "Card completed: %s",

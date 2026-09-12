@@ -436,6 +436,7 @@ public final class ThreadClient {
         @SubscribeEvent
         public static void reload(RegisterClientReloadListenersEvent event) {
             event.registerReloadListener(LoadingBriefs.INSTANCE);
+            event.registerReloadListener(DeathHints.INSTANCE);
         }
 
         @SubscribeEvent

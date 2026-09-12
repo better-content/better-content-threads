@@ -1,0 +1,39 @@
+package com.bettercontent.threads;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
+/** Pure classification and downed-episode memory, kept independently of Thread evidence. */
+public final class DeathHintContext {
+    static final Set<String> CATEGORIES = Set.of("general", "combat", "projectile", "explosion", "fall",
+        "fire", "drowning", "cold", "heat", "thirst", "hunger", "suffocation", "magic", "revival");
+    private final Map<UUID, String> downed = new HashMap<>();
+
+    public static String classify(String type, boolean fire, boolean fall, boolean projectile,
+                                  boolean explosion, boolean freezing, boolean attacker) {
+        if (type.equals("thirst:dehydrate")) return "thirst";
+        if ((type.equals("cold_sweat:cold") || type.equals("cold_sweat:cold_scaling"))) return "cold";
+        if ((type.equals("cold_sweat:hot") || type.equals("cold_sweat:hot_scaling"))) return "heat";
+        if (type.equals("downed_player_revival:bled_out") || type.equals("downed_player_revival:finished")) return "revival";
+        if (type.equals("minecraft:drown")) return "drowning";
+        if (type.equals("minecraft:starve")) return "hunger";
+        if (type.equals("minecraft:in_wall") || type.equals("minecraft:cramming")) return "suffocation";
+        if (type.equals("minecraft:magic") || type.equals("minecraft:indirect_magic") || type.equals("minecraft:wither")) return "magic";
+        if (fire) return "fire";
+        if (freezing) return "cold";
+        if (fall) return "fall";
+        if (explosion) return "explosion";
+        if (projectile) return "projectile";
+        return attacker ? "combat" : "general";
+    }
+
+    public void downed(UUID player, String context) { downed.put(player, context); }
+    public void clear(UUID player) { downed.remove(player); }
+    public void clear() { downed.clear(); }
+    public String death(UUID player, String terminal) {
+        String original = downed.remove(player);
+        return terminal.equals("revival") && original != null && !original.equals("general") ? original : terminal;
+    }
+}

@@ -1,0 +1,1418 @@
+{
+  "schema": "bc.death_hints.v1",
+  "hints": [
+    {
+      "id": "practice_dodge",
+      "concept_id": "controls.pack_specific_actions",
+      "pool": "survival",
+      "text": "Fast running, vaulting, and dodging have separate controls. Practice them on safe ground before relying on them in a fight.",
+      "contexts": [
+        "combat",
+        "projectile"
+      ],
+      "required_mods": [
+        "better_content_fixes",
+        "parcool"
+      ],
+      "sources": [
+        "mod_source/better-content-fixes/src/main/java/com/bettercontent/bettercontentfixes/learning/ParCoolControlLearning.java",
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/ThreadClient.java"
+      ]
+    },
+    {
+      "id": "keep_stamina",
+      "concept_id": "controls.pack_specific_actions",
+      "pool": "survival",
+      "text": "Advanced movement spends stamina. Leave yourself enough for the escape as well as the approach.",
+      "contexts": [
+        "combat",
+        "fall"
+      ],
+      "required_mods": [
+        "better_content_fixes",
+        "parcool"
+      ],
+      "sources": [
+        "mod_source/better-content-fixes/src/main/java/com/bettercontent/bettercontentfixes/learning/ParCoolControlLearning.java",
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/ThreadClient.java"
+      ]
+    },
+    {
+      "id": "movement_lesson",
+      "concept_id": "controls.pack_specific_actions",
+      "pool": "survival",
+      "text": "The Movement lesson shows your current bindings. Read it in Threads before trying an unfamiliar jump or dodge.",
+      "contexts": [
+        "combat",
+        "fall"
+      ],
+      "required_mods": [
+        "better_content_fixes",
+        "parcool"
+      ],
+      "sources": [
+        "mod_source/better-content-fixes/src/main/java/com/bettercontent/bettercontentfixes/learning/ParCoolControlLearning.java",
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/ThreadClient.java"
+      ]
+    },
+    {
+      "id": "projectile_cover",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Put solid cover between yourself and a ranged attacker before approaching. An open field leaves fewer places to retreat.",
+      "contexts": [
+        "projectile"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
+      ]
+    },
+    {
+      "id": "combat_exit",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Pick an escape route before entering a fight. Backing into another group of enemies can turn a retreat into a trap.",
+      "contexts": [
+        "combat"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
+      ]
+    },
+    {
+      "id": "explosion_distance",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Keep distance from an imminent explosion and move behind solid cover when possible.",
+      "contexts": [
+        "explosion"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
+      ]
+    },
+    {
+      "id": "explosion_storage",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Keep explosive work away from supplies you cannot afford to replace. Leave yourself a clear exit before igniting anything.",
+      "contexts": [
+        "explosion"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
+      ]
+    },
+    {
+      "id": "fall_route",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Check the descent before stepping off a ledge. A staircase is easier to retrace than a blind drop.",
+      "contexts": [
+        "fall"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
+      ]
+    },
+    {
+      "id": "fall_landing",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Look at the landing before committing to a jump. Leave room to stop on the other side.",
+      "contexts": [
+        "fall"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
+      ]
+    },
+    {
+      "id": "feather_falling",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Feather Falling reduces fall damage. Check its enchantment description when preparing boots for climbing and exploration.",
+      "contexts": [
+        "fall"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
+      ]
+    },
+    {
+      "id": "water_breathing",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Water Breathing can buy time underwater. Check the remaining effect duration before swimming farther from air.",
+      "contexts": [
+        "drowning"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
+      ]
+    },
+    {
+      "id": "air_route",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Plan your route back to air before diving. Turn back while you still have time to make the return trip.",
+      "contexts": [
+        "drowning"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
+      ]
+    },
+    {
+      "id": "underwater_work",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Separate underwater scouting from a long work session. Prepare breathing protection before settling in to mine or build.",
+      "contexts": [
+        "drowning"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
+      ]
+    },
+    {
+      "id": "fire_resistance",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Fire Resistance helps against fire and lava damage. Check that the effect is active before approaching a hot crossing.",
+      "contexts": [
+        "fire"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
+      ]
+    },
+    {
+      "id": "lava_crossing",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Build a secure route across lava before carrying out work nearby. Keep the return path visible.",
+      "contexts": [
+        "fire"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
+      ]
+    },
+    {
+      "id": "burning_escape",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Get clear of the burning area before returning to attack or collect items. Re-entering the hazard can undo your escape.",
+      "contexts": [
+        "fire"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
+      ]
+    },
+    {
+      "id": "falling_material",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Leave room to escape when working under loose sand or gravel. Digging overhead can bring material down onto you.",
+      "contexts": [
+        "suffocation"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
+      ]
+    },
+    {
+      "id": "cramped_space",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Avoid crowding into a confined space with many entities. Leave room to move away from the group.",
+      "contexts": [
+        "suffocation"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
+      ]
+    },
+    {
+      "id": "magic_effects",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Check active status effects when damage continues after a fight. The attacker may be gone while an effect remains.",
+      "contexts": [
+        "magic"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
+      ]
+    },
+    {
+      "id": "wither_distance",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Wither can keep dealing damage after the hit. Reach a safe place before deciding whether to resume the fight.",
+      "contexts": [
+        "magic"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
+      ]
+    },
+    {
+      "id": "food_supply",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Carry food you can eat before starting a long trip. Keep a reserve for the journey home.",
+      "contexts": [
+        "hunger"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
+      ]
+    },
+    {
+      "id": "purity_three",
+      "concept_id": "world.water_made_safe",
+      "pool": "survival",
+      "text": "Water at purity level 3 is safe to drink. Check purity before depending on a bottle for a long journey.",
+      "contexts": [
+        "thirst"
+      ],
+      "required_mods": [
+        "water_survival",
+        "thirst"
+      ],
+      "sources": [
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
+      ]
+    },
+    {
+      "id": "bottle_slot",
+      "concept_id": "world.water_made_safe",
+      "pool": "survival",
+      "text": "The water Curios slot can drink from stored water bottles as thirst drops. Fill it with safe water before leaving.",
+      "contexts": [
+        "thirst"
+      ],
+      "required_mods": [
+        "water_survival",
+        "thirst"
+      ],
+      "sources": [
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
+      ]
+    },
+    {
+      "id": "rain_sky",
+      "concept_id": "world.water_made_safe",
+      "pool": "survival",
+      "text": "Rain Collectors need an open view of the sky. Keep the space above the collector clear.",
+      "contexts": [
+        "thirst"
+      ],
+      "required_mods": [
+        "water_survival",
+        "thirst"
+      ],
+      "sources": [
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
+      ]
+    },
+    {
+      "id": "rain_reserve",
+      "concept_id": "world.water_made_safe",
+      "pool": "survival",
+      "text": "A Rain Collector stores a limited supply. Bottle collected water so you have a reserve between showers.",
+      "contexts": [
+        "thirst"
+      ],
+      "required_mods": [
+        "water_survival",
+        "thirst"
+      ],
+      "sources": [
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
+      ]
+    },
+    {
+      "id": "empty_bottles",
+      "concept_id": "world.water_made_safe",
+      "pool": "survival",
+      "text": "Water Survival provides a Curios slot for empty bottles. Keep bottles available for refilling along the way.",
+      "contexts": [
+        "thirst"
+      ],
+      "required_mods": [
+        "water_survival",
+        "thirst"
+      ],
+      "sources": [
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
+      ]
+    },
+    {
+      "id": "cold_clothing",
+      "concept_id": "world.body_has_weather",
+      "pool": "survival",
+      "text": "Check the cold insulation on your clothing before heading into a cold area. Armor protection and insulation solve different problems.",
+      "contexts": [
+        "cold"
+      ],
+      "required_mods": [
+        "cold_sweat"
+      ],
+      "sources": [
+        "better-content-modpack/config/coldsweat/item.toml",
+        "better-content-modpack/config/coldsweat/world.toml"
+      ]
+    },
+    {
+      "id": "heat_clothing",
+      "concept_id": "world.body_has_weather",
+      "pool": "survival",
+      "text": "Prepare heat insulation before traveling through hot areas. Check the clothing's temperature protection in its tooltip.",
+      "contexts": [
+        "heat"
+      ],
+      "required_mods": [
+        "cold_sweat"
+      ],
+      "sources": [
+        "better-content-modpack/config/coldsweat/item.toml",
+        "better-content-modpack/config/coldsweat/world.toml"
+      ]
+    },
+    {
+      "id": "body_and_air",
+      "concept_id": "world.body_has_weather",
+      "pool": "survival",
+      "text": "Body temperature and the temperature around you are different readings. Check both when choosing where to recover.",
+      "contexts": [
+        "cold",
+        "heat"
+      ],
+      "required_mods": [
+        "cold_sweat"
+      ],
+      "sources": [
+        "better-content-modpack/config/coldsweat/item.toml",
+        "better-content-modpack/config/coldsweat/world.toml"
+      ]
+    },
+    {
+      "id": "waterskin_temperature",
+      "concept_id": "world.body_has_weather",
+      "pool": "survival",
+      "text": "A prepared Cold Sweat waterskin helps change body temperature. Check its temperature before using it.",
+      "contexts": [
+        "cold",
+        "heat"
+      ],
+      "required_mods": [
+        "cold_sweat"
+      ],
+      "sources": [
+        "better-content-modpack/config/coldsweat/item.toml",
+        "better-content-modpack/config/coldsweat/world.toml"
+      ]
+    },
+    {
+      "id": "climate_route",
+      "concept_id": "world.body_has_weather",
+      "pool": "survival",
+      "text": "Plan stops in safer temperatures along a long route. Prepare clothing for the destination as well as the starting area.",
+      "contexts": [
+        "cold",
+        "heat"
+      ],
+      "required_mods": [
+        "cold_sweat"
+      ],
+      "sources": [
+        "better-content-modpack/config/coldsweat/item.toml",
+        "better-content-modpack/config/coldsweat/world.toml"
+      ]
+    },
+    {
+      "id": "nutrition_groups",
+      "concept_id": "survival.hunger_and_nutrition",
+      "pool": "survival",
+      "text": "A full hunger bar does not mean your nutrition groups are full. Check nutrition before choosing your next meal.",
+      "contexts": [
+        "hunger"
+      ],
+      "required_mods": [
+        "systemic_salience"
+      ],
+      "sources": [
+        "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/metabolism/MetabolicMath.java",
+        "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/nutrition/NutritionSnapshot.java"
+      ]
+    },
+    {
+      "id": "low_groups",
+      "concept_id": "survival.hunger_and_nutrition",
+      "pool": "survival",
+      "text": "Choose foods that replenish your lowest nutrition groups. Repeating one meal may leave other groups behind.",
+      "contexts": [
+        "hunger"
+      ],
+      "required_mods": [
+        "systemic_salience"
+      ],
+      "sources": [
+        "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/metabolism/MetabolicMath.java",
+        "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/nutrition/NutritionSnapshot.java"
+      ]
+    },
+    {
+      "id": "sugar_cost",
+      "concept_id": "survival.hunger_and_nutrition",
+      "pool": "survival",
+      "text": "Sugar makes nutrition drain faster. Check your food supply before relying on its short-lived benefits.",
+      "contexts": [
+        "hunger",
+        "combat"
+      ],
+      "required_mods": [
+        "systemic_salience"
+      ],
+      "sources": [
+        "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/metabolism/MetabolicMath.java",
+        "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/nutrition/NutritionSnapshot.java"
+      ]
+    },
+    {
+      "id": "frozen_meal",
+      "concept_id": "survival.food_thermal_state",
+      "pool": "survival",
+      "text": "Check food tooltips before a trip. Frozen food needs to thaw before you can eat it.",
+      "contexts": [
+        "hunger",
+        "cold"
+      ],
+      "required_mods": [
+        "heat_sync"
+      ],
+      "sources": [
+        "mod_source/heat-sync/src/main/kotlin/com/bettercontent/heatsync/food/FoodThermalService.kt"
+      ]
+    },
+    {
+      "id": "revive_use",
+      "concept_id": "fragility.life_reaches_tether",
+      "pool": "survival",
+      "text": "To revive a downed ally, aim at them and hold {use}. Reach them before they bleed out.",
+      "contexts": [
+        "revival",
+        "combat"
+      ],
+      "required_mods": [
+        "downed_player_revival"
+      ],
+      "sources": [
+        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/RevivalManager.java"
+      ]
+    },
+    {
+      "id": "downed_give_up",
+      "concept_id": "fragility.life_reaches_tether",
+      "pool": "survival",
+      "text": "When downed, hold {sneak} only if you intend to give up. Waiting keeps the revival opportunity open while time remains.",
+      "contexts": [
+        "revival"
+      ],
+      "required_mods": [
+        "downed_player_revival"
+      ],
+      "sources": [
+        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/RevivalManager.java"
+      ]
+    },
+    {
+      "id": "revive_helpers",
+      "concept_id": "fragility.life_reaches_tether",
+      "pool": "survival",
+      "text": "More than one player can help revive a downed ally. Keep the helpers close enough to continue the rescue.",
+      "contexts": [
+        "revival"
+      ],
+      "required_mods": [
+        "downed_player_revival"
+      ],
+      "sources": [
+        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/RevivalManager.java"
+      ]
+    },
+    {
+      "id": "rescue_proximity",
+      "concept_id": "fragility.life_reaches_tether",
+      "pool": "survival",
+      "text": "Stay within reach while helping a downed player. Moving too far away interrupts your contribution to the rescue.",
+      "contexts": [
+        "revival"
+      ],
+      "required_mods": [
+        "downed_player_revival"
+      ],
+      "sources": [
+        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/RevivalManager.java"
+      ]
+    },
+    {
+      "id": "fall_protection",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Fall protection reduces risk, but a checked route is still useful. Inspect the way back before descending into an unfamiliar cave.",
+      "contexts": [
+        "fall"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
+      ]
+    },
+    {
+      "id": "lessons_available",
+      "concept_id": "learning.threads",
+      "pool": "discovery",
+      "text": "Threads Lessons are available from the start. You can read survival instructions before discovering the related card.",
+      "contexts": [],
+      "required_mods": [
+        "better_content_threads"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/LoadingBriefs.java",
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/LearningLibraryScreen.java"
+      ]
+    },
+    {
+      "id": "reader_key",
+      "concept_id": "learning.threads",
+      "pool": "discovery",
+      "text": "Press {threads} to open Threads during play. Return to Lessons whenever you need a reminder.",
+      "contexts": [],
+      "required_mods": [
+        "better_content_threads"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/LoadingBriefs.java",
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/LearningLibraryScreen.java"
+      ]
+    },
+    {
+      "id": "loading_lessons",
+      "concept_id": "learning.threads",
+      "pool": "discovery",
+      "text": "Loading lessons can also be read in Threads. A quick join does not mean you missed your only chance to read them.",
+      "contexts": [],
+      "required_mods": [
+        "better_content_threads"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/LoadingBriefs.java",
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/LearningLibraryScreen.java"
+      ]
+    },
+    {
+      "id": "recipe_before_trip",
+      "concept_id": "crafting.emi_authority",
+      "pool": "discovery",
+      "text": "Check the recipe in EMI before gathering materials. Better Content changes many familiar recipes.",
+      "contexts": [],
+      "required_mods": [
+        "emi"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/ThreadDoorways.java",
+        "better-content-modpack/kubejs/server_scripts/progression"
+      ]
+    },
+    {
+      "id": "recipe_uses",
+      "concept_id": "crafting.emi_authority",
+      "pool": "discovery",
+      "text": "Look up an item's uses as well as its recipe in EMI. A material you found may serve several different processes.",
+      "contexts": [],
+      "required_mods": [
+        "emi"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/ThreadDoorways.java",
+        "better-content-modpack/kubejs/server_scripts/progression"
+      ]
+    },
+    {
+      "id": "recipe_sequence",
+      "concept_id": "crafting.emi_authority",
+      "pool": "discovery",
+      "text": "For a multi-step recipe, check the intermediate products before building the first machine.",
+      "contexts": [],
+      "required_mods": [
+        "emi"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/ThreadDoorways.java",
+        "better-content-modpack/kubejs/server_scripts/progression"
+      ]
+    },
+    {
+      "id": "collector_drink",
+      "concept_id": "world.water_made_safe",
+      "pool": "discovery",
+      "text": "A filled Rain Collector can be used with an empty hand to drink. Check the water's purity before relying on it.",
+      "contexts": [],
+      "required_mods": [
+        "water_survival",
+        "thirst"
+      ],
+      "sources": [
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
+      ]
+    },
+    {
+      "id": "collector_bottle",
+      "concept_id": "world.water_made_safe",
+      "pool": "discovery",
+      "text": "Use a suitable empty container on a filled Rain Collector to take water with you.",
+      "contexts": [],
+      "required_mods": [
+        "water_survival",
+        "thirst"
+      ],
+      "sources": [
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
+      ]
+    },
+    {
+      "id": "life_review",
+      "concept_id": "powers.life_becomes_capable",
+      "pool": "discovery",
+      "text": "Life choices last for your current life. Review the resulting properties before applying points.",
+      "contexts": [],
+      "required_mods": [
+        "rpg_stats"
+      ],
+      "sources": [
+        "mod_source/rpg-stats/src/main/kotlin/com/bettercontent/rpgstats/common/event/CommonForgeEvents.kt",
+        "mod_source/rpg-stats/src/main/kotlin/com/bettercontent/rpgstats/common/network/packets/AllocationPolicy.kt"
+      ]
+    },
+    {
+      "id": "life_after_death",
+      "concept_id": "powers.life_becomes_capable",
+      "pool": "discovery",
+      "text": "Death clears your Life allocations. Review the stats screen as you prepare for the next journey.",
+      "contexts": [],
+      "required_mods": [
+        "rpg_stats"
+      ],
+      "sources": [
+        "mod_source/rpg-stats/src/main/kotlin/com/bettercontent/rpgstats/common/event/CommonForgeEvents.kt",
+        "mod_source/rpg-stats/src/main/kotlin/com/bettercontent/rpgstats/common/network/packets/AllocationPolicy.kt"
+      ]
+    },
+    {
+      "id": "hand_crank",
+      "concept_id": "works.motion_becomes_industry",
+      "pool": "discovery",
+      "text": "A Hand Crank can power a small Create setup manually. Start with the machine you need, then connect its rotation.",
+      "contexts": [],
+      "required_mods": [
+        "create"
+      ],
+      "sources": [
+        "better-content-modpack/kubejs/server_scripts/progression/10_hand_workshop.js",
+        "better-content-modpack/kubejs/server_scripts/progression/20_powered_works.js",
+        "better-content-modpack/kubejs/server_scripts/progression/30_precision_factory.js"
+      ]
+    },
+    {
+      "id": "font_metallurgy",
+      "concept_id": "works.motion_becomes_industry",
+      "pool": "discovery",
+      "text": "Materials from several Font destinations can start seared metallurgy. Check the grout routes in EMI before choosing an expedition.",
+      "contexts": [],
+      "required_mods": [
+        "create",
+        "tconstruct",
+        "dimension_drink",
+        "emi"
+      ],
+      "sources": [
+        "better-content-modpack/kubejs/server_scripts/progression/10_hand_workshop.js",
+        "better-content-modpack/kubejs/server_scripts/progression/20_powered_works.js",
+        "better-content-modpack/kubejs/server_scripts/progression/30_precision_factory.js"
+      ]
+    },
+    {
+      "id": "andesite_route",
+      "concept_id": "works.motion_becomes_industry",
+      "pool": "discovery",
+      "text": "Andesite Alloy has casting and alloying routes in this pack. Compare the processes in EMI before choosing your setup.",
+      "contexts": [],
+      "required_mods": [
+        "create",
+        "tconstruct",
+        "emi"
+      ],
+      "sources": [
+        "better-content-modpack/kubejs/server_scripts/progression/10_hand_workshop.js",
+        "better-content-modpack/kubejs/server_scripts/progression/20_powered_works.js",
+        "better-content-modpack/kubejs/server_scripts/progression/30_precision_factory.js"
+      ]
+    },
+    {
+      "id": "assembly_order",
+      "concept_id": "works.precision_has_rhythm",
+      "pool": "discovery",
+      "text": "Sequenced assembly recipes need their steps in order. Check the number of repetitions before setting up the line.",
+      "contexts": [],
+      "required_mods": [
+        "create",
+        "emi"
+      ],
+      "sources": [
+        "better-content-modpack/kubejs/server_scripts/progression/10_hand_workshop.js",
+        "better-content-modpack/kubejs/server_scripts/progression/20_powered_works.js",
+        "better-content-modpack/kubejs/server_scripts/progression/30_precision_factory.js"
+      ]
+    },
+    {
+      "id": "assembly_intermediate",
+      "concept_id": "works.precision_has_rhythm",
+      "pool": "discovery",
+      "text": "Follow the intermediate item through sequenced assembly. One pass through a machine may be only part of the recipe.",
+      "contexts": [],
+      "required_mods": [
+        "create",
+        "emi"
+      ],
+      "sources": [
+        "better-content-modpack/kubejs/server_scripts/progression/10_hand_workshop.js",
+        "better-content-modpack/kubejs/server_scripts/progression/20_powered_works.js",
+        "better-content-modpack/kubejs/server_scripts/progression/30_precision_factory.js"
+      ]
+    },
+    {
+      "id": "repair_tools",
+      "concept_id": "works.hands_learn_repair",
+      "pool": "discovery",
+      "text": "Tinkers tools can be repaired after use. Check the repair options before replacing a worn tool.",
+      "contexts": [],
+      "required_mods": [
+        "tconstruct"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/TConstructThreads.java",
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/mixin/TinkerRepairResultMixin.java"
+      ]
+    },
+    {
+      "id": "repair_before_travel",
+      "concept_id": "works.hands_learn_repair",
+      "pool": "discovery",
+      "text": "Repair your working tools before a long expedition. Check the station result before taking the repaired item.",
+      "contexts": [],
+      "required_mods": [
+        "tconstruct"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/TConstructThreads.java",
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/mixin/TinkerRepairResultMixin.java"
+      ]
+    },
+    {
+      "id": "surface_signs",
+      "concept_id": "world.stone_makes_promises",
+      "pool": "discovery",
+      "text": "Surface ore signs point toward underground deposits. Read the deposit family before choosing where to dig.",
+      "contexts": [],
+      "required_mods": [
+        "realistic_ores"
+      ],
+      "sources": [
+        "mod_source/realistic-ores/src/main/java/com/bettercontent/realisticores/block/SurfaceSampleBlock.java",
+        "mod_source/realistic-ores/src/main/resources/data/realistic_ores/processing_definitions/copper_bloom.json",
+        "mod_source/realistic-ores/src/main/resources/data/realistic_ores/recipes/crafting/small_chunks/ironstone.json"
+      ]
+    },
+    {
+      "id": "ore_hosts",
+      "concept_id": "world.stone_makes_promises",
+      "pool": "discovery",
+      "text": "An ore deposit can appear in different host stones. Follow the deposit identity rather than expecting one background rock.",
+      "contexts": [],
+      "required_mods": [
+        "realistic_ores"
+      ],
+      "sources": [
+        "mod_source/realistic-ores/src/main/java/com/bettercontent/realisticores/block/SurfaceSampleBlock.java",
+        "mod_source/realistic-ores/src/main/resources/data/realistic_ores/processing_definitions/copper_bloom.json",
+        "mod_source/realistic-ores/src/main/resources/data/realistic_ores/recipes/crafting/small_chunks/ironstone.json"
+      ]
+    },
+    {
+      "id": "small_chunks",
+      "concept_id": "world.stone_makes_promises",
+      "pool": "discovery",
+      "text": "Keep small ore chunks from prospecting. Matching small chunks can be combined into a full chunk.",
+      "contexts": [],
+      "required_mods": [
+        "realistic_ores"
+      ],
+      "sources": [
+        "mod_source/realistic-ores/src/main/java/com/bettercontent/realisticores/block/SurfaceSampleBlock.java",
+        "mod_source/realistic-ores/src/main/resources/data/realistic_ores/processing_definitions/copper_bloom.json",
+        "mod_source/realistic-ores/src/main/resources/data/realistic_ores/recipes/crafting/small_chunks/ironstone.json"
+      ]
+    },
+    {
+      "id": "ore_processing",
+      "concept_id": "works.chemistry_remembers_sequence",
+      "pool": "discovery",
+      "text": "Look up your ore family in EMI before processing it. Different families follow different separation routes.",
+      "contexts": [],
+      "required_mods": [
+        "realistic_ores",
+        "emi"
+      ],
+      "sources": [
+        "mod_source/realistic-ores/src/main/java/com/bettercontent/realisticores/block/SurfaceSampleBlock.java",
+        "mod_source/realistic-ores/src/main/resources/data/realistic_ores/processing_definitions/copper_bloom.json",
+        "mod_source/realistic-ores/src/main/resources/data/realistic_ores/recipes/crafting/small_chunks/ironstone.json"
+      ]
+    },
+    {
+      "id": "ore_concentrates",
+      "concept_id": "works.chemistry_remembers_sequence",
+      "pool": "discovery",
+      "text": "Check which concentrate a process produces before building around it. One deposit can contain more than one useful material.",
+      "contexts": [],
+      "required_mods": [
+        "realistic_ores",
+        "emi"
+      ],
+      "sources": [
+        "mod_source/realistic-ores/src/main/java/com/bettercontent/realisticores/block/SurfaceSampleBlock.java",
+        "mod_source/realistic-ores/src/main/resources/data/realistic_ores/processing_definitions/copper_bloom.json",
+        "mod_source/realistic-ores/src/main/resources/data/realistic_ores/recipes/crafting/small_chunks/ironstone.json"
+      ]
+    },
+    {
+      "id": "font_return",
+      "concept_id": "powers.doors_borrow_worlds",
+      "pool": "discovery",
+      "text": "Before using a Dimensional Font, read how its journey returns you. Prepare supplies before starting the trip.",
+      "contexts": [],
+      "required_mods": [
+        "dimension_drink"
+      ],
+      "sources": [
+        "mod_source/dimension-drink/src/main/resources/defaults/fonts/nether.json",
+        "mod_source/dimension-drink/src/main/resources/defaults/fonts/ratlantis.json",
+        "mod_source/dimension-drink/src/main/kotlin/com/bettercontent/dimensiondrink/runtime/player/PlayerReturnHandler.kt",
+        "better-content-modpack/kubejs/server_scripts/policy/dimension_access.js"
+      ]
+    },
+    {
+      "id": "font_expedition",
+      "concept_id": "powers.doors_borrow_worlds",
+      "pool": "discovery",
+      "text": "Use a Font expedition to scout as well as gather. Note useful resources so a later visit has a clear purpose.",
+      "contexts": [],
+      "required_mods": [
+        "dimension_drink"
+      ],
+      "sources": [
+        "mod_source/dimension-drink/src/main/resources/defaults/fonts/nether.json",
+        "mod_source/dimension-drink/src/main/resources/defaults/fonts/ratlantis.json",
+        "mod_source/dimension-drink/src/main/kotlin/com/bettercontent/dimensiondrink/runtime/player/PlayerReturnHandler.kt",
+        "better-content-modpack/kubejs/server_scripts/policy/dimension_access.js"
+      ]
+    },
+    {
+      "id": "end_route",
+      "concept_id": "powers.doors_borrow_worlds",
+      "pool": "discovery",
+      "text": "The vanilla End route is disabled in Better Content. Look for Dimensional Fonts to explore the available realms.",
+      "contexts": [],
+      "required_mods": [
+        "dimension_drink"
+      ],
+      "sources": [
+        "mod_source/dimension-drink/src/main/resources/defaults/fonts/nether.json",
+        "mod_source/dimension-drink/src/main/resources/defaults/fonts/ratlantis.json",
+        "mod_source/dimension-drink/src/main/kotlin/com/bettercontent/dimensiondrink/runtime/player/PlayerReturnHandler.kt",
+        "better-content-modpack/kubejs/server_scripts/policy/dimension_access.js"
+      ]
+    },
+    {
+      "id": "heat_sink",
+      "concept_id": "works.heat_go_somewhere",
+      "pool": "discovery",
+      "text": "A heat network needs a way to lose excess heat. Check its surroundings and cooling before adding more heat sources.",
+      "contexts": [],
+      "required_mods": [
+        "heat_sync"
+      ],
+      "sources": [
+        "mod_source/heat-sync/src/main/kotlin/com/bettercontent/heatsync/PipeThermalStepMath.kt",
+        "mod_source/heat-sync/src/main/kotlin/com/bettercontent/heatsync/HeatSyncPipeThermalController.kt"
+      ]
+    },
+    {
+      "id": "heat_neighbors",
+      "concept_id": "works.heat_go_somewhere",
+      "pool": "discovery",
+      "text": "Heat pipes exchange heat with their neighbors. Trace the connected route when a section stays hotter than expected.",
+      "contexts": [],
+      "required_mods": [
+        "heat_sync"
+      ],
+      "sources": [
+        "mod_source/heat-sync/src/main/kotlin/com/bettercontent/heatsync/PipeThermalStepMath.kt",
+        "mod_source/heat-sync/src/main/kotlin/com/bettercontent/heatsync/HeatSyncPipeThermalController.kt"
+      ]
+    },
+    {
+      "id": "pressure_recipe",
+      "concept_id": "works.pressure_changes_matter",
+      "pool": "discovery",
+      "text": "Check the pressure required by a Pressure Chamber recipe. Having the ingredients alone is not enough.",
+      "contexts": [],
+      "required_mods": [
+        "pneumaticcraft"
+      ],
+      "sources": [
+        "better-content-modpack/kubejs/server_scripts/progression/40_thermal_pressure.js",
+        "better-content-modpack/kubejs/server_scripts/progression/50_electrical_control.js"
+      ]
+    },
+    {
+      "id": "pressure_inputs",
+      "concept_id": "works.pressure_changes_matter",
+      "pool": "discovery",
+      "text": "Pressure Chamber recipes can require several items at once. Check the amounts before starting the process.",
+      "contexts": [],
+      "required_mods": [
+        "pneumaticcraft"
+      ],
+      "sources": [
+        "better-content-modpack/kubejs/server_scripts/progression/40_thermal_pressure.js",
+        "better-content-modpack/kubejs/server_scripts/progression/50_electrical_control.js"
+      ]
+    },
+    {
+      "id": "spell_order",
+      "concept_id": "powers.reality_has_grammar",
+      "pool": "discovery",
+      "text": "Ars Nouveau spells apply glyphs in order. Check the sequence when a spell behaves differently from what you intended.",
+      "contexts": [],
+      "required_mods": [
+        "ars_nouveau"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/ArsNouveauThreads.java"
+      ]
+    },
+    {
+      "id": "spell_target",
+      "concept_id": "powers.reality_has_grammar",
+      "pool": "discovery",
+      "text": "Test a new spell on a suitable target in a safe place. Some effects need particular targets or conditions to work.",
+      "contexts": [],
+      "required_mods": [
+        "ars_nouveau"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/ArsNouveauThreads.java"
+      ]
+    },
+    {
+      "id": "relic_use",
+      "concept_id": "powers.relics_remember_wearers",
+      "pool": "discovery",
+      "text": "Relics gain experience through use. Read an item's abilities and use it where those abilities apply.",
+      "contexts": [],
+      "required_mods": [
+        "relics"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/RelicsThreads.java"
+      ]
+    },
+    {
+      "id": "relic_conditions",
+      "concept_id": "powers.relics_remember_wearers",
+      "pool": "discovery",
+      "text": "Check a relic's activation conditions before relying on it. Carrying the item may not be enough to trigger its ability.",
+      "contexts": [],
+      "required_mods": [
+        "relics"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/RelicsThreads.java"
+      ]
+    },
+    {
+      "id": "season_fertility",
+      "concept_id": "world.seasons_turn_work",
+      "pool": "discovery",
+      "text": "Check which season a crop is fertile in before planting a large field.",
+      "contexts": [],
+      "required_mods": [
+        "sereneseasons"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/SereneSeasonsThreads.java"
+      ]
+    },
+    {
+      "id": "season_reserves",
+      "concept_id": "world.seasons_turn_work",
+      "pool": "discovery",
+      "text": "Store surplus harvests while your crops are productive. A change of season can change what grows well.",
+      "contexts": [],
+      "required_mods": [
+        "sereneseasons"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/SereneSeasonsThreads.java"
+      ]
+    },
+    {
+      "id": "anchor_supply",
+      "concept_id": "powers.power_needs_anchor",
+      "pool": "discovery",
+      "text": "Chunk anchors need their own resource supply. Check that supply before relying on distant machinery to keep running.",
+      "contexts": [],
+      "required_mods": [
+        "arcane_chunk_loaders"
+      ],
+      "sources": [
+        "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/AnchorData.java",
+        "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/ArcaneAnchorBlockEntity.java"
+      ]
+    },
+    {
+      "id": "anchor_area",
+      "concept_id": "powers.power_needs_anchor",
+      "pool": "discovery",
+      "text": "A working chunk anchor keeps a centered three-by-three chunk area ticking. Plan the machines you want to keep active around it.",
+      "contexts": [],
+      "required_mods": [
+        "arcane_chunk_loaders"
+      ],
+      "sources": [
+        "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/AnchorData.java",
+        "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/ArcaneAnchorBlockEntity.java"
+      ]
+    },
+    {
+      "id": "schematic_design",
+      "concept_id": "fragility.copy_outlives_work",
+      "pool": "discovery",
+      "text": "A published schematic preserves a build's design, not its materials. Plan to gather blocks when rebuilding it.",
+      "contexts": [],
+      "required_mods": [
+        "world_lifecycle_manager"
+      ],
+      "sources": [
+        "mod_source/world-lifecycle-manager/src/main/java/com/bettercontent/worldlifecyclemanager/SchematicLibrary.java",
+        "mod_source/world-lifecycle-manager/src/main/java/com/bettercontent/worldlifecyclemanager/WorldCondenserBlockEntity.java"
+      ]
+    },
+    {
+      "id": "schematic_library",
+      "concept_id": "fragility.copy_outlives_work",
+      "pool": "discovery",
+      "text": "Publish a design to the schematic library if you want to preserve it across world resets.",
+      "contexts": [],
+      "required_mods": [
+        "world_lifecycle_manager"
+      ],
+      "sources": [
+        "mod_source/world-lifecycle-manager/src/main/java/com/bettercontent/worldlifecyclemanager/SchematicLibrary.java",
+        "mod_source/world-lifecycle-manager/src/main/java/com/bettercontent/worldlifecyclemanager/WorldCondenserBlockEntity.java"
+      ]
+    },
+    {
+      "id": "encoded_patterns",
+      "concept_id": "works.machines_can_remember",
+      "pool": "discovery",
+      "text": "AE2 autocrafting uses encoded patterns. Teach the network a recipe before asking it to craft the result.",
+      "contexts": [],
+      "required_mods": [
+        "ae2"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/Ae2Threads.java",
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/mixin/Ae2CraftingCpuMixin.java"
+      ]
+    },
+    {
+      "id": "craft_request",
+      "concept_id": "works.machines_can_remember",
+      "pool": "discovery",
+      "text": "A stored pattern is the start of an autocrafting setup. Check the crafting request for missing inputs before confirming it.",
+      "contexts": [],
+      "required_mods": [
+        "ae2"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/Ae2Threads.java",
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/mixin/Ae2CraftingCpuMixin.java"
+      ]
+    },
+    {
+      "id": "follow_roads",
+      "concept_id": "world.roads_make_neighbours",
+      "pool": "discovery",
+      "text": "Roads connect settlements through the wilderness. Following one can help you find another place to visit.",
+      "contexts": [],
+      "required_mods": [
+        "settlement_roads"
+      ],
+      "sources": [
+        "mod_source/settlement-roads/src/main/kotlin/com/bettercontent/settlementroads/runtime/RoadJourneyTracker.kt"
+      ]
+    },
+    {
+      "id": "assault_warning",
+      "concept_id": "fragility.army_walks_toward_you",
+      "pool": "discovery",
+      "text": "Pillager assaults are announced in advance. Use the warning to gather allies and prepare the approaches to your shelter.",
+      "contexts": [],
+      "required_mods": [
+        "pillager_campaigns"
+      ],
+      "sources": [
+        "mod_source/pillager-campaigns/src/main/kotlin/com/bettercontent/pillagercampaigns/system/InvasionRuntime.kt"
+      ]
+    },
+    {
+      "id": "spirit_markets",
+      "concept_id": "economy.spirits_remember_kills",
+      "pool": "discovery",
+      "text": "Village markets accept matching trading-spirit colors. Check the merchant's trade before collecting a particular color.",
+      "contexts": [],
+      "required_mods": [
+        "better_content_economy"
+      ],
+      "sources": [
+        "mod_source/better-content-economy/src/main/java/com/bettercontent/economy/registry/SpiritProfessions.java",
+        "mod_source/better-content-economy/src/main/java/com/bettercontent/economy/trader/WanderingTraderGameTests.java"
+      ]
+    },
+    {
+      "id": "orbit_possible",
+      "concept_id": "works.leave_atmosphere",
+      "pool": "teaser",
+      "text": "The sky is not the final destination. Creating Space has rockets that can reach Earth orbit.",
+      "contexts": [],
+      "required_mods": [
+        "creatingspace"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/CreatingSpaceThreads.java",
+        "better-content-modpack/kubejs/server_scripts/progression/60_aerospace.js"
+      ]
+    },
+    {
+      "id": "rocket_planning",
+      "concept_id": "works.leave_atmosphere",
+      "pool": "teaser",
+      "text": "A future rocket will need more than a launch button. Its controls let you check destination, thrust, and delta-v.",
+      "contexts": [],
+      "required_mods": [
+        "creatingspace"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/CreatingSpaceThreads.java",
+        "better-content-modpack/kubejs/server_scripts/progression/60_aerospace.js"
+      ]
+    },
+    {
+      "id": "world_successor",
+      "concept_id": "fragility.world_can_be_condensed",
+      "pool": "teaser",
+      "text": "A World Condenser can begin a successor world. Its interface explains the permanent reset before you commit.",
+      "contexts": [],
+      "required_mods": [
+        "world_lifecycle_manager"
+      ],
+      "sources": [
+        "mod_source/world-lifecycle-manager/src/main/java/com/bettercontent/worldlifecyclemanager/SchematicLibrary.java",
+        "mod_source/world-lifecycle-manager/src/main/java/com/bettercontent/worldlifecyclemanager/WorldCondenserBlockEntity.java"
+      ]
+    },
+    {
+      "id": "design_survives",
+      "concept_id": "fragility.world_can_be_condensed",
+      "pool": "teaser",
+      "text": "A workshop can leave more than memories behind. Published schematics preserve its design for a successor world.",
+      "contexts": [],
+      "required_mods": [
+        "world_lifecycle_manager"
+      ],
+      "sources": [
+        "mod_source/world-lifecycle-manager/src/main/java/com/bettercontent/worldlifecyclemanager/SchematicLibrary.java",
+        "mod_source/world-lifecycle-manager/src/main/java/com/bettercontent/worldlifecyclemanager/WorldCondenserBlockEntity.java"
+      ]
+    },
+    {
+      "id": "factory_memory",
+      "concept_id": "works.machines_can_remember",
+      "pool": "teaser",
+      "text": "An AE2 network can learn recipes through encoded patterns. A future workshop could make familiar supplies on request.",
+      "contexts": [],
+      "required_mods": [
+        "ae2"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/Ae2Threads.java",
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/mixin/Ae2CraftingCpuMixin.java"
+      ]
+    },
+    {
+      "id": "magic_keeps_working",
+      "concept_id": "powers.power_needs_anchor",
+      "pool": "teaser",
+      "text": "Magic can keep a distant workshop running. Chunk anchors turn a continuing resource supply into active chunks.",
+      "contexts": [],
+      "required_mods": [
+        "arcane_chunk_loaders"
+      ],
+      "sources": [
+        "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/AnchorData.java",
+        "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/ArcaneAnchorBlockEntity.java"
+      ]
+    },
+    {
+      "id": "other_skies",
+      "concept_id": "powers.doors_borrow_worlds",
+      "pool": "teaser",
+      "text": "Dimensional Fonts can take you beyond the Overworld. Each destination is another reason to prepare an expedition.",
+      "contexts": [],
+      "required_mods": [
+        "dimension_drink"
+      ],
+      "sources": [
+        "mod_source/dimension-drink/src/main/resources/defaults/fonts/nether.json",
+        "mod_source/dimension-drink/src/main/resources/defaults/fonts/ratlantis.json",
+        "mod_source/dimension-drink/src/main/kotlin/com/bettercontent/dimensiondrink/runtime/player/PlayerReturnHandler.kt",
+        "better-content-modpack/kubejs/server_scripts/policy/dimension_access.js"
+      ]
+    },
+    {
+      "id": "ratlantis_ahead",
+      "concept_id": "powers.doors_borrow_worlds",
+      "pool": "teaser",
+      "text": "Ratlantis is an available Font destination. Its ruins and machinery await a better-prepared expedition.",
+      "contexts": [],
+      "required_mods": [
+        "dimension_drink",
+        "rats"
+      ],
+      "sources": [
+        "mod_source/dimension-drink/src/main/resources/defaults/fonts/nether.json",
+        "mod_source/dimension-drink/src/main/resources/defaults/fonts/ratlantis.json",
+        "mod_source/dimension-drink/src/main/kotlin/com/bettercontent/dimensiondrink/runtime/player/PlayerReturnHandler.kt",
+        "better-content-modpack/kubejs/server_scripts/policy/dimension_access.js"
+      ]
+    },
+    {
+      "id": "bumblezone_ahead",
+      "concept_id": "powers.doors_borrow_worlds",
+      "pool": "teaser",
+      "text": "The Bumblezone has resources and plants of its own. A future Font trip can be more than a hunt for familiar ores.",
+      "contexts": [],
+      "required_mods": [
+        "dimension_drink",
+        "the_bumblezone"
+      ],
+      "sources": [
+        "mod_source/dimension-drink/src/main/resources/defaults/fonts/nether.json",
+        "mod_source/dimension-drink/src/main/resources/defaults/fonts/ratlantis.json",
+        "mod_source/dimension-drink/src/main/kotlin/com/bettercontent/dimensiondrink/runtime/player/PlayerReturnHandler.kt",
+        "better-content-modpack/kubejs/server_scripts/policy/dimension_access.js",
+        "mod_source/dimension-drink/src/main/resources/defaults/fonts/bumblezone.json"
+      ]
+    },
+    {
+      "id": "deposit_possibilities",
+      "concept_id": "works.chemistry_remembers_sequence",
+      "pool": "teaser",
+      "text": "A familiar ore family can lead to several useful concentrates. More advanced processing opens reasons to revisit old deposits.",
+      "contexts": [],
+      "required_mods": [
+        "realistic_ores"
+      ],
+      "sources": [
+        "mod_source/realistic-ores/src/main/java/com/bettercontent/realisticores/block/SurfaceSampleBlock.java",
+        "mod_source/realistic-ores/src/main/resources/data/realistic_ores/processing_definitions/copper_bloom.json",
+        "mod_source/realistic-ores/src/main/resources/data/realistic_ores/recipes/crafting/small_chunks/ironstone.json"
+      ]
+    },
+    {
+      "id": "relic_potential",
+      "concept_id": "powers.relics_remember_wearers",
+      "pool": "teaser",
+      "text": "A relic's first use need not be its last surprise. Check how its abilities develop as it gains experience.",
+      "contexts": [],
+      "required_mods": [
+        "relics"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/RelicsThreads.java"
+      ]
+    },
+    {
+      "id": "spell_possibilities",
+      "concept_id": "powers.reality_has_grammar",
+      "pool": "teaser",
+      "text": "A spell is something you can write. Ars Nouveau glyphs let you combine a method of casting with a sequence of effects.",
+      "contexts": [],
+      "required_mods": [
+        "ars_nouveau"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/ArsNouveauThreads.java"
+      ]
+    }
+  ]
+}

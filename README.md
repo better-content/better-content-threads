@@ -26,7 +26,7 @@ Loading lessons never impose mandatory onboarding. The world opens immediately w
 
 The Threads reader includes all sixteen spoiler-free lessons as a permanent reference alongside, but distinct from, the 52-card archive. Each `bc.loading_briefs.v3` lesson declares a stable concept, authoritative owner, and optional related Thread. Known related cards remain directly accessible without leaking unknown teaching copy. Native controls appear only for installed EMI/Ponder item targets or exact bound nutrition, RPG, and Trace Sight keys. Unsupported declared guide/Font/power/campaign/lifecycle targets stay hidden; the reader never closes merely to print a resource ID. Optional EMI/Ponder API classes are isolated so absence is safe. Movement lessons resolve current ParCool keys at render time.
 
-The card packet uses protocol 9 after removing prose and invitation fields. Client and server must use matching versions. Player-state schema 4, stable card IDs, route predicates, and the public `ThreadSignals` API are unchanged. Rules and lesson bodies have maximum lengths but no minimum word count; short explanations do not need padding.
+The network uses protocol 10, adding bounded death context to the card protocol that removed prose and invitation fields. Client and server must use matching versions. Player-state schema 4, stable card IDs, route predicates, and the public `ThreadSignals` API are unchanged. Rules and lesson bodies have maximum lengths but no minimum word count; short explanations do not need padding.
 
 ## Verification
 
@@ -49,3 +49,38 @@ and 2 in `build/learning-visual/screenshots/`. The `learningVisual` source set i
 included in the runtime JAR. It needs a display, opens no world, and sends no pointer
 input. Inspect the captures manually; this fixture does not verify pack integration,
 actual gameplay triggers, or native guides supplied by other mods.
+
+## Death-screen hints
+
+The native death screen shows one quiet, stable hint beneath its existing controls. The client
+catalogue `assets/better_content_threads/death_hints/catalogue.json` contains 96 tips: 40 survival,
+44 whole-pack discovery, and 12 light late-game teasers. Each `bc.death_hints.v1` entry has a stable
+ID, shared concept ID, pool, text, context categories, required mod IDs, and mechanical sources.
+Sources are workspace-relative paths or Minecraft 1.20.1 class references; they are authoring
+provenance and never appear in the player UI. Resource packs may replace the catalogue.
+
+Recognized damage categories receive contextual advice on three of four eligible deaths. Other
+selections use the general pool, with teasers weighted at one in eight general selections. Optional
+mod tips require every named mod to be installed. The last twelve displayed IDs are avoided when
+alternatives exist; an exhausted category repeats its oldest eligible hint. History lives only in
+`config/better-content-threads-death-hints.json`, independently of lessons and player progression.
+
+The server classifies registered damage types/tags and attackers before sending the native death
+screen packet. Revival's downed event retains the original category for bleed-out, giving up, or
+finishing; revival, logout, respawn, and server shutdown clear episode memory. Missing context uses
+general advice. Late context cannot replace the first rendered selection. No death-message text
+is parsed and no Thread signals are emitted by hint presentation.
+
+Hints wrap at normal font size and measure the actual native controls. If a small GUI has too little
+space below the controls, the hint is omitted and does not enter display history. A resize can make
+the same selection visible; it never rerolls it. Normal and hardcore controls and their delays remain
+native. The label is translatable; catalogue prose is resource-pack-overridable, and control tokens
+resolve the current bindings.
+
+`DeathHintsTest` covers content, weighting, eligibility, history, context lifecycle, packet bounds,
+and layout. The existing visual fixture includes production hint rendering against vanilla control
+geometry without a player/world; it is a presentation check, not an end-to-end respawn test. Set
+`-Dbc.learningVisual.deathHintsOnly=true` in `JAVA_TOOL_OPTIONS` for only the 15 death-hint frames.
+Use `-PlearningVisualHeight=960` to inspect all three GUI scales with enough vertical space;
+720 pixels checks the common minimum-height GUI layout; Minecraft may clamp scale 4 to scale 3.
+Unfittable geometry is covered separately by the layout unit test. Automated checks never inject mouse input.
