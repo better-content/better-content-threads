@@ -17,28 +17,25 @@ public final class ThreadDefinitions extends SimpleJsonResourceReloadListener {
         var loaded = new LinkedHashMap<String, ThreadDefinition>();
         resources.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> {
             JsonElement root = entry.getValue();
-            if (!root.isJsonObject()) throw new IllegalStateException("Threads v3 resources must be manifest objects: " + entry.getKey());
+            if (!root.isJsonObject()) throw new IllegalStateException("Threads v4 resources must be manifest objects: " + entry.getKey());
             JsonObject manifest = root.getAsJsonObject();
-            if (!manifest.has("schema") || !"bc.threads.v3".equals(manifest.get("schema").getAsString()))
+            if (!manifest.has("schema") || !"bc.threads.v4".equals(manifest.get("schema").getAsString()))
                 throw new IllegalStateException("Unsupported Threads catalogue schema: " + entry.getKey());
             if (!manifest.has("threads") || !manifest.get("threads").isJsonArray())
-                throw new IllegalStateException("Threads v3 manifest has no thread array: " + entry.getKey());
+                throw new IllegalStateException("Threads v4 manifest has no thread array: " + entry.getKey());
             manifest.getAsJsonArray("threads").forEach(e -> add(loaded, e.getAsJsonObject()));
         });
         // The reusable mod's isolated GameTest lane intentionally has no pack-owned catalogue.
         if (!loaded.isEmpty() && loaded.size() != 52) throw new IllegalStateException("Threads catalogue must contain exactly 52 definitions, found " + loaded.size());
-        if(!loaded.isEmpty())for(var suit:ThreadSuit.values()){
-            var orders=loaded.values().stream().filter(d->d.suit()==suit).map(ThreadDefinition::order).collect(java.util.stream.Collectors.toSet());
-            var expected=java.util.stream.IntStream.rangeClosed(1,13).boxed().collect(java.util.stream.Collectors.toSet());
-            if(!orders.equals(expected))throw new IllegalStateException("Thread suit must contain orders 1..13: "+suit.id());
+        if(!loaded.isEmpty()){
+            var orders=loaded.values().stream().map(ThreadDefinition::order).collect(java.util.stream.Collectors.toSet());
+            var expected=java.util.stream.IntStream.rangeClosed(1,52).boxed().collect(java.util.stream.Collectors.toSet());
+            if(!orders.equals(expected))throw new IllegalStateException("Thread orders must be globally unique 1..52");
         }
         definitions = Collections.unmodifiableMap(loaded);
     }
     private static void add(Map<String, ThreadDefinition> loaded, JsonObject json) {
         var definition = ThreadDefinition.parse(json);
-        var approved=ThreadArt.BY_ID.get(definition.id());
-        if(approved==null||approved.aspect()!=definition.aspect()||approved.suit()!=definition.suit()||approved.order()!=definition.order())
-            throw new IllegalStateException("unapproved thread identity or assignment for " + definition.id());
         if (loaded.putIfAbsent(definition.id(), definition) != null) throw new IllegalStateException("duplicate thread " + definition.id());
     }
     public Collection<ThreadDefinition> all() { return definitions.values(); }

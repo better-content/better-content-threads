@@ -1,1889 +1,1081 @@
 {
-  "schema": "bc.threads.v3",
+  "schema": "bc.threads.v4",
   "threads": [
     {
-      "id": "stone_makes_promises",
-      "concept_id": "world.stone_makes_promises",
-      "owner": "better-content-realistic-ores",
-      "title": "Finding Ore Deposits",
-      "suit": "world",
-      "order": 1,
-      "aspect": "work",
-      "art": "better_content_threads:textures/gui/threads/stone_makes_promises.png",
-      "rule": "Surface signs identify underground ore deposits. Read the sign, then look below for ore from the same deposit family.",
-      "action": "Follow the surface sign and mine ore from the matching deposit.",
-      "reveal_routes": [
-        {
-          "id": "read_deposit",
-          "label": "Deposit identified",
-          "type": "deposit_read",
-          "value": "*",
-          "producer": "better-content-realistic-ores",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "follow_deposit",
-          "label": "Ore extracted",
-          "type": "deposit_extract",
-          "value": "*",
-          "producer": "better-content-realistic-ores",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "guideme",
-        "target": "realistic_ores:prospecting"
-      }
-    },
-    {
-      "id": "world_remembers",
-      "concept_id": "world.world_remembers",
-      "owner": "better-content-player-traces",
-      "title": "Player Traces",
-      "suit": "world",
-      "order": 2,
-      "aspect": "control",
-      "art": "better_content_threads:textures/gui/threads/world_remembers.png",
-      "rule": "Player traces record movement and work. Return to a place you have visited to inspect the traces left there.",
-      "action": "Leave the area, then return and inspect its traces.",
-      "reveal_routes": [
-        {
-          "id": "trace_committed",
-          "label": "Committed trace",
-          "type": "trace_commit",
-          "value": "*",
-          "producer": "better-content-player-traces",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "trace_return",
-          "label": "Returned trace",
-          "type": "trace_return",
-          "value": "*",
-          "producer": "better-content-player-traces",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "trace_sight",
-        "target": "player_traces"
-      }
-    },
-    {
-      "id": "seasons_turn_work",
-      "concept_id": "world.seasons_turn_work",
-      "owner": "compat.sereneseasons",
-      "title": "Seasonal Farming",
-      "suit": "world",
-      "order": 3,
-      "aspect": "tempo",
-      "art": "better_content_threads:textures/gui/threads/seasons_turn_work.png",
-      "rule": "Seasons affect crop fertility. Check the current season and grow crops that are fertile during it.",
-      "action": "Harvest a crop that is fertile this season.",
-      "reveal_routes": [
-        {
-          "id": "season_changed",
-          "label": "Season turned",
-          "type": "season_change",
-          "value": "*",
-          "producer": "compat.sereneseasons",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "seasonal_harvest",
-          "label": "Seasonal harvest",
-          "type": "seasonal_harvest",
-          "value": "*",
-          "producer": "compat.sereneseasons",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "guideme",
-        "target": "sereneseasons"
-      }
-    },
-    {
-      "id": "forest_many_lives",
-      "concept_id": "world.forest_many_lives",
+      "id": "living_tree_fall",
+      "concept_id": "world.living_tree_fall",
       "owner": "compat.dynamictrees",
-      "title": "Replanting Trees",
-      "suit": "world",
-      "order": 4,
-      "aspect": "renewal",
-      "art": "better_content_threads:textures/gui/threads/forest_many_lives.png",
-      "rule": "Replant after cutting down a mature tree. Use a compatible sapling near the stump to replace the tree you removed.",
-      "action": "Plant a compatible sapling near the stump.",
-      "reveal_routes": [
+      "title": "Living Trees Fall Together",
+      "topic": "world",
+      "order": 1,
+      "art": "better_content_threads:textures/gui/threads/living_tree_fall.png",
+      "event": "Your cut brought down a connected living tree.",
+      "cause": "A mature Dynamic Tree falls as connected branches and trunk, rather than remaining suspended one log at a time.",
+      "action": "Collect the fallen wood and leave room for the tree to fall.",
+      "discovery_routes": [
         {
-          "id": "mature_tree_felled",
-          "label": "Felled tree",
+          "id": "living_tree_fall",
           "type": "tree_felled",
           "value": "natural_mature",
-          "producer": "compat.dynamictrees",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "stump_replanted",
-          "label": "Replanted opening",
-          "type": "tree_replant",
-          "value": "compatible",
-          "producer": "compat.dynamictrees",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "guideme",
-        "target": "dynamictrees"
-      }
-    },
-    {
-      "id": "roads_make_neighbours",
-      "concept_id": "world.roads_make_neighbours",
-      "owner": "better-content-settlement-roads",
-      "title": "Finding Settlements",
-      "suit": "world",
-      "order": 5,
-      "aspect": "mobility",
-      "art": "better_content_threads:textures/gui/threads/roads_make_neighbours.png",
-      "rule": "Roads lead through the wilderness to settlements. Follow a road to find a settlement.",
-      "action": "Follow a road into a settlement.",
-      "reveal_routes": [
-        {
-          "id": "road_entered",
-          "label": "Found road",
-          "type": "road_enter",
-          "value": "wilderness",
-          "producer": "better-content-settlement-roads",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "road_arrival",
-          "label": "Settlement arrival",
-          "type": "road_arrival",
-          "value": "settlement",
-          "producer": "better-content-settlement-roads",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "guideme",
-        "target": "settlement_roads"
-      }
-    },
-    {
-      "id": "fire_has_country",
-      "concept_id": "world.fire_has_country",
-      "owner": "better-content-threads",
-      "title": "Exploring the Nether",
-      "suit": "world",
-      "order": 6,
-      "aspect": "impact",
-      "art": "better_content_threads:textures/gui/threads/fire_has_country.png",
-      "rule": "The Nether has different resources and hazards from the Overworld. Bring supplies and plan how you will return before exploring.",
-      "action": "Explore the Nether with supplies and a return route.",
-      "reveal_routes": [
-        {
-          "id": "nether_arrival",
-          "label": "Nether arrival",
-          "type": "dimension_enter",
-          "value": "minecraft:the_nether",
-          "producer": "better-content-threads",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "nether_return",
-          "label": "Nether return",
-          "type": "dimension_return",
-          "value": "minecraft:the_nether",
-          "producer": "better-content-threads",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "font",
-        "target": "minecraft:the_nether"
-      }
-    },
-    {
-      "id": "sky_another_country",
-      "concept_id": "world.sky_another_country",
-      "owner": "better-content-threads",
-      "title": "Exploring the Aether",
-      "suit": "world",
-      "order": 7,
-      "aspect": "mobility",
-      "art": "better_content_threads:textures/gui/threads/sky_another_country.png",
-      "rule": "The Aether is a separate dimension with its own terrain and resources. Prepare supplies and a return route before exploring.",
-      "action": "Explore the Aether and return safely.",
-      "reveal_routes": [
-        {
-          "id": "aether_arrival",
-          "label": "Aether arrival",
-          "type": "dimension_enter",
-          "value": "aether:the_aether",
-          "producer": "better-content-threads",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "aether_return",
-          "label": "Aether return",
-          "type": "dimension_return",
-          "value": "aether:the_aether",
-          "producer": "better-content-threads",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "font",
-        "target": "aether:the_aether"
-      }
-    },
-    {
-      "id": "deep_own_light",
-      "concept_id": "world.deep_own_light",
-      "owner": "better-content-threads",
-      "title": "Exploring the Bumblezone",
-      "suit": "world",
-      "order": 8,
-      "aspect": "robustness",
-      "art": "better_content_threads:textures/gui/threads/deep_own_light.png",
-      "rule": "The Bumblezone has its own resources and plants. Collect useful materials and keep track of your return route.",
-      "action": "Collect useful materials in the Bumblezone and return.",
-      "reveal_routes": [
-        {
-          "id": "bumblezone_arrival",
-          "label": "Bumblezone arrival",
-          "type": "dimension_enter",
-          "value": "the_bumblezone:the_bumblezone",
-          "producer": "better-content-threads",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "bumblezone_return",
-          "label": "Bumblezone return",
-          "type": "dimension_return",
-          "value": "the_bumblezone:the_bumblezone",
-          "producer": "better-content-threads",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "font",
-        "target": "the_bumblezone:the_bumblezone"
-      }
-    },
-    {
-      "id": "silence_has_teeth",
-      "concept_id": "world.silence_has_teeth",
-      "owner": "better-content-threads",
-      "title": "Exploring Ratlantis",
-      "suit": "world",
-      "order": 9,
-      "aspect": "endurance",
-      "art": "better_content_threads:textures/gui/threads/silence_has_teeth.png",
-      "rule": "Ratlantis contains dangerous ruins, machinery, and transport routes. Bring supplies and plan your return before exploring.",
-      "action": "Explore Ratlantis with enough supplies to return safely.",
-      "reveal_routes": [
-        {
-          "id": "ratlantis_arrival",
-          "label": "Ratlantis arrival",
-          "type": "dimension_enter",
-          "value": "rats:ratlantis",
-          "producer": "better-content-threads",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "ratlantis_return",
-          "label": "Ratlantis return",
-          "type": "dimension_return",
-          "value": "rats:ratlantis",
-          "producer": "better-content-threads",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "font",
-        "target": "rats:ratlantis"
-      }
-    },
-    {
-      "id": "weather_has_momentum",
-      "concept_id": "world.weather_has_momentum",
-      "owner": "compat.weather2",
-      "title": "Storm Shelter",
-      "suit": "world",
-      "order": 10,
-      "aspect": "tempo",
-      "art": "better_content_threads:textures/gui/threads/weather_has_momentum.png",
-      "rule": "Storms move through the world. Reach shelter and stay protected until the storm has passed.",
-      "action": "Stay in shelter while the storm passes.",
-      "reveal_routes": [
-        {
-          "id": "storm_exposure",
-          "label": "Storm exposure",
-          "type": "storm_exposure",
-          "value": "significant",
-          "producer": "compat.weather2",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "storm_shelter",
-          "label": "Sheltered from storm",
-          "type": "storm_shelter",
-          "value": "protected",
-          "producer": "compat.weather2",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "guideme",
-        "target": "weather2"
-      }
-    },
-    {
-      "id": "body_has_weather",
-      "concept_id": "world.body_has_weather",
-      "owner": "better-content-heat-sync",
-      "title": "Body Temperature",
-      "suit": "world",
-      "order": 11,
-      "aspect": "robustness",
-      "art": "better_content_threads:textures/gui/threads/body_has_weather.png",
-      "rule": "Body temperature differs from the surrounding temperature. Use clothing and shelter to keep your body within a safe range.",
-      "action": "Use clothing or shelter to restore a safe body temperature.",
-      "reveal_routes": [
-        {
-          "id": "temperature_stress",
-          "label": "Temperature stress",
-          "type": "temperature_stress",
-          "value": "hot|cold",
-          "producer": "better-content-heat-sync",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "temperature_restored",
-          "label": "Comfort restored",
-          "type": "temperature_comfort",
-          "value": "restored",
-          "producer": "better-content-heat-sync",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "guideme",
-        "target": "cold_sweat"
-      }
-    },
-    {
-      "id": "water_made_safe",
-      "concept_id": "world.water_made_safe",
-      "owner": "better-content-water-survival",
-      "title": "Safe Drinking Water",
-      "suit": "world",
-      "order": 12,
-      "aspect": "control",
-      "art": "better_content_threads:textures/gui/threads/water_made_safe.png",
-      "rule": "Water at purity level 3 is safe to drink. Lower purity can cause illness. Cold Sweat waterskins change temperature but do not restore thirst.",
-      "action": "Purify water to level 3 before drinking it.",
-      "reveal_routes": [
-        {
-          "id": "thirst_first_drop",
-          "label": "Thirst began",
-          "type": "thirst_loss",
-          "value": "first_drop",
-          "producer": "better-content-water-survival",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "purity_three_drunk",
-          "label": "Safe water drunk",
-          "type": "water_drink",
-          "value": "purity_3_correlated",
-          "producer": "better-content-water-survival",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "guideme",
-        "target": "thirst"
-      }
-    },
-    {
-      "id": "feast_before_journey",
-      "concept_id": "world.feast_before_journey",
-      "owner": "better-content-dimension-drink",
-      "title": "Preparing Food for Travel",
-      "suit": "world",
-      "order": 13,
-      "aspect": "endurance",
-      "art": "better_content_threads:textures/gui/threads/feast_before_journey.png",
-      "rule": "Hunger and nutrition are separate. Eat foods that replenish your nutrition before entering another dimension.",
-      "action": "Eat a balanced meal before traveling.",
-      "reveal_routes": [
-        {
-          "id": "portal_approach",
-          "label": "Portal approached",
-          "type": "portal_approach",
-          "value": "major_realm",
-          "producer": "better-content-dimension-drink",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "fed_crossing",
-          "label": "Meal before travel",
-          "type": "fed_dimension_enter",
-          "value": "*",
-          "producer": "better-content-dimension-drink",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "diet",
-        "target": "food_diversity"
-      }
-    },
-    {
-      "id": "hands_learn_repair",
-      "concept_id": "works.hands_learn_repair",
-      "owner": "compat.tconstruct",
-      "title": "Repairing Tinkers Tools",
-      "suit": "works",
-      "order": 1,
-      "aspect": "renewal",
-      "art": "better_content_threads:textures/gui/threads/hands_learn_repair.png",
-      "rule": "Tinkers tools can be repaired after use. Repair your damaged tool instead of replacing it.",
-      "action": "Repair a Tinkers tool damaged through use.",
-      "reveal_routes": [
-        {
-          "id": "tool_worn",
-          "label": "Worn tool",
-          "type": "tool_worn",
-          "value": "tconstruct",
-          "producer": "compat.tconstruct",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "tool_repaired",
-          "label": "Tool repaired",
-          "type": "tool_repaired",
-          "value": "correlated",
-          "producer": "compat.tconstruct",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "tconstruct",
-        "target": "repair"
-      }
-    },
-    {
-      "id": "materials_temperaments",
-      "concept_id": "works.materials_temperaments",
-      "owner": "compat.tconstruct",
-      "title": "Making Alloys",
-      "suit": "works",
-      "order": 2,
-      "aspect": "robustness",
-      "art": "better_content_threads:textures/gui/threads/materials_temperaments.png",
-      "rule": "Alloying requires the right fluids, proportions, and temperature in a working smeltery. Cast the resulting alloy into the material you need.",
-      "action": "Make an alloy in the smeltery and cast it.",
-      "reveal_routes": [
-        {
-          "id": "alloyable_fluids",
-          "label": "Alloyable fluids",
-          "type": "smeltery_alloyable",
-          "value": "*",
-          "producer": "compat.tconstruct",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "alloy_cast",
-          "label": "Cast alloy",
-          "type": "alloy_cast",
-          "value": "*",
-          "producer": "compat.tconstruct",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "tconstruct",
-        "target": "alloys"
-      }
-    },
-    {
-      "id": "motion_becomes_industry",
-      "concept_id": "works.motion_becomes_industry",
-      "owner": "compat.create",
-      "title": "Hand Crank Power",
-      "suit": "works",
-      "order": 3,
-      "aspect": "work",
-      "art": "better_content_threads:textures/gui/threads/motion_becomes_industry.png",
-      "rule": "The Hand Crank provides manual rotational power for Create machines. It is your only source of rotational power before the Nether.",
-      "action": "Use the Hand Crank to run a Create machine.",
-      "reveal_routes": [
-        {
-          "id": "manual_process",
-          "label": "Manual process",
-          "type": "create_manual_start",
-          "value": "*",
-          "producer": "compat.create",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "manual_completion",
-          "label": "Hand-powered work",
-          "type": "create_manual_complete",
-          "value": "*",
-          "producer": "compat.create",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "ponder",
-        "target": "create:hand_crank"
-      }
-    },
-    {
-      "id": "rivers_turn_work",
-      "concept_id": "works.rivers_turn_work",
-      "owner": "compat.create",
-      "title": "Water Wheel Power",
-      "suit": "works",
-      "order": 4,
-      "aspect": "work",
-      "art": "better_content_threads:textures/gui/threads/rivers_turn_work.png",
-      "rule": "Create water wheels provide renewable rotational power. Connect a wheel to a machine to use that power.",
-      "action": "Connect a water wheel and run a machine.",
-      "reveal_routes": [
-        {
-          "id": "water_rotation",
-          "label": "Water rotation",
-          "type": "kinetic_source",
-          "value": "water",
-          "producer": "compat.create",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "water_work",
-          "label": "River-powered work",
-          "type": "kinetic_complete",
-          "value": "water",
-          "producer": "compat.create",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "ponder",
-        "target": "create:large_water_wheel"
-      }
-    },
-    {
-      "id": "precision_has_rhythm",
-      "concept_id": "works.precision_has_rhythm",
-      "owner": "compat.create",
-      "title": "Making Precision Mechanisms",
-      "suit": "works",
-      "order": 5,
-      "aspect": "tempo",
-      "art": "better_content_threads:textures/gui/threads/precision_has_rhythm.png",
-      "rule": "Precision Mechanisms use Create sequenced assembly. Follow the recipe's steps in order and repeat the sequence as shown in EMI.",
-      "action": "Follow the Precision Mechanism recipe in EMI.",
-      "reveal_routes": [
-        {
-          "id": "precision_started",
-          "label": "Precision begun",
-          "type": "precision_start",
-          "value": "create:precision_mechanism",
-          "producer": "compat.create",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "precision_finished",
-          "label": "Precision completed",
-          "type": "precision_complete",
-          "value": "create:precision_mechanism",
-          "producer": "compat.create",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "emi",
-        "target": "create:precision_mechanism"
-      }
-    },
-    {
-      "id": "heat_go_somewhere",
-      "concept_id": "works.heat_go_somewhere",
-      "owner": "better-content-heat-sync",
-      "title": "Cooling Heat Networks",
-      "suit": "works",
-      "order": 6,
-      "aspect": "robustness",
-      "art": "better_content_threads:textures/gui/threads/heat_go_somewhere.png",
-      "rule": "A heat network needs a way to remove excess heat. Connect a heat sink and check that the network cools.",
-      "action": "Connect a heat sink and cool the network.",
-      "reveal_routes": [
-        {
-          "id": "excess_heat",
-          "label": "Excess process heat",
-          "type": "heat_excess",
-          "value": "*",
-          "producer": "better-content-heat-sync",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "heat_sunk",
-          "label": "Heat transferred",
-          "type": "heat_safe",
-          "value": "registered_sink",
-          "producer": "better-content-heat-sync",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "guideme",
-        "target": "heat_sync"
-      }
-    },
-    {
-      "id": "pressure_changes_matter",
-      "concept_id": "works.pressure_changes_matter",
-      "owner": "compat.pneumaticcraft",
-      "title": "Pressure Chamber Recipes",
-      "suit": "works",
-      "order": 7,
-      "aspect": "impact",
-      "art": "better_content_threads:textures/gui/threads/pressure_changes_matter.png",
-      "rule": "The Pressure Chamber needs a complete enclosure and enough pressure for its recipe. Check both before processing items.",
-      "action": "Check the chamber and pressure, then complete a recipe.",
-      "reveal_routes": [
-        {
-          "id": "working_pressure",
-          "label": "Working pressure",
-          "type": "pressure_working",
-          "value": "*",
-          "producer": "compat.pneumaticcraft",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "safe_pressure_recipe",
-          "label": "Safe pressure process",
-          "type": "pressure_complete",
-          "value": "safe",
-          "producer": "compat.pneumaticcraft",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "guideme",
-        "target": "pneumaticcraft"
-      }
-    },
-    {
-      "id": "chemistry_remembers_sequence",
-      "concept_id": "works.chemistry_remembers_sequence",
-      "owner": "better-content-realistic-ores",
-      "title": "Processing Ore",
-      "suit": "works",
-      "order": 8,
-      "aspect": "control",
-      "art": "better_content_threads:textures/gui/threads/chemistry_remembers_sequence.png",
-      "rule": "Ore families use different separation processes. Look up your crushed ore in EMI and follow the steps for the concentrate you need.",
-      "action": "Look up the separation steps for your crushed ore.",
-      "reveal_routes": [
-        {
-          "id": "deposit_feed",
-          "label": "Deposit feed",
-          "type": "chemistry_feed",
-          "value": "*",
-          "producer": "better-content-realistic-ores",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "concentrate_route",
-          "label": "Separated concentrate",
-          "type": "chemistry_concentrate",
-          "value": "*",
-          "producer": "better-content-realistic-ores",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "guideme",
-        "target": "realistic_ores:processing"
-      }
-    },
-    {
-      "id": "electricity_agreement",
-      "concept_id": "works.electricity_agreement",
-      "owner": "compat.powergrid",
-      "title": "Powering Machines",
-      "suit": "works",
-      "order": 9,
-      "aspect": "work",
-      "art": "better_content_threads:textures/gui/threads/electricity_agreement.png",
-      "rule": "A generator supplies machines through a connected wire network. Check that the machine receives power.",
-      "action": "Connect a generator to a machine and check its power.",
-      "reveal_routes": [
-        {
-          "id": "power_network",
-          "label": "Power network",
-          "type": "electric_network",
-          "value": "connected",
-          "producer": "compat.powergrid",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "powered_recipe",
-          "label": "Powered work",
-          "type": "electric_complete",
-          "value": "generated_transmitted_consumed",
-          "producer": "compat.powergrid",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "emi",
-        "target": "powergrid:generator_housing"
-      }
-    },
-    {
-      "id": "machines_can_remember",
-      "concept_id": "works.machines_can_remember",
-      "owner": "compat.ae2",
-      "title": "AE2 Autocrafting",
-      "suit": "works",
-      "order": 10,
-      "aspect": "control",
-      "art": "better_content_threads:textures/gui/threads/machines_can_remember.png",
-      "rule": "AE2 uses encoded patterns to automate crafting. Configure the network, encode a pattern, and request the item.",
-      "action": "Encode an AE2 pattern and request its output.",
-      "reveal_routes": [
-        {
-          "id": "machine_memory",
-          "label": "Pattern encoded",
-          "type": "machine_memory",
-          "value": "ae2",
-          "producer": "compat.ae2",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "ae2_autocraft",
-          "label": "Patterned autocraft",
-          "type": "machine_recall",
-          "value": "ae2",
-          "producer": "compat.ae2",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "emi",
-        "target": "ae2:controller"
-      }
-    },
-    {
-      "id": "rails_turn_distance",
-      "concept_id": "works.rails_turn_distance",
-      "owner": "compat.create",
-      "title": "Scheduled Train Travel",
-      "suit": "works",
-      "order": 11,
-      "aspect": "tempo",
-      "art": "better_content_threads:textures/gui/threads/rails_turn_distance.png",
-      "rule": "Create trains use stations and schedules for planned trips. Set up stations and a schedule, then ride the train between them.",
-      "action": "Ride a scheduled train between stations at least 128 blocks apart.",
-      "reveal_routes": [
-        {
-          "id": "stations_linked",
-          "label": "Stations linked",
-          "type": "train_stations",
-          "value": "linked",
-          "producer": "compat.create",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "scheduled_ride",
-          "label": "Scheduled passage",
-          "type": "train_ride",
-          "value": "128",
-          "producer": "compat.create",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "ponder",
-        "target": "create:track_station"
-      }
-    },
-    {
-      "id": "vessel_becomes_place",
-      "concept_id": "works.vessel_becomes_place",
-      "owner": "compat.valkyrienskies",
-      "title": "Piloting Ships",
-      "suit": "works",
-      "order": 12,
-      "aspect": "mobility",
-      "art": "better_content_threads:textures/gui/threads/vessel_becomes_place.png",
-      "rule": "An assembled ship can move across the world. Pilot the ship and choose a safe place to land.",
-      "action": "Pilot your ship at least 128 blocks and land safely.",
-      "reveal_routes": [
-        {
-          "id": "vessel_assembled",
-          "label": "Vessel assembled",
-          "type": "vessel_assemble",
-          "value": "*",
-          "producer": "compat.valkyrienskies",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "vessel_landfall",
-          "label": "Made landfall",
-          "type": "vessel_landfall",
-          "value": "128",
-          "producer": "compat.valkyrienskies",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "emi",
-        "target": "vs_eureka:oak_ship_helm"
-      }
-    },
-    {
-      "id": "leave_atmosphere",
-      "concept_id": "works.leave_atmosphere",
-      "owner": "compat.creating-space",
-      "title": "Reaching Orbit",
-      "suit": "works",
-      "order": 13,
-      "aspect": "endurance",
-      "art": "better_content_threads:textures/gui/threads/leave_atmosphere.png",
-      "rule": "A rocket needs a valid destination, enough thrust, and enough delta-v. Check the rocket controls before launching to Earth orbit.",
-      "action": "Use the rocket controls to prepare a launch to Earth orbit.",
-      "reveal_routes": [
-        {
-          "id": "rocket_ready",
-          "label": "Launch-ready rocket",
-          "type": "rocket_ready",
-          "value": "*",
-          "producer": "compat.creating-space",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "orbit_reached",
-          "label": "Reached orbit",
-          "type": "orbit_reached",
-          "value": "*",
-          "producer": "compat.creating-space",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "emi",
-        "target": "creatingspace:rocket_controls"
-      }
-    },
-    {
-      "id": "life_becomes_capable",
-      "concept_id": "powers.life_becomes_capable",
-      "owner": "better-content-rpg-stats",
-      "title": "Spending Life Points",
-      "suit": "powers",
-      "order": 1,
-      "aspect": "renewal",
-      "art": "better_content_threads:textures/gui/threads/life_becomes_capable.png",
-      "rule": "Life points improve your stats when you spend them. Open the stats screen to review the effects before applying your choices.",
-      "action": "Open the stats screen and spend an available Life point.",
-      "reveal_routes": [
-        {
-          "id": "allocation_available",
-          "label": "Life point available",
-          "type": "life_allocation",
-          "value": "available",
-          "producer": "better-content-rpg-stats",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "allocation_spent",
-          "label": "Life point spent",
-          "type": "life_allocation",
-          "value": "spent",
-          "producer": "better-content-rpg-stats",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "rpg",
-        "target": "allocations"
-      }
-    },
-    {
-      "id": "blood_infrastructure",
-      "concept_id": "powers.blood_infrastructure",
-      "owner": "compat.bloodmagic",
-      "title": "Using the Blood Altar",
-      "suit": "powers",
-      "order": 2,
-      "aspect": "renewal",
-      "art": "better_content_threads:textures/gui/threads/blood_infrastructure.png",
-      "rule": "The Blood Altar uses Life Essence to process items. Supply the altar and insert an item with an altar recipe.",
-      "action": "Supply Life Essence and complete an altar recipe.",
-      "reveal_routes": [
-        {
-          "id": "altar_bound",
-          "label": "Bound altar",
-          "type": "blood_altar",
-          "value": "bound",
-          "producer": "compat.bloodmagic",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "altar_result",
-          "label": "Life Essence used",
-          "type": "blood_complete",
-          "value": "player_lp",
-          "producer": "compat.bloodmagic",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "powers",
-        "target": "Blood Magic"
-      }
-    },
-    {
-      "id": "dead_leave_work",
-      "concept_id": "powers.dead_leave_work",
-      "owner": "compat.malum-goety",
-      "title": "Using Soul Resources",
-      "suit": "powers",
-      "order": 3,
-      "aspect": "impact",
-      "art": "better_content_threads:textures/gui/threads/dead_leave_work.png",
-      "rule": "Malum and Goety use soul resources for their operations. Collect the resource needed by the system you are using.",
-      "action": "Use a soul resource in a Malum or Goety operation.",
-      "reveal_routes": [
-        {
-          "id": "soul_acquired",
-          "label": "Soul acquired",
-          "type": "soul_resource",
-          "value": "malum|goety",
-          "producer": "compat.malum-goety",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "malum_work",
-          "label": "Malum soul-work",
-          "type": "soul_work",
-          "value": "malum",
-          "producer": "compat.malum-goety",
-          "correlation": "episode"
-        },
-        {
-          "id": "goety_work",
-          "label": "Goety soul-work",
-          "type": "soul_work",
-          "value": "goety",
-          "producer": "compat.malum-goety",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "powers",
-        "target": "Soul Work"
-      }
-    },
-    {
-      "id": "spirits_honour_contracts",
-      "concept_id": "powers.spirits_honour_contracts",
-      "owner": "compat.occultism",
-      "title": "Occultism Rituals",
-      "suit": "powers",
-      "order": 4,
-      "aspect": "control",
-      "art": "better_content_threads:textures/gui/threads/spirits_honour_contracts.png",
-      "rule": "An Occultism ritual needs the correct layout and offerings. Follow its instructions and wait for the ritual to finish.",
-      "action": "Complete a ritual using the required layout and offerings.",
-      "reveal_routes": [
-        {
-          "id": "binding_started",
-          "label": "Binding begun",
-          "type": "spirit_binding",
-          "value": "occultism",
-          "producer": "compat.occultism",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "occultist_contract",
-          "label": "Ritual completed",
-          "type": "spirit_complete",
-          "value": "occultism",
-          "producer": "compat.occultism",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "powers",
-        "target": "Spirit Contracts"
-      }
-    },
-    {
-      "id": "reality_has_grammar",
-      "concept_id": "powers.reality_has_grammar",
-      "owner": "compat.ars-nouveau",
-      "title": "Writing Ars Spells",
-      "suit": "powers",
-      "order": 5,
-      "aspect": "control",
-      "art": "better_content_threads:textures/gui/threads/reality_has_grammar.png",
-      "rule": "Ars Nouveau spells apply glyphs in order. Write a spell and cast it on a target where its effects can work.",
-      "action": "Write a spell and test it on a suitable target.",
-      "reveal_routes": [
-        {
-          "id": "spell_authored",
-          "label": "Spell written",
-          "type": "spell_authored",
-          "value": "ars_nouveau",
-          "producer": "compat.ars-nouveau",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "spell_effect",
-          "label": "Spell cast",
-          "type": "spell_effect",
-          "value": "ars_nouveau",
-          "producer": "compat.ars-nouveau",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "powers",
-        "target": "Ars Nouveau"
-      }
-    },
-    {
-      "id": "elements_change_sentence",
-      "concept_id": "powers.elements_change_sentence",
-      "owner": "compat.ars-elemental",
-      "title": "Elemental Spell Effects",
-      "suit": "powers",
-      "order": 6,
-      "aspect": "impact",
-      "art": "better_content_threads:textures/gui/threads/elements_change_sentence.png",
-      "rule": "Elemental modifiers change how an Ars spell affects its target. Test the modified spell on a suitable target.",
-      "action": "Test an elemental spell where its effect can work.",
-      "reveal_routes": [
-        {
-          "id": "element_added",
-          "label": "Element added",
-          "type": "spell_element",
-          "value": "added",
-          "producer": "compat.ars-elemental",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "element_triggered",
-          "label": "Element enacted",
-          "type": "spell_element",
-          "value": "triggered",
-          "producer": "compat.ars-elemental",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "powers",
-        "target": "Ars Elemental"
-      }
-    },
-    {
-      "id": "doors_borrow_worlds",
-      "concept_id": "powers.doors_borrow_worlds",
-      "owner": "better-content-dimensional-font",
-      "title": "Dimensional Font Travel",
-      "suit": "powers",
-      "order": 7,
-      "aspect": "mobility",
-      "art": "better_content_threads:textures/gui/threads/doors_borrow_worlds.png",
-      "rule": "Dimensional Fonts provide return trips to other dimensions. Keep track of your Font journey and how to return.",
-      "action": "Return from your Dimensional Font trip.",
-      "reveal_routes": [
-        {
-          "id": "font_departure",
-          "label": "Font departure",
-          "type": "font_transit",
-          "value": "depart",
-          "producer": "better-content-dimensional-font",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "font_return",
-          "label": "Font return",
-          "type": "font_transit",
-          "value": "return",
-          "producer": "better-content-dimensional-font",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "font",
-        "target": "dimensional_font"
-      }
-    },
-    {
-      "id": "power_needs_anchor",
-      "concept_id": "powers.power_needs_anchor",
-      "owner": "better-content-arcane-chunk-loaders",
-      "title": "Keeping Chunks Loaded",
-      "suit": "powers",
-      "order": 8,
-      "aspect": "robustness",
-      "art": "better_content_threads:textures/gui/threads/power_needs_anchor.png",
-      "rule": "A chunk anchor keeps nearby chunks running while you are away. Supply the resource required by that anchor.",
-      "action": "Supply the anchor and check your machines after leaving the area.",
-      "reveal_routes": [
-        {
-          "id": "anchor_placed",
-          "label": "Anchor placed",
-          "type": "arcane_anchor",
-          "value": "placed",
-          "producer": "better-content-arcane-chunk-loaders",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "anchor_persisted",
-          "label": "Persistent anchor",
-          "type": "arcane_anchor",
-          "value": "ticket_verified",
-          "producer": "better-content-arcane-chunk-loaders",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "guideme",
-        "target": "arcane_chunk_loaders"
-      }
-    },
-    {
-      "id": "traditions_can_cross",
-      "concept_id": "powers.traditions_can_cross",
-      "owner": "compat.ars-addons",
-      "title": "Connecting Magic Systems",
-      "suit": "powers",
-      "order": 9,
-      "aspect": "control",
-      "art": "better_content_threads:textures/gui/threads/traditions_can_cross.png",
-      "rule": "Ars Creo connects Ars Nouveau to Create machines. Check EMI for available machines and their requirements.",
-      "action": "Check EMI for Ars Creo machines and their requirements.",
-      "reveal_routes": [
-        {
-          "id": "hybrid_constructed",
-          "label": "Combined machine built",
-          "type": "tradition_cross",
-          "value": "constructed",
-          "producer": "compat.ars-addons",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "ars_creo",
-          "label": "Ars Creo machine used",
-          "type": "tradition_cross",
-          "value": "ars_creo",
-          "producer": "compat.ars-addons",
-          "correlation": "episode"
-        },
-        {
-          "id": "ars_energistique",
-          "label": "Source converted",
-          "type": "tradition_cross",
-          "value": "ars_energistique",
-          "producer": "compat.ars-addons",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "powers",
-        "target": "Hybrid Traditions"
-      }
-    },
-    {
-      "id": "relics_remember_wearers",
-      "concept_id": "powers.relics_remember_wearers",
-      "owner": "compat.relics",
-      "title": "Developing Relics",
-      "suit": "powers",
-      "order": 10,
-      "aspect": "endurance",
-      "art": "better_content_threads:textures/gui/threads/relics_remember_wearers.png",
-      "rule": "A relic gains experience through use. Keep using the same item in situations where its abilities work.",
-      "action": "Use the same relic again where it can gain experience.",
-      "reveal_routes": [
-        {
-          "id": "relic_first",
-          "label": "Relic used",
-          "type": "relic_activation",
-          "value": "first",
-          "producer": "compat.relics",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "relic_second",
-          "label": "Relic used again",
-          "type": "relic_activation",
-          "value": "correlated_second",
-          "producer": "compat.relics",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "emi",
-        "target": "artifacts"
-      }
-    },
-    {
-      "id": "source_becomes_machinery",
-      "concept_id": "powers.source_becomes_machinery",
-      "owner": "compat.ars-energistique",
-      "title": "Using Source for Machinery",
-      "suit": "powers",
-      "order": 11,
-      "aspect": "work",
-      "art": "better_content_threads:textures/gui/threads/source_becomes_machinery.png",
-      "rule": "Source Chunk Anchors and Rail Beetle Source Impellers use Ars Source. Ars Energistique conversion is disabled in Better Content.",
-      "action": "Check the Source requirements of your anchor or engine.",
-      "reveal_routes": [
-        {
-          "id": "source_connected",
-          "label": "Source connected",
-          "type": "source_machine",
-          "value": "connected",
-          "producer": "compat.ars-energistique",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "source_process",
-          "label": "Source-powered work",
-          "type": "source_machine",
-          "value": "complete",
-          "producer": "compat.ars-energistique",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "powers",
-        "target": "Ars Energistique"
-      }
-    },
-    {
-      "id": "rules_adhere_matter",
-      "concept_id": "powers.rules_adhere_matter",
-      "owner": "better-content-threads",
-      "title": "Using Enchantments",
-      "suit": "powers",
-      "order": 12,
-      "aspect": "robustness",
-      "art": "better_content_threads:textures/gui/threads/rules_adhere_matter.png",
-      "rule": "Enchantments work under specific conditions. Check the enchantment's effect and use the item where that effect applies.",
-      "action": "Use an enchanted item where its effect applies.",
-      "reveal_routes": [
-        {
-          "id": "item_enchanted",
-          "label": "Item enchanted",
-          "type": "enchant_apply",
-          "value": "supported",
-          "producer": "better-content-threads",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "enchant_triggered",
-          "label": "Enchantment used",
-          "type": "enchant_effect",
-          "value": "correlated",
-          "producer": "better-content-threads",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "emi",
-        "target": "minecraft:enchanting_table"
-      }
-    },
-    {
-      "id": "body_borrow_state",
-      "concept_id": "powers.body_borrow_state",
-      "owner": "better-content-threads",
-      "title": "Temporary Protection",
-      "suit": "powers",
-      "order": 13,
-      "aspect": "tempo",
-      "art": "better_content_threads:textures/gui/threads/body_borrow_state.png",
-      "rule": "Temporary protections help with specific hazards. Choose a protection that matches the danger you face.",
-      "action": "Use a temporary protection suited to the hazard.",
-      "reveal_routes": [
-        {
-          "id": "hazard_met",
-          "label": "Hazard encountered",
-          "type": "effect_hazard",
-          "value": "fire|water|dark|temperature",
-          "producer": "better-content-threads",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "state_borrowed",
-          "label": "Protection used",
-          "type": "effect_resolution",
-          "value": "correlated",
-          "producer": "better-content-threads",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "emi",
-        "target": "minecraft:potion"
-      }
-    },
-    {
-      "id": "life_reaches_tether",
-      "concept_id": "fragility.life_reaches_tether",
-      "owner": "better-content-threads",
-      "title": "Downing and Revival",
-      "suit": "fragility",
-      "order": 1,
-      "aspect": "endurance",
-      "art": "better_content_threads:textures/gui/threads/life_reaches_tether.png",
-      "rule": "When you are downed, another player can revive you before you bleed out. Death ends the revival opportunity and resets your Life stats.",
-      "action": "Wait for help and follow the revival controls on screen.",
-      "reveal_routes": [
-        {
-          "id": "player_downed",
-          "label": "Player downed",
-          "type": "downed",
-          "value": "player",
-          "producer": "better-content-threads",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "bleed_out",
-          "label": "Player died",
-          "type": "death",
-          "value": "player",
-          "producer": "better-content-threads",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "guideme",
-        "target": "downed_player_revival"
-      }
-    },
-    {
-      "id": "ruins_are_instructions",
-      "concept_id": "fragility.ruins_are_instructions",
-      "owner": "better-content-threads",
-      "title": "Exploring Ruins",
-      "suit": "fragility",
-      "order": 2,
-      "aspect": "control",
-      "art": "better_content_threads:textures/gui/threads/ruins_are_instructions.png",
-      "rule": "Ruins contain resources and threats. Explore carefully and return with supplies before starting another expedition.",
-      "action": "Leave the ruin alive with an item you found inside.",
-      "reveal_routes": [
-        {
-          "id": "ruin_entered",
-          "label": "Entered ruin",
-          "type": "structure_enter",
-          "value": "major_ruin",
-          "producer": "better-content-threads",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "ruin_evidence",
-          "label": "Recovered evidence",
-          "type": "structure_exit",
-          "value": "new_item_alive",
-          "producer": "better-content-threads",
-          "correlation": "episode"
+          "producer": "compat.dynamictrees"
         }
       ]
     },
     {
-      "id": "enemies_no_cause",
-      "concept_id": "fragility.enemies_no_cause",
-      "owner": "better-content-threads",
-      "title": "Hostile Faction Combat",
-      "suit": "fragility",
+      "id": "surveyed_deposit",
+      "concept_id": "world.surveyed_deposit",
+      "owner": "realistic-ores",
+      "title": "Surface Signs Predict Deposits",
+      "topic": "world",
+      "order": 2,
+      "art": "better_content_threads:textures/gui/threads/surveyed_deposit.png",
+      "event": "You extracted ore matching your earlier surface survey.",
+      "cause": "Surface samples identify underground deposit families. Your matching extraction confirms the connection between the sign and the deposit.",
+      "action": "Follow other samples and use the prospecting guide to identify their deposits.",
+      "discovery_routes": [
+        {
+          "id": "surveyed_deposit",
+          "type": "deposit_extract",
+          "value": "*",
+          "producer": "realistic-ores"
+        }
+      ]
+    },
+    {
+      "id": "returned_traces",
+      "concept_id": "world.returned_traces",
+      "owner": "player-traces",
+      "title": "Earlier Work Leaves Traces",
+      "topic": "world",
       "order": 3,
-      "aspect": "tempo",
-      "art": "better_content_threads:textures/gui/threads/enemies_no_cause.png",
-      "rule": "Different hostile factions can fight each other. Position yourself so an attack from one faction hits another.",
-      "action": "Position one hostile faction to hit another.",
-      "reveal_routes": [
+      "art": "better_content_threads:textures/gui/threads/returned_traces.png",
+      "event": "You returned to traces of your earlier activity.",
+      "cause": "Player Traces preserves evidence of movement and work. Returning to a recorded place lets you recognize its history.",
+      "action": "Open Trace Sight to inspect the traces around you.",
+      "discovery_routes": [
         {
-          "id": "factions_target",
-          "label": "Factions encountered",
-          "type": "hostile_collision",
-          "value": "targeted_by_two",
-          "producer": "better-content-threads",
-          "correlation": "episode"
+          "id": "returned_traces",
+          "type": "trace_return",
+          "value": "own_old_trace",
+          "producer": "player-traces"
         }
-      ],
-      "completion_routes": [
-        {
-          "id": "factions_collide",
-          "label": "Factions fought",
-          "type": "hostile_collision",
-          "value": "cross_damage",
-          "producer": "better-content-threads",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "guideme",
-        "target": "hostile_factions"
-      }
+      ]
     },
     {
-      "id": "copy_outlives_work",
-      "concept_id": "fragility.copy_outlives_work",
-      "owner": "better-content-world-lifecycle-manager",
-      "title": "Saving Builds as Schematics",
-      "suit": "fragility",
+      "id": "road_destination",
+      "concept_id": "world.road_destination",
+      "owner": "settlement-roads",
+      "title": "Roads Connect Settlements",
+      "topic": "world",
       "order": 4,
-      "aspect": "robustness",
-      "art": "better_content_threads:textures/gui/threads/copy_outlives_work.png",
-      "rule": "Publish a schematic to preserve a build's design across world resets. The schematic stores the design, not the blocks needed to build it.",
-      "action": "Publish your build to the lineage schematic library.",
-      "reveal_routes": [
+      "art": "better_content_threads:textures/gui/threads/road_destination.png",
+      "event": "Your road journey reached a settlement.",
+      "cause": "Settlement roads connect places through the wilderness. Following the route can lead to inhabited infrastructure without wandering at random.",
+      "action": "Remember the route for your next journey and inspect the settlement's services.",
+      "discovery_routes": [
         {
-          "id": "schematic_captured",
-          "label": "Build captured",
-          "type": "schematic_capture",
-          "value": "substantial",
-          "producer": "better-content-world-lifecycle-manager",
-          "correlation": "episode"
+          "id": "road_destination",
+          "type": "road_arrival",
+          "value": "settlement",
+          "producer": "settlement-roads"
         }
-      ],
-      "completion_routes": [
-        {
-          "id": "schematic_published",
-          "label": "Lineage copy",
-          "type": "schematic_publish",
-          "value": "correlated",
-          "producer": "better-content-world-lifecycle-manager",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "lifecycle",
-        "target": "schematic_library"
-      }
+      ]
     },
     {
-      "id": "army_walks_toward_you",
-      "concept_id": "fragility.army_walks_toward_you",
-      "owner": "better-content-pillager-campaigns",
-      "title": "Preparing for Pillager Assaults",
-      "suit": "fragility",
+      "id": "cave_warning",
+      "concept_id": "world.cave_warning",
+      "owner": "depth-director",
+      "title": "An Underground Approach Was Announced",
+      "topic": "world",
       "order": 5,
-      "aspect": "impact",
-      "art": "better_content_threads:textures/gui/threads/army_walks_toward_you.png",
-      "rule": "Pillager assaults are announced before arrival. Use the warning to gather allies, prepare defenses, or reach shelter.",
-      "action": "Prepare shelter and defenses when an assault is announced.",
-      "reveal_routes": [
+      "art": "better_content_threads:textures/gui/threads/cave_warning.png",
+      "event": "A cave encounter announced its approach toward you.",
+      "cause": "Directional sounds, rumbles, and falling debris warn of an approaching underground encounter. The warning comes from its approach direction.",
+      "action": "Look toward the sound, find an escape route, and prepare before the attackers arrive.",
+      "discovery_routes": [
         {
-          "id": "campaign_warned",
-          "label": "Campaign warned",
-          "type": "campaign_state",
-          "value": "gathering|approaching|materialized",
-          "producer": "better-content-pillager-campaigns",
-          "correlation": "episode"
+          "id": "cave_warning",
+          "type": "depth_warning",
+          "value": "committed",
+          "producer": "depth-director"
         }
-      ],
-      "completion_routes": [
-        {
-          "id": "campaign_resolved",
-          "label": "Campaign resolved",
-          "type": "campaign_outcome",
-          "value": "survived|defeated",
-          "producer": "better-content-pillager-campaigns",
-          "correlation": "episode"
-        },
-        {
-          "id": "campaign_retreated",
-          "label": "Campaign retreated",
-          "type": "campaign_outcome",
-          "value": "retreated",
-          "producer": "better-content-pillager-campaigns",
-          "correlation": "episode"
-        },
-        {
-          "id": "campaign_target_dead",
-          "label": "Target fell",
-          "type": "campaign_outcome",
-          "value": "target_dead",
-          "producer": "better-content-pillager-campaigns",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "campaign",
-        "target": "status"
-      }
+      ]
     },
     {
-      "id": "world_can_be_condensed",
-      "concept_id": "fragility.world_can_be_condensed",
-      "owner": "better-content-world-lifecycle-manager",
-      "title": "Resetting the World",
-      "suit": "fragility",
+      "id": "transplanted_cultivar",
+      "concept_id": "world.transplanted_cultivar",
+      "owner": "bumblezone-cultivars",
+      "title": "Cultivars Can Grow Abroad",
+      "topic": "world",
       "order": 6,
-      "aspect": "renewal",
-      "art": "better_content_threads:textures/gui/threads/world_can_be_condensed.png",
-      "rule": "The World Condenser starts a permanent world reset. Review its interface and save what can carry over before committing.",
-      "action": "Commit only when you intend to reset the world.",
-      "reveal_routes": [
+      "art": "better_content_threads:textures/gui/threads/transplanted_cultivar.png",
+      "event": "Your imported cultivar produced a harvest in the Overworld.",
+      "cause": "Bumblezone is the source of cultivatable food flora, but compatible plants can grow in the Overworld after you bring their seeds home.",
+      "action": "Keep seeds for replanting and check the plant's growing conditions.",
+      "discovery_routes": [
         {
-          "id": "condenser_formed",
-          "label": "Condenser formed",
-          "type": "condenser",
-          "value": "formed",
-          "producer": "better-content-world-lifecycle-manager",
-          "correlation": "episode"
+          "id": "transplanted_cultivar",
+          "type": "cultivar_harvest",
+          "value": "overworld",
+          "producer": "bumblezone-cultivars"
         }
-      ],
-      "completion_routes": [
-        {
-          "id": "successor_verified",
-          "label": "Verified successor",
-          "type": "successor",
-          "value": "verified",
-          "producer": "better-content-world-lifecycle-manager",
-          "correlation": "episode"
-        }
-      ],
-      "doorway": {
-        "type": "lifecycle",
-        "target": "world_condenser"
-      }
+      ]
     },
     {
-      "id": "sleep_is_not_an_anchor",
-      "concept_id": "survival.sleep_and_spawn",
-      "owner": "better-content-fixes",
-      "title": "Sleep and Permanent Spawn",
-      "suit": "fragility",
+      "id": "trading_spirits",
+      "concept_id": "world.trading_spirits",
+      "owner": "better-content-economy",
+      "title": "Kills Release Trading Spirits",
+      "topic": "world",
       "order": 7,
-      "aspect": "control",
-      "rule": "Sleep speeds up the world simulation. Machines, weather, and threats continue during sleep. Beds do not change your permanent spawn point.",
-      "action": "Check your machines and surroundings before sleeping.",
-      "reveal_routes": [
+      "art": "better_content_threads:textures/gui/threads/trading_spirits.png",
+      "event": "A kill credited to you released trading spirits.",
+      "cause": "Credited player kills release spirits. Village markets accept their matching spirit colour; eldritch and umbral spirits are not trading currency.",
+      "action": "Check a market's accepted spirit before choosing a trade.",
+      "discovery_routes": [
         {
-          "id": "sleep_started",
-          "label": "Sleep begun",
-          "type": "sleep_started",
-          "value": "night",
-          "producer": "better-content-fixes",
-          "correlation": "episode"
+          "id": "trading_spirits",
+          "type": "spirit_acquired",
+          "value": "*",
+          "producer": "better-content-economy"
         }
-      ],
-      "completion_routes": [
-        {
-          "id": "sleep_finished",
-          "label": "Night simulated",
-          "type": "sleep_finished",
-          "value": "simulated_time",
-          "producer": "better-content-fixes",
-          "correlation": "episode"
-        }
-      ],
-      "art": "better_content_threads:textures/gui/threads/sleep_is_not_an_anchor.png"
+      ]
     },
     {
-      "id": "hunger_is_not_nutrition",
-      "concept_id": "survival.hunger_and_nutrition",
-      "owner": "systemic-salience",
-      "title": "Hunger and Nutrition",
-      "suit": "fragility",
+      "id": "frozen_food",
+      "concept_id": "body.frozen_food",
+      "owner": "heat-sync",
+      "title": "Frozen Food Cannot Be Eaten",
+      "topic": "body",
       "order": 8,
-      "aspect": "endurance",
-      "rule": "A full hunger bar does not mean all your nutrition groups are filled. Check the nutrition screen and eat foods for your lowest groups.",
-      "action": "Eat foods that replenish your lowest nutrition groups.",
-      "reveal_routes": [
+      "art": "better_content_threads:textures/gui/threads/frozen_food.png",
+      "event": "The food you tried to eat was frozen.",
+      "cause": "Frozen food must thaw before it can be eaten. Food retains its thermal state in storage and when matching stacks merge.",
+      "action": "Warm the food and check its tooltip before trying again.",
+      "discovery_routes": [
         {
-          "id": "nutrition_warning",
-          "label": "Nutrition warning",
-          "type": "nutrition_warning",
-          "value": "hunger_full_nutrition_low",
-          "producer": "systemic-salience",
-          "correlation": "episode"
+          "id": "frozen_food",
+          "type": "food_thermal_state",
+          "value": "frozen_use_rejected",
+          "producer": "heat-sync"
         }
-      ],
-      "completion_routes": [
+      ]
+    },
+    {
+      "id": "sugar_crash",
+      "concept_id": "body.sugar_crash",
+      "owner": "systemic-salience",
+      "title": "A Sugar Boost Became a Crash",
+      "topic": "body",
+      "order": 9,
+      "art": "better_content_threads:textures/gui/threads/sugar_crash.png",
+      "event": "Your sugar boost gave way to a metabolic crash.",
+      "cause": "Sugar provides a temporary boost, but its associated metabolic debt can outlast it. The crash is a resource state, not an injury.",
+      "action": "Let the debt recover and check your nutrition before adding more sugar.",
+      "discovery_routes": [
         {
-          "id": "nutrition_recovered",
-          "label": "Balanced recovery",
-          "type": "nutrition_recovered",
-          "value": "balanced_meal",
-          "producer": "systemic-salience",
-          "correlation": "episode"
+          "id": "sugar_crash",
+          "type": "sugar_crash",
+          "value": "entered",
+          "producer": "systemic-salience"
         }
       ],
       "doorway": {
         "type": "diet",
-        "target": "systemic_salience"
-      },
-      "art": "better_content_threads:textures/gui/threads/hunger_is_not_nutrition.png"
+        "target": "nutrition"
+      }
     },
     {
-      "id": "food_carries_weather",
-      "concept_id": "survival.food_thermal_state",
-      "owner": "heat-sync",
-      "title": "Food Temperature",
-      "suit": "fragility",
-      "order": 9,
-      "aspect": "robustness",
-      "rule": "Food retains its temperature state in storage and when stacks merge. Check the tooltip and thaw frozen food before eating.",
-      "action": "Check food temperature before eating or using it.",
-      "reveal_routes": [
-        {
-          "id": "food_state_changed",
-          "label": "Food changed state",
-          "type": "food_thermal_state",
-          "value": "non_neutral",
-          "producer": "heat-sync",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "food_state_resolved",
-          "label": "Food state resolved",
-          "type": "food_thermal_use",
-          "value": "appropriate",
-          "producer": "heat-sync",
-          "correlation": "episode"
-        }
-      ],
-      "art": "better_content_threads:textures/gui/threads/food_carries_weather.png"
-    },
-    {
-      "id": "coins_do_not_climb",
-      "concept_id": "economy.spirits_remember_kills",
-      "owner": "better-content-economy",
-      "title": "Trading with Spirits",
-      "suit": "fragility",
+      "id": "heavy_blow",
+      "concept_id": "body.heavy_blow",
+      "owner": "systemic-salience",
+      "title": "Nutrition Strengthened That Blow",
+      "topic": "body",
       "order": 10,
-      "aspect": "work",
-      "rule": "Player-credited kills release trading spirits. Each village market accepts its matching spirit color. Eldritch and umbral spirits cannot be used for trade.",
-      "action": "Collect a trading spirit and spend it at a matching market.",
-      "reveal_routes": [
+      "art": "better_content_threads:textures/gui/threads/heavy_blow.png",
+      "event": "Your prepared attack triggered Heavy Blow.",
+      "cause": "High protein nutrition can strengthen a rested, charged attack. Heavy Blow has a recovery interval before it can trigger again.",
+      "action": "Maintain protein nutrition and allow the attack to recover before relying on another heavy blow.",
+      "discovery_routes": [
         {
-          "id": "spirit_acquired",
-          "label": "Kill spirit collected",
-          "type": "spirit_acquired",
-          "value": "*",
-          "producer": "better-content-economy",
-          "correlation": "episode"
+          "id": "heavy_blow",
+          "type": "heavy_blow",
+          "value": "executed",
+          "producer": "systemic-salience"
         }
       ],
-      "completion_routes": [
-        {
-          "id": "authored_trade",
-          "label": "Spirit spent",
-          "type": "authored_trade",
-          "value": "matching_spirit_spent",
-          "producer": "better-content-economy",
-          "correlation": "episode"
-        }
-      ],
-      "art": "better_content_threads:textures/gui/threads/coins_do_not_climb.png"
+      "doorway": {
+        "type": "diet",
+        "target": "nutrition"
+      }
     },
     {
-      "id": "the_end_is_not_a_door",
-      "concept_id": "world.authored_realm_access",
-      "owner": "better-content-dimension-access",
-      "title": "The End Is Unavailable",
-      "suit": "fragility",
+      "id": "work_rhythm",
+      "concept_id": "body.work_rhythm",
+      "owner": "systemic-salience",
+      "title": "Sustained Work Built a Rhythm",
+      "topic": "body",
       "order": 11,
-      "aspect": "mobility",
-      "rule": "The vanilla End route is disabled. Use Dimensional Fonts for the available dimension trips.",
-      "action": "Use a Dimensional Font for a return trip.",
-      "reveal_routes": [
+      "art": "better_content_threads:textures/gui/threads/work_rhythm.png",
+      "event": "Your mining sequence reached full Work Rhythm.",
+      "cause": "High grain nutrition supports a mining rhythm that builds through successive valid breaks. A pause or unsuitable work interrupts the sequence.",
+      "action": "Keep suitable tools and provisions ready when planning a long mining session.",
+      "discovery_routes": [
         {
-          "id": "end_route_blocked",
-          "label": "Closed End route",
-          "type": "end_route_blocked",
-          "value": "eye_or_portal",
-          "producer": "better-content-dimension-access",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "font_route_completed",
-          "label": "Font voyage",
-          "type": "font_route_completed",
-          "value": "returned",
-          "producer": "better-content-dimension-drink",
-          "correlation": "episode"
+          "id": "work_rhythm",
+          "type": "work_rhythm",
+          "value": "maximum",
+          "producer": "systemic-salience"
         }
       ],
       "doorway": {
-        "type": "font",
-        "target": "aether:the_aether"
-      },
-      "art": "better_content_threads:textures/gui/threads/the_end_is_not_a_door.png"
+        "type": "diet",
+        "target": "nutrition"
+      }
     },
     {
-      "id": "recipes_obey_this_world",
-      "concept_id": "crafting.emi_authority",
-      "owner": "better-content-pack",
-      "title": "Checking Recipes",
-      "suit": "fragility",
+      "id": "deep_reserve",
+      "concept_id": "body.deep_reserve",
+      "owner": "systemic-salience",
+      "title": "Deep Reserve Activated",
+      "topic": "body",
       "order": 12,
-      "aspect": "control",
-      "rule": "Recipes can differ from vanilla and other modpacks. Check EMI for the ingredients and process before gathering materials.",
-      "action": "Check an item's recipe in EMI before gathering materials.",
-      "reveal_routes": [
+      "art": "better_content_threads:textures/gui/threads/deep_reserve.png",
+      "event": "Your nutritional reserve activated during resource depletion.",
+      "cause": "High fat nutrition can provide a brief reserve when hunger, thirst, or stamina becomes critically low. The reserve is temporary and needs recovery.",
+      "action": "Restore the depleted resource and seek a safe place to recover.",
+      "discovery_routes": [
         {
-          "id": "recipe_viewed",
-          "label": "Recipe consulted",
-          "type": "recipe_viewed",
-          "value": "emi",
-          "producer": "better-content-threads",
-          "correlation": "episode"
-        }
-      ],
-      "completion_routes": [
-        {
-          "id": "pack_recipe_crafted",
-          "label": "Pack recipe crafted",
-          "type": "pack_recipe_crafted",
-          "value": "registered",
-          "producer": "better-content-pack",
-          "correlation": "episode"
+          "id": "deep_reserve",
+          "type": "deep_reserve",
+          "value": "activated",
+          "producer": "systemic-salience"
         }
       ],
       "doorway": {
-        "type": "emi",
-        "target": "minecraft:crafting_table"
-      },
-      "art": "better_content_threads:textures/gui/threads/recipes_obey_this_world.png"
+        "type": "diet",
+        "target": "nutrition"
+      }
     },
     {
-      "id": "the_body_learns_new_motions",
-      "concept_id": "controls.pack_specific_actions",
-      "owner": "better-content-fixes",
-      "title": "Movement Controls",
-      "suit": "fragility",
+      "id": "nutrition_cleanse",
+      "concept_id": "body.nutrition_cleanse",
+      "owner": "systemic-salience",
+      "title": "Nutrition Cleansed an Effect",
+      "topic": "body",
       "order": 13,
-      "aspect": "tempo",
-      "rule": "Fast running, vaulting, and dodging use separate controls and spend stamina. The Movement lesson shows your current key bindings.",
-      "action": "Practice vaulting and dodging away from danger.",
-      "reveal_routes": [
+      "art": "better_content_threads:textures/gui/threads/nutrition_cleanse.png",
+      "event": "Your nutrition removed a harmful status effect.",
+      "cause": "High dairy nutrition can cleanse a finite harmful effect. Status-effect cleansing does not treat Death's Door injuries.",
+      "action": "Inspect remaining effects and use the Body screen for injuries that need medicine.",
+      "discovery_routes": [
         {
-          "id": "custom_control_used",
-          "label": "New motion used",
-          "type": "custom_control_used",
+          "id": "nutrition_cleanse",
+          "type": "nutrition_cleanse",
           "value": "*",
-          "producer": "better-content-fixes",
-          "correlation": "episode"
+          "producer": "systemic-salience"
         }
       ],
-      "completion_routes": [
+      "doorway": {
+        "type": "diet",
+        "target": "nutrition"
+      }
+    },
+    {
+      "id": "deaths_door",
+      "concept_id": "body.deaths_door",
+      "owner": "downed-player-revival",
+      "title": "You Reached Death's Door",
+      "topic": "body",
+      "order": 14,
+      "art": "better_content_threads:textures/gui/threads/deaths_door.png",
+      "event": "A hit exhausted your positive HP and left you injured.",
+      "cause": "Positive HP protects the crossing hit from the injury death roll. At zero HP, further accepted damaging hits can kill. Movement and ordinary controls remain available.",
+      "action": "Get out of danger, let the healing lock expire, and open your Body screen.",
+      "discovery_routes": [
         {
-          "id": "custom_control_mastered",
-          "label": "New motions practiced",
-          "type": "custom_control_mastered",
-          "value": "distinct_second",
-          "producer": "better-content-fixes",
-          "correlation": "episode"
+          "id": "deaths_door",
+          "type": "deaths_door",
+          "value": "entered",
+          "producer": "downed-player-revival"
         }
       ],
-      "art": "better_content_threads:textures/gui/threads/the_body_learns_new_motions.png"
+      "doorway": {
+        "type": "body",
+        "target": "self"
+      }
+    },
+    {
+      "id": "persistent_injuries",
+      "concept_id": "body.persistent_injuries",
+      "owner": "downed-player-revival",
+      "title": "Healing Left Injuries Behind",
+      "topic": "body",
+      "order": 15,
+      "art": "better_content_threads:textures/gui/threads/persistent_injuries.png",
+      "event": "You recovered HP while your injuries remained active.",
+      "cause": "Healing restores your HP buffer. Existing injuries remain until treated; their body regions determine impairment and their types determine the required cures.",
+      "action": "Open your Body screen and treat the remaining injuries.",
+      "discovery_routes": [
+        {
+          "id": "persistent_injuries",
+          "type": "injury_healing",
+          "value": "persistent",
+          "producer": "downed-player-revival"
+        }
+      ],
+      "doorway": {
+        "type": "body",
+        "target": "self"
+      }
+    },
+    {
+      "id": "trauma_amplification",
+      "concept_id": "body.trauma_amplification",
+      "owner": "downed-player-revival",
+      "title": "Trauma Worsened Existing Injuries",
+      "topic": "body",
+      "order": 16,
+      "art": "better_content_threads:textures/gui/threads/trauma_amplification.png",
+      "event": "Another accepted hit increased the effects of injuries you already carried.",
+      "cause": "Trauma temporarily amplifies functional injury penalties. It does not increase the death probability contributed by your active maims.",
+      "action": "Get out of danger, allow trauma to expire, and treat your injuries.",
+      "discovery_routes": [
+        {
+          "id": "trauma_amplification",
+          "type": "injury_trauma",
+          "value": "amplified",
+          "producer": "downed-player-revival"
+        }
+      ],
+      "doorway": {
+        "type": "body",
+        "target": "self"
+      }
+    },
+    {
+      "id": "self_treatment",
+      "concept_id": "body.self_treatment",
+      "owner": "downed-player-revival",
+      "title": "You Treated an Injury",
+      "topic": "body",
+      "order": 17,
+      "art": "better_content_threads:textures/gui/threads/self_treatment.png",
+      "event": "You completed treatment on one of your own injuries.",
+      "cause": "A matching cure removes the oldest matching injury in the selected region. Medicine is consumed only when treatment completes; remaining injuries still need care.",
+      "action": "Review your Body screen for remaining injuries and treatment supplies.",
+      "discovery_routes": [
+        {
+          "id": "self_treatment",
+          "type": "injury_treatment",
+          "value": "self",
+          "producer": "downed-player-revival"
+        }
+      ],
+      "doorway": {
+        "type": "body",
+        "target": "self"
+      }
+    },
+    {
+      "id": "life_allocation_lost",
+      "concept_id": "body.life_allocation_lost",
+      "owner": "rpg-stats",
+      "title": "Death Ended This Life's Allocation",
+      "topic": "body",
+      "order": 18,
+      "art": "better_content_threads:textures/gui/threads/life_allocation_lost.png",
+      "event": "Final death cleared the Life points you had allocated.",
+      "cause": "Life allocations belong to one life and clear on final death. Surviving Death's Door does not clear them, and your lineage discoveries remain recorded.",
+      "action": "Review your next life's allocations when points become available.",
+      "discovery_routes": [
+        {
+          "id": "life_allocation_lost",
+          "type": "life_allocation",
+          "value": "lost_on_death",
+          "producer": "rpg-stats"
+        }
+      ]
+    },
+    {
+      "id": "geology_sifting",
+      "concept_id": "materials.geology_sifting",
+      "owner": "realistic-ores",
+      "title": "Sifting Separated Minerals",
+      "topic": "materials",
+      "order": 19,
+      "art": "better_content_threads:textures/gui/threads/geology_sifting.png",
+      "event": "Your sifting operation separated crushed geology into useful products.",
+      "cause": "Sifting separates a feed's mineral products and coproducts according to its recipe. Different geology families have different yields.",
+      "action": "Inspect the feed in EMI and choose the separation route for the products you need.",
+      "discovery_routes": [
+        {
+          "id": "geology_sifting",
+          "type": "geology_sift",
+          "value": "completed",
+          "producer": "realistic-ores"
+        }
+      ]
+    },
+    {
+      "id": "ore_rinsing",
+      "concept_id": "materials.ore_rinsing",
+      "owner": "realistic-ores",
+      "title": "Rinsing Prepared Another Route",
+      "topic": "materials",
+      "order": 20,
+      "art": "better_content_threads:textures/gui/threads/ore_rinsing.png",
+      "event": "Your Spouting operation produced rinsed ore feed.",
+      "cause": "Spouting prepares crushed geology with fluid for later processing. Rinsed feed is an intermediate, not a finished metal product.",
+      "action": "Look up the rinsed feed in EMI and prepare its next pressure-processing batch.",
+      "discovery_routes": [
+        {
+          "id": "ore_rinsing",
+          "type": "ore_rinse",
+          "value": "completed",
+          "producer": "realistic-ores"
+        }
+      ]
+    },
+    {
+      "id": "pressure_refining",
+      "concept_id": "materials.pressure_refining",
+      "owner": "realistic-ores",
+      "title": "Pressure Transformed Prepared Ore",
+      "topic": "materials",
+      "order": 21,
+      "art": "better_content_threads:textures/gui/threads/pressure_refining.png",
+      "event": "A pressure-processing batch transformed your prepared ore feed.",
+      "cause": "Prepared feeds need the recipe's required batch and pressure. Successful processing yields the listed primary products and coproducts.",
+      "action": "Use EMI to check the exact input batch, pressure, and resulting products.",
+      "discovery_routes": [
+        {
+          "id": "pressure_refining",
+          "type": "pressure_complete",
+          "value": "prepared_ore",
+          "producer": "realistic-ores"
+        }
+      ]
+    },
+    {
+      "id": "alloy_created",
+      "concept_id": "materials.alloy_created",
+      "owner": "compat.tconstruct",
+      "title": "Molten Ingredients Became an Alloy",
+      "topic": "materials",
+      "order": 22,
+      "art": "better_content_threads:textures/gui/threads/alloy_created.png",
+      "event": "Your smeltery created alloy from component fluids.",
+      "cause": "Alloying consumes compatible fluids in specific proportions at a suitable temperature. A tank containing ingredients has not necessarily completed that reaction.",
+      "action": "Check the alloy recipe and cast the resulting fluid into the form you need.",
+      "discovery_routes": [
+        {
+          "id": "alloy_created",
+          "type": "alloy_cast",
+          "value": "tconstruct",
+          "producer": "compat.tconstruct"
+        }
+      ]
+    },
+    {
+      "id": "gas_pollution",
+      "concept_id": "materials.gas_pollution",
+      "owner": "latent-chemlib",
+      "title": "Escaped Gas Became Pollution",
+      "topic": "materials",
+      "order": 23,
+      "art": "better_content_threads:textures/gui/threads/gas_pollution.png",
+      "event": "Gas from your material escaped into the atmosphere.",
+      "cause": "Uncontained gas can become native world pollution. Suitable airtight storage prevents escape while its sealed state remains active.",
+      "action": "Contain gas before storing or moving it, and use native pollution controls for released material.",
+      "discovery_routes": [
+        {
+          "id": "gas_pollution",
+          "type": "gas_pollution",
+          "value": "released",
+          "producer": "latent-chemlib"
+        }
+      ]
+    },
+    {
+      "id": "radioactive_disturbance",
+      "concept_id": "materials.radioactive_disturbance",
+      "owner": "latent-chemlib",
+      "title": "Disturbing Ore Activated Its Emissions",
+      "topic": "materials",
+      "order": 24,
+      "art": "better_content_threads:textures/gui/threads/radioactive_disturbance.png",
+      "event": "Your disturbance activated a radioactive material form.",
+      "cause": "Natural hosted radioactive ore can be inert until disturbed. Mined, carried, contained, and replaced forms can continue emitting radiation and heat.",
+      "action": "Check the material's emission information and plan handling and containment before moving more.",
+      "discovery_routes": [
+        {
+          "id": "radioactive_disturbance",
+          "type": "radioactive_ore",
+          "value": "activated",
+          "producer": "latent-chemlib"
+        }
+      ]
+    },
+    {
+      "id": "radiogenic_heat",
+      "concept_id": "materials.radiogenic_heat",
+      "owner": "latent-chemlib",
+      "title": "Radioactive Material Transferred Heat",
+      "topic": "materials",
+      "order": 25,
+      "art": "better_content_threads:textures/gui/threads/radiogenic_heat.png",
+      "event": "Your thermal system accepted heat from radioactive material.",
+      "cause": "Radioactive material can release heat into Heat Sync. Heat transfer does not remove the material's other radioactive consequences.",
+      "action": "Provide a controlled thermal path and manage emissions independently.",
+      "discovery_routes": [
+        {
+          "id": "radiogenic_heat",
+          "type": "radiogenic_heat",
+          "value": "accepted",
+          "producer": "latent-chemlib"
+        }
+      ]
+    },
+    {
+      "id": "manual_work",
+      "concept_id": "industry.manual_work",
+      "owner": "compat.create",
+      "title": "Manual Rotation Completed Work",
+      "topic": "industry",
+      "order": 26,
+      "art": "better_content_threads:textures/gui/threads/manual_work.png",
+      "event": "Your Hand Crank powered a completed machine operation.",
+      "cause": "The Hand Crank supplies rotational power to connected Create machinery. In this pack it provides the initial rotational source before the Nether.",
+      "action": "Use the crank to perform the next process shown in EMI or Ponder.",
+      "discovery_routes": [
+        {
+          "id": "manual_work",
+          "type": "create_manual_complete",
+          "value": "hand_crank",
+          "producer": "compat.create"
+        }
+      ]
+    },
+    {
+      "id": "transmission_overload",
+      "concept_id": "industry.transmission_overload",
+      "owner": "create-transmission-loss",
+      "title": "Transmission Overloaded the Network",
+      "topic": "industry",
+      "order": 27,
+      "art": "better_content_threads:textures/gui/threads/transmission_overload.png",
+      "event": "Transmission overhead pushed your network beyond its capacity.",
+      "cause": "Shafts, gears, gearboxes, and belts consume stress capacity. A network that supports the working machines alone can still overload after transmission costs.",
+      "action": "Shorten or simplify the transmission, reduce speed where useful, or increase available capacity.",
+      "discovery_routes": [
+        {
+          "id": "transmission_overload",
+          "type": "transmission",
+          "value": "overloaded",
+          "producer": "create-transmission-loss"
+        }
+      ]
+    },
+    {
+      "id": "coolant_recovery",
+      "concept_id": "industry.coolant_recovery",
+      "owner": "heat-sync",
+      "title": "Coolant Exchange Restored Safety",
+      "topic": "industry",
+      "order": 28,
+      "art": "better_content_threads:textures/gui/threads/coolant_recovery.png",
+      "event": "Coolant exchange brought your exchanger\u2019s heat buffer back into its safe range.",
+      "cause": "A working coolant exchanger converts fluid and transfers heat out of its buffer. Cooling that exchanger does not prove every connected machine is safe.",
+      "action": "Keep coolant available and check the temperature of each connected machine.",
+      "discovery_routes": [
+        {
+          "id": "coolant_recovery",
+          "type": "heat_safe",
+          "value": "safe",
+          "producer": "heat-sync"
+        }
+      ]
+    },
+    {
+      "id": "electrical_work",
+      "concept_id": "industry.electrical_work",
+      "owner": "compat.powergrid",
+      "title": "Electricity Reached a Consumer",
+      "topic": "industry",
+      "order": 29,
+      "art": "better_content_threads:textures/gui/threads/electrical_work.png",
+      "event": "Your connected electrical network powered useful work.",
+      "cause": "A working electrical system needs generation, transmission, and a consuming machine. A wire or charged terminal alone does not prove useful delivery.",
+      "action": "Check the consumer and the connected network when output stops.",
+      "discovery_routes": [
+        {
+          "id": "electrical_work",
+          "type": "electric_complete",
+          "value": "generated_transmitted_consumed",
+          "producer": "compat.powergrid"
+        }
+      ]
+    },
+    {
+      "id": "precision_assembly",
+      "concept_id": "industry.precision_assembly",
+      "owner": "compat.create",
+      "title": "The Assembly Sequence Finished",
+      "topic": "industry",
+      "order": 30,
+      "art": "better_content_threads:textures/gui/threads/precision_assembly.png",
+      "event": "Your sequenced assembly produced a Precision Mechanism.",
+      "cause": "Sequenced assembly applies ordered operations to an intermediate and may repeat the sequence. The finished mechanism is produced only at the final result boundary.",
+      "action": "Follow EMI's sequence and repeat count when automating the next batch.",
+      "discovery_routes": [
+        {
+          "id": "precision_assembly",
+          "type": "precision_complete",
+          "value": "create:precision_mechanism",
+          "producer": "compat.create"
+        }
+      ]
+    },
+    {
+      "id": "autocrafting_finished",
+      "concept_id": "industry.autocrafting_finished",
+      "owner": "compat.ae2",
+      "title": "Your Autocrafting Job Finished",
+      "topic": "industry",
+      "order": 31,
+      "art": "better_content_threads:textures/gui/threads/autocrafting_finished.png",
+      "event": "The autocrafting job you requested finished successfully.",
+      "cause": "AE2 uses encoded patterns and available processing resources to complete requested work. Your operation can finish while you are elsewhere.",
+      "action": "Return to your terminal for the result or inspect the job's processing chain.",
+      "discovery_routes": [
+        {
+          "id": "autocrafting_finished",
+          "type": "machine_recall",
+          "value": "ae2",
+          "producer": "compat.ae2"
+        }
+      ]
+    },
+    {
+      "id": "programmed_machine",
+      "concept_id": "industry.programmed_machine",
+      "owner": "oc2r-create-bridge",
+      "title": "A Program Changed Your Machine",
+      "topic": "industry",
+      "order": 32,
+      "art": "better_content_threads:textures/gui/threads/programmed_machine.png",
+      "event": "A computer command changed your machine\u2019s operating state.",
+      "cause": "OpenComputers II can control supported Create devices through their scripting interface. This command caused a real state change, not just a successful query.",
+      "action": "Use the device's native API to inspect state and build the next control step.",
+      "discovery_routes": [
+        {
+          "id": "programmed_machine",
+          "type": "computer_operation",
+          "value": "changed",
+          "producer": "oc2r-create-bridge"
+        }
+      ]
+    },
+    {
+      "id": "wireless_delivery",
+      "concept_id": "industry.wireless_delivery",
+      "owner": "oc2r-wireless-pubsub",
+      "title": "Your Wireless Message Arrived",
+      "topic": "industry",
+      "order": 33,
+      "art": "better_content_threads:textures/gui/threads/wireless_delivery.png",
+      "event": "A message from your operation reached another device.",
+      "cause": "A wireless card delivered your published message to a subscribed receiver. Transmission costs depend on the payload size; publishing alone does not prove delivery.",
+      "action": "Check the topic, receiving device, and relay power when messages fail to arrive.",
+      "discovery_routes": [
+        {
+          "id": "wireless_delivery",
+          "type": "wireless_message",
+          "value": "received",
+          "producer": "oc2r-wireless-pubsub"
+        }
+      ]
+    },
+    {
+      "id": "anchored_work",
+      "concept_id": "industry.anchored_work",
+      "owner": "arcane-chunk-loaders",
+      "title": "Your Work Continued While Away",
+      "topic": "industry",
+      "order": 34,
+      "art": "better_content_threads:textures/gui/threads/anchored_work.png",
+      "event": "An anchored operation continued outside player loading range.",
+      "cause": "A supplied chunk anchor can keep its area running without a nearby player. Its ticket kept this operation active while you were away.",
+      "action": "Maintain the anchor's resource supply and inspect the area it actually keeps loaded.",
+      "discovery_routes": [
+        {
+          "id": "anchored_work",
+          "type": "anchor_work",
+          "value": "remote_progress",
+          "producer": "arcane-chunk-loaders"
+        }
+      ]
+    },
+    {
+      "id": "authored_spell",
+      "concept_id": "magic.authored_spell",
+      "owner": "compat.ars_nouveau",
+      "title": "Your Spell Took Effect",
+      "topic": "magic",
+      "order": 35,
+      "art": "better_content_threads:textures/gui/threads/authored_spell.png",
+      "event": "A spell you authored resolved its effect.",
+      "cause": "Ars Nouveau spell components determine how the spell reaches its target and what it does there. A saved design must still execute successfully.",
+      "action": "Inspect the spell's components and test the next change on a suitable target.",
+      "discovery_routes": [
+        {
+          "id": "authored_spell",
+          "type": "spell_effect",
+          "value": "ars_nouveau",
+          "producer": "compat.ars_nouveau"
+        }
+      ]
+    },
+    {
+      "id": "elemental_spell",
+      "concept_id": "magic.elemental_spell",
+      "owner": "compat.ars_elemental",
+      "title": "An Element Changed the Effect",
+      "topic": "magic",
+      "order": 36,
+      "art": "better_content_threads:textures/gui/threads/elemental_spell.png",
+      "event": "An elemental component participated in your spell's resolved effect.",
+      "cause": "Elemental spell components change the operation performed on the target. Their presence in an editor alone does not mean an effect has occurred.",
+      "action": "Compare the components and target conditions when refining the spell.",
+      "discovery_routes": [
+        {
+          "id": "elemental_spell",
+          "type": "spell_element",
+          "value": "triggered",
+          "producer": "compat.ars_elemental"
+        }
+      ]
+    },
+    {
+      "id": "blood_altar_result",
+      "concept_id": "magic.blood_altar_result",
+      "owner": "compat.bloodmagic",
+      "title": "Life Essence Produced a Result",
+      "topic": "magic",
+      "order": 37,
+      "art": "better_content_threads:textures/gui/threads/blood_altar_result.png",
+      "event": "Your Blood Altar completed an item-processing recipe.",
+      "cause": "The Blood Altar spends its available Life Essence on a valid recipe. Other Soul Network spending is a separate operation.",
+      "action": "Check the altar's recipe, tier, and essence supply before the next batch.",
+      "discovery_routes": [
+        {
+          "id": "blood_altar_result",
+          "type": "blood_complete",
+          "value": "altar_recipe",
+          "producer": "compat.bloodmagic"
+        }
+      ]
+    },
+    {
+      "id": "occult_ritual",
+      "concept_id": "magic.occult_ritual",
+      "owner": "compat.occultism",
+      "title": "Your Ritual Succeeded",
+      "topic": "magic",
+      "order": 38,
+      "art": "better_content_threads:textures/gui/threads/occult_ritual.png",
+      "event": "Your Occultism ritual reached its successful outcome.",
+      "cause": "A valid ritual combines its required arrangement and offerings to produce a particular result. Beginning the ritual is not the same as finishing it.",
+      "action": "Consult the native ritual guide for the result and requirements you need next.",
+      "discovery_routes": [
+        {
+          "id": "occult_ritual",
+          "type": "spirit_complete",
+          "value": "occultism",
+          "producer": "compat.occultism"
+        }
+      ]
+    },
+    {
+      "id": "soul_powered_spell",
+      "concept_id": "magic.soul_powered_spell",
+      "owner": "compat.goety",
+      "title": "Soul Energy Powered a Spell",
+      "topic": "magic",
+      "order": 39,
+      "art": "better_content_threads:textures/gui/threads/soul_powered_spell.png",
+      "event": "Your Goety spell successfully used soul energy.",
+      "cause": "Goety soul energy powers its own magical operations. Available energy, a suitable focus, and a successful cast are separate requirements.",
+      "action": "Inspect the focus and your soul-energy supply before relying on another cast.",
+      "discovery_routes": [
+        {
+          "id": "soul_powered_spell",
+          "type": "soul_work",
+          "value": "goety",
+          "producer": "compat.goety"
+        }
+      ]
+    },
+    {
+      "id": "spirit_ritual",
+      "concept_id": "magic.spirit_ritual",
+      "owner": "compat.malum",
+      "title": "Spirits Completed an Infusion",
+      "topic": "magic",
+      "order": 40,
+      "art": "better_content_threads:textures/gui/threads/spirit_ritual.png",
+      "event": "Your spirit altar completed an infusion.",
+      "cause": "Malum consumed the required spirits and ingredients to transform the altar input into its infusion result.",
+      "action": "Collect the infused item and consult the native guide for its uses.",
+      "discovery_routes": [
+        {
+          "id": "spirit_ritual",
+          "type": "spirit_ritual",
+          "value": "malum",
+          "producer": "compat.malum"
+        }
+      ]
+    },
+    {
+      "id": "relic_development",
+      "concept_id": "magic.relic_development",
+      "owner": "compat.relics",
+      "title": "Your Relic Developed Through Use",
+      "topic": "magic",
+      "order": 41,
+      "art": "better_content_threads:textures/gui/threads/relic_development.png",
+      "event": "A relic you used crossed a native development boundary.",
+      "cause": "Relics gain experience through their own working abilities. Development belongs to the same physical relic rather than any item with the same name.",
+      "action": "Inspect the relic's updated abilities and keep using it where they apply.",
+      "discovery_routes": [
+        {
+          "id": "relic_development",
+          "type": "relic_developed",
+          "value": "*",
+          "producer": "compat.relics"
+        }
+      ]
+    },
+    {
+      "id": "ruinous_mutation",
+      "concept_id": "magic.ruinous_mutation",
+      "owner": "tinkers-construct-affixes",
+      "title": "Ruinous Flux Resolved Permanently",
+      "topic": "magic",
+      "order": 42,
+      "art": "better_content_threads:textures/gui/threads/ruinous_mutation.png",
+      "event": "Your confirmed Ruinous Flux application resolved.",
+      "cause": "Ruinous Flux can permanently mutate a part or destroy it. A surviving mutation locks that part against further mutation.",
+      "action": "Inspect the actual outcome before deciding how to use the surviving part.",
+      "discovery_routes": [
+        {
+          "id": "ruinous_mutation",
+          "type": "ruinous_flux",
+          "value": "resolved",
+          "producer": "tinkers-construct-affixes"
+        }
+      ]
+    },
+    {
+      "id": "font_travel",
+      "concept_id": "travel.font_travel",
+      "owner": "dimension-drink",
+      "title": "A Font Transported You",
+      "topic": "travel",
+      "order": 43,
+      "art": "better_content_threads:textures/gui/threads/font_travel.png",
+      "event": "A Font successfully transported you into its journey.",
+      "cause": "Fonts open journeys governed by their charge and run rules. This is a successful transit, not a vanilla portal or a promise of permanent access.",
+      "action": "Check the journey's visible state and identify the return route.",
+      "discovery_routes": [
+        {
+          "id": "font_travel",
+          "type": "font_transit",
+          "value": "depart",
+          "producer": "dimension-drink"
+        }
+      ]
+    },
+    {
+      "id": "vessel_travel",
+      "concept_id": "travel.vessel_travel",
+      "owner": "compat.valkyrienskies",
+      "title": "Your Build Became a Vessel",
+      "topic": "travel",
+      "order": 44,
+      "art": "better_content_threads:textures/gui/threads/vessel_travel.png",
+      "event": "An assembled vessel carried you away from its starting place.",
+      "cause": "A physical ship moves its assembled structure through the world. Boarding an unmoving structure alone does not demonstrate transport.",
+      "action": "Inspect the vessel's controls and plan a safe stopping or landing place.",
+      "discovery_routes": [
+        {
+          "id": "vessel_travel",
+          "type": "vessel_moved",
+          "value": "carried",
+          "producer": "compat.valkyrienskies"
+        }
+      ]
+    },
+    {
+      "id": "orbital_arrival",
+      "concept_id": "travel.orbital_arrival",
+      "owner": "compat.creatingspace",
+      "title": "Your Rocket Reached Orbit",
+      "topic": "travel",
+      "order": 45,
+      "art": "better_content_threads:textures/gui/threads/orbital_arrival.png",
+      "event": "Your tracked rocket journey arrived in Earth orbit.",
+      "cause": "A successful launch requires an assembled rocket with suitable propulsion and destination. Reaching orbit is a real journey result, not a readiness estimate.",
+      "action": "Inspect your orbital situation and prepare the resources needed for the next movement.",
+      "discovery_routes": [
+        {
+          "id": "orbital_arrival",
+          "type": "orbit_reached",
+          "value": "creatingspace:earth_orbit",
+          "producer": "compat.creatingspace"
+        }
+      ]
+    },
+    {
+      "id": "train_fuel_cost",
+      "concept_id": "travel.train_fuel_cost",
+      "owner": "create-train-fuel-scaling",
+      "title": "Speed Increased Fuel Consumption",
+      "topic": "travel",
+      "order": 46,
+      "art": "better_content_threads:textures/gui/threads/train_fuel_cost.png",
+      "event": "Your moving train consumed fuel above its ordinary-speed baseline.",
+      "cause": "Powered train fuel consumption rises with speed according to the configured scaling curve. Faster travel can consume fuel disproportionately quickly.",
+      "action": "Reduce speed or provision more fuel for the planned route.",
+      "discovery_routes": [
+        {
+          "id": "train_fuel_cost",
+          "type": "train_fuel",
+          "value": "speed_scaled",
+          "producer": "create-train-fuel-scaling"
+        }
+      ]
+    },
+    {
+      "id": "beetle_route",
+      "concept_id": "travel.beetle_route",
+      "owner": "rail-beetle",
+      "title": "The Beetle Built Your Route",
+      "topic": "travel",
+      "order": 47,
+      "art": "better_content_threads:textures/gui/threads/beetle_route.png",
+      "event": "Your Rail Beetle completed the route you selected.",
+      "cause": "The Beetle builds through loaded terrain using its supplied rails, supports, and engine work. The finished railway follows the route it actually constructed.",
+      "action": "Inspect the completed route and reload supplies before selecting the next section.",
+      "discovery_routes": [
+        {
+          "id": "beetle_route",
+          "type": "rail_beetle",
+          "value": "route_complete",
+          "producer": "rail-beetle"
+        }
+      ]
+    },
+    {
+      "id": "magical_engine",
+      "concept_id": "travel.magical_engine",
+      "owner": "rail-beetle",
+      "title": "Magic Powered Mechanical Work",
+      "topic": "travel",
+      "order": 48,
+      "art": "better_content_threads:textures/gui/threads/magical_engine.png",
+      "event": "Your Beetle's magical engine spent its resource on real work.",
+      "cause": "An alternate engine powers Beetle operations using its own native resource. Installing an engine is different from supplying and using it.",
+      "action": "Check the installed engine's resource and keep it supplied for the next job.",
+      "discovery_routes": [
+        {
+          "id": "magical_engine",
+          "type": "beetle_engine",
+          "value": "magic_work",
+          "producer": "rail-beetle"
+        }
+      ]
+    },
+    {
+      "id": "campaign_arrival",
+      "concept_id": "lineage.campaign_arrival",
+      "owner": "pillager-campaigns",
+      "title": "The Campaign Reached You",
+      "topic": "lineage",
+      "order": 49,
+      "art": "better_content_threads:textures/gui/threads/campaign_arrival.png",
+      "event": "A campaign materialized attackers for your encounter.",
+      "cause": "Pillager campaigns can bring organized assaults to their target. The earlier warning is preparation time, not the arrival itself.",
+      "action": "Use prepared defenses, maintain an escape route, and watch the campaign state.",
+      "discovery_routes": [
+        {
+          "id": "campaign_arrival",
+          "type": "campaign_attack",
+          "value": "materialized",
+          "producer": "pillager-campaigns"
+        }
+      ]
+    },
+    {
+      "id": "hostile_crossfire",
+      "concept_id": "lineage.hostile_crossfire",
+      "owner": "compat.minecraft",
+      "title": "Hostile Factions Hit Each Other",
+      "topic": "lineage",
+      "order": 50,
+      "art": "better_content_threads:textures/gui/threads/hostile_crossfire.png",
+      "event": "Hostiles in your encounter damaged one another.",
+      "cause": "Hostile groups do not necessarily share allegiance. Their attacks can damage other tracked hostiles in the same encounter.",
+      "action": "Use cover and positioning while keeping an escape route of your own.",
+      "discovery_routes": [
+        {
+          "id": "hostile_crossfire",
+          "type": "hostile_collision",
+          "value": "cross_damage",
+          "producer": "compat.minecraft"
+        }
+      ]
+    },
+    {
+      "id": "lineage_successor",
+      "concept_id": "lineage.lineage_successor",
+      "owner": "world-lifecycle-manager",
+      "title": "The World Changed, the Lineage Remained",
+      "topic": "lineage",
+      "order": 51,
+      "art": "better_content_threads:textures/gui/threads/lineage_successor.png",
+      "event": "You entered a verified successor of your existing lineage.",
+      "cause": "The World Condenser replaces a world while designated lineage records continue. Your archive persists and the successor earns a new discovery score. The Condenser currently needs a dedicated server; integrated single-player support is planned.",
+      "action": "Review the successor conditions and the records that carried forward.",
+      "discovery_routes": [
+        {
+          "id": "lineage_successor",
+          "type": "lineage",
+          "value": "successor",
+          "producer": "world-lifecycle-manager"
+        }
+      ]
+    },
+    {
+      "id": "schematic_substitution",
+      "concept_id": "lineage.schematic_substitution",
+      "owner": "world-lifecycle-manager",
+      "title": "Your Schematic Used a Substitute",
+      "topic": "lineage",
+      "order": 52,
+      "art": "better_content_threads:textures/gui/threads/schematic_substitution.png",
+      "event": "Your Schematicannon placed a configured fallback material.",
+      "cause": "A configured substitution supplies an allowed replacement when the original block is unavailable. The cannon still consumes the required building material.",
+      "action": "Review the fallback rules and available supplies before continuing construction.",
+      "discovery_routes": [
+        {
+          "id": "schematic_substitution",
+          "type": "schematic_substitute",
+          "value": "placed",
+          "producer": "world-lifecycle-manager"
+        }
+      ]
     }
   ]
 }

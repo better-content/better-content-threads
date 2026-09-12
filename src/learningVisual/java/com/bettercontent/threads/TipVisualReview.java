@@ -4,6 +4,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.PauseScreen;
+import net.minecraft.client.gui.screens.TitleScreen;
+import org.lwjgl.glfw.GLFW;
+import java.util.Random;
+import java.util.Set;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -15,7 +19,7 @@ import java.util.function.Supplier;
 /** Isolated tips-only native client review; never ships and injects no pointer input. */
 @Mod.EventBusSubscriber(modid = BetterContentThreads.MOD_ID, value = Dist.CLIENT)
 public final class TipVisualReview {
-    private record Frame(String name, int scale, Supplier<Screen> screen) {}
+    private record Frame(String name, int width, int scale, Supplier<Screen> screen) {}
     private static final List<Frame> frames = new ArrayList<>();
     private static int frame = -1;
     private static int ticks;
@@ -27,14 +31,17 @@ public final class TipVisualReview {
         if (mc.getOverlay() != null || mc.screen == null || capturing) return;
         if (frame < 0) {
             if (++ticks < 30) return;
-            for (int scale : new int[]{4, 3, 2}) {
-                frames.add(new Frame("pause-native-" + scale, scale, () -> new PauseScreen(true)));
-                for (String id : List.of("combat_space", "beetle_route_beacons", "revive_use")) {
-                    var hint = DeathHints.INSTANCE.all().stream().filter(h -> h.id().equals(id)).findFirst().orElseThrow();
-                    frames.add(new Frame("pause-single-" + id + "-" + scale, scale, () -> new PauseHintVisualScreen(hint, true)));
-                    frames.add(new Frame("pause-multi-" + id + "-" + scale, scale, () -> new PauseHintVisualScreen(hint, false)));
+            for (int[] size : new int[][]{{960,3},{1280,3},{1280,2}}) {
+                int width=size[0],scale=size[1];String suffix=width+"-scale-"+scale;
+                frames.add(new Frame("menu-native-"+suffix,width,scale,()->new TitleScreen(false)));
+                frames.add(new Frame("pause-native-"+suffix,width,scale,()->new PauseScreen(true)));
+                for(String context:List.of("door_locked","injury_cure","sugar_crash")) {
+                    var selected=DeathHintRotation.select(DeathHints.INSTANCE.all(),context,"pause",DeathHintRotation.State.empty(),id->true,new Random(38),Set.of());
+                    if(!selected.hint().contexts().contains(context))throw new IllegalStateException("Context fixture selected unrelated advice: "+context);
+                    frames.add(new Frame("pause-context-"+context+"-"+suffix,width,scale,()->new PauseHintVisualScreen(selected.hint(),true)));
                 }
             }
+            if(Boolean.getBoolean("bc.learningVisual.menuOnly"))frames.removeIf(f->!f.name().startsWith("menu-native-"));
             next();
             return;
         }
@@ -53,6 +60,7 @@ public final class TipVisualReview {
             return;
         }
         var next = frames.get(frame);
+        GLFW.glfwSetWindowSize(mc.getWindow().getWindow(),next.width(),720);
         mc.options.guiScale().set(next.scale());
         mc.resizeDisplay();
         mc.setScreen(next.screen().get());

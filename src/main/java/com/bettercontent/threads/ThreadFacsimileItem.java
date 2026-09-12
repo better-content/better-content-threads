@@ -21,6 +21,6 @@ public final class ThreadFacsimileItem extends Item {
         return stack;
     }
     public static String threadId(ItemStack stack){return stack.hasTag()?stack.getTag().getString(THREAD):"";}
-    @Override public Component getName(ItemStack stack){var d=ThreadDefinitions.INSTANCE.get(threadId(stack));return d==null?super.getName(stack):Component.literal(d.title()+" — Card Copy");}
+    @Override public Component getName(ItemStack stack){var d=ThreadDefinitions.INSTANCE.get(threadId(stack));if(d==null)d=ThreadArt.BY_ID.get(threadId(stack));return d==null?super.getName(stack):Component.literal(d.title()+" — Card Copy");}
     @Override public void appendHoverText(ItemStack stack,@Nullable Level level,List<Component> tooltip,TooltipFlag flag){var tag=stack.getTag();if(tag==null)return;tooltip.add(Component.literal("Collected by "+tag.getString(COLLECTOR)).withStyle(ChatFormatting.GRAY));tooltip.add(Component.literal("Lineage "+tag.getString(LINEAGE)).withStyle(ChatFormatting.DARK_GRAY));tooltip.add(Component.literal("Display copy. Does not unlock cards or give rewards.").withStyle(ChatFormatting.ITALIC,ChatFormatting.DARK_GRAY));}
 }

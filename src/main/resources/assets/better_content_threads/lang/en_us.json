@@ -1,11 +1,7 @@
 {
   "screen.better_content_threads.death_hint": "Hint",
   "item.better_content_threads.thread_facsimile": "Thread Card Copy",
-  "message.better_content_threads.thread_revealed": "Card unlocked: %s",
-  "message.better_content_threads.thread_completed": "Card completed: %s",
   "message.better_content_threads.thread_reader_hint": "%s · Open Threads",
-  "screen.better_content_threads.catalogue_status": "%s of 13 unlocked",
-  "screen.better_content_threads.catalogue_status_unread": "%1$s of 13 unlocked · %2$s to open",
   "screen.better_content_threads.reveal_badge": "OPEN",
   "screen.better_content_threads.generating_world": "GENERATING WORLD",
   "screen.better_content_threads.building_spawn": "Building spawn area · %s%%",
@@ -22,5 +18,8 @@
   "screen.better_content_threads.related_thread": "Related Thread",
   "screen.better_content_threads.open_guide": "Open Guide",
   "key.better_content_threads.open_reader": "Open Threads",
-  "key.categories.better_content_threads": "Better Content"
+  "key.categories.better_content_threads": "Better Content",
+  "message.better_content_threads.thread_discovered": "Discovered: %s",
+  "message.better_content_threads.thread_remembered": "Remembered: %s",
+  "screen.better_content_threads.journal_status": "%1$s this generation · %2$s lineage discoveries · %3$s unread"
 }

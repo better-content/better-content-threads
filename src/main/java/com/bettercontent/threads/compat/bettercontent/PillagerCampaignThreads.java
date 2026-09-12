@@ -9,6 +9,11 @@ import java.util.Locale;
 public final class PillagerCampaignThreads {
     private PillagerCampaignThreads() {}
 
+    @net.minecraftforge.eventbus.api.SubscribeEvent
+    public static void materialized(com.bettercontent.pillagercampaigns.api.CampaignMaterializedEvent event) {
+        if (event.getMembers() > 0) com.bettercontent.threads.ThreadSignals.emit(event.getPlayer(), "campaign_attack", "materialized", event.getInvasionId());
+    }
+
     public static String state(ServerPlayer player) {
         return CampaignStatusApi.state(player).name().toLowerCase(Locale.ROOT);
     }

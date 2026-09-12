@@ -5,7 +5,25 @@
   "plugin": "com.bettercontent.threads.mixin.BetterContentThreadsMixinPlugin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "better_content_threads.refmap.json",
-  "client": ["LevelLoadingScreenAccessor"],
-  "mixins": ["Ae2CraftingCpuMixin", "ArsSourceEnergyMixin", "ArsUpdateCasterMixin", "OccultismRitualBowlMixin", "TinkerAlloyMixin", "TinkerRepairResultMixin"],
-  "injectors": {"defaultRequire": 1}
+  "client": [
+    "LevelLoadingScreenAccessor"
+  ],
+  "mixins": [
+    "Ae2CraftingCpuMixin",
+    "ArsUpdateCasterMixin",
+    "OccultismRitualBowlMixin",
+    "TinkerAlloyMixin",
+    "DynamicTreeFellingMixin",
+    "BloodAltarRecipeMixin",
+    "GoetySpellResultMixin",
+    "MalumSpiritWorkMixin",
+    "CreatePressOutcomeMixin",
+    "CreateAssemblyOutcomeMixin",
+    "GeologySifterOutcomeMixin",
+    "OreSpoutingOutcomeMixin",
+    "PressureOreOutcomeMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }

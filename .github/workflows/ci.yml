@@ -11,7 +11,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     env:
       BC_CUSTOM_MOD_JAR_DIR: ${{ github.workspace }}/build/ci-provider-jars
     steps:
@@ -28,17 +28,18 @@ jobs:
             index.toml
             mods
           sparse-checkout-cone-mode: false
-      - name: Prepare verified provider JARs
-        run: >-
-          python3 build/ci-pack-baseline/.github/scripts/prepare-provider-jars.py
-          --pack-root build/ci-pack-baseline
-          --repository better-content-threads
-          --output "$BC_CUSTOM_MOD_JAR_DIR"
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
       - uses: gradle/actions/setup-gradle@v4
+      - name: Check provider provenance validation
+        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
+      - name: Build pinned API providers over the verified baseline
+        run: >-
+          python3 .github/scripts/prepare-source-providers.py
+          --pack-root build/ci-pack-baseline
+          --output "$BC_CUSTOM_MOD_JAR_DIR"
       - name: Verify repository
         run: ./gradlew --no-daemon verifyFull stageRuntimeJar
       - name: Preserve verification evidence

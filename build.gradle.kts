@@ -52,6 +52,7 @@ minecraft {
         val baseClient = create("client")
         create("learningVisual") {
             parent(baseClient)
+            args("--mixin", "better_content_threads.visual.mixins.json")
             workingDirectory(project.file("build/learning-visual"))
             args("--width", "1280", "--height", providers.gradleProperty("learningVisualHeight").orElse("720").get())
             mods { getByName(property("mod_id") as String).source(learningVisual) }
@@ -80,6 +81,8 @@ fun betterContentJar(repository: String, artifact: String): java.io.File {
 }
 
 repositories {
+    flatDir { dirs("../downed-player-revival/build/libs") }
+    maven("https://api.modrinth.com/maven") { content { includeGroup("maven.modrinth") } }
     maven("https://maven.minecraftforge.net")
     maven("https://harleyoconnor.com/maven")
     maven("https://repo.spongepowered.org/repository/maven-public/")
@@ -104,16 +107,32 @@ val betterContentApiJars = files(
     betterContentJar("better-content-fixes", "better-content-fixes-0.1.8.jar"),
     betterContentJar("player-traces", "player-traces-0.1.0.jar"),
     betterContentJar("systemic-salience", "systemic-salience-0.1.1.jar"),
-    betterContentJar("realistic-ores", "realistic-ores-0.2.0.jar")
+    betterContentJar("realistic-ores", "realistic-ores-0.2.0.jar"),
+    betterContentJar("latent-chemlib", "latent-chemlib-0.2.0.jar"),
+    betterContentJar("depth-director", "depth-director-0.2.1.jar"),
+    betterContentJar("bumblezone-cultivars", "bumblezone-cultivars-0.1.0.jar"),
+    betterContentJar("tinkers-construct-affixes", "tinkers-construct-affixes-1.0.0.jar"),
+    betterContentJar("create-transmission-loss", "create-transmission-loss-0.1.0.jar"),
+    betterContentJar("create-train-fuel-scaling", "create-train-fuel-scaling-0.1.0.jar"),
+    betterContentJar("rail-beetle", "rail-beetle-0.1.0.jar"),
+    betterContentJar("oc2r-create-bridge", "oc2r-create-bridge-0.1.0.jar"),
+    betterContentJar("oc2r-wireless-pubsub", "oc2r-wireless-pubsub-1.0.0.jar")
 )
 
 dependencies {
     minecraft("net.minecraftforge:forge:${property("minecraft_version")}-${property("forge_version")}")
+    add(learningVisual.compileOnlyConfigurationName, files(betterContentJar("downed-player-revival", "downed-player-revival-1.0.0.jar")))
+    if (providers.gradleProperty("combinedDeathVisual").map(String::toBoolean).getOrElse(false)) {
+        add(learningVisual.runtimeOnlyConfigurationName, fg.deobf("com.bettercontent:downed-player-revival:1.0.0"))
+    }
     compileOnly(betterContentApiJars)
     testCompileOnly(betterContentApiJars)
     testRuntimeOnly(betterContentApiJars)
     testRuntimeOnly("org.jetbrains.kotlin:kotlin-stdlib:2.0.0")
     compileOnly(fg.deobf("curse.maven:hyle-609850:7736352"))
+    compileOnly(fg.deobf("curse.maven:diet-443570:4813904"))
+    compileOnly(fg.deobf("curse.maven:occultism-361026:7429593"))
+    compileOnly(fg.deobf("curse.maven:malum-484064:6646111"))
     compileOnly(fg.deobf("curse.maven:thirst-was-taken-679270:6660408"))
     compileOnly(fg.deobf("curse.maven:cold-sweat-506194:7893262"))
     compileOnly(fg.deobf("curse.maven:pollution-of-the-realms-269973:8554528"))
@@ -128,6 +147,7 @@ dependencies {
     compileOnly(fg.deobf("curse.maven:mantle-74924:7563777"))
     compileOnly(fg.deobf("curse.maven:tinkers-construct-74072:7449219"))
     compileOnly(fg.deobf("curse.maven:pneumaticcraft-repressurized-281849:7307654"))
+    compileOnly(fg.deobf("maven.modrinth:create-sifting:1.20.1-1.8.6-6.0.6"))
     compileOnly(fg.deobf("curse.maven:ars-nouveau-401955:6688854"))
     compileOnly(fg.deobf("curse.maven:blood-magic-224791:7956981"))
     compileOnly(fg.deobf("curse.maven:goety-586095:8087429"))
@@ -191,6 +211,7 @@ tasks.named<JavaCompile>("compileJava") {
 }
 
 tasks.test {
+    doFirst { systemProperty("threads.optionalCompileClasspath", configurations.compileClasspath.get().asPath) }
     useJUnitPlatform()
     finalizedBy(tasks.jacocoTestReport)
 }

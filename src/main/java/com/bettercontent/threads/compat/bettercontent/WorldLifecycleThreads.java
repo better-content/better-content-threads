@@ -3,8 +3,6 @@ package com.bettercontent.threads.compat.bettercontent;
 import com.bettercontent.threads.ThreadSignals;
 import com.bettercontent.worldlifecyclemanager.PrestigeService;
 import com.bettercontent.worldlifecyclemanager.api.LineagePlayerDataApi;
-import com.bettercontent.worldlifecyclemanager.api.event.SchematicPublishedEvent;
-import com.bettercontent.worldlifecyclemanager.api.event.WorldCondenserAccessedEvent;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -17,15 +15,29 @@ import java.util.UUID;
 public final class WorldLifecycleThreads {
     private WorldLifecycleThreads() {}
 
-    @SubscribeEvent
-    public static void schematicPublished(SchematicPublishedEvent event) {
-        ThreadSignals.emit(event.getPlayer(), "schematic_capture", "substantial", event.getEpisodeId());
-        ThreadSignals.emit(event.getPlayer(), "schematic_publish", "correlated", event.getEpisodeId());
+    /** Player visit history is itself stored in this lineage; a new visitor is not a successor. */
+    public static boolean verifySuccessor(net.minecraft.server.level.ServerPlayer player) {
+        try {
+            ResourceLocation key = new ResourceLocation("better_content_threads", "discovery_visit");
+            CompoundTag previous = readPlayerData(player.server, key, player.getUUID());
+            long current = generation(player.server);
+            String lineage = lineageId(player.server);
+            boolean successor = previous.contains("generation") && lineage.equals(previous.getString("lineage"))
+                && (current > previous.getLong("generation") || previous.getBoolean("pending"));
+            CompoundTag visit = new CompoundTag(); visit.putString("lineage", lineage); visit.putLong("generation", current); visit.putBoolean("pending", successor);
+            writePlayerData(player.server, key, player.getUUID(), visit);
+            return successor;
+        } catch (IOException failure) {
+            throw new IllegalStateException("Cannot verify successor lineage", failure);
+        }
     }
 
-    @SubscribeEvent
-    public static void condenserAccessed(WorldCondenserAccessedEvent event) {
-        ThreadSignals.emit(event.getPlayer(), "condenser", "formed", event.getEpisodeId());
+    public static void successorRecorded(net.minecraft.server.level.ServerPlayer player) {
+        try {
+            ResourceLocation key = new ResourceLocation("better_content_threads", "discovery_visit");
+            CompoundTag visit = readPlayerData(player.server, key, player.getUUID());
+            visit.putBoolean("pending", false); writePlayerData(player.server, key, player.getUUID(), visit);
+        } catch (IOException failure) { throw new IllegalStateException("Cannot acknowledge successor discovery", failure); }
     }
 
     public static long generation(MinecraftServer server) throws IOException {

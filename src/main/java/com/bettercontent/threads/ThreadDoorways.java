@@ -17,6 +17,7 @@ final class ThreadDoorways {
     static boolean available(ThreadNetwork.Card card) {
         if (!card.known()) return false;
         return switch (card.doorwayType()) {
+            case "body" -> ModList.get().isLoaded("downed_player_revival");
             case "emi" -> ModList.get().isLoaded("emi") && !targetStack(card.doorwayTarget()).isEmpty();
             case "ponder" -> ModList.get().isLoaded("ponder") && !targetStack(card.doorwayTarget()).isEmpty();
             default -> nativeKey(card.doorwayType()) != null;
@@ -25,6 +26,7 @@ final class ThreadDoorways {
 
     static Component label(ThreadNetwork.Card card) {
         return Component.literal(switch (card.doorwayType()) {
+            case "body" -> "Open Body";
             case "emi" -> "View recipes";
             case "ponder" -> "Ponder apparatus";
             case "diet" -> "Open nutrition";
@@ -50,6 +52,7 @@ final class ThreadDoorways {
     static void open(ThreadNetwork.Card card) {
         if (!available(card)) return;
         var mc = Minecraft.getInstance();
+        if (card.doorwayType().equals("body")) { BodyDoorway.open(); return; }
         if (card.doorwayType().equals("emi")) { EmiDoorway.open(card.doorwayTarget()); return; }
         if (card.doorwayType().equals("ponder")) { PonderDoorway.open(mc, card.doorwayTarget()); return; }
         var key = nativeKey(card.doorwayType());
@@ -57,6 +60,9 @@ final class ThreadDoorways {
     }
 
     // Keep optional API types out of the outer class verifier when a mod is absent.
+    private static final class BodyDoorway {
+        static void open() { com.bettercontent.downedplayerrevival.client.ClientRevivalInput.openOwnBody(); }
+    }
     private static final class EmiDoorway {
         static void open(String target) {
             EmiApi.displayRecipes(EmiStack.of(targetStack(target)));

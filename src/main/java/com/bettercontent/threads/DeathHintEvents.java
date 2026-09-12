@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = BetterContentThreads.MOD_ID)
 public final class DeathHintEvents {
+    private static final java.util.Set<java.util.UUID> FINALIZED = new java.util.HashSet<>();
     public static final DeathHintContext CONTEXT = new DeathHintContext();
 
     public static String classify(DamageSource source) {
@@ -19,13 +20,17 @@ public final class DeathHintEvents {
             source.is(DamageTypeTags.IS_FIRE), source.is(DamageTypeTags.IS_FALL), source.is(DamageTypeTags.IS_PROJECTILE),
             source.is(DamageTypeTags.IS_EXPLOSION), source.is(DamageTypeTags.IS_FREEZING), source.getEntity() != null);
     }
+    public static void finalDeath(ServerPlayer player, DamageSource source) {
+        if (FINALIZED.add(player.getUUID())) ThreadNetwork.deathHint(player, classify(source));
+    }
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void death(LivingDeathEvent event) {
+        if (net.minecraftforge.fml.ModList.get().isLoaded("downed_player_revival")) return;
         if (event.getEntity() instanceof ServerPlayer player) {
-            ThreadNetwork.deathHint(player, CONTEXT.death(player.getUUID(), classify(event.getSource())));
+            finalDeath(player, event.getSource());
         }
     }
-    @SubscribeEvent public static void logout(PlayerEvent.PlayerLoggedOutEvent event) { CONTEXT.clear(event.getEntity().getUUID()); }
-    @SubscribeEvent public static void respawn(PlayerEvent.PlayerRespawnEvent event) { CONTEXT.clear(event.getEntity().getUUID()); }
-    @SubscribeEvent public static void stop(ServerStoppedEvent event) { CONTEXT.clear(); }
+    @SubscribeEvent public static void logout(PlayerEvent.PlayerLoggedOutEvent event) { CONTEXT.clear(event.getEntity().getUUID()); FINALIZED.remove(event.getEntity().getUUID()); }
+    @SubscribeEvent public static void respawn(PlayerEvent.PlayerRespawnEvent event) { CONTEXT.clear(event.getEntity().getUUID()); FINALIZED.remove(event.getEntity().getUUID()); }
+    @SubscribeEvent public static void stop(ServerStoppedEvent event) { CONTEXT.clear(); FINALIZED.clear(); }
 }

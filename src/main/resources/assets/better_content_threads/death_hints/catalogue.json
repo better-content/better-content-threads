@@ -1,5 +1,5 @@
 {
-  "schema": "bc.death_hints.v1",
+  "schema": "bc.teaching_hints.v2",
   "hints": [
     {
       "id": "practice_dodge",
@@ -17,7 +17,13 @@
       "sources": [
         "mod_source/better-content-fixes/src/main/java/com/bettercontent/bettercontentfixes/learning/ParCoolControlLearning.java",
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/ThreadClient.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "keep_stamina",
@@ -35,7 +41,13 @@
       "sources": [
         "mod_source/better-content-fixes/src/main/java/com/bettercontent/bettercontentfixes/learning/ParCoolControlLearning.java",
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/ThreadClient.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "movement_lesson",
@@ -53,7 +65,13 @@
       "sources": [
         "mod_source/better-content-fixes/src/main/java/com/bettercontent/bettercontentfixes/learning/ParCoolControlLearning.java",
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/ThreadClient.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "projectile_cover",
@@ -66,7 +84,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "combat_exit",
@@ -79,7 +103,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "explosion_distance",
@@ -92,7 +122,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "explosion_storage",
@@ -105,7 +141,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "fall_route",
@@ -118,7 +160,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "fall_landing",
@@ -131,7 +179,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "feather_falling",
@@ -144,7 +198,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "water_breathing",
@@ -157,7 +217,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "air_route",
@@ -170,7 +236,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "underwater_work",
@@ -183,7 +255,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "fire_resistance",
@@ -196,7 +274,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "lava_crossing",
@@ -209,7 +293,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "burning_escape",
@@ -222,7 +312,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "falling_material",
@@ -235,7 +331,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "cramped_space",
@@ -248,7 +350,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "magic_effects",
@@ -261,7 +369,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "wither_distance",
@@ -274,7 +388,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "food_supply",
@@ -287,7 +407,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "purity_three",
@@ -305,7 +431,13 @@
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "bottle_slot",
@@ -323,7 +455,13 @@
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "rain_sky",
@@ -341,7 +479,13 @@
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "rain_reserve",
@@ -359,7 +503,13 @@
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "empty_bottles",
@@ -377,7 +527,13 @@
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "cold_clothing",
@@ -393,7 +549,13 @@
       "sources": [
         "better-content-modpack/config/coldsweat/item.toml",
         "better-content-modpack/config/coldsweat/world.toml"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "heat_clothing",
@@ -409,7 +571,13 @@
       "sources": [
         "better-content-modpack/config/coldsweat/item.toml",
         "better-content-modpack/config/coldsweat/world.toml"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "body_and_air",
@@ -426,7 +594,13 @@
       "sources": [
         "better-content-modpack/config/coldsweat/item.toml",
         "better-content-modpack/config/coldsweat/world.toml"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "waterskin_temperature",
@@ -443,7 +617,13 @@
       "sources": [
         "better-content-modpack/config/coldsweat/item.toml",
         "better-content-modpack/config/coldsweat/world.toml"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "climate_route",
@@ -460,7 +640,13 @@
       "sources": [
         "better-content-modpack/config/coldsweat/item.toml",
         "better-content-modpack/config/coldsweat/world.toml"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "nutrition_groups",
@@ -476,7 +662,13 @@
       "sources": [
         "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/metabolism/MetabolicMath.java",
         "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/nutrition/NutritionSnapshot.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "low_groups",
@@ -492,7 +684,13 @@
       "sources": [
         "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/metabolism/MetabolicMath.java",
         "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/nutrition/NutritionSnapshot.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "sugar_cost",
@@ -509,7 +707,13 @@
       "sources": [
         "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/metabolism/MetabolicMath.java",
         "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/nutrition/NutritionSnapshot.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "frozen_meal",
@@ -525,68 +729,13 @@
       ],
       "sources": [
         "mod_source/heat-sync/src/main/kotlin/com/bettercontent/heatsync/food/FoodThermalService.kt"
-      ]
-    },
-    {
-      "id": "revive_use",
-      "concept_id": "fragility.life_reaches_tether",
-      "pool": "survival",
-      "text": "To revive a downed ally, aim at them and hold {use}. Reach them before they bleed out.",
-      "contexts": [
-        "revival",
-        "combat"
       ],
-      "required_mods": [
-        "downed_player_revival"
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
       ],
-      "sources": [
-        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/RevivalManager.java"
-      ]
-    },
-    {
-      "id": "downed_give_up",
-      "concept_id": "fragility.life_reaches_tether",
-      "pool": "survival",
-      "text": "When downed, hold {sneak} only if you intend to give up. Waiting keeps the revival opportunity open while time remains.",
-      "contexts": [
-        "revival"
-      ],
-      "required_mods": [
-        "downed_player_revival"
-      ],
-      "sources": [
-        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/RevivalManager.java"
-      ]
-    },
-    {
-      "id": "revive_helpers",
-      "concept_id": "fragility.life_reaches_tether",
-      "pool": "survival",
-      "text": "More than one player can help revive a downed ally. Keep the helpers close enough to continue the rescue.",
-      "contexts": [
-        "revival"
-      ],
-      "required_mods": [
-        "downed_player_revival"
-      ],
-      "sources": [
-        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/RevivalManager.java"
-      ]
-    },
-    {
-      "id": "rescue_proximity",
-      "concept_id": "fragility.life_reaches_tether",
-      "pool": "survival",
-      "text": "Stay within reach while helping a downed player. Moving too far away interrupts your contribution to the rescue.",
-      "contexts": [
-        "revival"
-      ],
-      "required_mods": [
-        "downed_player_revival"
-      ],
-      "sources": [
-        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/RevivalManager.java"
-      ]
+      "requirements": []
     },
     {
       "id": "fall_protection",
@@ -599,7 +748,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, Player, FoodData, DamageSources, MobEffects, EnchantmentHelper"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "lessons_available",
@@ -613,7 +768,11 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/LoadingBriefs.java",
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/LearningLibraryScreen.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "reader_key",
@@ -627,7 +786,11 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/LoadingBriefs.java",
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/LearningLibraryScreen.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "loading_lessons",
@@ -641,7 +804,11 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/LoadingBriefs.java",
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/LearningLibraryScreen.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "recipe_before_trip",
@@ -655,7 +822,11 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/ThreadDoorways.java",
         "better-content-modpack/kubejs/server_scripts/progression"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "recipe_uses",
@@ -669,7 +840,11 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/ThreadDoorways.java",
         "better-content-modpack/kubejs/server_scripts/progression"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "recipe_sequence",
@@ -683,7 +858,11 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/ThreadDoorways.java",
         "better-content-modpack/kubejs/server_scripts/progression"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "collector_drink",
@@ -699,7 +878,11 @@
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "collector_bottle",
@@ -715,7 +898,11 @@
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "life_review",
@@ -729,7 +916,11 @@
       "sources": [
         "mod_source/rpg-stats/src/main/kotlin/com/bettercontent/rpgstats/common/event/CommonForgeEvents.kt",
         "mod_source/rpg-stats/src/main/kotlin/com/bettercontent/rpgstats/common/network/packets/AllocationPolicy.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "life_after_death",
@@ -743,7 +934,11 @@
       "sources": [
         "mod_source/rpg-stats/src/main/kotlin/com/bettercontent/rpgstats/common/event/CommonForgeEvents.kt",
         "mod_source/rpg-stats/src/main/kotlin/com/bettercontent/rpgstats/common/network/packets/AllocationPolicy.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "hand_crank",
@@ -758,7 +953,11 @@
         "better-content-modpack/kubejs/server_scripts/progression/10_hand_workshop.js",
         "better-content-modpack/kubejs/server_scripts/progression/20_powered_works.js",
         "better-content-modpack/kubejs/server_scripts/progression/30_precision_factory.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "font_metallurgy",
@@ -776,7 +975,11 @@
         "better-content-modpack/kubejs/server_scripts/progression/10_hand_workshop.js",
         "better-content-modpack/kubejs/server_scripts/progression/20_powered_works.js",
         "better-content-modpack/kubejs/server_scripts/progression/30_precision_factory.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "andesite_route",
@@ -793,7 +996,11 @@
         "better-content-modpack/kubejs/server_scripts/progression/10_hand_workshop.js",
         "better-content-modpack/kubejs/server_scripts/progression/20_powered_works.js",
         "better-content-modpack/kubejs/server_scripts/progression/30_precision_factory.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "assembly_order",
@@ -809,7 +1016,11 @@
         "better-content-modpack/kubejs/server_scripts/progression/10_hand_workshop.js",
         "better-content-modpack/kubejs/server_scripts/progression/20_powered_works.js",
         "better-content-modpack/kubejs/server_scripts/progression/30_precision_factory.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "assembly_intermediate",
@@ -825,7 +1036,11 @@
         "better-content-modpack/kubejs/server_scripts/progression/10_hand_workshop.js",
         "better-content-modpack/kubejs/server_scripts/progression/20_powered_works.js",
         "better-content-modpack/kubejs/server_scripts/progression/30_precision_factory.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "repair_tools",
@@ -839,7 +1054,11 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/TConstructThreads.java",
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/mixin/TinkerRepairResultMixin.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "repair_before_travel",
@@ -853,7 +1072,11 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/TConstructThreads.java",
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/mixin/TinkerRepairResultMixin.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "surface_signs",
@@ -868,7 +1091,11 @@
         "mod_source/realistic-ores/src/main/java/com/bettercontent/realisticores/block/SurfaceSampleBlock.java",
         "mod_source/realistic-ores/src/main/resources/data/realistic_ores/processing_definitions/copper_bloom.json",
         "mod_source/realistic-ores/src/main/resources/data/realistic_ores/recipes/crafting/small_chunks/ironstone.json"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "ore_hosts",
@@ -883,7 +1110,11 @@
         "mod_source/realistic-ores/src/main/java/com/bettercontent/realisticores/block/SurfaceSampleBlock.java",
         "mod_source/realistic-ores/src/main/resources/data/realistic_ores/processing_definitions/copper_bloom.json",
         "mod_source/realistic-ores/src/main/resources/data/realistic_ores/recipes/crafting/small_chunks/ironstone.json"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "small_chunks",
@@ -898,7 +1129,11 @@
         "mod_source/realistic-ores/src/main/java/com/bettercontent/realisticores/block/SurfaceSampleBlock.java",
         "mod_source/realistic-ores/src/main/resources/data/realistic_ores/processing_definitions/copper_bloom.json",
         "mod_source/realistic-ores/src/main/resources/data/realistic_ores/recipes/crafting/small_chunks/ironstone.json"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "ore_processing",
@@ -914,7 +1149,11 @@
         "mod_source/realistic-ores/src/main/java/com/bettercontent/realisticores/block/SurfaceSampleBlock.java",
         "mod_source/realistic-ores/src/main/resources/data/realistic_ores/processing_definitions/copper_bloom.json",
         "mod_source/realistic-ores/src/main/resources/data/realistic_ores/recipes/crafting/small_chunks/ironstone.json"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "ore_concentrates",
@@ -930,7 +1169,11 @@
         "mod_source/realistic-ores/src/main/java/com/bettercontent/realisticores/block/SurfaceSampleBlock.java",
         "mod_source/realistic-ores/src/main/resources/data/realistic_ores/processing_definitions/copper_bloom.json",
         "mod_source/realistic-ores/src/main/resources/data/realistic_ores/recipes/crafting/small_chunks/ironstone.json"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "font_return",
@@ -946,7 +1189,11 @@
         "mod_source/dimension-drink/src/main/resources/defaults/fonts/ratlantis.json",
         "mod_source/dimension-drink/src/main/kotlin/com/bettercontent/dimensiondrink/runtime/player/PlayerReturnHandler.kt",
         "better-content-modpack/kubejs/server_scripts/policy/dimension_access.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "font_expedition",
@@ -962,7 +1209,11 @@
         "mod_source/dimension-drink/src/main/resources/defaults/fonts/ratlantis.json",
         "mod_source/dimension-drink/src/main/kotlin/com/bettercontent/dimensiondrink/runtime/player/PlayerReturnHandler.kt",
         "better-content-modpack/kubejs/server_scripts/policy/dimension_access.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "end_route",
@@ -978,7 +1229,11 @@
         "mod_source/dimension-drink/src/main/resources/defaults/fonts/ratlantis.json",
         "mod_source/dimension-drink/src/main/kotlin/com/bettercontent/dimensiondrink/runtime/player/PlayerReturnHandler.kt",
         "better-content-modpack/kubejs/server_scripts/policy/dimension_access.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "heat_sink",
@@ -992,7 +1247,11 @@
       "sources": [
         "mod_source/heat-sync/src/main/kotlin/com/bettercontent/heatsync/PipeThermalStepMath.kt",
         "mod_source/heat-sync/src/main/kotlin/com/bettercontent/heatsync/HeatSyncPipeThermalController.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "heat_neighbors",
@@ -1006,7 +1265,11 @@
       "sources": [
         "mod_source/heat-sync/src/main/kotlin/com/bettercontent/heatsync/PipeThermalStepMath.kt",
         "mod_source/heat-sync/src/main/kotlin/com/bettercontent/heatsync/HeatSyncPipeThermalController.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "pressure_recipe",
@@ -1020,7 +1283,11 @@
       "sources": [
         "better-content-modpack/kubejs/server_scripts/progression/40_thermal_pressure.js",
         "better-content-modpack/kubejs/server_scripts/progression/50_electrical_control.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "pressure_inputs",
@@ -1034,7 +1301,11 @@
       "sources": [
         "better-content-modpack/kubejs/server_scripts/progression/40_thermal_pressure.js",
         "better-content-modpack/kubejs/server_scripts/progression/50_electrical_control.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "spell_order",
@@ -1047,7 +1318,11 @@
       ],
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/ArsNouveauThreads.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "spell_target",
@@ -1060,7 +1335,11 @@
       ],
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/ArsNouveauThreads.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "relic_use",
@@ -1073,7 +1352,11 @@
       ],
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/RelicsThreads.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "relic_conditions",
@@ -1086,7 +1369,11 @@
       ],
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/RelicsThreads.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "season_fertility",
@@ -1099,7 +1386,11 @@
       ],
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/SereneSeasonsThreads.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "season_reserves",
@@ -1112,7 +1403,11 @@
       ],
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/SereneSeasonsThreads.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "anchor_supply",
@@ -1126,7 +1421,11 @@
       "sources": [
         "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/AnchorData.java",
         "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/ArcaneAnchorBlockEntity.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "anchor_area",
@@ -1140,7 +1439,11 @@
       "sources": [
         "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/AnchorData.java",
         "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/ArcaneAnchorBlockEntity.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "schematic_design",
@@ -1154,7 +1457,11 @@
       "sources": [
         "mod_source/world-lifecycle-manager/src/main/java/com/bettercontent/worldlifecyclemanager/SchematicLibrary.java",
         "mod_source/world-lifecycle-manager/src/main/java/com/bettercontent/worldlifecyclemanager/WorldCondenserBlockEntity.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "schematic_library",
@@ -1168,7 +1475,11 @@
       "sources": [
         "mod_source/world-lifecycle-manager/src/main/java/com/bettercontent/worldlifecyclemanager/SchematicLibrary.java",
         "mod_source/world-lifecycle-manager/src/main/java/com/bettercontent/worldlifecyclemanager/WorldCondenserBlockEntity.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "encoded_patterns",
@@ -1182,7 +1493,11 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/Ae2Threads.java",
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/mixin/Ae2CraftingCpuMixin.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "craft_request",
@@ -1196,7 +1511,11 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/Ae2Threads.java",
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/mixin/Ae2CraftingCpuMixin.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "follow_roads",
@@ -1209,7 +1528,11 @@
       ],
       "sources": [
         "mod_source/settlement-roads/src/main/kotlin/com/bettercontent/settlementroads/runtime/RoadJourneyTracker.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "assault_warning",
@@ -1222,7 +1545,11 @@
       ],
       "sources": [
         "mod_source/pillager-campaigns/src/main/kotlin/com/bettercontent/pillagercampaigns/system/InvasionRuntime.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "spirit_markets",
@@ -1236,7 +1563,11 @@
       "sources": [
         "mod_source/better-content-economy/src/main/java/com/bettercontent/economy/registry/SpiritProfessions.java",
         "mod_source/better-content-economy/src/main/java/com/bettercontent/economy/trader/WanderingTraderGameTests.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "orbit_possible",
@@ -1250,7 +1581,11 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/CreatingSpaceThreads.java",
         "better-content-modpack/kubejs/server_scripts/progression/60_aerospace.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "rocket_planning",
@@ -1264,7 +1599,11 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/CreatingSpaceThreads.java",
         "better-content-modpack/kubejs/server_scripts/progression/60_aerospace.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "world_successor",
@@ -1278,7 +1617,11 @@
       "sources": [
         "mod_source/world-lifecycle-manager/src/main/java/com/bettercontent/worldlifecyclemanager/SchematicLibrary.java",
         "mod_source/world-lifecycle-manager/src/main/java/com/bettercontent/worldlifecyclemanager/WorldCondenserBlockEntity.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "design_survives",
@@ -1292,7 +1635,11 @@
       "sources": [
         "mod_source/world-lifecycle-manager/src/main/java/com/bettercontent/worldlifecyclemanager/SchematicLibrary.java",
         "mod_source/world-lifecycle-manager/src/main/java/com/bettercontent/worldlifecyclemanager/WorldCondenserBlockEntity.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "factory_memory",
@@ -1306,7 +1653,11 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/Ae2Threads.java",
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/mixin/Ae2CraftingCpuMixin.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "magic_keeps_working",
@@ -1320,7 +1671,11 @@
       "sources": [
         "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/AnchorData.java",
         "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/ArcaneAnchorBlockEntity.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "other_skies",
@@ -1336,7 +1691,11 @@
         "mod_source/dimension-drink/src/main/resources/defaults/fonts/ratlantis.json",
         "mod_source/dimension-drink/src/main/kotlin/com/bettercontent/dimensiondrink/runtime/player/PlayerReturnHandler.kt",
         "better-content-modpack/kubejs/server_scripts/policy/dimension_access.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "ratlantis_ahead",
@@ -1353,7 +1712,11 @@
         "mod_source/dimension-drink/src/main/resources/defaults/fonts/ratlantis.json",
         "mod_source/dimension-drink/src/main/kotlin/com/bettercontent/dimensiondrink/runtime/player/PlayerReturnHandler.kt",
         "better-content-modpack/kubejs/server_scripts/policy/dimension_access.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "bumblezone_ahead",
@@ -1371,7 +1734,11 @@
         "mod_source/dimension-drink/src/main/kotlin/com/bettercontent/dimensiondrink/runtime/player/PlayerReturnHandler.kt",
         "better-content-modpack/kubejs/server_scripts/policy/dimension_access.js",
         "mod_source/dimension-drink/src/main/resources/defaults/fonts/bumblezone.json"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "deposit_possibilities",
@@ -1386,7 +1753,11 @@
         "mod_source/realistic-ores/src/main/java/com/bettercontent/realisticores/block/SurfaceSampleBlock.java",
         "mod_source/realistic-ores/src/main/resources/data/realistic_ores/processing_definitions/copper_bloom.json",
         "mod_source/realistic-ores/src/main/resources/data/realistic_ores/recipes/crafting/small_chunks/ironstone.json"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "relic_potential",
@@ -1399,7 +1770,11 @@
       ],
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/RelicsThreads.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "spell_possibilities",
@@ -1412,7 +1787,11 @@
       ],
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/ArsNouveauThreads.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "combat_space",
@@ -1425,7 +1804,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "combat_group",
@@ -1438,7 +1823,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "combat_corner",
@@ -1451,7 +1842,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "combat_supplies",
@@ -1464,7 +1861,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "archer_location",
@@ -1477,7 +1880,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "projectile_recovery",
@@ -1490,7 +1899,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "cliff_work",
@@ -1503,7 +1918,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "vertical_return",
@@ -1516,7 +1937,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "night_vision_water",
@@ -1529,7 +1956,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "water_breathing_exit",
@@ -1542,7 +1975,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "milk_effects",
@@ -1555,7 +1994,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "effect_timer",
@@ -1571,7 +2016,13 @@
       "required_mods": [],
       "sources": [
         "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "water_slot_empty",
@@ -1589,7 +2040,13 @@
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "water_slot_purity",
@@ -1607,7 +2064,13 @@
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "collector_capacity",
@@ -1625,7 +2088,13 @@
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "collector_location",
@@ -1643,7 +2112,13 @@
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
         "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "food_group_hover",
@@ -1659,7 +2134,13 @@
       "sources": [
         "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/metabolism/MetabolicMath.java",
         "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/nutrition/NutritionSnapshot.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "nutrition_time",
@@ -1675,7 +2156,13 @@
       "sources": [
         "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/metabolism/MetabolicMath.java",
         "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/nutrition/NutritionSnapshot.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "sugar_recovery",
@@ -1692,7 +2179,13 @@
       "sources": [
         "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/metabolism/MetabolicMath.java",
         "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/nutrition/NutritionSnapshot.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "meal_balance",
@@ -1708,68 +2201,13 @@
       "sources": [
         "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/metabolism/MetabolicMath.java",
         "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/nutrition/NutritionSnapshot.java"
-      ]
-    },
-    {
-      "id": "revival_aftercare",
-      "concept_id": "fragility.life_reaches_tether",
-      "pool": "survival",
-      "text": "After a rescue, check the revived player's condition before continuing. Arrange a safer place to recover together.",
-      "contexts": [
-        "revival"
       ],
-      "required_mods": [
-        "downed_player_revival"
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
       ],
-      "sources": [
-        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/RevivalManager.java"
-      ]
-    },
-    {
-      "id": "revival_food",
-      "concept_id": "fragility.life_reaches_tether",
-      "pool": "survival",
-      "text": "Helping with a revival uses hunger. Keep food available if your group is making repeated rescues.",
-      "contexts": [
-        "revival"
-      ],
-      "required_mods": [
-        "downed_player_revival"
-      ],
-      "sources": [
-        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/RevivalManager.java"
-      ]
-    },
-    {
-      "id": "revival_target",
-      "concept_id": "fragility.life_reaches_tether",
-      "pool": "survival",
-      "text": "Keep aiming at the downed player while holding {use}. Switching targets can interrupt your aid.",
-      "contexts": [
-        "revival"
-      ],
-      "required_mods": [
-        "downed_player_revival"
-      ],
-      "sources": [
-        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/RevivalManager.java"
-      ]
-    },
-    {
-      "id": "revival_cover",
-      "concept_id": "fragility.life_reaches_tether",
-      "pool": "survival",
-      "text": "Protect the people performing a rescue. A teammate watching the approach can help keep the rescuers at work.",
-      "contexts": [
-        "revival",
-        "combat"
-      ],
-      "required_mods": [
-        "downed_player_revival"
-      ],
-      "sources": [
-        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/RevivalManager.java"
-      ]
+      "requirements": []
     },
     {
       "id": "food_spoilage",
@@ -1784,7 +2222,13 @@
       ],
       "sources": [
         "mod_source/heat-sync/src/main/kotlin/com/bettercontent/heatsync/food/FoodThermalService.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "frozen_backup",
@@ -1800,7 +2244,13 @@
       ],
       "sources": [
         "mod_source/heat-sync/src/main/kotlin/com/bettercontent/heatsync/food/FoodThermalService.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "food_merge",
@@ -1815,7 +2265,13 @@
       ],
       "sources": [
         "mod_source/heat-sync/src/main/kotlin/com/bettercontent/heatsync/food/FoodThermalService.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "food_thaw_check",
@@ -1831,7 +2287,13 @@
       ],
       "sources": [
         "mod_source/heat-sync/src/main/kotlin/com/bettercontent/heatsync/food/FoodThermalService.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "storm_early",
@@ -1847,7 +2309,13 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/WeatherTwoThreads.java",
         "better-content-modpack/config/Weather2/Storm.toml"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "storm_return",
@@ -1861,7 +2329,13 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/WeatherTwoThreads.java",
         "better-content-modpack/config/Weather2/Storm.toml"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "storm_exposed",
@@ -1875,7 +2349,13 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/WeatherTwoThreads.java",
         "better-content-modpack/config/Weather2/Storm.toml"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "storm_wait",
@@ -1889,7 +2369,13 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/WeatherTwoThreads.java",
         "better-content-modpack/config/Weather2/Storm.toml"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "assault_approach",
@@ -1905,7 +2391,13 @@
       ],
       "sources": [
         "mod_source/pillager-campaigns/src/main/kotlin/com/bettercontent/pillagercampaigns/system/InvasionRuntime.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "assault_resupply",
@@ -1920,7 +2412,13 @@
       ],
       "sources": [
         "mod_source/pillager-campaigns/src/main/kotlin/com/bettercontent/pillagercampaigns/system/InvasionRuntime.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "assault_allies",
@@ -1935,7 +2433,13 @@
       ],
       "sources": [
         "mod_source/pillager-campaigns/src/main/kotlin/com/bettercontent/pillagercampaigns/system/InvasionRuntime.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "assault_escape",
@@ -1951,7 +2455,13 @@
       ],
       "sources": [
         "mod_source/pillager-campaigns/src/main/kotlin/com/bettercontent/pillagercampaigns/system/InvasionRuntime.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "gas_escape",
@@ -1965,7 +2475,13 @@
       "sources": [
         "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/sim/GasEscapeHandler.java",
         "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/api/LatentEmissionProfiles.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "gas_inventory",
@@ -1979,7 +2495,13 @@
       "sources": [
         "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/sim/GasEscapeHandler.java",
         "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/api/LatentEmissionProfiles.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "radioactive_mining",
@@ -1993,7 +2515,13 @@
       "sources": [
         "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/sim/GasEscapeHandler.java",
         "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/api/LatentEmissionProfiles.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "radioactive_replacement",
@@ -2007,7 +2535,13 @@
       "sources": [
         "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/sim/GasEscapeHandler.java",
         "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/api/LatentEmissionProfiles.java"
-      ]
+      ],
+      "surfaces": [
+        "menu",
+        "pause",
+        "death"
+      ],
+      "requirements": []
     },
     {
       "id": "beetle_terminus",
@@ -2022,7 +2556,11 @@
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "beetle_rails",
@@ -2037,7 +2575,11 @@
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "beetle_loaded_ground",
@@ -2052,7 +2594,11 @@
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "beetle_obstructions",
@@ -2067,7 +2613,11 @@
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "beetle_water",
@@ -2082,7 +2632,11 @@
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "beetle_brakes",
@@ -2097,7 +2651,11 @@
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "beetle_fallback",
@@ -2112,7 +2670,11 @@
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "beetle_supports",
@@ -2127,7 +2689,11 @@
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "beetle_modules",
@@ -2142,7 +2708,11 @@
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "beetle_remote",
@@ -2157,7 +2727,11 @@
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "train_speed_cost",
@@ -2170,7 +2744,11 @@
       ],
       "sources": [
         "mod_source/create-train-fuel-scaling/src/main/java/com/bettercontent/createtrainfuelscaling/TrainFuelCostCalculator.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "train_top_speed",
@@ -2183,7 +2761,11 @@
       ],
       "sources": [
         "mod_source/create-train-fuel-scaling/src/main/java/com/bettercontent/createtrainfuelscaling/TrainFuelCostCalculator.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "train_round_trip",
@@ -2196,7 +2778,11 @@
       ],
       "sources": [
         "mod_source/create-train-fuel-scaling/src/main/java/com/bettercontent/createtrainfuelscaling/TrainFuelCostCalculator.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "shaft_stress",
@@ -2210,7 +2796,11 @@
       "sources": [
         "mod_source/create-transmission-loss/src/main/kotlin/com/bettercontent/createtransmissionloss/network/NetworkScanner.kt",
         "mod_source/create-transmission-loss/src/main/kotlin/com/bettercontent/createtransmissionloss/mixin/StressCalculatorMixin.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "shorter_power_route",
@@ -2224,7 +2814,11 @@
       "sources": [
         "mod_source/create-transmission-loss/src/main/kotlin/com/bettercontent/createtransmissionloss/network/NetworkScanner.kt",
         "mod_source/create-transmission-loss/src/main/kotlin/com/bettercontent/createtransmissionloss/mixin/StressCalculatorMixin.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "belt_span_cost",
@@ -2238,7 +2832,11 @@
       "sources": [
         "mod_source/create-transmission-loss/src/main/kotlin/com/bettercontent/createtransmissionloss/network/NetworkScanner.kt",
         "mod_source/create-transmission-loss/src/main/kotlin/com/bettercontent/createtransmissionloss/mixin/StressCalculatorMixin.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "trace_notes",
@@ -2252,7 +2850,11 @@
       "sources": [
         "mod_source/player-traces/src/main/kotlin/com/bettercontent/playertraces/logic/AnnotationService.kt",
         "mod_source/player-traces/src/main/kotlin/com/bettercontent/playertraces/logic/CaptureService.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "trace_support",
@@ -2266,7 +2868,11 @@
       "sources": [
         "mod_source/player-traces/src/main/kotlin/com/bettercontent/playertraces/logic/AnnotationService.kt",
         "mod_source/player-traces/src/main/kotlin/com/bettercontent/playertraces/logic/CaptureService.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "trace_authorship",
@@ -2280,7 +2886,11 @@
       "sources": [
         "mod_source/player-traces/src/main/kotlin/com/bettercontent/playertraces/logic/AnnotationService.kt",
         "mod_source/player-traces/src/main/kotlin/com/bettercontent/playertraces/logic/CaptureService.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "trace_gestures",
@@ -2294,7 +2904,11 @@
       "sources": [
         "mod_source/player-traces/src/main/kotlin/com/bettercontent/playertraces/logic/AnnotationService.kt",
         "mod_source/player-traces/src/main/kotlin/com/bettercontent/playertraces/logic/CaptureService.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "cultivar_origin",
@@ -2308,7 +2922,11 @@
       "sources": [
         "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/CultivarLootModifier.java",
         "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/LivingPollenNurseryBlock.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "cultivar_home",
@@ -2322,7 +2940,11 @@
       "sources": [
         "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/CultivarLootModifier.java",
         "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/LivingPollenNurseryBlock.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "cultivar_nursery",
@@ -2336,7 +2958,11 @@
       "sources": [
         "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/CultivarLootModifier.java",
         "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/LivingPollenNurseryBlock.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "cultivar_variety",
@@ -2350,7 +2976,11 @@
       "sources": [
         "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/CultivarLootModifier.java",
         "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/LivingPollenNurseryBlock.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "ratlantis_components",
@@ -2364,7 +2994,11 @@
       "sources": [
         "mod_source/ratlantis-logistics/src/main/java/com/bettercontent/ratlantislogistics/ReplantingInputs.java",
         "better-content-modpack/kubejs/server_scripts/progression/20_ratlantis_logistics.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "ratlantis_route_plan",
@@ -2378,7 +3012,11 @@
       "sources": [
         "mod_source/ratlantis-logistics/src/main/java/com/bettercontent/ratlantislogistics/ReplantingInputs.java",
         "better-content-modpack/kubejs/server_scripts/progression/20_ratlantis_logistics.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "rat_replant_inputs",
@@ -2392,7 +3030,11 @@
       "sources": [
         "mod_source/ratlantis-logistics/src/main/java/com/bettercontent/ratlantislogistics/ReplantingInputs.java",
         "better-content-modpack/kubejs/server_scripts/progression/20_ratlantis_logistics.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "rat_replant_matching",
@@ -2406,7 +3048,11 @@
       "sources": [
         "mod_source/ratlantis-logistics/src/main/java/com/bettercontent/ratlantislogistics/ReplantingInputs.java",
         "better-content-modpack/kubejs/server_scripts/progression/20_ratlantis_logistics.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "ore_coproducts",
@@ -2421,7 +3067,11 @@
         "mod_source/realistic-ores/src/main/java/com/bettercontent/realisticores/block/SurfaceSampleBlock.java",
         "mod_source/realistic-ores/src/main/resources/data/realistic_ores/processing_definitions/copper_bloom.json",
         "mod_source/realistic-ores/src/main/resources/data/realistic_ores/recipes/crafting/small_chunks/ironstone.json"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "ore_route_choice",
@@ -2436,7 +3086,11 @@
         "mod_source/realistic-ores/src/main/java/com/bettercontent/realisticores/block/SurfaceSampleBlock.java",
         "mod_source/realistic-ores/src/main/resources/data/realistic_ores/processing_definitions/copper_bloom.json",
         "mod_source/realistic-ores/src/main/resources/data/realistic_ores/recipes/crafting/small_chunks/ironstone.json"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "ore_small_family",
@@ -2451,7 +3105,11 @@
         "mod_source/realistic-ores/src/main/java/com/bettercontent/realisticores/block/SurfaceSampleBlock.java",
         "mod_source/realistic-ores/src/main/resources/data/realistic_ores/processing_definitions/copper_bloom.json",
         "mod_source/realistic-ores/src/main/resources/data/realistic_ores/recipes/crafting/small_chunks/ironstone.json"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "ore_stage_storage",
@@ -2466,7 +3124,11 @@
         "mod_source/realistic-ores/src/main/java/com/bettercontent/realisticores/block/SurfaceSampleBlock.java",
         "mod_source/realistic-ores/src/main/resources/data/realistic_ores/processing_definitions/copper_bloom.json",
         "mod_source/realistic-ores/src/main/resources/data/realistic_ores/recipes/crafting/small_chunks/ironstone.json"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "anchor_redstone",
@@ -2480,7 +3142,11 @@
       "sources": [
         "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/AnchorData.java",
         "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/ArcaneAnchorBlockEntity.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "anchor_resource_type",
@@ -2494,7 +3160,11 @@
       "sources": [
         "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/AnchorData.java",
         "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/ArcaneAnchorBlockEntity.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "anchor_empty",
@@ -2508,7 +3178,11 @@
       "sources": [
         "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/AnchorData.java",
         "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/ArcaneAnchorBlockEntity.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "chemistry_containment",
@@ -2522,7 +3196,11 @@
       "sources": [
         "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/sim/GasEscapeHandler.java",
         "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/api/LatentEmissionProfiles.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "gas_atmosphere",
@@ -2536,7 +3214,11 @@
       "sources": [
         "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/sim/GasEscapeHandler.java",
         "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/api/LatentEmissionProfiles.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "radioactive_forms",
@@ -2550,7 +3232,11 @@
       "sources": [
         "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/sim/GasEscapeHandler.java",
         "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/api/LatentEmissionProfiles.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "life_preview",
@@ -2564,7 +3250,11 @@
       "sources": [
         "mod_source/rpg-stats/src/main/kotlin/com/bettercontent/rpgstats/common/event/CommonForgeEvents.kt",
         "mod_source/rpg-stats/src/main/kotlin/com/bettercontent/rpgstats/common/network/packets/AllocationPolicy.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "life_specialization",
@@ -2578,7 +3268,11 @@
       "sources": [
         "mod_source/rpg-stats/src/main/kotlin/com/bettercontent/rpgstats/common/event/CommonForgeEvents.kt",
         "mod_source/rpg-stats/src/main/kotlin/com/bettercontent/rpgstats/common/network/packets/AllocationPolicy.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "life_new_plan",
@@ -2592,7 +3286,11 @@
       "sources": [
         "mod_source/rpg-stats/src/main/kotlin/com/bettercontent/rpgstats/common/event/CommonForgeEvents.kt",
         "mod_source/rpg-stats/src/main/kotlin/com/bettercontent/rpgstats/common/network/packets/AllocationPolicy.kt"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "recipe_output_count",
@@ -2606,7 +3304,11 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/ThreadDoorways.java",
         "better-content-modpack/kubejs/server_scripts/progression"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "recipe_machine_type",
@@ -2620,7 +3322,11 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/ThreadDoorways.java",
         "better-content-modpack/kubejs/server_scripts/progression"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "recipe_alternatives",
@@ -2634,7 +3340,11 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/ThreadDoorways.java",
         "better-content-modpack/kubejs/server_scripts/progression"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "beetle_route_beacons",
@@ -2649,7 +3359,11 @@
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "beetle_magic_drives",
@@ -2664,7 +3378,11 @@
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
         "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "bumblezone_food_future",
@@ -2678,7 +3396,11 @@
       "sources": [
         "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/CultivarLootModifier.java",
         "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/LivingPollenNurseryBlock.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "pollen_propagation",
@@ -2692,7 +3414,11 @@
       "sources": [
         "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/CultivarLootModifier.java",
         "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/LivingPollenNurseryBlock.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "ratlantis_logistics_future",
@@ -2706,7 +3432,11 @@
       "sources": [
         "mod_source/ratlantis-logistics/src/main/java/com/bettercontent/ratlantislogistics/ReplantingInputs.java",
         "better-content-modpack/kubejs/server_scripts/progression/20_ratlantis_logistics.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "ratlantis_farming_future",
@@ -2720,7 +3450,11 @@
       "sources": [
         "mod_source/ratlantis-logistics/src/main/java/com/bettercontent/ratlantislogistics/ReplantingInputs.java",
         "better-content-modpack/kubejs/server_scripts/progression/20_ratlantis_logistics.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "chemical_world_effects",
@@ -2734,7 +3468,11 @@
       "sources": [
         "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/sim/GasEscapeHandler.java",
         "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/api/LatentEmissionProfiles.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "radioactive_heat",
@@ -2748,7 +3486,11 @@
       "sources": [
         "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/sim/GasEscapeHandler.java",
         "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/api/LatentEmissionProfiles.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "railway_speed_budget",
@@ -2761,7 +3503,11 @@
       ],
       "sources": [
         "mod_source/create-train-fuel-scaling/src/main/java/com/bettercontent/createtrainfuelscaling/TrainFuelCostCalculator.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "railway_economy",
@@ -2774,7 +3520,11 @@
       ],
       "sources": [
         "mod_source/create-train-fuel-scaling/src/main/java/com/bettercontent/createtrainfuelscaling/TrainFuelCostCalculator.java"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "space_workshop",
@@ -2787,7 +3537,11 @@
       ],
       "sources": [
         "better-content-modpack/kubejs/server_scripts/progression/60_aerospace.js"
-      ]
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
     },
     {
       "id": "aerospace_materials",
@@ -2800,6 +3554,328 @@
       ],
       "sources": [
         "better-content-modpack/kubejs/server_scripts/progression/60_aerospace.js"
+      ],
+      "surfaces": [
+        "menu"
+      ],
+      "requirements": []
+    },
+    {
+      "id": "door_healing_locked",
+      "concept_id": "survival.door_healing_locked",
+      "pool": "survival",
+      "text": "You are at Death\u2019s Door and healing is still locked. Move to safety; the next accepted hit can kill. Open Body to inspect the healing lock and your injuries.",
+      "contexts": [
+        "door_locked"
+      ],
+      "required_mods": [
+        "downed_player_revival"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/HintContextEvents.java",
+        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/state/BodySnapshot.java"
+      ],
+      "surfaces": [
+        "pause"
+      ],
+      "requirements": [
+        "door_locked"
+      ]
+    },
+    {
+      "id": "door_restore_hp",
+      "concept_id": "survival.door_restore_hp",
+      "pool": "survival",
+      "text": "Healing is available at Death\u2019s Door. Restore HP to regain its protective buffer. Your injuries remain until treated; inspect them in Body.",
+      "contexts": [
+        "door_healable"
+      ],
+      "required_mods": [
+        "downed_player_revival"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/HintContextEvents.java",
+        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/state/BodySnapshot.java"
+      ],
+      "surfaces": [
+        "pause"
+      ],
+      "requirements": [
+        "door_healable"
+      ]
+    },
+    {
+      "id": "injury_medicine_ready",
+      "concept_id": "survival.injury_medicine_ready",
+      "pool": "survival",
+      "text": "You have matching injury medicine. Open Body, select the injury, and finish treatment in safety. HP healing leaves injuries.",
+      "contexts": [
+        "injury_cure"
+      ],
+      "required_mods": [
+        "downed_player_revival"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/HintContextEvents.java",
+        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/state/BodySnapshot.java"
+      ],
+      "surfaces": [
+        "pause"
+      ],
+      "requirements": [
+        "injury_cure"
+      ]
+    },
+    {
+      "id": "trauma_penalties",
+      "concept_id": "survival.trauma_penalties",
+      "pool": "survival",
+      "text": "Trauma amplifies existing impairments, not injury death odds. Avoid hits while stacks expire; treat injuries in Body.",
+      "contexts": [
+        "injury_trauma"
+      ],
+      "required_mods": [
+        "downed_player_revival"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/HintContextEvents.java",
+        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/state/BodySnapshot.java"
+      ],
+      "surfaces": [
+        "pause"
+      ],
+      "requirements": [
+        "injury_trauma"
+      ]
+    },
+    {
+      "id": "injury_find_medicine",
+      "concept_id": "survival.injury_find_medicine",
+      "pool": "survival",
+      "text": "Open Body to find medicine for untreated injuries. Injury type selects the cure; region determines the impairment.",
+      "contexts": [
+        "injury_uncured"
+      ],
+      "required_mods": [
+        "downed_player_revival"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/HintContextEvents.java",
+        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/state/BodySnapshot.java"
+      ],
+      "surfaces": [
+        "pause"
+      ],
+      "requirements": [
+        "injury_uncured"
+      ]
+    },
+    {
+      "id": "door_prepare",
+      "concept_id": "survival.door_prepare",
+      "pool": "survival",
+      "text": "Positive HP protects you from the death roll on the hit that empties it. At Death\u2019s Door, further hits can kill. Healing restores HP; treatment removes injuries.",
+      "contexts": [],
+      "required_mods": [
+        "downed_player_revival"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/HintContextEvents.java",
+        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/state/BodySnapshot.java"
+      ],
+      "surfaces": [
+        "menu",
+        "death"
+      ],
+      "requirements": []
+    },
+    {
+      "id": "injury_treatment_prepare",
+      "concept_id": "survival.injury_treatment_prepare",
+      "pool": "survival",
+      "text": "Body shows injuries and medicines. Complete treatment: one medicine cures one injury. Totems do not prevent player death.",
+      "contexts": [],
+      "required_mods": [
+        "downed_player_revival"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/HintContextEvents.java",
+        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/state/BodySnapshot.java"
+      ],
+      "surfaces": [
+        "menu",
+        "death"
+      ],
+      "requirements": []
+    },
+    {
+      "id": "context_crash",
+      "concept_id": "survival.context_crash",
+      "pool": "survival",
+      "text": "Your sugar boost has become a crash. Check nutrition and recover somewhere safe; adding more sugar can extend the cycle.",
+      "contexts": [
+        "sugar_crash"
+      ],
+      "required_mods": [
+        "systemic_salience"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/HintContextEvents.java"
+      ],
+      "surfaces": [
+        "pause"
+      ],
+      "requirements": [
+        "sugar_crash"
+      ]
+    },
+    {
+      "id": "context_alcohol",
+      "concept_id": "survival.context_alcohol",
+      "pool": "survival",
+      "text": "Alcohol is currently impairing your control. Allow it to clear before attempting risky movement or fighting.",
+      "contexts": [
+        "alcohol"
+      ],
+      "required_mods": [
+        "systemic_salience"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/HintContextEvents.java"
+      ],
+      "surfaces": [
+        "pause"
+      ],
+      "requirements": [
+        "alcohol"
+      ]
+    },
+    {
+      "id": "context_nutrition",
+      "concept_id": "survival.context_nutrition",
+      "pool": "survival",
+      "text": "At least one nutrition group is below its supported threshold. Open nutrition and choose foods that replenish your lowest groups.",
+      "contexts": [
+        "nutrition"
+      ],
+      "required_mods": [
+        "systemic_salience",
+        "diet"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/HintContextEvents.java"
+      ],
+      "surfaces": [
+        "pause"
+      ],
+      "requirements": [
+        "nutrition"
+      ]
+    },
+    {
+      "id": "context_frozen",
+      "concept_id": "survival.context_frozen",
+      "pool": "survival",
+      "text": "The food you are holding is frozen. Thaw it before eating; its stored temperature matters even after you carry it elsewhere.",
+      "contexts": [
+        "frozen_food"
+      ],
+      "required_mods": [
+        "heat_sync"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/HintContextEvents.java"
+      ],
+      "surfaces": [
+        "pause"
+      ],
+      "requirements": [
+        "frozen_food"
+      ]
+    },
+    {
+      "id": "context_campaign_approaching",
+      "concept_id": "survival.context_campaign",
+      "pool": "survival",
+      "text": "A campaign is approaching you. Prepare cover, supplies, and an escape route before its attackers arrive.",
+      "contexts": [
+        "campaign_approaching"
+      ],
+      "required_mods": [
+        "pillager_campaigns"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/HintContextEvents.java"
+      ],
+      "surfaces": [
+        "pause"
+      ],
+      "requirements": [
+        "campaign_approaching"
+      ]
+    },
+    {
+      "id": "context_low_health",
+      "concept_id": "survival.context_low_health",
+      "pool": "survival",
+      "text": "Your HP buffer is low. Find cover and restore health before taking another hit. Inspect persistent injuries separately in Body.",
+      "contexts": [
+        "low_health"
+      ],
+      "required_mods": [
+        "downed_player_revival"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/HintContextEvents.java",
+        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/state/BodySnapshot.java"
+      ],
+      "surfaces": [
+        "pause"
+      ],
+      "requirements": [
+        "low_health"
+      ]
+    },
+    {
+      "id": "context_campaign_active",
+      "concept_id": "survival.context_campaign",
+      "pool": "survival",
+      "text": "Campaign attackers have arrived for you. Use cover and an escape route, and manage your supplies through the assault.",
+      "contexts": [
+        "campaign_active"
+      ],
+      "required_mods": [
+        "pillager_campaigns"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/HintContextEvents.java"
+      ],
+      "surfaces": [
+        "pause"
+      ],
+      "requirements": [
+        "campaign_active"
+      ]
+    },
+    {
+      "id": "context_campaign_recovery",
+      "concept_id": "survival.context_campaign",
+      "pool": "survival",
+      "text": "You survived your campaign. Check injuries, replace spent supplies, and repair defenses before the next journey.",
+      "contexts": [
+        "campaign_recovery"
+      ],
+      "required_mods": [
+        "pillager_campaigns"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/HintContextEvents.java"
+      ],
+      "surfaces": [
+        "pause"
+      ],
+      "requirements": [
+        "campaign_recovery"
       ]
     }
   ]

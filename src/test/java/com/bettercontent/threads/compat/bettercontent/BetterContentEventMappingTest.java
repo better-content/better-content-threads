@@ -4,7 +4,6 @@ import com.bettercontent.arcanechunkloaders.api.event.ArcaneAnchorProgressEvent;
 import com.bettercontent.bettercontentfixes.api.event.CustomControlEpisodeEvent;
 import com.bettercontent.bettercontentfixes.api.event.SleepTimelapseEvent;
 import com.bettercontent.heatsync.api.event.BodyTemperatureEpisodeEvent;
-import com.bettercontent.heatsync.api.event.CoolantSafetyEvent;
 import com.bettercontent.heatsync.api.event.FoodThermalEpisodeEvent;
 import com.bettercontent.playertraces.api.event.TraceEpisodeEvent;
 import com.bettercontent.rpgstats.api.event.LifeAllocationEvent;
@@ -18,14 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 final class BetterContentEventMappingTest {
     @Test
-    void mapsEveryArcaneAnchorStage() {
-        assertEquals(evidence("arcane_anchor", "placed"),
-            ArcaneChunkLoaderThreads.evidence(ArcaneAnchorProgressEvent.Stage.PLACED));
-        assertEquals(evidence("arcane_anchor", "ticket_verified"),
-            ArcaneChunkLoaderThreads.evidence(ArcaneAnchorProgressEvent.Stage.REMOTE_TICKET_VERIFIED));
-    }
-
-    @Test
     void mapsEveryThermalStage() {
         assertEquals(evidence("temperature_stress", "cold"),
             HeatSyncThreads.bodyEvidence(BodyTemperatureEpisodeEvent.Stage.STRESSED_COLD));
@@ -33,11 +24,7 @@ final class BetterContentEventMappingTest {
             HeatSyncThreads.bodyEvidence(BodyTemperatureEpisodeEvent.Stage.STRESSED_HOT));
         assertEquals(evidence("temperature_comfort", "restored"),
             HeatSyncThreads.bodyEvidence(BodyTemperatureEpisodeEvent.Stage.COMFORT_RESTORED));
-        assertEquals(evidence("heat_excess", "network"),
-            HeatSyncThreads.coolantEvidence(CoolantSafetyEvent.Stage.EXCESS_HEAT_OBSERVED));
-        assertEquals(evidence("heat_safe", "safe"),
-            HeatSyncThreads.coolantEvidence(CoolantSafetyEvent.Stage.SAFE_AFTER_COOLANT_EXCHANGE));
-        assertEquals(evidence("food_thermal_state", "non_neutral"),
+        assertEquals(evidence("food_thermal_state", "frozen_use_rejected"),
             HeatSyncThreads.foodEvidence(FoodThermalEpisodeEvent.Stage.FROZEN_USE_REJECTED));
         assertEquals(evidence("food_thermal_use", "appropriate"),
             HeatSyncThreads.foodEvidence(FoodThermalEpisodeEvent.Stage.FRESH_USE_FINISHED));
@@ -77,10 +64,8 @@ final class BetterContentEventMappingTest {
             SystemicSalienceThreads.evidence(NutritionEpisodeEvent.Kind.WARNING));
         assertEquals(evidence("nutrition_recovered", "balanced_meal"),
             SystemicSalienceThreads.evidence(NutritionEpisodeEvent.Kind.RECOVERED));
-        assertEquals(evidence("thirst_loss", "first_drop"),
-            WaterSurvivalThreads.evidence(WaterSafetyEvent.Stage.THIRST_LOST));
-        assertEquals(evidence("water_drink", "purity_3_correlated"),
-            WaterSurvivalThreads.evidence(WaterSafetyEvent.Stage.PURIFIED_WATER_CONSUMED));
+        assertEquals(evidence("life_allocation", "lost_on_death"),
+            RpgStatsThreads.evidence(LifeAllocationEvent.State.LOST_ON_DEATH));
     }
 
     private static ThreadEvidence evidence(String type, String value) {

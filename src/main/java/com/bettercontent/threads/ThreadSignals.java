@@ -1,28 +1,24 @@
 package com.bettercontent.threads;
-
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-import java.util.ArrayList;
-
-/** Stable optional-integration surface. Signals describe completed native actions; they never grant rewards. */
+import java.util.*;
+/** Authoritative outcome ingress. A route matches one completed native effect, never setup. */
 public final class ThreadSignals {
-    private ThreadSignals(){}
-    public static void emit(ServerPlayer player,String type,String value){
-        emit(player,type,value,null);
-    }
-    public static void emit(ServerPlayer player,String type,String value,String correlationToken){
-        if(player==null||type==null||value==null||!type.matches("[a-z0-9_]{1,32}")||value.length()>160||(correlationToken!=null&&!ThreadPlayerState.validCorrelation(correlationToken)))return;
-        var state=ThreadPlayerState.get(player);var notices=new ArrayList<ThreadNetwork.Notice>();boolean dirty=false;
-        for(var definition:ThreadDefinitions.INSTANCE.all()){
-            boolean wasActive=state.active.contains(definition.id());
-            var reveal=matching(definition.revealRoutes(),type,value);
-            if(!wasActive&&reveal!=null&&correlationToken!=null&&state.reveal(definition.id(),correlationToken)){notices.add(ThreadNetwork.notice(definition,ThreadNetwork.NoticeKind.REVEAL));dirty=true;}
-            else if(wasActive&&reveal!=null&&correlationToken!=null&&state.bindCorrelation(definition.id(),correlationToken))dirty=true;
-            if(wasActive&&!state.completed.contains(definition.id())){var route=matching(definition.completionRoutes(),type,value);if(route!=null&&correlationToken!=null&&correlationToken.equals(state.correlations.get(definition.id()))&&state.complete(definition.id(),route.label(),state.generation)){notices.add(ThreadNetwork.notice(definition,ThreadNetwork.NoticeKind.COMPLETE));dirty=true;}}
-        }
-        if(type.equals("condenser")&&value.equals("formed")&&state.active.contains("world_can_be_condensed")&&correlationToken!=null){state.pendingCondenserGeneration=state.generation+1;state.pendingCondenserCorrelation=correlationToken;dirty=true;}
-        if(dirty){state.save(player);ThreadNetwork.sync(player,false,notices);}
-    }
-    public static String activeCorrelation(ServerPlayer player,String threadId){if(player==null||threadId==null||!threadId.matches("[a-z0-9_]{1,48}"))return null;return ThreadPlayerState.get(player).correlations.get(threadId);}
-    private static ThreadDefinition.Route matching(java.util.List<ThreadDefinition.Route> routes,String type,String value){return routes.stream().filter(r->r.type().equals(type)&&matches(r.value(),value)).findFirst().orElse(null);}
-    private static boolean matches(String expected,String actual){if(expected.equals("*"))return true;for(String candidate:expected.split("\\|"))if(candidate.equals(actual))return true;return false;}
+ private ThreadSignals(){}
+ public static void emit(ServerPlayer player,String type,String value){emit(player,type,value,null,"");}
+ public static void emit(ServerPlayer player,String type,String value,String correlation){emit(player,type,value,correlation,"");}
+ public static void emit(ServerPlayer player,String type,String value,String correlation,String context){if(player!=null)emit(player.server,player.getUUID(),type,value,correlation,context);}
+ public static void emit(MinecraftServer server,UUID owner,String type,String value,String correlation,String context){
+  if(server==null||owner==null||type==null||!type.matches("[a-z0-9_]{1,32}")||value==null||value.length()>160||!ThreadPlayerState.validCorrelation(correlation) )return;
+  if(!server.isSameThread()){server.execute(()->emit(server,owner,type,value,correlation,context));return;}
+  String detail=context==null?"":context.substring(0,Math.min(256,context.length()));
+  var state=ThreadPlayerState.get(server,owner);state.enterGeneration(ThreadPlayerState.currentGeneration(server));boolean changed=false;
+  for(var d:ThreadDefinitions.INSTANCE.all())for(var route:d.discoveryRoutes())if(route.type().equals(type)&&matches(route.value(),value)){
+   changed|=state.discover(d.id(),route.id(),correlation,detail,state.generation);break;
+  }
+  if(!changed)return;state.save(server,owner);var player=server.getPlayerList().getPlayer(owner);if(player!=null)deliver(player);
+ }
+ public static void login(ServerPlayer player){var state=ThreadPlayerState.get(player);state.enterGeneration(ThreadPlayerState.currentGeneration(player.server));state.save(player);deliver(player);}
+ public static void deliver(ServerPlayer player){var state=ThreadPlayerState.get(player);var notices=new ArrayList<ThreadNetwork.Notice>();for(String id:state.pendingNotices){var d=ThreadDefinitions.INSTANCE.get(id);if(d!=null)notices.add(ThreadNetwork.notice(d,state.generationCounts.getOrDefault(id,0)>1?ThreadNetwork.NoticeKind.REMINDER:ThreadNetwork.NoticeKind.DISCOVERY,state.contexts.getOrDefault(id,""),state.lastGeneration.getOrDefault(id,state.generation)));}ThreadNetwork.sync(player,false,notices);state.pendingNotices.clear();state.save(player);}
+ private static boolean matches(String expected,String actual){if(expected.equals("*"))return true;return Arrays.asList(expected.split("\\|",-1)).contains(actual);}
 }

@@ -15,8 +15,6 @@ public final class ThreadSignals {
         com.bettercontent.threads.ThreadSignals.emit(player, type, value, correlationToken);
     }
 
-    /** Returns the active episode token for an optional producer that must resume after reload. */
-    public static String activeCorrelation(ServerPlayer player, String threadId) {
-        return com.bettercontent.threads.ThreadSignals.activeCorrelation(player, threadId);
-    }
+    public static void emit(ServerPlayer player,String type,String value,String correlation,String context){com.bettercontent.threads.ThreadSignals.emit(player,type,value,correlation,context);}
+    public static void emit(net.minecraft.server.MinecraftServer server,java.util.UUID player,String type,String value,String correlation,String context){com.bettercontent.threads.ThreadSignals.emit(server,player,type,value,correlation,context);}
 }

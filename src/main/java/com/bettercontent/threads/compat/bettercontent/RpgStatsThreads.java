@@ -18,6 +18,7 @@ public final class RpgStatsThreads {
         return new ThreadEvidence("life_allocation", switch (state) {
             case AVAILABLE -> "available";
             case SPENT -> "spent";
+            case LOST_ON_DEATH -> "lost_on_death";
         });
     }
 }

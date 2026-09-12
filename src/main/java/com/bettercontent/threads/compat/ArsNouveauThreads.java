@@ -3,87 +3,63 @@ package com.bettercontent.threads.compat;
 import com.bettercontent.threads.ThreadSignals;
 import com.hollingsworth.arsnouveau.api.event.EffectResolveEvent;
 import com.hollingsworth.arsnouveau.api.spell.Spell;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import java.util.*;
 
-import java.util.LinkedHashSet;
-import java.util.Locale;
-import java.util.Set;
-
-/** Exact spell-save to matching resolved-effect correlation for Ars 4.12.7. */
+/** Authorship plus a demonstrated world/target change at native effect resolution. */
 public final class ArsNouveauThreads {
-    private static final String ROOT = "BetterContentThreadsArsEpisode";
+    private static final String ROOT = "BetterContentThreadsAuthoredSpells";
+    private static final Map<Object, String> BEFORE = new WeakHashMap<>();
     private ArsNouveauThreads() {}
-
     public static void authored(ServerPlayer player, Spell spell) {
         if (spell == null || !spell.isValid() || spell.getSpellSize() < 2) return;
-        String signature = signature(spell);
-        remember(player, "reality", signature, "spell_authored", "ars_nouveau");
-        Set<String> namespaces = namespaces(spell);
-        if (namespaces.contains("ars_elemental")) remember(player, "elements", signature, "spell_element", "added");
-        if (crossing(namespaces) != null) remember(player, "traditions", signature, "tradition_cross", "constructed");
+        var persisted = player.getPersistentData().getCompound(Player.PERSISTED_NBT_TAG);
+        var authored = persisted.getCompound(ROOT);
+        authored.putBoolean(signature(spell), true);
+        persisted.put(ROOT, authored); player.getPersistentData().put(Player.PERSISTED_NBT_TAG, persisted);
     }
-
-    @SubscribeEvent
-    public static void effectResolved(EffectResolveEvent.Post event) {
-        if (!(event.shooter instanceof ServerPlayer player) || event.spell == null) return;
-        String signature = signature(event.spell);
-        complete(player, "reality", "reality_has_grammar", signature, "spell_effect", "ars_nouveau");
-        if (namespaces(event.spell).contains("ars_elemental"))
-            complete(player, "elements", "elements_change_sentence", signature, "spell_element", "triggered");
-        String crossing = crossing(namespaces(event.spell));
-        if (crossing != null)
-            complete(player, "traditions", "traditions_can_cross", signature, "tradition_cross", crossing);
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void before(EffectResolveEvent.Pre event) {
+        if (!event.isCanceled() && event.shooter instanceof ServerPlayer) BEFORE.put(event.resolver, observation(event));
     }
-
-    private static void remember(ServerPlayer player, String key, String signature, String type, String value) {
-        String token = player.getUUID() + ":ars:" + key + ":" + Integer.toUnsignedString(signature.hashCode(), 36)
-            + ":" + player.server.getTickCount();
-        CompoundTag state = state(player);
-        state.putString(key + "Signature", signature);
-        state.putString(key + "Token", token);
-        save(player, state);
-        ThreadSignals.emit(player, type, value, token);
+    @SubscribeEvent public static void effectResolved(EffectResolveEvent.Post event) {
+        String before = BEFORE.remove(event.resolver);
+        if (!(event.shooter instanceof ServerPlayer player) || event.spell == null || before == null
+            || before.equals(observation(event))) return;
+        if (!player.getPersistentData().getCompound(Player.PERSISTED_NBT_TAG).getCompound(ROOT).getBoolean(signature(event.spell))) return;
+        String token = UUID.randomUUID().toString();
+        ThreadSignals.emit(player, "spell_effect", "ars_nouveau", token);
+        boolean elemental = event.resolveEffect.getRegistryName().getNamespace().equals("ars_elemental")
+            || event.spellStats.getAugments().stream().anyMatch(a -> a.getRegistryName().getNamespace().equals("ars_elemental"));
+        if (elemental) ThreadSignals.emit(player, "spell_element", "triggered", token);
     }
-
-    private static void complete(ServerPlayer player, String key, String card, String signature, String type, String value) {
-        CompoundTag state = state(player);
-        String token = state.getString(key + "Token");
-        if (!signature.equals(state.getString(key + "Signature")) || token.isBlank()) return;
-        String active = ThreadSignals.activeCorrelation(player, card);
-        if (!token.equals(active)) return;
-        ThreadSignals.emit(player, type, value, token);
-        state.remove(key + "Signature");
-        state.remove(key + "Token");
-        save(player, state);
+    private static String observation(EffectResolveEvent event) {
+        var hit = event.rayTraceResult.getLocation();
+        var pos = BlockPos.containing(hit);
+        StringBuilder value = new StringBuilder();
+        for (var b : BlockPos.betweenClosed(pos.offset(-1,-1,-1), pos.offset(1,1,1)))
+            value.append(event.world.getBlockState(b)).append(';');
+        if (event.rayTraceResult instanceof EntityHitResult entityHit) append(value, entityHit.getEntity());
+        append(value, event.shooter);
+        event.world.getEntities((Entity)null, new AABB(pos).inflate(4)).stream()
+            .map(Entity::getUUID).sorted().forEach(value::append);
+        return value.toString();
     }
-
+    private static void append(StringBuilder value, Entity entity) {
+        value.append(entity.getUUID()).append(entity.position()).append(entity.getDeltaMovement())
+            .append(entity.getRemainingFireTicks()).append(entity.isRemoved());
+        if (entity instanceof LivingEntity living) value.append(living.getHealth()).append(living.getActiveEffects());
+    }
     private static String signature(Spell spell) {
-        return spell.serializeRecipe().stream().map(Object::toString).reduce((a, b) -> a + "," + b).orElse("");
-    }
-
-    private static Set<String> namespaces(Spell spell) {
-        var result = new LinkedHashSet<String>();
-        spell.serializeRecipe().forEach(id -> result.add(id.getNamespace().toLowerCase(Locale.ROOT)));
-        return Set.copyOf(result);
-    }
-
-    private static String crossing(Set<String> namespaces) {
-        if (!namespaces.contains("ars_nouveau")) return null;
-        if (namespaces.contains("ars_creo")) return "ars_creo";
-        if (namespaces.contains("arseng")) return "ars_energistique";
-        return null;
-    }
-
-    private static CompoundTag state(ServerPlayer player) {
-        return player.getPersistentData().getCompound(Player.PERSISTED_NBT_TAG).getCompound(ROOT);
-    }
-
-    private static void save(ServerPlayer player, CompoundTag state) {
-        CompoundTag persisted = player.getPersistentData().getCompound(Player.PERSISTED_NBT_TAG);
-        persisted.put(ROOT, state);
-        player.getPersistentData().put(Player.PERSISTED_NBT_TAG, persisted);
+        return spell.serializeRecipe().stream().map(Object::toString).reduce((a,b) -> a + "," + b).orElse("");
     }
 }

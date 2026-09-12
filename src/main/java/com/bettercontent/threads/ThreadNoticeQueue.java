@@ -41,6 +41,8 @@ final class ThreadNoticeQueue<T> {
         return new Frame<>(queue.getFirst(), elapsedMs, started);
     }
 
+    void clear() { queue.clear(); elapsedMs = 0L; announced = false; }
+
     int size() {
         return queue.size();
     }

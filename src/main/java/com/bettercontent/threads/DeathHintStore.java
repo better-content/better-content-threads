@@ -12,9 +12,10 @@ import java.nio.file.AtomicMoveNotSupportedException;
 import java.util.HashSet;
 
 final class DeathHintStore {
-    static DeathHintRotation.State load() {
+    static DeathHintRotation.State load() { return load("death"); }
+    static DeathHintRotation.State load(String surface) {
         try {
-            return Files.isRegularFile(path()) ? decode(JsonParser.parseString(Files.readString(path())).getAsJsonObject())
+            return Files.isRegularFile(path(surface)) ? decode(JsonParser.parseString(Files.readString(path(surface))).getAsJsonObject())
                 : DeathHintRotation.State.empty();
         } catch (Exception failure) {
             LogUtils.getLogger().warn("Could not read local tip history", failure);
@@ -54,8 +55,9 @@ final class DeathHintStore {
         json.addProperty("last_pause_id", state.lastPauseId());
         return json;
     }
-    static void save(DeathHintRotation.State state) {
-        try { write(path(), state); }
+    static void save(DeathHintRotation.State state) { save("death",state); }
+    static void save(String surface, DeathHintRotation.State state) {
+        try { write(path(surface), state); }
         catch (Exception failure) { LogUtils.getLogger().warn("Could not save local tip history", failure); }
     }
     static void write(Path path, DeathHintRotation.State state) throws java.io.IOException {
@@ -67,5 +69,8 @@ final class DeathHintStore {
             catch (AtomicMoveNotSupportedException ignored) { Files.move(temporary, path, StandardCopyOption.REPLACE_EXISTING); }
         } finally { Files.deleteIfExists(temporary); }
     }
-    private static Path path() { return FMLPaths.CONFIGDIR.get().resolve("better-content-threads-death-hints.json"); }
+    private static Path path(String surface) {
+        if (!java.util.Set.of("death","pause","menu").contains(surface)) throw new IllegalArgumentException("unknown surface");
+        return FMLPaths.CONFIGDIR.get().resolve("better-content-threads-"+surface+"-hints.json");
+    }
 }

@@ -1,0 +1,185 @@
+{
+  "schema": "bc.threads_ci_providers.v1",
+  "baselineCommit": "7daccf81465d0803824831f014d695419c6e7696",
+  "providers": [
+    {
+      "repository": "arcane-chunk-loaders",
+      "modId": "arcane_chunk_loaders",
+      "artifact": "arcane-chunk-loaders-0.1.0.jar",
+      "dependsOn": [],
+      "sourceCommit": "22d5b642c8d4fa61f3655fd86a0cebdaa09c165c"
+    },
+    {
+      "repository": "dimension-drink",
+      "modId": "dimension_drink",
+      "artifact": "dimension-drink-1.0.0.jar",
+      "dependsOn": []
+    },
+    {
+      "repository": "better-content-economy",
+      "modId": "better_content_economy",
+      "artifact": "better-content-economy-1.0.1.jar",
+      "dependsOn": [
+        "dimension-drink"
+      ],
+      "sourceCommit": "fe1b3892032b77a0cf0f49d0bf19c7b52616a2f3"
+    },
+    {
+      "repository": "dynamic-survival-hud",
+      "modId": "dynamic_survival_hud",
+      "artifact": "dynamic-survival-hud-1.0.0.jar",
+      "dependsOn": [],
+      "sourceCommit": "d3822667f74883052f1521c2c03ec86d1c26311f"
+    },
+    {
+      "repository": "heat-sync",
+      "modId": "heat_sync",
+      "artifact": "heat-sync-0.1.0.jar",
+      "dependsOn": [],
+      "sourceCommit": "45ae6d21ff09fbf8519284f7ae0c9dbff69f6051"
+    },
+    {
+      "repository": "latent-chemlib",
+      "modId": "latent_chemlib",
+      "artifact": "latent-chemlib-0.2.0.jar",
+      "dependsOn": [
+        "heat-sync"
+      ],
+      "sourceCommit": "74d1da3b123ffaea7c6af527dbde185e657819b7"
+    },
+    {
+      "repository": "better-content-fixes",
+      "modId": "better_content_fixes",
+      "artifact": "better-content-fixes-0.1.8.jar",
+      "dependsOn": [
+        "dynamic-survival-hud",
+        "heat-sync",
+        "latent-chemlib"
+      ],
+      "sourceCommit": "65beec3dc2dd6bfa3dabf331761f22bf15e94ad1"
+    },
+    {
+      "repository": "bumblezone-cultivars",
+      "modId": "bumblezone_cultivars",
+      "artifact": "bumblezone-cultivars-0.1.0.jar",
+      "dependsOn": [],
+      "sourceCommit": "b09040ce5bb5552d9a044df9722a35b9dd1c864d"
+    },
+    {
+      "repository": "create-train-fuel-scaling",
+      "modId": "create_train_fuel_scaling",
+      "artifact": "create-train-fuel-scaling-0.1.0.jar",
+      "dependsOn": [],
+      "sourceCommit": "f7a8fd15ea64d0cfe362b552e75f1ddc99f865c4"
+    },
+    {
+      "repository": "create-transmission-loss",
+      "modId": "create_transmission_loss",
+      "artifact": "create-transmission-loss-0.1.0.jar",
+      "dependsOn": [],
+      "sourceCommit": "620f0091b5bde9b321949a84fae36f4d599f188f"
+    },
+    {
+      "repository": "downed-player-revival",
+      "modId": "downed_player_revival",
+      "artifact": "downed-player-revival-1.0.0.jar",
+      "dependsOn": [
+        "dynamic-survival-hud"
+      ],
+      "sourceCommit": "25652f21a892da77adc0eece4c3bf752ef5d417a"
+    },
+    {
+      "repository": "depth-director",
+      "modId": "depth_director",
+      "artifact": "depth-director-0.2.1.jar",
+      "dependsOn": [
+        "downed-player-revival"
+      ],
+      "sourceCommit": "4f4a784f0f0dcd125f5b85fbad4d9f036e950d9f"
+    },
+    {
+      "repository": "oc2r-create-bridge",
+      "modId": "oc2r_create_bridge",
+      "artifact": "oc2r-create-bridge-0.1.0.jar",
+      "dependsOn": [],
+      "sourceCommit": "6f62a90c33f2bcc51e3cdf1c7b95f4c6e78c3f38"
+    },
+    {
+      "repository": "oc2r-wireless-pubsub",
+      "modId": "oc2r_wireless_pubsub",
+      "artifact": "oc2r-wireless-pubsub-1.0.0.jar",
+      "dependsOn": [],
+      "sourceCommit": "34ab58840729c654c26f4ba0895d95ab6d5938f5"
+    },
+    {
+      "repository": "pillager-campaigns",
+      "modId": "pillager_campaigns",
+      "artifact": "pillager-campaigns-0.5.4.jar",
+      "dependsOn": [
+        "downed-player-revival"
+      ],
+      "sourceCommit": "d562e5b4ebdb893f44d348440e1af1da41faa655"
+    },
+    {
+      "repository": "player-traces",
+      "modId": "player_traces",
+      "artifact": "player-traces-0.1.0.jar",
+      "dependsOn": [
+        "downed-player-revival"
+      ]
+    },
+    {
+      "repository": "rail-beetle",
+      "modId": "rail_beetle",
+      "artifact": "rail-beetle-0.1.0.jar",
+      "dependsOn": [],
+      "sourceCommit": "3883995fd01a8f3c3f8ec662de562ee2d7d24353"
+    },
+    {
+      "repository": "realistic-ores",
+      "modId": "realistic_ores",
+      "artifact": "realistic-ores-0.2.0.jar",
+      "dependsOn": []
+    },
+    {
+      "repository": "rpg-stats",
+      "modId": "rpg_stats",
+      "artifact": "rpg-stats-1.0.1.jar",
+      "dependsOn": [],
+      "sourceCommit": "bf70974b82192e3f544f5bf9c778b64e8dfa86ee"
+    },
+    {
+      "repository": "settlement-roads",
+      "modId": "settlement_roads",
+      "artifact": "settlement-roads-0.1.0.jar",
+      "dependsOn": []
+    },
+    {
+      "repository": "systemic-salience",
+      "modId": "systemic_salience",
+      "artifact": "systemic-salience-0.1.1.jar",
+      "dependsOn": [],
+      "sourceCommit": "81a4553b96d1d22e7cdf69fdea5e3b622efbc527"
+    },
+    {
+      "repository": "tinkers-construct-affixes",
+      "modId": "tinkers_construct_affixes",
+      "artifact": "tinkers-construct-affixes-1.0.0.jar",
+      "dependsOn": [],
+      "sourceCommit": "7ac40017db96bfe6ff210a8730ef2f7eafe40c07"
+    },
+    {
+      "repository": "water-survival",
+      "modId": "water_survival",
+      "artifact": "water-survival-1.1.0.jar",
+      "dependsOn": []
+    },
+    {
+      "repository": "world-lifecycle-manager",
+      "modId": "world_lifecycle_manager",
+      "artifact": "world-lifecycle-manager-0.1.0.jar",
+      "dependsOn": [],
+      "sourceCommit": "25a155b054db77bd6e3d412e8386c1e6913a7b77"
+    }
+  ]
+}

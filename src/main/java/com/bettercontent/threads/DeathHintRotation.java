@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.random.RandomGenerator;
 
-/** Both surfaces draw from one cycle; selection alone never consumes an entry. */
+/** Each caller supplies its own surface history; only rendering records exposure. */
 final class DeathHintRotation {
     record State(Set<String> shown, long cycle, long contextualDeaths, String pauseId,
                  String lastDeathId, String lastPauseId) {
@@ -29,29 +29,25 @@ final class DeathHintRotation {
     }
     static Selection select(List<DeathHint> catalogue, String context, State state,
                             Predicate<String> installed, RandomGenerator random, Set<String> reserved) {
-        var eligible = eligible(catalogue, installed);
-        // A temporary broken catalogue must not erase the real catalogue's history.
-        if (eligible.isEmpty() || eligible.equals(List.of(DeathHints.FALLBACK)))
-            return new Selection(DeathHints.FALLBACK, false, state.cycle());
+        return select(catalogue, context, "death", state, installed, random, reserved);
+    }
+    static Selection select(List<DeathHint> catalogue, String context, String surface, State state,
+                            Predicate<String> installed, RandomGenerator random, Set<String> reserved) {
+        var eligible = eligible(catalogue, installed).stream().filter(h -> h.surfaces().contains(surface))
+            .filter(h -> h.requirements().isEmpty() || h.requirements().contains(context)).toList();
+        var related = eligible.stream().filter(h -> h.contexts().contains(context)).toList();
+        // A useful explanation remains relevant even when it has been shown before.
+        if (!related.isEmpty()) eligible = related;
+        else if (!surface.equals("menu")) eligible = eligible.stream().filter(h -> h.contexts().isEmpty()).toList();
+        if (eligible.isEmpty()) return new Selection(DeathHints.FALLBACK, false, state.cycle());
         var unseen = eligible.stream().filter(h -> !state.shown().contains(h.id())).toList();
         long cycle = state.cycle();
-        if (unseen.isEmpty()) { unseen = eligible; cycle++; }
+        if (unseen.isEmpty()) unseen = eligible;
         var available = unseen.stream().filter(h -> !reserved.contains(h.id())).toList();
-        if (available.isEmpty() && cycle > state.cycle() && eligible.size() == 1) available = eligible;
-        if (available.isEmpty()) return null; // The other surface still holds the last unseen tip.
-        var avoidCurrent = available.stream().filter(h -> !h.id().equals(state.lastDeathId())
-            && !h.id().equals(state.lastPauseId())).toList();
-        if (!avoidCurrent.isEmpty()) available = avoidCurrent;
-        var related = available.stream().filter(h -> h.contexts().contains(context)).toList();
-        boolean opportunity = !related.isEmpty();
-        List<DeathHint> pool;
-        if (opportunity && state.contextualDeaths() % 4 != 3) pool = related;
-        else {
-            boolean teaser = random.nextInt(8) == 0;
-            pool = available.stream().filter(h -> h.pool().equals("teaser") == teaser).toList();
-            if (pool.isEmpty()) pool = available;
-        }
-        return new Selection(pool.get(random.nextInt(pool.size())), opportunity, cycle);
+        if (available.isEmpty()) available = unseen;
+        var avoid = available.stream().filter(h -> !h.id().equals(state.lastDeathId()) && !h.id().equals(state.lastPauseId())).toList();
+        if (!avoid.isEmpty()) available = avoid;
+        return new Selection(available.get(random.nextInt(available.size())), !related.isEmpty(), cycle);
     }
 
     static State displayed(State state, Selection selection, boolean pause) {

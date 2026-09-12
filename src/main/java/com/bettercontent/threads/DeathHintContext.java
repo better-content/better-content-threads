@@ -8,7 +8,7 @@ import java.util.UUID;
 /** Pure classification and downed-episode memory, kept independently of Thread evidence. */
 public final class DeathHintContext {
     static final Set<String> CATEGORIES = Set.of("general", "combat", "projectile", "explosion", "fall",
-        "fire", "drowning", "cold", "heat", "thirst", "hunger", "suffocation", "magic", "revival");
+        "fire", "drowning", "cold", "heat", "thirst", "hunger", "suffocation", "magic", "revival", "door_locked", "door_healable", "injury_cure", "injury_trauma", "injury_uncured", "sugar_crash", "alcohol", "nutrition", "campaign", "campaign_approaching", "campaign_active", "campaign_recovery", "frozen_food", "low_health");
     private final Map<UUID, String> downed = new HashMap<>();
 
     public static String classify(String type, boolean fire, boolean fall, boolean projectile,
@@ -16,7 +16,6 @@ public final class DeathHintContext {
         if (type.equals("thirst:dehydrate")) return "thirst";
         if ((type.equals("cold_sweat:cold") || type.equals("cold_sweat:cold_scaling"))) return "cold";
         if ((type.equals("cold_sweat:hot") || type.equals("cold_sweat:hot_scaling"))) return "heat";
-        if (type.equals("downed_player_revival:bled_out") || type.equals("downed_player_revival:finished")) return "revival";
         if (type.equals("minecraft:drown")) return "drowning";
         if (type.equals("minecraft:starve")) return "hunger";
         if (type.equals("minecraft:in_wall") || type.equals("minecraft:cramming")) return "suffocation";
@@ -33,7 +32,7 @@ public final class DeathHintContext {
     public void clear(UUID player) { downed.remove(player); }
     public void clear() { downed.clear(); }
     public String death(UUID player, String terminal) {
-        String original = downed.remove(player);
-        return terminal.equals("revival") && original != null && !original.equals("general") ? original : terminal;
+        downed.remove(player);
+        return terminal;
     }
 }

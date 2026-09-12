@@ -45,7 +45,7 @@ final class LoadingBriefs implements ResourceManagerReloadListener {
                 }
                 parsed.add(brief);
             }
-            if (parsed.size() != 16 || !parsed.get(0).id().equals("threads")) throw new IllegalArgumentException("loading briefs require the Threads introduction plus fifteen survival lessons");
+            if (parsed.size() != 17 || !parsed.get(0).id().equals("threads")) throw new IllegalArgumentException("loading briefs require the Threads introduction plus sixteen survival lessons");
             all = List.copyOf(parsed);
         } catch (Exception failure) {
             LOGGER.error("Could not load learning briefs; using the built-in Threads introduction", failure);

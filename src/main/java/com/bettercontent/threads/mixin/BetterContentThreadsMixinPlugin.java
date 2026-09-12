@@ -21,12 +21,18 @@ public final class BetterContentThreadsMixinPlugin implements IMixinConfigPlugin
     @Override
     public boolean shouldApplyMixin(final String targetClassName, final String mixinClassName) {
         final LoadingModList mods = FMLLoader.getLoadingModList();
+        if (mixinClassName.endsWith("GeologySifterOutcomeMixin")) return isLoaded(mods, "createsifter");
+        if (mixinClassName.endsWith("OreSpoutingOutcomeMixin")) return isLoaded(mods, "create");
+        if (mixinClassName.endsWith("PressureOreOutcomeMixin")) return isLoaded(mods, "pneumaticcraft");
         if (mixinClassName.endsWith("Ae2CraftingCpuMixin")) return isLoaded(mods, "ae2");
-        if (mixinClassName.endsWith("ArsSourceEnergyMixin")) return isLoaded(mods, "arseng");
+        if (mixinClassName.endsWith("DynamicTreeFellingMixin")) return isLoaded(mods, "dynamictrees");
+        if (mixinClassName.endsWith("BloodAltarRecipeMixin")) return isLoaded(mods, "bloodmagic");
+        if (mixinClassName.endsWith("GoetySpellResultMixin")) return isLoaded(mods, "goety");
+        if (mixinClassName.endsWith("MalumSpiritWorkMixin")) return isLoaded(mods, "malum");
+        if (mixinClassName.endsWith("CreatePressOutcomeMixin") || mixinClassName.endsWith("CreateAssemblyOutcomeMixin")) return isLoaded(mods, "create");
         if (mixinClassName.endsWith("ArsUpdateCasterMixin")) return isLoaded(mods, "ars_nouveau");
         if (mixinClassName.endsWith("OccultismRitualBowlMixin")) return isLoaded(mods, "occultism");
-        if (mixinClassName.endsWith("TinkerAlloyMixin")
-                || mixinClassName.endsWith("TinkerRepairResultMixin")) {
+        if (mixinClassName.endsWith("TinkerAlloyMixin")) {
             return isLoaded(mods, "tconstruct");
         }
         return true;

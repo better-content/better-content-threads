@@ -1,7 +1,7 @@
 package com.bettercontent.threads.compat.bettercontent;
 
 import com.bettercontent.heatsync.api.event.BodyTemperatureEpisodeEvent;
-import com.bettercontent.heatsync.api.event.CoolantSafetyEvent;
+import com.bettercontent.heatsync.api.event.CoolantRecoveryEvent;
 import com.bettercontent.heatsync.api.event.FoodThermalEpisodeEvent;
 import com.bettercontent.threads.ThreadSignals;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -17,9 +17,9 @@ public final class HeatSyncThreads {
     }
 
     @SubscribeEvent
-    public static void coolantSafetyChanged(CoolantSafetyEvent event) {
-        ThreadEvidence evidence = coolantEvidence(event.getStage());
-        ThreadSignals.emit(event.getPlayer(), evidence.type(), evidence.value(), event.getEpisodeId());
+    public static void coolantRecovered(CoolantRecoveryEvent event) {
+        ThreadSignals.emit(event.getLevel().getServer(), event.getOwner(), "heat_safe", "safe",
+            event.getEpisodeId(), event.getPosition().toShortString());
     }
 
     @SubscribeEvent
@@ -36,16 +36,9 @@ public final class HeatSyncThreads {
         };
     }
 
-    static ThreadEvidence coolantEvidence(CoolantSafetyEvent.Stage stage) {
-        return switch (stage) {
-            case EXCESS_HEAT_OBSERVED -> new ThreadEvidence("heat_excess", "network");
-            case SAFE_AFTER_COOLANT_EXCHANGE -> new ThreadEvidence("heat_safe", "safe");
-        };
-    }
-
     static ThreadEvidence foodEvidence(FoodThermalEpisodeEvent.Stage stage) {
         return switch (stage) {
-            case FROZEN_USE_REJECTED -> new ThreadEvidence("food_thermal_state", "non_neutral");
+            case FROZEN_USE_REJECTED -> new ThreadEvidence("food_thermal_state", "frozen_use_rejected");
             case FRESH_USE_FINISHED -> new ThreadEvidence("food_thermal_use", "appropriate");
         };
     }

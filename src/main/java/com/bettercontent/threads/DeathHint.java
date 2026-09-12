@@ -6,7 +6,10 @@ import java.util.Set;
 
 /** Curated copy and authoring provenance; no discovery or reward state. */
 record DeathHint(String id, String conceptId, String pool, String text,
-                 Set<String> contexts, Set<String> requiredMods, List<String> sources) {
+                 Set<String> contexts, Set<String> requiredMods, List<String> sources, Set<String> surfaces, Set<String> requirements) {
+    DeathHint(String id,String conceptId,String pool,String text,Set<String> contexts,Set<String> requiredMods,List<String> sources) {
+        this(id,conceptId,pool,text,contexts,requiredMods,sources,Set.of("menu","pause","death"),Set.of());
+    }
     DeathHint {
         if (!id.matches("[a-z0-9_]{3,48}") || !conceptId.matches("[a-z0-9_.]{3,80}"))
             throw new IllegalArgumentException("invalid death hint identity");
@@ -16,6 +19,9 @@ record DeathHint(String id, String conceptId, String pool, String text,
             throw new IllegalArgumentException("death hint must fit 40 words / 240 characters");
         String plain = text.replace("{sneak}", "").replace("{use}", "").replace("{threads}", "");
         if (plain.contains("{") || plain.contains("}")) throw new IllegalArgumentException("unknown hint binding");
+        surfaces = Set.copyOf(surfaces); requirements = Set.copyOf(requirements);
+        if (surfaces.isEmpty() || !Set.of("menu","pause","death").containsAll(surfaces)) throw new IllegalArgumentException("invalid teaching surface");
+        if (!DeathHintContext.CATEGORIES.containsAll(requirements)) throw new IllegalArgumentException("invalid context requirement");
         contexts = Set.copyOf(contexts);
         requiredMods = Set.copyOf(requiredMods);
         sources = List.copyOf(sources);
@@ -30,7 +36,7 @@ record DeathHint(String id, String conceptId, String pool, String text,
     static DeathHint parse(JsonObject json) {
         return new DeathHint(json.get("id").getAsString(), json.get("concept_id").getAsString(),
             json.get("pool").getAsString(), json.get("text").getAsString(),
-            Set.copyOf(strings(json, "contexts")), Set.copyOf(strings(json, "required_mods")), strings(json, "sources"));
+            Set.copyOf(strings(json, "contexts")), Set.copyOf(strings(json, "required_mods")), strings(json, "sources"), Set.copyOf(strings(json,"surfaces")), Set.copyOf(strings(json,"requirements")));
     }
 
     private static List<String> strings(JsonObject json, String key) {

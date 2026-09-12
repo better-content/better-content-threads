@@ -1,27 +1,36 @@
 package com.bettercontent.threads.compat.bettercontent;
 
-import com.bettercontent.downedplayerrevival.api.event.PlayerDownedEvent;
+import com.bettercontent.downedplayerrevival.api.event.InjuryEvent;
 import com.bettercontent.threads.ThreadSignals;
 import com.bettercontent.threads.DeathHintEvents;
-import com.bettercontent.downedplayerrevival.api.event.PlayerRevivedEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-/** Maps Revival's published downed lifecycle into correlated Thread evidence. */
+/** Only committed bodily outcomes become discoveries. */
 public final class DownedRevivalThreads {
     private DownedRevivalThreads() {}
-
-    @SubscribeEvent
-    public static void revived(PlayerRevivedEvent event) {
-        DeathHintEvents.CONTEXT.clear(event.getEntity().getUUID());
+    private static void emit(InjuryEvent event, String type, String value) {
+        if (event.getEntity() instanceof ServerPlayer player)
+            ThreadSignals.emit(player, type, value, player.getUUID()+":injury:"+event.snapshot().serverTick()+":"+type, context(event));
     }
-
-    @SubscribeEvent
-    public static void playerDowned(PlayerDownedEvent event) {
-        if (event.getEntity() instanceof ServerPlayer player) {
-            DeathHintEvents.CONTEXT.downed(player.getUUID(), DeathHintEvents.classify(event.getSource()));
-            String episode = player.getUUID() + ":downed:" + player.server.getTickCount();
-            ThreadSignals.emit(player, "downed", "player", episode);
+    private static String context(InjuryEvent event) {
+        if(event instanceof InjuryEvent.Treated treated) {
+            var record=treated.record();
+            return record.type().name()+" "+record.region().name()+"; medicine "+record.itemId();
         }
+        return "Active injuries: "+event.snapshot().activeMaims().size()+"; trauma: "+event.snapshot().traumaCount();
+    }
+    @SubscribeEvent public static void entered(InjuryEvent.EnteredDoor event) { emit(event,"deaths_door","entered"); }
+    @SubscribeEvent public static void healed(InjuryEvent.Healed event) {
+        if (event.snapshot().health()>0 && !event.snapshot().activeMaims().isEmpty()) emit(event,"injury_healing","persistent");
+    }
+    @SubscribeEvent public static void trauma(InjuryEvent.TraumaIncreased event) {
+        if (event.amplifiedExistingInjury()) emit(event,"injury_trauma","amplified");
+    }
+    @SubscribeEvent public static void treated(InjuryEvent.Treated event) {
+        if (event.healer().getUUID().equals(event.getEntity().getUUID())) emit(event,"injury_treatment","self");
+    }
+    @SubscribeEvent public static void died(InjuryEvent.FinalDeath event) {
+        if (event.getEntity() instanceof ServerPlayer player) DeathHintEvents.finalDeath(player,event.source());
     }
 }

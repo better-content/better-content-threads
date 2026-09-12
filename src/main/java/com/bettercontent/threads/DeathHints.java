@@ -22,7 +22,7 @@ final class DeathHints implements ResourceManagerReloadListener {
     List<DeathHint> all() { return all; }
 
     static List<DeathHint> parse(JsonObject root) {
-        if (!"bc.death_hints.v1".equals(root.get("schema").getAsString()))
+        if (!"bc.teaching_hints.v2".equals(root.get("schema").getAsString()))
             throw new IllegalArgumentException("invalid death hint schema");
         var hints = new ArrayList<DeathHint>();
         var ids = new HashSet<String>();

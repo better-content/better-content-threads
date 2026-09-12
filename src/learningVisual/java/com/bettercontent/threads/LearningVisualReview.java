@@ -30,7 +30,7 @@ public final class LearningVisualReview {
 
     @SubscribeEvent
     public static void tick(TickEvent.ClientTickEvent event) throws Exception {
-        if (Boolean.getBoolean("bc.learningVisual.tipsOnly") || event.phase != TickEvent.Phase.END) return;
+        if (Boolean.getBoolean("bc.learningVisual.tipsOnly") || Boolean.getBoolean("bc.learningVisual.journalOnly") || Boolean.getBoolean("bc.learningVisual.combinedDeathOnly") || event.phase != TickEvent.Phase.END) return;
         var mc = Minecraft.getInstance();
         if (mc.getOverlay() != null || mc.screen == null) return;
         if (frame < 0) {
@@ -76,7 +76,7 @@ public final class LearningVisualReview {
 
     private static void prepare() throws Exception {
         for (int scale : new int[]{4, 3, 2}) {
-            for (String id : List.of("purity_three", "revive_use", "body_and_air", "orbit_possible")) {
+            for (String id : List.of("purity_three", "door_prepare", "body_and_air", "orbit_possible")) {
                 var hint = DeathHints.INSTANCE.all().stream().filter(h -> h.id().equals(id)).findFirst().orElseThrow();
                 frames.add(new Frame("death-" + id + "-scale-" + scale, scale, () -> new DeathHintVisualScreen(hint, false)));
             }
@@ -89,9 +89,9 @@ public final class LearningVisualReview {
         for (var row : json.getAsJsonObject().getAsJsonArray("threads")) {
             var d = ThreadDefinition.parse(row.getAsJsonObject());
             var door = d.doorway();
-            cards.add(new ThreadNetwork.Card(d.id(), d.conceptId(), d.title(), d.suit().id(), d.order(), d.aspect().id(), d.art().toString(),
-                true, false, true, false, d.rule(), d.action(),
-                door == null ? "" : door.type(), door == null ? "" : door.target(), 1, 0, 0, ""));
+            cards.add(new ThreadNetwork.Card(d.id(), d.conceptId(), d.title(), d.topic().id(), d.order(), d.aspect()==null?"":d.aspect().id(), d.art().toString(),
+                true, false, true, d.event(), d.cause(), d.action(),
+                door == null ? "" : door.type(), door == null ? "" : door.target(), 1, 0, 0, d.order(), ""));
         }
         for (int scale : new int[]{4, 3, 2}) {
             String suffix = "-scale-" + scale;
@@ -112,7 +112,7 @@ public final class LearningVisualReview {
                     }
                 }));
             }
-            for (String id : List.of("life_reaches_tether", "water_made_safe", "rails_turn_distance", "the_body_learns_new_motions")) {
+            for (String id : List.of("deaths_door", "frozen_food", "train_fuel_cost", "heavy_blow")) {
                 frames.add(new Frame("card-" + id + suffix, scale, () -> new ThreadDeckScreen(cards, id)));
                 frames.add(new Frame("card-bottom-" + id + suffix, scale, () -> new ThreadDeckScreen(cards, id) {
                     private int rendered;

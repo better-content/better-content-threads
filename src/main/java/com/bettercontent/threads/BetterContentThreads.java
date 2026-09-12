@@ -38,6 +38,18 @@ public final class BetterContentThreads {
         ThreadRegistry.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ThreadNetwork.register();
         MinecraftForge.EVENT_BUS.register(ThreadEvents.class);
+        MinecraftForge.EVENT_BUS.register(OperationOwners.class);
+        if (ModList.get().isLoaded("latent_chemlib")) MinecraftForge.EVENT_BUS.register(com.bettercontent.threads.compat.bettercontent.ChemicalDiscoveryThreads.class);
+        if (ModList.get().isLoaded("depth_director")) MinecraftForge.EVENT_BUS.register(com.bettercontent.threads.compat.bettercontent.DepthDirectorThreads.class);
+        if (ModList.get().isLoaded("bumblezone_cultivars")) MinecraftForge.EVENT_BUS.register(com.bettercontent.threads.compat.bettercontent.CultivarThreads.class);
+        if (ModList.get().isLoaded("tinkers_construct_affixes")) MinecraftForge.EVENT_BUS.register(com.bettercontent.threads.compat.bettercontent.RuinousFluxThreads.class);
+        if (ModList.get().isLoaded("world_lifecycle_manager")) MinecraftForge.EVENT_BUS.register(com.bettercontent.threads.compat.bettercontent.SchematicSubstitutionThreads.class);
+        if (ModList.get().isLoaded("oc2r_create_bridge")) MinecraftForge.EVENT_BUS.register(com.bettercontent.threads.compat.bettercontent.ComputerOperationThreads.class);
+        if (ModList.get().isLoaded("oc2r_wireless_pubsub")) MinecraftForge.EVENT_BUS.register(com.bettercontent.threads.compat.bettercontent.WirelessReceiptThreads.class);
+        if (ModList.get().isLoaded("create_transmission_loss")) MinecraftForge.EVENT_BUS.register(com.bettercontent.threads.compat.bettercontent.TransmissionLossThreads.class);
+        if (ModList.get().isLoaded("create_train_fuel_scaling")) MinecraftForge.EVENT_BUS.register(com.bettercontent.threads.compat.bettercontent.TrainFuelThreads.class);
+        if (ModList.get().isLoaded("rail_beetle")) MinecraftForge.EVENT_BUS.register(com.bettercontent.threads.compat.bettercontent.RailBeetleThreads.class);
+        if (ModList.get().isLoaded("pillager_campaigns")) MinecraftForge.EVENT_BUS.register(com.bettercontent.threads.compat.bettercontent.PillagerCampaignThreads.class);
         MinecraftForge.EVENT_BUS.register(NativeAdvancementThreads.class);
         MinecraftForge.EVENT_BUS.register(PackActionThreads.class);
         if (ModList.get().isLoaded("ae2")) {
@@ -69,6 +81,7 @@ public final class BetterContentThreads {
         }
         if (ModList.get().isLoaded("systemic_salience")) {
             MinecraftForge.EVENT_BUS.register(SystemicSalienceThreads.class);
+            MinecraftForge.EVENT_BUS.register(com.bettercontent.threads.compat.bettercontent.MetabolicDiscoveryThreads.class);
         }
         if (ModList.get().isLoaded("downed_player_revival")) {
             MinecraftForge.EVENT_BUS.register(DownedRevivalThreads.class);

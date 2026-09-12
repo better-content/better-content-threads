@@ -59,6 +59,7 @@ public final class ThreadClient {
         cards = sync.cards();
         NOTICES.addAll(sync.notices());
         if (sync.open()) Minecraft.getInstance().setScreen(new ThreadDeckScreen(cards));
+        else if (Minecraft.getInstance().screen instanceof ThreadDeckScreen deck) deck.updateCards(cards);
     }
 
     @SubscribeEvent
@@ -77,9 +78,6 @@ public final class ThreadClient {
 
     @SubscribeEvent
     public static void opening(ScreenEvent.Opening event) {
-        if (event.getNewScreen() != null && event.getNewScreen().getClass().getName().equals("dev.emi.emi.screen.RecipeScreen")) {
-            ThreadNetwork.request("recipe_viewed", "");
-        }
         if (event.getNewScreen() instanceof LevelLoadingScreen levelLoading
                 && !(levelLoading instanceof LearningLevelLoadingScreen)
                 && Minecraft.getInstance().level == null) {
@@ -124,6 +122,9 @@ public final class ThreadClient {
     public static void logout(ClientPlayerNetworkEvent.LoggingOut event) {
         currentBriefs = null;
         arrivalPending = false;
+        cards = List.of();
+        NOTICES.clear();
+        lastLiveFrame = 0L;
     }
 
     @SubscribeEvent
@@ -151,7 +152,7 @@ public final class ThreadClient {
     @SubscribeEvent
     public static void render(RenderGuiEvent.Post event) {
         var minecraft = Minecraft.getInstance();
-        if (minecraft.player == null || minecraft.screen != null) {
+        if (minecraft.player == null || minecraft.screen != null || ContextHintClient.suppressThreadNotice()) {
             lastLiveFrame = 0L;
             return;
         }
@@ -172,7 +173,7 @@ public final class ThreadClient {
         int centerY = screenHeight / 3;
         renderParticles(graphics, notice, elapsed, alpha, centerX, centerY - 5);
         drawArchiveGlyph(graphics,centerX-4,centerY+NOTICE_GLYPH_OFFSET_Y,ARCHIVE_GOLD,alpha);
-        Component message = Component.translatable(notice.kind()==ThreadNetwork.NoticeKind.REVEAL?"message.better_content_threads.thread_revealed":"message.better_content_threads.thread_completed", notice.title());
+        Component message = Component.translatable(notice.kind()==ThreadNetwork.NoticeKind.DISCOVERY?"message.better_content_threads.thread_discovered":"message.better_content_threads.thread_remembered",notice.title());
         int textWidth = Minecraft.getInstance().font.width(message);
         float scale = Math.max(NOTICE_MIN_TEXT_SCALE,Math.min(NOTICE_TEXT_SCALE, (screenWidth - 24.0f) / Math.max(1, textWidth)));
         drawOutlinedCentered(graphics, message, centerX, centerY + NOTICE_TEXT_OFFSET_Y, scale, alpha);
@@ -207,7 +208,7 @@ public final class ThreadClient {
     }
 
     private static void renderParticles(GuiGraphics graphics, ThreadNetwork.Notice notice, long elapsed, float noticeAlpha, int centerX, int centerY) {
-        int aspect = ThreadAspect.parse(notice.aspect()).color();
+        int aspect = notice.aspect().isEmpty() ? ThreadTopic.parse(notice.topic()).color() : ThreadAspect.parse(notice.aspect()).color();
         double progress = elapsed / (double) ThreadNoticeQueue.DURATION_MS;
         int seed = notice.id().hashCode();
         for (int i = 0; i < 20; i++) {
@@ -241,7 +242,7 @@ public final class ThreadClient {
         int totalWidth = 18 + 5 + keyWidth + 5;
         int x = screenWidth - totalWidth - 6;
         int y = Math.max(36, screenHeight / 2 - 14);
-        renderSealedPlate(graphics, x, y, 18, 27, ThreadSuit.parse(card.suit()).color(),ThreadAspect.parse(card.aspect()).color(), card.id().hashCode(), false);
+        renderSealedPlate(graphics, x, y, 18, 27, ThreadTopic.parse(card.topic()).color(),card.aspect().isEmpty()?ARCHIVE_GOLD:ThreadAspect.parse(card.aspect()).color(), card.id().hashCode(), false);
         graphics.drawString(Minecraft.getInstance().font, Long.toString(count), x + 13, y + 19, 0xFFF0E5CE, true);
         drawKeycap(graphics, binding, x + 23, y + 3, keyWidth);
         graphics.drawString(Minecraft.getInstance().font, "Threads", x + 23, y + 18, 0xFFE0D4BB, true);
