@@ -72,7 +72,7 @@ public class ThreadDeckScreen extends Screen {
         doorwayButton = addRenderableWidget(Button.builder(Component.literal("Look closer"),
             button -> { var card = current(); if (card != null) ThreadDoorways.open(card); })
             .bounds(0, 0, 100, 20).build());
-        facsimileButton = addRenderableWidget(Button.builder(Component.literal("Issue facsimile"),
+        facsimileButton = addRenderableWidget(Button.builder(Component.literal("Get card copy"),
             button -> { var card = current(); if (card != null) ThreadNetwork.request("issue", card.id()); })
             .bounds(0, 0, 100, 20).build());
         doorwayButton.visible = facsimileButton.visible = false;
@@ -269,9 +269,9 @@ public class ThreadDeckScreen extends Screen {
     private void renderDetails(GuiGraphics graphics, ThreadNetwork.Card card, int x, int y, int panelWidth, int cardHeight) {
         var text = new ReadingText(font, panelWidth - 8);
         if (reveal.phase() == ThreadRevealState.Phase.SEALED) {
-            text.add("Let the plate develop", 0xFFF0E5CE);
+            text.add("Open this card", 0xFFF0E5CE);
             text.gap();
-            text.add("Click or Space to remember", 0xFFC6A15B);
+            text.add("Click or press Space to open", 0xFFC6A15B);
         } else if (reveal.phase() == ThreadRevealState.Phase.COMPLETE) {
             text.add(card.title(), 0xFFF0E5CE);
             text.add(capital(card.suit()) + " · " + capital(card.aspect()), 0xFFBAB8AB);
@@ -282,14 +282,11 @@ public class ThreadDeckScreen extends Screen {
                 text.gap();
                 text.add("TRY THIS", 0xFFC6A15B);
                 text.add(card.action(), 0xFFF0E5CE);
-                text.add(card.invitation(), 0xFFBAB8AB);
             }
             text.gap();
-            text.add(card.prose(), 0xFFBAB8AB);
-            text.gap();
             if (card.completed()) text.add("Completed in this world", 0xFFACCEAC);
-            else if (!card.active()) text.add("Remembered in an earlier world", 0xFFBAB8AB);
-            if (card.completionCount() > 0) text.add("Remembered " + card.completionCount() + " time"
+            else if (!card.active()) text.add("Unlocked in an earlier world", 0xFFBAB8AB);
+            if (card.completionCount() > 0) text.add("Completed " + card.completionCount() + " time"
                 + (card.completionCount() == 1 ? "" : "s"), 0xFFBAB8AB);
             if (!card.routeSummary().isEmpty()) text.add(card.routeSummary(), 0xFFBAB8AB);
             boolean available = ThreadDoorways.available(card);

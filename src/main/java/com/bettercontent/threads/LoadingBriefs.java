@@ -17,9 +17,9 @@ final class LoadingBriefs implements ResourceManagerReloadListener {
     private static final Logger LOGGER = LogUtils.getLogger();
     static final ResourceLocation MANIFEST = new ResourceLocation(BetterContentThreads.MOD_ID, "loading_briefs/catalogue.json");
     static final LoadingBrief FALLBACK = new LoadingBrief("threads", "learning.threads", "better-content-threads", "",
-        "Orientation", "Your discoveries live in Threads",
-        "When the world teaches you a changed rule, a small Threads reminder appears. Press the shown key — M by default — to read the rule and its evidence.",
-        "Open Threads when a new rule appears.",
+        "Orientation", "Using Threads",
+        "Threads records the rules you discover through play. Press the shown key, M by default, to read them. Select Lessons for survival instructions available from the start.",
+        "Open Lessons for survival instructions.",
         new ResourceLocation(BetterContentThreads.MOD_ID, "textures/gui/loading_briefs/threads.png"));
     static final LoadingBriefs INSTANCE = new LoadingBriefs();
     private volatile List<LoadingBrief> all = List.of(FALLBACK);

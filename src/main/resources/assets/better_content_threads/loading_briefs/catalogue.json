@@ -6,9 +6,9 @@
       "concept_id": "learning.threads",
       "owner": "better-content-threads",
       "category": "Discovery",
-      "headline": "Your discoveries live in Threads",
-      "body": "Threads keeps the rules you discover through play. Open it with the shown key, M by default. Its Lessons button also holds every survival lesson from the start.",
-      "action": "Open Lessons whenever you need a survival reminder.",
+      "headline": "Using Threads",
+      "body": "Threads records the rules you discover through play. Open it with the shown key, M by default. Select Lessons to read the survival instructions available from the start.",
+      "action": "Open Lessons for survival instructions.",
       "art": "better_content_threads:textures/gui/loading_briefs/threads.png"
     },
     {
@@ -16,9 +16,9 @@
       "concept_id": "survival.hud_visibility",
       "owner": "better-content-dynamic-survival-hud",
       "category": "Awareness",
-      "headline": "Quiet meters are still watching",
-      "body": "Survival meters fade when their values are calm, leaving the view uncluttered. Hold Sneak whenever you need to reveal every managed meter and assess your condition.",
-      "action": "Hold Sneak for a full status check.",
+      "headline": "Checking Survival Meters",
+      "body": "Survival meters fade when their values are stable. Hold Sneak to show all managed meters and check your condition.",
+      "action": "Hold Sneak to check your meters.",
       "art": "better_content_threads:textures/gui/loading_briefs/hud.png"
     },
     {
@@ -27,9 +27,9 @@
       "owner": "better-content-water-survival",
       "related_thread": "water_made_safe",
       "category": "Hydration",
-      "headline": "Clear water is earned",
-      "body": "Thirst and water purity are separate constraints. Collect rain, melt snow near a campfire, and carry bottles in Curios slots; purity level three is safe to drink.",
-      "action": "Purify a reserve before traveling.",
+      "headline": "Drinking Safe Water",
+      "body": "Water at purity level 3 is safe to drink. Collect rain, melt snow near a campfire, and carry drinking water in bottles. Bottles can go in Curios slots.",
+      "action": "Prepare safe drinking water before traveling.",
       "art": "better_content_threads:textures/gui/loading_briefs/water.png"
     },
     {
@@ -38,9 +38,9 @@
       "owner": "systemic-salience",
       "related_thread": "hunger_is_not_nutrition",
       "category": "Nutrition",
-      "headline": "Full is not nourished",
-      "body": "Hunger measures immediate fuel, while nutrition tracks six food groups over time. Repeating one excellent meal can still leave neglected groups dangerously low afterward.",
-      "action": "Open nutrition and choose foods for your lowest groups.",
+      "headline": "Balancing Nutrition",
+      "body": "Hunger and nutrition are separate. Nutrition tracks six food groups over time. Check each group and choose foods that replenish the lowest ones.",
+      "action": "Open nutrition and check your lowest groups.",
       "art": "better_content_threads:textures/gui/loading_briefs/nutrition.png"
     },
     {
@@ -48,9 +48,9 @@
       "concept_id": "survival.food_variety",
       "owner": "slice-of-life-carrot",
       "category": "Health",
-      "headline": "New foods build lasting health",
-      "body": "A varied menu does more than balance nutrients. Eating enough distinct foods permanently raises maximum health, so unfamiliar ingredients are valuable milestones instead of disposable curiosities.",
-      "action": "Try foods you have never eaten.",
+      "headline": "Increasing Maximum Health",
+      "body": "Eating enough different foods permanently increases your maximum health. Try foods you have not eaten before as well as foods that replenish your nutrition.",
+      "action": "Try a food you have never eaten.",
       "art": "better_content_threads:textures/gui/loading_briefs/variety.png"
     },
     {
@@ -58,9 +58,9 @@
       "concept_id": "survival.metabolic_load",
       "owner": "systemic-salience",
       "category": "Metabolism",
-      "headline": "Borrowed speed leaves a debt",
-      "body": "Sugar can quicken your cadence, but it accelerates nutrient expenditure and leaves debt behind. Alcohol offers a moderate composure window; excess turns the bargain against you.",
-      "action": "Treat stimulants as planned resources.",
+      "headline": "Sugar and Alcohol",
+      "body": "Sugar increases speed but makes nutrition drain faster and causes a crash afterward. Moderate alcohol improves control; higher amounts cause impairment.",
+      "action": "Check your nutrition before consuming sugar.",
       "art": "better_content_threads:textures/gui/loading_briefs/metabolism.png"
     },
     {
@@ -69,9 +69,9 @@
       "owner": "better-content-heat-sync",
       "related_thread": "body_has_weather",
       "category": "Climate",
-      "headline": "Your body has weather",
-      "body": "World temperature and body temperature are different pressures. Clothing, shelter, biome, season, and thermal foods can push the balance, so prepare before entering an extreme climate.",
-      "action": "Pack for the temperature ahead.",
+      "headline": "Managing Body Temperature",
+      "body": "Your body temperature differs from the temperature around you. Clothing, shelter, biome, season, and food temperature affect it. Prepare for hot or cold areas before traveling.",
+      "action": "Bring clothing suited to your destination.",
       "art": "better_content_threads:textures/gui/loading_briefs/temperature.png"
     },
     {
@@ -80,9 +80,9 @@
       "owner": "better-content-fixes",
       "related_thread": "the_body_learns_new_motions",
       "category": "Movement",
-      "headline": "Your body has more motions",
-      "body": "Advanced movement spends stamina. Fast run uses Shift, vault uses Mouse 5, and direct dodge uses R; directional double-tap dodging is disabled. Practice these actions on safe ground.",
-      "action": "Practice movement before danger finds you.",
+      "headline": "Movement Controls",
+      "body": "Advanced movement uses stamina. Fast run uses Shift, vault uses Mouse 5, and direct dodge uses R; directional double-tap dodging is disabled.",
+      "action": "Practice these movements on safe ground.",
       "art": "better_content_threads:textures/gui/loading_briefs/movement.png"
     },
     {
@@ -91,8 +91,8 @@
       "owner": "better-content-fixes",
       "related_thread": "sleep_is_not_an_anchor",
       "category": "Rest",
-      "headline": "Sleep advances the world",
-      "body": "A bed is not a frozen checkpoint. Sleep simulates the passing hours quickly, advancing weather, ecology, temperature, and active threats while your vulnerable world continues moving.",
+      "headline": "Sleeping Safely",
+      "body": "Sleep speeds up the passing hours. Weather, temperature, ecology, and active threats continue during sleep. Check the area before using a bed.",
       "action": "Secure the area before sleeping.",
       "art": "better_content_threads:textures/gui/loading_briefs/sleep.png"
     },
@@ -102,9 +102,9 @@
       "owner": "better-content-downed-player-revival",
       "related_thread": "life_reaches_tether",
       "category": "Recovery",
-      "headline": "Defeat is not immediate death",
-      "body": "Falling can begin a recoverable downed state. A companion revives by holding Use while aiming at you; hold Sneak only when you intend to give up.",
-      "action": "Protect downed allies and hold Use.",
+      "headline": "Reviving Downed Players",
+      "body": "A downed player can be revived before they bleed out. Aim at them and hold Use. When downed, hold Sneak only if you want to give up.",
+      "action": "Aim at a downed ally and hold Use.",
       "art": "better_content_threads:textures/gui/loading_briefs/downing.png"
     },
     {
@@ -113,9 +113,9 @@
       "owner": "better-content-rpg-stats",
       "related_thread": "life_becomes_capable",
       "category": "Growth",
-      "headline": "A life chooses what it becomes",
-      "body": "Life stats create irreversible strengths within one lifetime and reset on death. Constitution helps conserve hunger, thirst, and stamina, while other choices shape different long-term capabilities.",
-      "action": "Choose each life stat deliberately.",
+      "headline": "Spending Life Points",
+      "body": "Life stat choices are permanent for your current life and reset on death. Constitution reduces hunger, thirst, and stamina use. Review each stat before spending points.",
+      "action": "Review the effects before applying your points.",
       "art": "better_content_threads:textures/gui/loading_briefs/life.png"
     },
     {
@@ -124,9 +124,9 @@
       "owner": "compat.sereneseasons",
       "related_thread": "seasons_turn_work",
       "category": "Seasons",
-      "headline": "Seasons turn the work",
-      "body": "The calendar changes which crops and trees grow well. Observe seasonal feedback, preserve surplus from productive months, and expect familiar land to demand a different plan later.",
-      "action": "Plant for the present season.",
+      "headline": "Seasonal Farming",
+      "body": "Seasons affect which crops and trees grow well. Check seasonal feedback before planting, and store surplus food for less productive seasons.",
+      "action": "Plant crops suited to the current season.",
       "art": "better_content_threads:textures/gui/loading_briefs/seasons.png"
     },
     {
@@ -135,9 +135,9 @@
       "owner": "compat.weather2",
       "related_thread": "weather_has_momentum",
       "category": "Weather",
-      "headline": "Weather has momentum",
-      "body": "Storms are systems with motion, not decorative flashes. Watch the sky, listen for escalation, and keep a defensible route indoors before severe weather overtakes exposed work.",
-      "action": "Read the sky before committing.",
+      "headline": "Preparing for Storms",
+      "body": "Storms move through the world and can damage exposed areas. Watch for worsening weather and keep a route to shelter.",
+      "action": "Reach shelter before a severe storm arrives.",
       "art": "better_content_threads:textures/gui/loading_briefs/weather.png"
     },
     {
@@ -145,9 +145,9 @@
       "concept_id": "world.pollution_transport",
       "owner": "compat.pollution-of-the-realms",
       "category": "Industry",
-      "headline": "Industry changes the air",
-      "body": "Pollution moves with the world and can harm living things. Detect it, protect yourself, route emitters through chimneys and filters, then clean contamination instead of abandoning it.",
-      "action": "Vent, filter, measure, and clean.",
+      "headline": "Managing Pollution",
+      "body": "Pollution spreads and can harm living things. Use detectors and protective equipment, route emissions through chimneys and filters, and clean contaminated areas.",
+      "action": "Check emissions and install filters.",
       "art": "better_content_threads:textures/gui/loading_briefs/pollution.png"
     },
     {
@@ -155,9 +155,9 @@
       "concept_id": "building.structural_support",
       "owner": "compat.realistic-block-physics",
       "category": "Building",
-      "headline": "Structures need support",
-      "body": "Buildings need support from the ground through their walls, columns, and spans. Add supports as you build outward; a large floating platform may not hold together.",
-      "action": "Support a new span before extending it farther.",
+      "headline": "Supporting Buildings",
+      "body": "Buildings need support through foundations, walls, and columns. Add supports as you extend a span or platform.",
+      "action": "Add supports before extending a platform.",
       "art": "better_content_threads:textures/gui/loading_briefs/physics.png"
     },
     {
@@ -166,9 +166,9 @@
       "owner": "better-content-pillager-campaigns",
       "related_thread": "army_walks_toward_you",
       "category": "Threats",
-      "headline": "Warnings mean someone is coming",
-      "body": "Pillager scouts appear often, but full assaults are rarer and announced. Treat each warning as preparation time: fortify approaches, gather allies, and choose where the fight happens.",
-      "action": "Prepare when an assault is warned.",
+      "headline": "Pillager Assault Warnings",
+      "body": "Pillager scouts appear more often than full assaults. Assaults are announced in advance. Use the warning to gather allies, fortify approaches, and reach shelter.",
+      "action": "Prepare defenses when an assault is announced.",
       "art": "better_content_threads:textures/gui/loading_briefs/campaigns.png"
     }
   ]

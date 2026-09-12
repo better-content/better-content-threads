@@ -81,7 +81,7 @@ public final class LearningVisualReview {
             var d = ThreadDefinition.parse(row.getAsJsonObject());
             var door = d.doorway();
             cards.add(new ThreadNetwork.Card(d.id(), d.conceptId(), d.title(), d.suit().id(), d.order(), d.aspect().id(), d.art().toString(),
-                true, false, true, false, d.rule(), d.prose(), d.invitation(), d.action(),
+                true, false, true, false, d.rule(), d.action(),
                 door == null ? "" : door.type(), door == null ? "" : door.target(), 1, 0, 0, ""));
         }
         for (int scale : new int[]{4, 3, 2}) {

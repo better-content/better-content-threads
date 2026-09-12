@@ -25,7 +25,7 @@ record LoadingBrief(
         if (!category.matches("[A-Za-z ]{3,24}")) throw new IllegalArgumentException("invalid loading brief category");
         if (headline.isBlank() || headline.length() > 54) throw new IllegalArgumentException("invalid loading brief headline");
         int words = body.trim().split("\\s+").length;
-        if (words < 24 || words > 48) throw new IllegalArgumentException("loading brief body must contain 24-48 words");
+        if (body.isBlank() || words > 48) throw new IllegalArgumentException("loading brief body must contain 1-48 words");
         int actionWords = action.trim().split("\\s+").length;
         if (actionWords < 3 || actionWords > 16 || action.length() > 96) {
             throw new IllegalArgumentException("loading brief action must contain 3-16 words and at most 96 characters");

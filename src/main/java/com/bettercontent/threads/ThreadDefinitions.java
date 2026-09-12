@@ -17,12 +17,12 @@ public final class ThreadDefinitions extends SimpleJsonResourceReloadListener {
         var loaded = new LinkedHashMap<String, ThreadDefinition>();
         resources.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> {
             JsonElement root = entry.getValue();
-            if (!root.isJsonObject()) throw new IllegalStateException("Threads v2 resources must be manifest objects: " + entry.getKey());
+            if (!root.isJsonObject()) throw new IllegalStateException("Threads v3 resources must be manifest objects: " + entry.getKey());
             JsonObject manifest = root.getAsJsonObject();
-            if (!manifest.has("schema") || !"bc.threads.v2".equals(manifest.get("schema").getAsString()))
+            if (!manifest.has("schema") || !"bc.threads.v3".equals(manifest.get("schema").getAsString()))
                 throw new IllegalStateException("Unsupported Threads catalogue schema: " + entry.getKey());
             if (!manifest.has("threads") || !manifest.get("threads").isJsonArray())
-                throw new IllegalStateException("Threads v2 manifest has no thread array: " + entry.getKey());
+                throw new IllegalStateException("Threads v3 manifest has no thread array: " + entry.getKey());
             manifest.getAsJsonArray("threads").forEach(e -> add(loaded, e.getAsJsonObject()));
         });
         // The reusable mod's isolated GameTest lane intentionally has no pack-owned catalogue.
