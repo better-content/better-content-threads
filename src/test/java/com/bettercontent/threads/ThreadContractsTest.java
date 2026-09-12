@@ -64,7 +64,7 @@ final class ThreadContractsTest {
         var blocks=Arrays.asList(metadata.split(java.util.regex.Pattern.quote("[[dependencies.${mod_id}]]")));
         var expected=Map.ofEntries(
             Map.entry("arcane_chunk_loaders","[0.1.0]"),Map.entry("better_content_economy","[1.0.1]"),
-            Map.entry("better_content_fixes","[0.1.7]"),Map.entry("dimension_drink","[1.0.0]"),
+            Map.entry("better_content_fixes","[0.1.8]"),Map.entry("dimension_drink","[1.0.0]"),
             Map.entry("downed_player_revival","[1.0.0]"),Map.entry("heat_sync","[0.1.0]"),
             Map.entry("pillager_campaigns","[0.5.4]"),Map.entry("player_traces","[0.1.0]"),
             Map.entry("rpg_stats","[1.0.1]"),Map.entry("realistic_ores","[0.2.0]"),

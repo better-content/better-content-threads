@@ -38,7 +38,7 @@ side="BOTH"
 [[dependencies.${mod_id}]]
 modId="better_content_fixes"
 mandatory=false
-versionRange="[0.1.7]"
+versionRange="[0.1.8]"
 ordering="AFTER"
 side="BOTH"
 [[dependencies.${mod_id}]]

@@ -101,7 +101,7 @@ val betterContentApiJars = files(
     betterContentJar("heat-sync", "heat-sync-0.1.0.jar"),
     betterContentJar("settlement-roads", "settlement-roads-0.1.0.jar"),
     betterContentJar("water-survival", "water-survival-1.1.0.jar"),
-    betterContentJar("better-content-fixes", "better-content-fixes-0.1.7.jar"),
+    betterContentJar("better-content-fixes", "better-content-fixes-0.1.8.jar"),
     betterContentJar("player-traces", "player-traces-0.1.0.jar"),
     betterContentJar("systemic-salience", "systemic-salience-0.1.1.jar"),
     betterContentJar("realistic-ores", "realistic-ores-0.2.0.jar")
