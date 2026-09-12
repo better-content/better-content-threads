@@ -129,8 +129,8 @@ public final class ThreadClient {
     @SubscribeEvent
     public static void screen(ScreenEvent.Init.Post event) {
         if (event.getScreen() instanceof PauseScreen) {
-            int x = event.getScreen().width / 2 + 104;
-            int y = event.getScreen().height / 4 + 120;
+            int x = event.getScreen().width - 80;
+            int y = 8;
             event.addListener(Button.builder(Component.literal("Threads"), button -> ThreadNetwork.request("open", ""))
                 .bounds(x, y, 72, 20).build());
             return;

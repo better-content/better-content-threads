@@ -1413,6 +1413,1394 @@
       "sources": [
         "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/ArsNouveauThreads.java"
       ]
+    },
+    {
+      "id": "combat_space",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Fight where you have room to move. A narrow doorway can become a trap if enemies reach you from both sides.",
+      "contexts": [
+        "combat"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
+      ]
+    },
+    {
+      "id": "combat_group",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "When several enemies approach, retreat far enough to see the whole group before committing to another attack.",
+      "contexts": [
+        "combat"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
+      ]
+    },
+    {
+      "id": "combat_corner",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Check around a corner before chasing an enemy through it. The next room may contain another group.",
+      "contexts": [
+        "combat"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
+      ]
+    },
+    {
+      "id": "combat_supplies",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Keep emergency supplies within easy reach. Searching a full inventory during a fight costs time you may need to escape.",
+      "contexts": [
+        "combat"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
+      ]
+    },
+    {
+      "id": "archer_location",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Locate the ranged attacker before rushing forward. The nearest visible enemy may not be the source of the shots.",
+      "contexts": [
+        "projectile"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
+      ]
+    },
+    {
+      "id": "projectile_recovery",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Use cover while eating or preparing an item. Staying still in a ranged enemy's sight gives it another clear shot.",
+      "contexts": [
+        "projectile"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
+      ]
+    },
+    {
+      "id": "cliff_work",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Work back from the edge when arranging your inventory. Check your footing before returning to building or mining.",
+      "contexts": [
+        "fall"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
+      ]
+    },
+    {
+      "id": "vertical_return",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Leave a usable way back up when descending. The return climb may be harder with enemies nearby.",
+      "contexts": [
+        "fall"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
+      ]
+    },
+    {
+      "id": "night_vision_water",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Night Vision improves visibility, not breathing. Prepare air or a breathing effect separately before diving.",
+      "contexts": [
+        "drowning"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
+      ]
+    },
+    {
+      "id": "water_breathing_exit",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Water Breathing has a time limit. Include the swim back to safety when planning how long to stay submerged.",
+      "contexts": [
+        "drowning"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
+      ]
+    },
+    {
+      "id": "milk_effects",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Milk clears potion effects, including helpful ones. Check what you would lose before drinking it during an expedition.",
+      "contexts": [
+        "magic"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
+      ]
+    },
+    {
+      "id": "effect_timer",
+      "concept_id": "survival.hazard_preparation",
+      "pool": "survival",
+      "text": "Protection with a duration can end while you are still in danger. Check the timer before starting another task.",
+      "contexts": [
+        "fire",
+        "cold",
+        "heat",
+        "magic"
+      ],
+      "required_mods": [],
+      "sources": [
+        "minecraft@1.20.1: LivingEntity, MobEffects, MilkBucketItem, FoodData"
+      ]
+    },
+    {
+      "id": "water_slot_empty",
+      "concept_id": "world.water_made_safe",
+      "pool": "survival",
+      "text": "An empty water slot cannot replenish thirst. Check your equipped bottles as well as the supplies in your backpack.",
+      "contexts": [
+        "thirst"
+      ],
+      "required_mods": [
+        "water_survival",
+        "thirst"
+      ],
+      "sources": [
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
+      ]
+    },
+    {
+      "id": "water_slot_purity",
+      "concept_id": "world.water_made_safe",
+      "pool": "survival",
+      "text": "Automatic drinking still uses the water you supplied. Check bottle purity before placing it in the water slot.",
+      "contexts": [
+        "thirst"
+      ],
+      "required_mods": [
+        "water_survival",
+        "thirst"
+      ],
+      "sources": [
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
+      ]
+    },
+    {
+      "id": "collector_capacity",
+      "concept_id": "world.water_made_safe",
+      "pool": "survival",
+      "text": "A Rain Collector can fill up. Move stored water into containers if you want room for the next rainfall.",
+      "contexts": [
+        "thirst"
+      ],
+      "required_mods": [
+        "water_survival",
+        "thirst"
+      ],
+      "sources": [
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
+      ]
+    },
+    {
+      "id": "collector_location",
+      "concept_id": "world.water_made_safe",
+      "pool": "survival",
+      "text": "A roof over a Rain Collector blocks collection. Give it open sky even if the rest of your water station is sheltered.",
+      "contexts": [
+        "thirst"
+      ],
+      "required_mods": [
+        "water_survival",
+        "thirst"
+      ],
+      "sources": [
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/RainCollectorBlock.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterBottleCurio.java",
+        "mod_source/water-survival/src/main/java/com/bettercontent/watersurvival/WaterSurvival.java"
+      ]
+    },
+    {
+      "id": "food_group_hover",
+      "concept_id": "survival.hunger_and_nutrition",
+      "pool": "survival",
+      "text": "Compare food-group information before choosing provisions. Two filling meals can contribute to different nutrition groups.",
+      "contexts": [
+        "hunger"
+      ],
+      "required_mods": [
+        "systemic_salience"
+      ],
+      "sources": [
+        "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/metabolism/MetabolicMath.java",
+        "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/nutrition/NutritionSnapshot.java"
+      ]
+    },
+    {
+      "id": "nutrition_time",
+      "concept_id": "survival.hunger_and_nutrition",
+      "pool": "survival",
+      "text": "Nutrition changes over time. Recheck the screen during a long trip, especially after relying on one type of food.",
+      "contexts": [
+        "hunger"
+      ],
+      "required_mods": [
+        "systemic_salience"
+      ],
+      "sources": [
+        "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/metabolism/MetabolicMath.java",
+        "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/nutrition/NutritionSnapshot.java"
+      ]
+    },
+    {
+      "id": "sugar_recovery",
+      "concept_id": "survival.hunger_and_nutrition",
+      "pool": "survival",
+      "text": "Sugar's benefits draw on your existing nutritional state. Replenish food groups instead of treating more sugar as recovery.",
+      "contexts": [
+        "hunger",
+        "combat"
+      ],
+      "required_mods": [
+        "systemic_salience"
+      ],
+      "sources": [
+        "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/metabolism/MetabolicMath.java",
+        "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/nutrition/NutritionSnapshot.java"
+      ]
+    },
+    {
+      "id": "meal_balance",
+      "concept_id": "survival.hunger_and_nutrition",
+      "pool": "survival",
+      "text": "Pack foods that cover different nutrition groups. A stack of one food is convenient, but it may leave several groups low.",
+      "contexts": [
+        "hunger"
+      ],
+      "required_mods": [
+        "systemic_salience"
+      ],
+      "sources": [
+        "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/metabolism/MetabolicMath.java",
+        "mod_source/systemic-salience/src/main/java/com/bettercontent/systemicsalience/nutrition/NutritionSnapshot.java"
+      ]
+    },
+    {
+      "id": "revival_aftercare",
+      "concept_id": "fragility.life_reaches_tether",
+      "pool": "survival",
+      "text": "After a rescue, check the revived player's condition before continuing. Arrange a safer place to recover together.",
+      "contexts": [
+        "revival"
+      ],
+      "required_mods": [
+        "downed_player_revival"
+      ],
+      "sources": [
+        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/RevivalManager.java"
+      ]
+    },
+    {
+      "id": "revival_food",
+      "concept_id": "fragility.life_reaches_tether",
+      "pool": "survival",
+      "text": "Helping with a revival uses hunger. Keep food available if your group is making repeated rescues.",
+      "contexts": [
+        "revival"
+      ],
+      "required_mods": [
+        "downed_player_revival"
+      ],
+      "sources": [
+        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/RevivalManager.java"
+      ]
+    },
+    {
+      "id": "revival_target",
+      "concept_id": "fragility.life_reaches_tether",
+      "pool": "survival",
+      "text": "Keep aiming at the downed player while holding {use}. Switching targets can interrupt your aid.",
+      "contexts": [
+        "revival"
+      ],
+      "required_mods": [
+        "downed_player_revival"
+      ],
+      "sources": [
+        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/RevivalManager.java"
+      ]
+    },
+    {
+      "id": "revival_cover",
+      "concept_id": "fragility.life_reaches_tether",
+      "pool": "survival",
+      "text": "Protect the people performing a rescue. A teammate watching the approach can help keep the rescuers at work.",
+      "contexts": [
+        "revival",
+        "combat"
+      ],
+      "required_mods": [
+        "downed_player_revival"
+      ],
+      "sources": [
+        "mod_source/downed-player-revival/src/main/java/com/bettercontent/downedplayerrevival/RevivalManager.java"
+      ]
+    },
+    {
+      "id": "food_spoilage",
+      "concept_id": "survival.food_thermal_state",
+      "pool": "survival",
+      "text": "Food tooltips show thermal and spoilage state. Check stored provisions before choosing what to take on a trip.",
+      "contexts": [
+        "hunger"
+      ],
+      "required_mods": [
+        "heat_sync"
+      ],
+      "sources": [
+        "mod_source/heat-sync/src/main/kotlin/com/bettercontent/heatsync/food/FoodThermalService.kt"
+      ]
+    },
+    {
+      "id": "frozen_backup",
+      "concept_id": "survival.food_thermal_state",
+      "pool": "survival",
+      "text": "Keep an edible backup meal when traveling in cold conditions. A frozen main supply cannot help until it thaws.",
+      "contexts": [
+        "hunger",
+        "cold"
+      ],
+      "required_mods": [
+        "heat_sync"
+      ],
+      "sources": [
+        "mod_source/heat-sync/src/main/kotlin/com/bettercontent/heatsync/food/FoodThermalService.kt"
+      ]
+    },
+    {
+      "id": "food_merge",
+      "concept_id": "survival.food_thermal_state",
+      "pool": "survival",
+      "text": "Merging food stacks combines their thermal state. Recheck the resulting stack instead of assuming it stayed unchanged.",
+      "contexts": [
+        "hunger"
+      ],
+      "required_mods": [
+        "heat_sync"
+      ],
+      "sources": [
+        "mod_source/heat-sync/src/main/kotlin/com/bettercontent/heatsync/food/FoodThermalService.kt"
+      ]
+    },
+    {
+      "id": "food_thaw_check",
+      "concept_id": "survival.food_thermal_state",
+      "pool": "survival",
+      "text": "Check the food tooltip after warming a frozen meal. Wait until it is actually thawed before relying on it.",
+      "contexts": [
+        "hunger",
+        "cold"
+      ],
+      "required_mods": [
+        "heat_sync"
+      ],
+      "sources": [
+        "mod_source/heat-sync/src/main/kotlin/com/bettercontent/heatsync/food/FoodThermalService.kt"
+      ]
+    },
+    {
+      "id": "storm_early",
+      "concept_id": "world.weather_has_momentum",
+      "pool": "survival",
+      "text": "Prepare a shelter route while the weather is still manageable. Waiting for a storm to arrive leaves less time to react.",
+      "contexts": [
+        "combat"
+      ],
+      "required_mods": [
+        "weather2"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/WeatherTwoThreads.java",
+        "better-content-modpack/config/Weather2/Storm.toml"
+      ]
+    },
+    {
+      "id": "storm_return",
+      "concept_id": "world.weather_has_momentum",
+      "pool": "survival",
+      "text": "Take changing weather into account on the return journey. A clear outward trip does not guarantee a clear trip home.",
+      "contexts": [],
+      "required_mods": [
+        "weather2"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/WeatherTwoThreads.java",
+        "better-content-modpack/config/Weather2/Storm.toml"
+      ]
+    },
+    {
+      "id": "storm_exposed",
+      "concept_id": "world.weather_has_momentum",
+      "pool": "survival",
+      "text": "Avoid choosing an exposed worksite as your only shelter. Keep a safer place available when the weather worsens.",
+      "contexts": [],
+      "required_mods": [
+        "weather2"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/WeatherTwoThreads.java",
+        "better-content-modpack/config/Weather2/Storm.toml"
+      ]
+    },
+    {
+      "id": "storm_wait",
+      "concept_id": "world.weather_has_momentum",
+      "pool": "survival",
+      "text": "Stay aware of the storm while sheltered. Check conditions before resuming a long trip through exposed terrain.",
+      "contexts": [],
+      "required_mods": [
+        "weather2"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/compat/WeatherTwoThreads.java",
+        "better-content-modpack/config/Weather2/Storm.toml"
+      ]
+    },
+    {
+      "id": "assault_approach",
+      "concept_id": "fragility.army_walks_toward_you",
+      "pool": "survival",
+      "text": "When an assault is announced, check the approaches to your base. Choose where defenders can stand and where they can retreat.",
+      "contexts": [
+        "combat",
+        "projectile"
+      ],
+      "required_mods": [
+        "pillager_campaigns"
+      ],
+      "sources": [
+        "mod_source/pillager-campaigns/src/main/kotlin/com/bettercontent/pillagercampaigns/system/InvasionRuntime.kt"
+      ]
+    },
+    {
+      "id": "assault_resupply",
+      "concept_id": "fragility.army_walks_toward_you",
+      "pool": "survival",
+      "text": "Use an assault warning to repair equipment and gather food. Do those jobs before enemies reach the base.",
+      "contexts": [
+        "combat"
+      ],
+      "required_mods": [
+        "pillager_campaigns"
+      ],
+      "sources": [
+        "mod_source/pillager-campaigns/src/main/kotlin/com/bettercontent/pillagercampaigns/system/InvasionRuntime.kt"
+      ]
+    },
+    {
+      "id": "assault_allies",
+      "concept_id": "fragility.army_walks_toward_you",
+      "pool": "survival",
+      "text": "An assault warning is time to regroup. Make sure allies know where the group intends to defend or withdraw.",
+      "contexts": [
+        "combat"
+      ],
+      "required_mods": [
+        "pillager_campaigns"
+      ],
+      "sources": [
+        "mod_source/pillager-campaigns/src/main/kotlin/com/bettercontent/pillagercampaigns/system/InvasionRuntime.kt"
+      ]
+    },
+    {
+      "id": "assault_escape",
+      "concept_id": "fragility.army_walks_toward_you",
+      "pool": "survival",
+      "text": "Prepare a retreat route before an assault. A fortified entrance is more useful when you can leave if it is overwhelmed.",
+      "contexts": [
+        "combat",
+        "explosion"
+      ],
+      "required_mods": [
+        "pillager_campaigns"
+      ],
+      "sources": [
+        "mod_source/pillager-campaigns/src/main/kotlin/com/bettercontent/pillagercampaigns/system/InvasionRuntime.kt"
+      ]
+    },
+    {
+      "id": "gas_escape",
+      "concept_id": "world.chemical_exposure",
+      "pool": "survival",
+      "text": "Some ChemLib gases can escape from stored items into the atmosphere. Check containment before stockpiling them near living areas.",
+      "contexts": [],
+      "required_mods": [
+        "latent_chemlib"
+      ],
+      "sources": [
+        "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/sim/GasEscapeHandler.java",
+        "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/api/LatentEmissionProfiles.java"
+      ]
+    },
+    {
+      "id": "gas_inventory",
+      "concept_id": "world.chemical_exposure",
+      "pool": "survival",
+      "text": "A carried gas supply can be a source of pollution. Inspect the material before treating it as ordinary inventory cargo.",
+      "contexts": [],
+      "required_mods": [
+        "latent_chemlib"
+      ],
+      "sources": [
+        "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/sim/GasEscapeHandler.java",
+        "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/api/LatentEmissionProfiles.java"
+      ]
+    },
+    {
+      "id": "radioactive_mining",
+      "concept_id": "world.chemical_exposure",
+      "pool": "survival",
+      "text": "Natural hosted radioactive ore can behave differently after mining. Plan handling before collecting uranium or thorium forms.",
+      "contexts": [],
+      "required_mods": [
+        "latent_chemlib"
+      ],
+      "sources": [
+        "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/sim/GasEscapeHandler.java",
+        "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/api/LatentEmissionProfiles.java"
+      ]
+    },
+    {
+      "id": "radioactive_replacement",
+      "concept_id": "world.chemical_exposure",
+      "pool": "survival",
+      "text": "Placing mined radioactive material back down does not necessarily make it inert again. Check its handling requirements.",
+      "contexts": [],
+      "required_mods": [
+        "latent_chemlib"
+      ],
+      "sources": [
+        "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/sim/GasEscapeHandler.java",
+        "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/api/LatentEmissionProfiles.java"
+      ]
+    },
+    {
+      "id": "beetle_terminus",
+      "concept_id": "works.rail_beetle",
+      "pool": "discovery",
+      "text": "Rail Beetles survey new routes at railway ends. A Beetle in the middle of a railway remains in driving mode.",
+      "contexts": [],
+      "required_mods": [
+        "rail_beetle"
+      ],
+      "sources": [
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
+      ]
+    },
+    {
+      "id": "beetle_rails",
+      "concept_id": "works.rail_beetle",
+      "pool": "discovery",
+      "text": "Load rails, support blocks, and fuel before asking a Rail Beetle to build. Its prompt identifies missing supplies.",
+      "contexts": [],
+      "required_mods": [
+        "rail_beetle"
+      ],
+      "sources": [
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
+      ]
+    },
+    {
+      "id": "beetle_loaded_ground",
+      "concept_id": "works.rail_beetle",
+      "pool": "discovery",
+      "text": "A Rail Beetle plans through loaded terrain. Explore the area before expecting a route farther into the cave.",
+      "contexts": [],
+      "required_mods": [
+        "rail_beetle"
+      ],
+      "sources": [
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
+      ]
+    },
+    {
+      "id": "beetle_obstructions",
+      "concept_id": "works.rail_beetle",
+      "pool": "discovery",
+      "text": "Rail Beetles do not tunnel through solid rock. Clear a passage before planning a railway through it.",
+      "contexts": [],
+      "required_mods": [
+        "rail_beetle"
+      ],
+      "sources": [
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
+      ]
+    },
+    {
+      "id": "beetle_water",
+      "concept_id": "works.rail_beetle",
+      "pool": "discovery",
+      "text": "Rail Beetles do not plan underwater routes. Prepare a dry route if you want the machine to extend the railway.",
+      "contexts": [],
+      "required_mods": [
+        "rail_beetle"
+      ],
+      "sources": [
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
+      ]
+    },
+    {
+      "id": "beetle_brakes",
+      "concept_id": "works.rail_beetle",
+      "pool": "discovery",
+      "text": "Stop a Rail Beetle and apply its brakes before servicing engines or modules.",
+      "contexts": [],
+      "required_mods": [
+        "rail_beetle"
+      ],
+      "sources": [
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
+      ]
+    },
+    {
+      "id": "beetle_fallback",
+      "concept_id": "works.rail_beetle",
+      "pool": "discovery",
+      "text": "A Rail Beetle can burn cargo fuel when its installed engine is empty. Keep that in mind when choosing what to carry.",
+      "contexts": [],
+      "required_mods": [
+        "rail_beetle"
+      ],
+      "sources": [
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
+      ]
+    },
+    {
+      "id": "beetle_supports",
+      "concept_id": "works.rail_beetle",
+      "pool": "discovery",
+      "text": "Rail Beetles prefer non-burnable support blocks. Supplying stone helps keep useful fuel out of the supports.",
+      "contexts": [],
+      "required_mods": [
+        "rail_beetle"
+      ],
+      "sources": [
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
+      ]
+    },
+    {
+      "id": "beetle_modules",
+      "concept_id": "works.rail_beetle",
+      "pool": "discovery",
+      "text": "A Rail Beetle cannot install duplicate module families. Choose different upgrades for its available bays.",
+      "contexts": [],
+      "required_mods": [
+        "rail_beetle"
+      ],
+      "sources": [
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
+      ]
+    },
+    {
+      "id": "beetle_remote",
+      "concept_id": "works.rail_beetle",
+      "pool": "discovery",
+      "text": "Long-range Beetle dispatch reaches already-loaded machines. It does not keep distant chunks loaded by itself.",
+      "contexts": [],
+      "required_mods": [
+        "rail_beetle"
+      ],
+      "sources": [
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
+      ]
+    },
+    {
+      "id": "train_speed_cost",
+      "concept_id": "works.train_fuel",
+      "pool": "discovery",
+      "text": "Powered train fuel use rises with speed. Slowing a long journey can reduce its fuel cost.",
+      "contexts": [],
+      "required_mods": [
+        "create_train_fuel_scaling"
+      ],
+      "sources": [
+        "mod_source/create-train-fuel-scaling/src/main/java/com/bettercontent/createtrainfuelscaling/TrainFuelCostCalculator.java"
+      ]
+    },
+    {
+      "id": "train_top_speed",
+      "concept_id": "works.train_fuel",
+      "pool": "discovery",
+      "text": "A very fast train can consume fuel much faster than one near its normal top speed. Budget fuel for the speed you intend to use.",
+      "contexts": [],
+      "required_mods": [
+        "create_train_fuel_scaling"
+      ],
+      "sources": [
+        "mod_source/create-train-fuel-scaling/src/main/java/com/bettercontent/createtrainfuelscaling/TrainFuelCostCalculator.java"
+      ]
+    },
+    {
+      "id": "train_round_trip",
+      "concept_id": "works.train_fuel",
+      "pool": "discovery",
+      "text": "Estimate train fuel for both directions of a route. Increasing speed changes the fuel budget as well as the journey time.",
+      "contexts": [],
+      "required_mods": [
+        "create_train_fuel_scaling"
+      ],
+      "sources": [
+        "mod_source/create-train-fuel-scaling/src/main/java/com/bettercontent/createtrainfuelscaling/TrainFuelCostCalculator.java"
+      ]
+    },
+    {
+      "id": "shaft_stress",
+      "concept_id": "works.transmission_loss",
+      "pool": "discovery",
+      "text": "Shafts, cogs, gearboxes, and belts contribute transmission stress. Account for the route as well as the powered machines.",
+      "contexts": [],
+      "required_mods": [
+        "create_transmission_loss"
+      ],
+      "sources": [
+        "mod_source/create-transmission-loss/src/main/kotlin/com/bettercontent/createtransmissionloss/network/NetworkScanner.kt",
+        "mod_source/create-transmission-loss/src/main/kotlin/com/bettercontent/createtransmissionloss/mixin/StressCalculatorMixin.kt"
+      ]
+    },
+    {
+      "id": "shorter_power_route",
+      "concept_id": "works.transmission_loss",
+      "pool": "discovery",
+      "text": "A long rotational-power route has a cost. Consider placing the power source closer to the machines it serves.",
+      "contexts": [],
+      "required_mods": [
+        "create_transmission_loss"
+      ],
+      "sources": [
+        "mod_source/create-transmission-loss/src/main/kotlin/com/bettercontent/createtransmissionloss/network/NetworkScanner.kt",
+        "mod_source/create-transmission-loss/src/main/kotlin/com/bettercontent/createtransmissionloss/mixin/StressCalculatorMixin.kt"
+      ]
+    },
+    {
+      "id": "belt_span_cost",
+      "concept_id": "works.transmission_loss",
+      "pool": "discovery",
+      "text": "Belt transmission loss considers the span between pulleys. Check long belts when reviewing a network's stress use.",
+      "contexts": [],
+      "required_mods": [
+        "create_transmission_loss"
+      ],
+      "sources": [
+        "mod_source/create-transmission-loss/src/main/kotlin/com/bettercontent/createtransmissionloss/network/NetworkScanner.kt",
+        "mod_source/create-transmission-loss/src/main/kotlin/com/bettercontent/createtransmissionloss/mixin/StressCalculatorMixin.kt"
+      ]
+    },
+    {
+      "id": "trace_notes",
+      "concept_id": "world.world_remembers",
+      "pool": "discovery",
+      "text": "Players can leave notes through Player Traces. Read nearby notes for information left by earlier visitors.",
+      "contexts": [],
+      "required_mods": [
+        "player_traces"
+      ],
+      "sources": [
+        "mod_source/player-traces/src/main/kotlin/com/bettercontent/playertraces/logic/AnnotationService.kt",
+        "mod_source/player-traces/src/main/kotlin/com/bettercontent/playertraces/logic/CaptureService.kt"
+      ]
+    },
+    {
+      "id": "trace_support",
+      "concept_id": "world.world_remembers",
+      "pool": "discovery",
+      "text": "Traces are tied to their supporting blocks. Changing the ground can remove the traces attached to it.",
+      "contexts": [],
+      "required_mods": [
+        "player_traces"
+      ],
+      "sources": [
+        "mod_source/player-traces/src/main/kotlin/com/bettercontent/playertraces/logic/AnnotationService.kt",
+        "mod_source/player-traces/src/main/kotlin/com/bettercontent/playertraces/logic/CaptureService.kt"
+      ]
+    },
+    {
+      "id": "trace_authorship",
+      "concept_id": "world.world_remembers",
+      "pool": "discovery",
+      "text": "Trace notes are written by players. Treat their advice as another player's observation rather than a guaranteed pack instruction.",
+      "contexts": [],
+      "required_mods": [
+        "player_traces"
+      ],
+      "sources": [
+        "mod_source/player-traces/src/main/kotlin/com/bettercontent/playertraces/logic/AnnotationService.kt",
+        "mod_source/player-traces/src/main/kotlin/com/bettercontent/playertraces/logic/CaptureService.kt"
+      ]
+    },
+    {
+      "id": "trace_gestures",
+      "concept_id": "world.world_remembers",
+      "pool": "discovery",
+      "text": "A Trace note can include a recorded gesture. Inspect the marker as well as its text when reviewing a place.",
+      "contexts": [],
+      "required_mods": [
+        "player_traces"
+      ],
+      "sources": [
+        "mod_source/player-traces/src/main/kotlin/com/bettercontent/playertraces/logic/AnnotationService.kt",
+        "mod_source/player-traces/src/main/kotlin/com/bettercontent/playertraces/logic/CaptureService.kt"
+      ]
+    },
+    {
+      "id": "cultivar_origin",
+      "concept_id": "world.bumblezone_cultivars",
+      "pool": "discovery",
+      "text": "The Bumblezone is a source of cultivatable food plants. Look for propagation materials when preparing a farming expedition.",
+      "contexts": [],
+      "required_mods": [
+        "bumblezone_cultivars"
+      ],
+      "sources": [
+        "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/CultivarLootModifier.java",
+        "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/LivingPollenNurseryBlock.java"
+      ]
+    },
+    {
+      "id": "cultivar_home",
+      "concept_id": "world.bumblezone_cultivars",
+      "pool": "discovery",
+      "text": "Bumblezone cultivars support farming back in the Overworld. Bring propagation materials home rather than only a meal.",
+      "contexts": [],
+      "required_mods": [
+        "bumblezone_cultivars"
+      ],
+      "sources": [
+        "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/CultivarLootModifier.java",
+        "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/LivingPollenNurseryBlock.java"
+      ]
+    },
+    {
+      "id": "cultivar_nursery",
+      "concept_id": "world.bumblezone_cultivars",
+      "pool": "discovery",
+      "text": "Breaking a Living Pollen Nursery yields seeds. Collect them when you find a nursery in the Bumblezone.",
+      "contexts": [],
+      "required_mods": [
+        "bumblezone_cultivars"
+      ],
+      "sources": [
+        "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/CultivarLootModifier.java",
+        "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/LivingPollenNurseryBlock.java"
+      ]
+    },
+    {
+      "id": "cultivar_variety",
+      "concept_id": "world.bumblezone_cultivars",
+      "pool": "discovery",
+      "text": "Collect more than one useful cultivar when exploring the Bumblezone. Different plants give you more options for future meals.",
+      "contexts": [],
+      "required_mods": [
+        "bumblezone_cultivars"
+      ],
+      "sources": [
+        "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/CultivarLootModifier.java",
+        "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/LivingPollenNurseryBlock.java"
+      ]
+    },
+    {
+      "id": "ratlantis_components",
+      "concept_id": "works.ratlantis_logistics",
+      "pool": "discovery",
+      "text": "Ratlantis supplies components for scalable logistics. Check which component your next transport setup requires.",
+      "contexts": [],
+      "required_mods": [
+        "ratlantis_logistics"
+      ],
+      "sources": [
+        "mod_source/ratlantis-logistics/src/main/java/com/bettercontent/ratlantislogistics/ReplantingInputs.java",
+        "better-content-modpack/kubejs/server_scripts/progression/20_ratlantis_logistics.js"
+      ]
+    },
+    {
+      "id": "ratlantis_route_plan",
+      "concept_id": "works.ratlantis_logistics",
+      "pool": "discovery",
+      "text": "Plan a Ratlantis expedition around the logistics parts you need. Review the recipes before filling your inventory with loot.",
+      "contexts": [],
+      "required_mods": [
+        "ratlantis_logistics"
+      ],
+      "sources": [
+        "mod_source/ratlantis-logistics/src/main/java/com/bettercontent/ratlantislogistics/ReplantingInputs.java",
+        "better-content-modpack/kubejs/server_scripts/progression/20_ratlantis_logistics.js"
+      ]
+    },
+    {
+      "id": "rat_replant_inputs",
+      "concept_id": "works.ratlantis_logistics",
+      "pool": "discovery",
+      "text": "A rat that replants needs suitable planting inputs. Check the supplies provided to an automated farm.",
+      "contexts": [],
+      "required_mods": [
+        "ratlantis_logistics"
+      ],
+      "sources": [
+        "mod_source/ratlantis-logistics/src/main/java/com/bettercontent/ratlantislogistics/ReplantingInputs.java",
+        "better-content-modpack/kubejs/server_scripts/progression/20_ratlantis_logistics.js"
+      ]
+    },
+    {
+      "id": "rat_replant_matching",
+      "concept_id": "works.ratlantis_logistics",
+      "pool": "discovery",
+      "text": "Check which input replants the crop or tree you are automating. An edible harvest is not always the correct planting item.",
+      "contexts": [],
+      "required_mods": [
+        "ratlantis_logistics"
+      ],
+      "sources": [
+        "mod_source/ratlantis-logistics/src/main/java/com/bettercontent/ratlantislogistics/ReplantingInputs.java",
+        "better-content-modpack/kubejs/server_scripts/progression/20_ratlantis_logistics.js"
+      ]
+    },
+    {
+      "id": "ore_coproducts",
+      "concept_id": "works.chemistry_remembers_sequence",
+      "pool": "discovery",
+      "text": "Ore processing can yield coproducts as well as the main metal. Leave storage space for the whole output.",
+      "contexts": [],
+      "required_mods": [
+        "realistic_ores"
+      ],
+      "sources": [
+        "mod_source/realistic-ores/src/main/java/com/bettercontent/realisticores/block/SurfaceSampleBlock.java",
+        "mod_source/realistic-ores/src/main/resources/data/realistic_ores/processing_definitions/copper_bloom.json",
+        "mod_source/realistic-ores/src/main/resources/data/realistic_ores/recipes/crafting/small_chunks/ironstone.json"
+      ]
+    },
+    {
+      "id": "ore_route_choice",
+      "concept_id": "works.chemistry_remembers_sequence",
+      "pool": "discovery",
+      "text": "Compare processing routes for the material you actually need. The highest primary-metal yield is not the only useful result.",
+      "contexts": [],
+      "required_mods": [
+        "realistic_ores"
+      ],
+      "sources": [
+        "mod_source/realistic-ores/src/main/java/com/bettercontent/realisticores/block/SurfaceSampleBlock.java",
+        "mod_source/realistic-ores/src/main/resources/data/realistic_ores/processing_definitions/copper_bloom.json",
+        "mod_source/realistic-ores/src/main/resources/data/realistic_ores/recipes/crafting/small_chunks/ironstone.json"
+      ]
+    },
+    {
+      "id": "ore_small_family",
+      "concept_id": "works.chemistry_remembers_sequence",
+      "pool": "discovery",
+      "text": "Combine small chunks from the same deposit family. Mixing unrelated samples does not make a matching full chunk.",
+      "contexts": [],
+      "required_mods": [
+        "realistic_ores"
+      ],
+      "sources": [
+        "mod_source/realistic-ores/src/main/java/com/bettercontent/realisticores/block/SurfaceSampleBlock.java",
+        "mod_source/realistic-ores/src/main/resources/data/realistic_ores/processing_definitions/copper_bloom.json",
+        "mod_source/realistic-ores/src/main/resources/data/realistic_ores/recipes/crafting/small_chunks/ironstone.json"
+      ]
+    },
+    {
+      "id": "ore_stage_storage",
+      "concept_id": "works.chemistry_remembers_sequence",
+      "pool": "discovery",
+      "text": "Keep ore stages distinguishable in storage. A chunk, crushed ore, and a concentrate belong to different processing steps.",
+      "contexts": [],
+      "required_mods": [
+        "realistic_ores"
+      ],
+      "sources": [
+        "mod_source/realistic-ores/src/main/java/com/bettercontent/realisticores/block/SurfaceSampleBlock.java",
+        "mod_source/realistic-ores/src/main/resources/data/realistic_ores/processing_definitions/copper_bloom.json",
+        "mod_source/realistic-ores/src/main/resources/data/realistic_ores/recipes/crafting/small_chunks/ironstone.json"
+      ]
+    },
+    {
+      "id": "anchor_redstone",
+      "concept_id": "powers.power_needs_anchor",
+      "pool": "discovery",
+      "text": "A redstone signal disables a chunk anchor. Check nearby controls if an adequately supplied anchor stops keeping chunks active.",
+      "contexts": [],
+      "required_mods": [
+        "arcane_chunk_loaders"
+      ],
+      "sources": [
+        "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/AnchorData.java",
+        "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/ArcaneAnchorBlockEntity.java"
+      ]
+    },
+    {
+      "id": "anchor_resource_type",
+      "concept_id": "powers.power_needs_anchor",
+      "pool": "discovery",
+      "text": "Different chunk anchors accept different resources. Match the supply to the anchor variant you built.",
+      "contexts": [],
+      "required_mods": [
+        "arcane_chunk_loaders"
+      ],
+      "sources": [
+        "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/AnchorData.java",
+        "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/ArcaneAnchorBlockEntity.java"
+      ]
+    },
+    {
+      "id": "anchor_empty",
+      "concept_id": "powers.power_needs_anchor",
+      "pool": "discovery",
+      "text": "An anchor can run out of its resource. Include replenishment in the design of an unattended workshop.",
+      "contexts": [],
+      "required_mods": [
+        "arcane_chunk_loaders"
+      ],
+      "sources": [
+        "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/AnchorData.java",
+        "mod_source/arcane-chunk-loaders/src/main/java/com/bettercontent/arcanechunkloaders/blockentity/ArcaneAnchorBlockEntity.java"
+      ]
+    },
+    {
+      "id": "chemistry_containment",
+      "concept_id": "world.chemical_exposure",
+      "pool": "discovery",
+      "text": "Chemical storage has consequences beyond inventory space. Check whether the material can escape or emit radiation.",
+      "contexts": [],
+      "required_mods": [
+        "latent_chemlib"
+      ],
+      "sources": [
+        "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/sim/GasEscapeHandler.java",
+        "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/api/LatentEmissionProfiles.java"
+      ]
+    },
+    {
+      "id": "gas_atmosphere",
+      "concept_id": "world.chemical_exposure",
+      "pool": "discovery",
+      "text": "Escaped ChemLib gas enters the pollution system. Plan atmospheric handling alongside the process that produces it.",
+      "contexts": [],
+      "required_mods": [
+        "latent_chemlib"
+      ],
+      "sources": [
+        "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/sim/GasEscapeHandler.java",
+        "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/api/LatentEmissionProfiles.java"
+      ]
+    },
+    {
+      "id": "radioactive_forms",
+      "concept_id": "world.chemical_exposure",
+      "pool": "discovery",
+      "text": "Different radioactive forms can have different emissions. Do not assume an ore, concentrate, and finished material behave alike.",
+      "contexts": [],
+      "required_mods": [
+        "latent_chemlib"
+      ],
+      "sources": [
+        "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/sim/GasEscapeHandler.java",
+        "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/api/LatentEmissionProfiles.java"
+      ]
+    },
+    {
+      "id": "life_preview",
+      "concept_id": "powers.life_becomes_capable",
+      "pool": "discovery",
+      "text": "The Life screen shows resulting properties. Review the concrete changes before committing an allocation.",
+      "contexts": [],
+      "required_mods": [
+        "rpg_stats"
+      ],
+      "sources": [
+        "mod_source/rpg-stats/src/main/kotlin/com/bettercontent/rpgstats/common/event/CommonForgeEvents.kt",
+        "mod_source/rpg-stats/src/main/kotlin/com/bettercontent/rpgstats/common/network/packets/AllocationPolicy.kt"
+      ]
+    },
+    {
+      "id": "life_specialization",
+      "concept_id": "powers.life_becomes_capable",
+      "pool": "discovery",
+      "text": "Choose Life improvements for the activities you plan to do. Check their resulting properties rather than relying on the aspect name.",
+      "contexts": [],
+      "required_mods": [
+        "rpg_stats"
+      ],
+      "sources": [
+        "mod_source/rpg-stats/src/main/kotlin/com/bettercontent/rpgstats/common/event/CommonForgeEvents.kt",
+        "mod_source/rpg-stats/src/main/kotlin/com/bettercontent/rpgstats/common/network/packets/AllocationPolicy.kt"
+      ]
+    },
+    {
+      "id": "life_new_plan",
+      "concept_id": "powers.life_becomes_capable",
+      "pool": "discovery",
+      "text": "A new life is a chance to reconsider stat choices. Review your needs before repeating the previous allocation.",
+      "contexts": [],
+      "required_mods": [
+        "rpg_stats"
+      ],
+      "sources": [
+        "mod_source/rpg-stats/src/main/kotlin/com/bettercontent/rpgstats/common/event/CommonForgeEvents.kt",
+        "mod_source/rpg-stats/src/main/kotlin/com/bettercontent/rpgstats/common/network/packets/AllocationPolicy.kt"
+      ]
+    },
+    {
+      "id": "recipe_output_count",
+      "concept_id": "crafting.emi_authority",
+      "pool": "discovery",
+      "text": "Check a recipe's output count when budgeting materials. Some pack recipes produce several components in a batch.",
+      "contexts": [],
+      "required_mods": [
+        "emi"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/ThreadDoorways.java",
+        "better-content-modpack/kubejs/server_scripts/progression"
+      ]
+    },
+    {
+      "id": "recipe_machine_type",
+      "concept_id": "crafting.emi_authority",
+      "pool": "discovery",
+      "text": "Check the process type shown by EMI. Ingredients for one machine may not work in a similar-looking machine.",
+      "contexts": [],
+      "required_mods": [
+        "emi"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/ThreadDoorways.java",
+        "better-content-modpack/kubejs/server_scripts/progression"
+      ]
+    },
+    {
+      "id": "recipe_alternatives",
+      "concept_id": "crafting.emi_authority",
+      "pool": "discovery",
+      "text": "Review alternate recipes before starting a large build. A route using materials you already have may suit the job better.",
+      "contexts": [],
+      "required_mods": [
+        "emi"
+      ],
+      "sources": [
+        "mod_source/better-content-threads/src/main/java/com/bettercontent/threads/ThreadDoorways.java",
+        "better-content-modpack/kubejs/server_scripts/progression"
+      ]
+    },
+    {
+      "id": "beetle_route_beacons",
+      "concept_id": "works.rail_beetle",
+      "pool": "teaser",
+      "text": "Route Beacons can guide a Rail Beetle toward a chosen destination. A railway need not grow only along its default suggestions.",
+      "contexts": [],
+      "required_mods": [
+        "rail_beetle"
+      ],
+      "sources": [
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
+      ]
+    },
+    {
+      "id": "beetle_magic_drives",
+      "concept_id": "works.rail_beetle",
+      "pool": "teaser",
+      "text": "Rail Beetles have optional drives for several power systems. A future railway can put more than furnace fuel to work.",
+      "contexts": [],
+      "required_mods": [
+        "rail_beetle"
+      ],
+      "sources": [
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/entity/BeetlePower.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/navigation/TerrainRoutePlanner.java",
+        "mod_source/rail-beetle/src/main/java/com/bettercontent/railbeetle/upgrade/ModuleKind.java"
+      ]
+    },
+    {
+      "id": "bumblezone_food_future",
+      "concept_id": "world.bumblezone_cultivars",
+      "pool": "teaser",
+      "text": "A Bumblezone expedition can change what grows at home. Its cultivars offer more reasons to return than immediate food.",
+      "contexts": [],
+      "required_mods": [
+        "bumblezone_cultivars"
+      ],
+      "sources": [
+        "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/CultivarLootModifier.java",
+        "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/LivingPollenNurseryBlock.java"
+      ]
+    },
+    {
+      "id": "pollen_propagation",
+      "concept_id": "world.bumblezone_cultivars",
+      "pool": "teaser",
+      "text": "Living Pollen Nurseries hold seeds for future gardens. Exploring the Bumblezone can expand what you can plant at home.",
+      "contexts": [],
+      "required_mods": [
+        "bumblezone_cultivars"
+      ],
+      "sources": [
+        "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/CultivarLootModifier.java",
+        "mod_source/bumblezone-cultivars/src/main/java/com/bettercontent/bumblezonecultivars/LivingPollenNurseryBlock.java"
+      ]
+    },
+    {
+      "id": "ratlantis_logistics_future",
+      "concept_id": "works.ratlantis_logistics",
+      "pool": "teaser",
+      "text": "Ratlantis can supply a future transport network. Check its logistics components when carrying everything by hand becomes limiting.",
+      "contexts": [],
+      "required_mods": [
+        "ratlantis_logistics"
+      ],
+      "sources": [
+        "mod_source/ratlantis-logistics/src/main/java/com/bettercontent/ratlantislogistics/ReplantingInputs.java",
+        "better-content-modpack/kubejs/server_scripts/progression/20_ratlantis_logistics.js"
+      ]
+    },
+    {
+      "id": "ratlantis_farming_future",
+      "concept_id": "works.ratlantis_logistics",
+      "pool": "teaser",
+      "text": "Rat logistics can extend into replanting crops and trees. A later farm can supply more than its owner can tend by hand.",
+      "contexts": [],
+      "required_mods": [
+        "ratlantis_logistics"
+      ],
+      "sources": [
+        "mod_source/ratlantis-logistics/src/main/java/com/bettercontent/ratlantislogistics/ReplantingInputs.java",
+        "better-content-modpack/kubejs/server_scripts/progression/20_ratlantis_logistics.js"
+      ]
+    },
+    {
+      "id": "chemical_world_effects",
+      "concept_id": "world.chemical_exposure",
+      "pool": "teaser",
+      "text": "Chemistry can affect the world around a workshop. Gases and radioactive forms give advanced storage its own engineering problems.",
+      "contexts": [],
+      "required_mods": [
+        "latent_chemlib"
+      ],
+      "sources": [
+        "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/sim/GasEscapeHandler.java",
+        "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/api/LatentEmissionProfiles.java"
+      ]
+    },
+    {
+      "id": "radioactive_heat",
+      "concept_id": "world.chemical_exposure",
+      "pool": "teaser",
+      "text": "Some radioactive forms also emit heat. Advanced material handling can involve temperature as well as radiation.",
+      "contexts": [],
+      "required_mods": [
+        "latent_chemlib"
+      ],
+      "sources": [
+        "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/sim/GasEscapeHandler.java",
+        "mod_source/latent-chemlib/src/main/java/com/bettercontent/latentchemlib/api/LatentEmissionProfiles.java"
+      ]
+    },
+    {
+      "id": "railway_speed_budget",
+      "concept_id": "works.train_fuel",
+      "pool": "teaser",
+      "text": "A faster railway needs a different fuel budget. Planning speed becomes part of planning the transport network.",
+      "contexts": [],
+      "required_mods": [
+        "create_train_fuel_scaling"
+      ],
+      "sources": [
+        "mod_source/create-train-fuel-scaling/src/main/java/com/bettercontent/createtrainfuelscaling/TrainFuelCostCalculator.java"
+      ]
+    },
+    {
+      "id": "railway_economy",
+      "concept_id": "works.train_fuel",
+      "pool": "teaser",
+      "text": "Maximum speed is not always the cheapest way to move supplies. A future railway can trade travel time for fuel savings.",
+      "contexts": [],
+      "required_mods": [
+        "create_train_fuel_scaling"
+      ],
+      "sources": [
+        "mod_source/create-train-fuel-scaling/src/main/java/com/bettercontent/createtrainfuelscaling/TrainFuelCostCalculator.java"
+      ]
+    },
+    {
+      "id": "space_workshop",
+      "concept_id": "works.leave_atmosphere",
+      "pool": "teaser",
+      "text": "The path to space includes an engineering table, an electrolyzer, and an air liquefier. Today's workshop can grow toward them.",
+      "contexts": [],
+      "required_mods": [
+        "creatingspace"
+      ],
+      "sources": [
+        "better-content-modpack/kubejs/server_scripts/progression/60_aerospace.js"
+      ]
+    },
+    {
+      "id": "aerospace_materials",
+      "concept_id": "works.leave_atmosphere",
+      "pool": "teaser",
+      "text": "Aerospace equipment brings advanced alloys into the workshop. Check those recipes when planning your next processing expansion.",
+      "contexts": [],
+      "required_mods": [
+        "creatingspace"
+      ],
+      "sources": [
+        "better-content-modpack/kubejs/server_scripts/progression/60_aerospace.js"
+      ]
     }
   ]
 }

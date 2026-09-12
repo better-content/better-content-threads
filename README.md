@@ -50,20 +50,28 @@ included in the runtime JAR. It needs a display, opens no world, and sends no po
 input. Inspect the captures manually; this fixture does not verify pack integration,
 actual gameplay triggers, or native guides supplied by other mods.
 
-## Death-screen hints
+## Death and pause-menu tips
 
-The native death screen shows one quiet, stable hint beneath its existing controls. The client
-catalogue `assets/better_content_threads/death_hints/catalogue.json` contains 96 tips: 40 survival,
-44 whole-pack discovery, and 12 light late-game teasers. Each `bc.death_hints.v1` entry has a stable
+The native death screen and Esc menu show separate, stable tips from one client catalogue:
+`assets/better_content_threads/death_hints/catalogue.json`. Its 192 entries include 80 survival,
+88 whole-pack discovery, and 24 light late-game teasers. Each `bc.death_hints.v1` entry has a stable
 ID, shared concept ID, pool, text, context categories, required mod IDs, and mechanical sources.
 Sources are workspace-relative paths or Minecraft 1.20.1 class references; they are authoring
 provenance and never appear in the player UI. Resource packs may replace the catalogue.
 
-Recognized damage categories receive contextual advice on three of four eligible deaths. Other
-selections use the general pool, with teasers weighted at one in eight general selections. Optional
-mod tips require every named mod to be installed. The last twelve displayed IDs are avoided when
-alternatives exist; an exhausted category repeats its oldest eligible hint. History lives only in
-`config/better-content-threads-death-hints.json`, independently of lessons and player progression.
+Both surfaces share a persistent cycle of displayed IDs. Every eligible tip must be shown before
+another cycle starts; exhausted contextual categories yield to unseen tips elsewhere. Recognized
+categories prefer contextual advice on three of four eligible death selections. General selections
+weight teasers at one in eight while both pools have unseen entries. Tips require every named mod.
+At cycle boundaries, avoid the last death and Esc tips when alternatives exist.
+
+The Esc tip is chosen on first use and remains stable through reopening, resizing, respawning,
+reconnecting, and restarting. A confirmed death clears that choice once; the next Esc menu chooses
+its replacement. The death screen has its own selection. Only actually rendered tips enter history;
+a hidden selection reserves its ID without consuming it or forcing a new cycle. History schema 2
+in `config/better-content-threads-death-hints.json` stores the cycle and current Esc tip atomically.
+Schema 1 migrates its known recent IDs into the first cycle. This client-wide history is independent
+of loading exposure, worlds, and player progression. Packet protocol remains 10.
 
 The server classifies registered damage types/tags and attackers before sending the native death
 screen packet. Revival's downed event retains the original category for bleed-out, giving up, or
@@ -71,16 +79,18 @@ finishing; revival, logout, respawn, and server shutdown clear episode memory. M
 general advice. Late context cannot replace the first rendered selection. No death-message text
 is parsed and no Thread signals are emitted by hint presentation.
 
-Hints wrap at normal font size and measure the actual native controls. If a small GUI has too little
-space below the controls, the hint is omitted and does not enter display history. A resize can make
-the same selection visible; it never rerolls it. Normal and hardcore controls and their delays remain
-native. The label is translatable; catalogue prose is resource-pack-overridable, and control tokens
-resolve the current bindings.
+Hints wrap at normal font size and measure actual controls. The Esc menu moves its button group
+up only as needed, retaining full-size controls and a top-right Threads doorway. The built-in pool
+fits a 320×240 GUI; smaller or oversized resource-pack layouts omit tips that cannot fit without
+recording them. Resizing never rerolls a selection. Normal and hardcore death controls and their
+delays remain native. The label is translatable, and control tokens resolve current bindings.
 
-`DeathHintsTest` covers content, weighting, eligibility, history, context lifecycle, packet bounds,
-and layout. The existing visual fixture includes production hint rendering against vanilla control
-geometry without a player/world; it is a presentation check, not an end-to-end respawn test. Set
-`-Dbc.learningVisual.deathHintsOnly=true` in `JAVA_TOOL_OPTIONS` for only the 15 death-hint frames.
-Use `-PlearningVisualHeight=960` to inspect all three GUI scales with enough vertical space;
-720 pixels checks the common minimum-height GUI layout; Minecraft may clamp scale 4 to scale 3.
-Unfittable geometry is covered separately by the layout unit test. Automated checks never inject mouse input.
+`DeathHintsTest` and `HintLifecycleTest` cover content, shared cycles, persistence/migration,
+eligibility, death/respawn boundaries, context, packet bounds, and layout. Visual fixtures render
+production hints with native death geometry and single/multiplayer pause geometry without a
+player/world; these are presentation checks, not end-to-end connection or respawn tests. Set
+`-Dbc.learningVisual.deathHintsOnly=true` in `JAVA_TOOL_OPTIONS` for 15 death-hint frames, or
+`-Dbc.learningVisual.tipsOnly=true` for 21 pause frames including the native PauseScreen and a
+real-font fit check of all 192 tips. Use `-PlearningVisualHeight=960` to inspect GUI scales 4/3/2;
+720 pixels checks the common minimum-height layout, where Minecraft may clamp scale 4 to 3.
+Automated checks never inject mouse input.

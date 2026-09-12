@@ -4,44 +4,71 @@ import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.StringWidget;
 import net.minecraft.client.gui.screens.DeathScreen;
+import net.minecraft.client.gui.screens.PauseScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.event.ScreenEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = BetterContentThreads.MOD_ID, value = Dist.CLIENT)
 public final class DeathHintClient {
     private static final Random RANDOM = new Random();
-    private static DeathHintSession session = new DeathHintSession();
-    private static DeathHintRotation.State history;
-    private static DeathScreen active;
+    private static HintLifecycle lifecycle;
+    private static Screen layoutScreen;
+    private static List<WidgetPosition> positions = List.of();
+    private record WidgetPosition(AbstractWidget widget, int y) {}
 
+    private static HintLifecycle lifecycle() {
+        if (lifecycle == null) lifecycle = new HintLifecycle(DeathHintStore.load());
+        return lifecycle;
+    }
     public static void receive(UUID player, String context) {
         var local = Minecraft.getInstance().player;
-        if (local != null && local.getUUID().equals(player)) session.receive(context, Util.getMillis());
+        if (local != null && local.getUUID().equals(player) && lifecycle().death(context, Util.getMillis()))
+            DeathHintStore.save(lifecycle().state());
     }
-    @SubscribeEvent public static void logout(ClientPlayerNetworkEvent.LoggingOut event) { reset(); }
-    @SubscribeEvent public static void clone(ClientPlayerNetworkEvent.Clone event) { reset(); }
-    private static void reset() { active = null; session = new DeathHintSession(); }
-
-    @SubscribeEvent public static void render(ScreenEvent.Render.Post event) {
-        if (!(event.getScreen() instanceof DeathScreen death)) return;
-        if (active != null && active != death) session = new DeathHintSession();
-        active = death;
-        if (history == null) history = DeathHintStore.load();
-        if (session.selection() == null) session.select(DeathHintRotation.select(DeathHints.INSTANCE.all(),
-            session.freeze(Util.getMillis()), history, id -> ModList.get().isLoaded(id), RANDOM));
-        if (renderHint(event.getGuiGraphics(), death, session.selection().hint()) && session.record()) {
-            history = DeathHintRotation.displayed(history, session.selection());
-            DeathHintStore.save(history);
+    @SubscribeEvent public static void logout(ClientPlayerNetworkEvent.LoggingOut event) {
+        if (lifecycle != null) lifecycle.disconnect();
+        layoutScreen = null;
+        positions = List.of();
+    }
+    @SubscribeEvent public static void clone(ClientPlayerNetworkEvent.Clone event) {
+        if (lifecycle != null) lifecycle.respawn();
+    }
+    private static boolean normalPause(Screen screen) {
+        return screen instanceof PauseScreen && screen.children().stream().filter(c -> c instanceof Button).count() > 1;
+    }
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void init(ScreenEvent.Init.Post event) {
+        if (normalPause(event.getScreen())) rememberPauseLayout(event.getScreen());
+    }
+    @SubscribeEvent public static void beforeRender(ScreenEvent.Render.Pre event) {
+        if (normalPause(event.getScreen())) {
+            var selected = lifecycle().pauseTip(DeathHints.INSTANCE.all(), id -> ModList.get().isLoaded(id), RANDOM);
+            if (selected != null) layoutPause(event.getScreen(), selected.hint());
         }
+    }
+    @SubscribeEvent public static void render(ScreenEvent.Render.Post event) {
+        var screen = event.getScreen();
+        boolean pause = normalPause(screen);
+        if (!pause && !(screen instanceof DeathScreen)) return;
+        var before = lifecycle().state();
+        var selected = pause
+            ? lifecycle().pauseTip(DeathHints.INSTANCE.all(), id -> ModList.get().isLoaded(id), RANDOM)
+            : lifecycle().deathTip(DeathHints.INSTANCE.all(), id -> ModList.get().isLoaded(id), RANDOM, Util.getMillis());
+        if (selected != null && renderHint(event.getGuiGraphics(), screen, selected.hint())) lifecycle().displayed(selected, pause);
+        if (!before.equals(lifecycle().state())) DeathHintStore.save(lifecycle().state());
     }
 
     static Component text(DeathHint hint) {
@@ -50,8 +77,30 @@ public final class DeathHintClient {
             .replace("{use}", mc.options.keyUse.getTranslatedKeyMessage().getString())
             .replace("{threads}", ThreadClient.OPEN.getTranslatedKeyMessage().getString()));
     }
+    static void rememberPauseLayout(Screen screen) {
+        layoutScreen = screen;
+        positions = screen.children().stream().filter(c -> c instanceof AbstractWidget)
+            .map(c -> (AbstractWidget) c).map(w -> new WidgetPosition(w, w.getY())).toList();
+    }
+    static void layoutPause(Screen screen, DeathHint hint) {
+        if (layoutScreen != screen) rememberPauseLayout(screen);
+        var controls = positions.stream().filter(p -> p.widget() instanceof Button && p.y() >= 28).toList();
+        if (controls.isEmpty()) return;
+        int first = controls.stream().mapToInt(WidgetPosition::y).min().orElse(36);
+        int bottom = controls.stream().mapToInt(p -> p.y() + p.widget().getHeight()).max().orElse(36);
+        int lines = Minecraft.getInstance().font.split(text(hint), DeathHintLayout.textWidth(screen.width)).size();
+        var layout = PauseHintLayout.calculate(screen.height, first, bottom, lines, Minecraft.getInstance().font.lineHeight);
+        for (var p : positions) {
+            int y = p.y();
+            if (layout.fits()) {
+                if (p.widget() instanceof StringWidget && layout.titleY() >= 0) y = layout.titleY();
+                else if (p.widget() instanceof Button && p.y() >= 28) y -= layout.shift();
+            }
+            p.widget().setY(y);
+        }
+    }
 
-    /** Also used by the isolated visual fixture; layout measures actual native widgets. */
+    /** Layout measures native widgets and is shared by the isolated visual fixtures. */
     static boolean renderHint(GuiGraphics graphics, Screen screen, DeathHint hint) {
         var font = Minecraft.getInstance().font;
         var lines = font.split(text(hint), DeathHintLayout.textWidth(screen.width));

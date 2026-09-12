@@ -20,27 +20,27 @@ final class DeathHintsTest {
     private DeathHint hint(String id, String pool, Set<String> context, Set<String> mods) {
         return new DeathHint(id, "test.concept", pool, "Prepare for your next journey.", context, mods, List.of("test authority"));
     }
-    @Test void curatedPoolHasNinetySixDistinctBoundedSourcedTips() throws Exception {
+    @Test void curatedPoolHasOneHundredNinetyTwoDistinctBoundedSourcedTips() throws Exception {
         var all = catalogue();
-        assertEquals(96, all.size());
-        assertEquals(40, all.stream().filter(h -> h.pool().equals("survival")).count());
-        assertEquals(44, all.stream().filter(h -> h.pool().equals("discovery")).count());
-        assertEquals(12, all.stream().filter(h -> h.pool().equals("teaser")).count());
-        assertEquals(96, all.stream().map(DeathHint::text).distinct().count());
+        assertEquals(192, all.size());
+        assertEquals(80, all.stream().filter(h -> h.pool().equals("survival")).count());
+        assertEquals(88, all.stream().filter(h -> h.pool().equals("discovery")).count());
+        assertEquals(24, all.stream().filter(h -> h.pool().equals("teaser")).count());
+        assertEquals(192, all.stream().map(DeathHint::text).distinct().count());
         for (String category : DeathHintContext.CATEGORIES) if (!category.equals("general"))
             assertTrue(all.stream().anyMatch(h -> h.contexts().contains(category)), category);
     }
-    @Test void contextualAdviceGetsThreeOpportunitiesThenDiscovery() {
+    @Test void contextualAdvicePrefersUnseenThenFallsBackAcrossCategories() {
         var related = hint("related", "survival", Set.of("fall"), Set.of());
         var general = hint("general", "discovery", Set.of(), Set.of());
         var all = List.of(related, general);
         var state = DeathHintRotation.State.empty();
-        for (int i = 0; i < 3; i++) {
-            var selected = DeathHintRotation.select(all, "fall", state, m -> true, new Random(1));
-            assertEquals(related, selected.hint());
-            state = DeathHintRotation.displayed(state, selected);
-        }
-        assertEquals(general, DeathHintRotation.select(all, "fall", state, m -> true, new Random(1)).hint());
+        var first = DeathHintRotation.select(all, "fall", state, m -> true, new Random(1));
+        assertEquals(related, first.hint());
+        state = DeathHintRotation.displayed(state, first, false);
+        var second = DeathHintRotation.select(all, "fall", state, m -> true, new Random(1));
+        assertEquals(general, second.hint());
+        assertEquals(0, second.cycle());
     }
     @Test void unavailableModsNeverLeakAndAnEmptyPoolHasSafeAdvice() {
         var unavailable = hint("unavailable", "teaser", Set.of("fall"), Set.of("missing_mod"));
@@ -48,17 +48,23 @@ final class DeathHintsTest {
         assertEquals(DeathHints.FALLBACK, selection.hint());
         assertFalse(selection.contextualOpportunity());
     }
-    @Test void generalRotationAvoidsLastTwelveAndPersistsHistory() throws Exception {
+    @Test void everyEligibleTipIsShownBeforeAnyRepeatAcrossBothSurfaces() throws Exception {
         var state = DeathHintRotation.State.empty();
-        for (int i = 0; i < 200; i++) {
-            var chosen = DeathHintRotation.select(catalogue(), "general", state, m -> true, new Random(i));
-            // Teasers have a smaller independent eligible pool; regular tips always have fresh alternatives.
-            if (!chosen.hint().pool().equals("teaser")) assertFalse(state.recent().contains(chosen.hint().id()));
-            state = DeathHintRotation.displayed(state, chosen);
-            assertTrue(state.recent().size() <= 12);
+        var all = catalogue();
+        var seen = new java.util.HashSet<String>();
+        for (int i = 0; i < 192 * 3; i++) {
+            boolean pause = i % 2 == 0;
+            var chosen = DeathHintRotation.select(all, pause ? "general" : "fall", state, m -> true, new Random(i));
+            if (chosen.cycle() > state.cycle()) {
+                assertEquals(192, seen.size());
+                seen.clear();
+            }
+            assertTrue(seen.add(chosen.hint().id()), "repeat before exhaustion: " + chosen.hint().id());
+            state = DeathHintRotation.displayed(state, chosen, pause);
             state = DeathHintStore.decode(DeathHintStore.encode(state));
         }
-        assertEquals(0, state.contextualDeaths());
+        assertEquals(192, seen.size());
+        assertEquals(2, state.cycle());
     }
     @Test void generalTeaserWeightIsApproximatelyOneInEight() throws Exception {
         int teasers = 0;
@@ -68,11 +74,12 @@ final class DeathHintsTest {
                 DeathHintRotation.State.empty(), m -> true, random).hint().pool().equals("teaser")) teasers++;
         assertTrue(teasers > 900 && teasers < 1100, "teasers=" + teasers);
     }
-    @Test void exhaustedContextualPoolRepeatsOldestEligibleTip() {
+    @Test void reservedLastUnseenTipDoesNotResetTheCycle() {
         var first = hint("first", "survival", Set.of("fire"), Set.of());
         var second = hint("second", "survival", Set.of("fire"), Set.of());
-        var state = new DeathHintRotation.State(List.of("first", "second"), 0);
-        assertEquals(first, DeathHintRotation.select(List.of(first, second), "fire", state, m -> true, new Random()).hint());
+        var state = new DeathHintRotation.State(Set.of("first"), 0, 0, "", "first", "");
+        assertNull(DeathHintRotation.select(List.of(first, second), "fire", state, m -> true, new Random(), Set.of("second")));
+        assertEquals(second, DeathHintRotation.select(List.of(first, second), "fire", state, m -> true, new Random()).hint());
     }
     @Test void catalogueRejectsDuplicatesInvalidContextsAndUnknownBindingTokens() throws Exception {
         var json = JsonParser.parseString(Files.readString(Path.of(
@@ -126,9 +133,9 @@ final class DeathHintsTest {
         var session = new DeathHintSession();
         session.receive("fall", 100);
         assertEquals("fall", session.freeze(150));
-        session.select(new DeathHintRotation.Selection(DeathHints.FALLBACK, true));
+        session.select(new DeathHintRotation.Selection(DeathHints.FALLBACK, true, 0));
         session.receive("fire", 200);
-        session.select(new DeathHintRotation.Selection(hint("other", "discovery", Set.of(), Set.of()), false));
+        session.select(new DeathHintRotation.Selection(hint("other", "discovery", Set.of(), Set.of()), false, 0));
         assertEquals(DeathHints.FALLBACK, session.selection().hint());
         assertTrue(session.record());
         assertFalse(session.record());

@@ -30,7 +30,7 @@ public final class LearningVisualReview {
 
     @SubscribeEvent
     public static void tick(TickEvent.ClientTickEvent event) throws Exception {
-        if (event.phase != TickEvent.Phase.END) return;
+        if (Boolean.getBoolean("bc.learningVisual.tipsOnly") || event.phase != TickEvent.Phase.END) return;
         var mc = Minecraft.getInstance();
         if (mc.getOverlay() != null || mc.screen == null) return;
         if (frame < 0) {
