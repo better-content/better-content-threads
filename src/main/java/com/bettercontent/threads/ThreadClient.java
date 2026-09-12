@@ -67,11 +67,7 @@ public final class ThreadClient {
         var minecraft = Minecraft.getInstance();
         if (arrivalPending && currentBriefs != null && minecraft.player != null && minecraft.level != null && minecraft.screen == null) {
             arrivalPending = false;
-            if (currentBriefs.keepReading()) {
-                minecraft.setScreen(new LoadingBriefScreen(currentBriefs, ThreadClient::dismissBrief));
-            } else {
-                dismissBrief();
-            }
+            minecraft.setScreen(new LoadingBriefScreen(currentBriefs, ThreadClient::dismissBrief));
             return;
         }
         if (OPEN.consumeClick()) ThreadNetwork.request("open", "");
@@ -146,15 +142,10 @@ public final class ThreadClient {
             false, nativeControlRows(event.getScreen()));
         event.addListener(Button.builder(Component.translatable("screen.better_content_threads.loading_previous"),
                 button -> currentBriefs.move(-1))
-            .bounds(event.getScreen().width / 2 - 146, layout.controlsY(), 88, 20).build());
-        event.addListener(Button.builder(keepReadingLabel(currentBriefs), button -> {
-                currentBriefs.toggleKeepReading();
-                button.setMessage(keepReadingLabel(currentBriefs));
-            })
-            .bounds(event.getScreen().width / 2 - 50, layout.controlsY(), 100, 20).build());
+            .bounds(event.getScreen().width / 2 - 92, layout.controlsY(), 88, 20).build());
         event.addListener(Button.builder(Component.translatable("screen.better_content_threads.loading_next"),
                 button -> currentBriefs.move(1))
-            .bounds(event.getScreen().width / 2 + 58, layout.controlsY(), 88, 20).build());
+            .bounds(event.getScreen().width / 2 + 4, layout.controlsY(), 88, 20).build());
     }
 
     @SubscribeEvent
@@ -388,12 +379,6 @@ public final class ThreadClient {
             0, 0, 512, 256, 512, 256);
         lessonText(session, layout.textWidth() - 8).render(graphics, layout.textX(), layout.textY(),
             layout.textWidth(), layout.panelHeight() - 24, scroll);
-    }
-
-    static Component keepReadingLabel(LoadingBriefSession session) {
-        return Component.translatable(session.keepReading()
-            ? "screen.better_content_threads.keep_reading_selected"
-            : "screen.better_content_threads.keep_reading");
     }
 
     static void renderSealedPlate(GuiGraphics graphics,int x,int y,int width,int height,int suitColor,int aspectColor,int seed,boolean selected) {

@@ -8,7 +8,6 @@ import org.lwjgl.glfw.GLFW;
 final class LearningLevelLoadingScreen extends net.minecraft.client.gui.screens.LevelLoadingScreen {
     private final StoringChunkProgressListener progressListener;
     private final LoadingBriefSession session;
-    private Button keepReading;
     private long lastProgressNarration;
 
     LearningLevelLoadingScreen(StoringChunkProgressListener progressListener, LoadingBriefSession session) {
@@ -22,15 +21,10 @@ final class LearningLevelLoadingScreen extends net.minecraft.client.gui.screens.
         var layout = LoadingBriefBackdropLayout.calculate(width, height, true);
         addRenderableWidget(Button.builder(net.minecraft.network.chat.Component.translatable("screen.better_content_threads.loading_previous"),
                 button -> session.move(-1))
-            .bounds(width / 2 - 146, layout.controlsY(), 88, 20).build());
-        keepReading = addRenderableWidget(Button.builder(ThreadClient.keepReadingLabel(session), button -> {
-                session.toggleKeepReading();
-                button.setMessage(ThreadClient.keepReadingLabel(session));
-            })
-            .bounds(width / 2 - 50, layout.controlsY(), 100, 20).build());
+            .bounds(width / 2 - 92, layout.controlsY(), 88, 20).build());
         addRenderableWidget(Button.builder(net.minecraft.network.chat.Component.translatable("screen.better_content_threads.loading_next"),
                 button -> session.move(1))
-            .bounds(width / 2 + 58, layout.controlsY(), 88, 20).build());
+            .bounds(width / 2 + 4, layout.controlsY(), 88, 20).build());
     }
 
     @Override
