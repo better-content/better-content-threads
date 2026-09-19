@@ -2,7 +2,6 @@ package com.bettercontent.threads;
 
 import com.bettercontent.threads.BetterContentThreads;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.*;
@@ -15,7 +14,7 @@ import java.util.function.Supplier;
 public final class ThreadNetwork {
     private static final String VERSION="11";
     private static final SimpleChannel CHANNEL=NetworkRegistry.newSimpleChannel(new ResourceLocation(BetterContentThreads.MOD_ID,"threads"),()->VERSION,VERSION::equals,VERSION::equals);
-    private static final Map<UUID,Long>lastIssue=new HashMap<>();private static int messageId;
+    private static int messageId;
     private ThreadNetwork(){}
     public enum NoticeKind{DISCOVERY,REMINDER}
     public static void register(){CHANNEL.messageBuilder(HintContext.class,messageId++,NetworkDirection.PLAY_TO_CLIENT).encoder(HintContext::encode).decoder(HintContext::decode).consumerMainThread(HintContext::handle).add();CHANNEL.messageBuilder(Sync.class,messageId++,NetworkDirection.PLAY_TO_CLIENT).encoder(Sync::encode).decoder(Sync::decode).consumerMainThread(Sync::handle).add();CHANNEL.messageBuilder(Action.class,messageId++,NetworkDirection.PLAY_TO_SERVER).encoder(Action::encode).decoder(Action::decode).consumerMainThread(Action::handle).add();CHANNEL.messageBuilder(DeathContext.class,messageId++,NetworkDirection.PLAY_TO_CLIENT).encoder(DeathContext::encode).decoder(DeathContext::decode).consumerMainThread(DeathContext::handle).add();}
@@ -70,7 +69,8 @@ public final class ThreadNetwork {
     public record Action(String action,String thread){
         void encode(FriendlyByteBuf b){b.writeUtf(action,16);b.writeUtf(thread,48);}static Action decode(FriendlyByteBuf b){return new Action(b.readUtf(16),b.readUtf(48));}
         static void handle(Action m,Supplier<NetworkEvent.Context>c){var player=c.get().getSender();c.get().enqueueWork(()->handle(player,m));c.get().setPacketHandled(true);}
-        private static void handle(ServerPlayer player,Action action){if(player==null)return;if(action.action.equals("open")){sync(player,true,List.of());return;}if(!ThreadDefinitions.INSTANCE.contains(action.thread))return;var state=ThreadPlayerState.get(player);if(!state.known.contains(action.thread))return;if(action.action.equals("read")){if(state.markRead(action.thread)){state.save(player);sync(player,false,List.of());}return;}if(!action.action.equals("issue")||state.unread.contains(action.thread))return;long now=System.currentTimeMillis(),previous=lastIssue.getOrDefault(player.getUUID(),0L);if(now-previous<1000)return;lastIssue.put(player.getUUID(),now);var stack=ThreadFacsimileItem.create(action.thread,player);if(!player.getInventory().add(stack)){player.displayClientMessage(Component.literal("Make room in your inventory for the card copy."),true);return;}player.containerMenu.broadcastChanges();}
+        private static void handle(ServerPlayer player,Action action){if(player==null||!isReaderAction(action.action))return;if(action.action.equals("open")){sync(player,true,List.of());return;}if(!ThreadDefinitions.INSTANCE.contains(action.thread))return;var state=ThreadPlayerState.get(player);if(!state.known.contains(action.thread))return;if(state.markRead(action.thread)){state.save(player);sync(player,false,List.of());}}
+        static boolean isReaderAction(String action) { return action.equals("open") || action.equals("read"); }
     }
     private static void writeCards(FriendlyByteBuf b,List<Card>cards){if(cards.size()>52)throw new IllegalArgumentException("too many thread cards");b.writeVarInt(cards.size());cards.forEach(c->c.encode(b));}
     private static List<Card>readCards(FriendlyByteBuf b){int n=b.readVarInt();if(n<0||n>52)throw new IllegalArgumentException("invalid thread packet");var out=new ArrayList<Card>(n);var ids=new HashSet<String>();for(int i=0;i<n;i++){var card=Card.decode(b);if(!ids.add(card.id()))throw new IllegalArgumentException("duplicate thread card");out.add(card);}return List.copyOf(out);}

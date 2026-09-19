@@ -52,10 +52,9 @@ public final class HintContextEvents {
             var body=com.bettercontent.downedplayerrevival.api.InjuryApi.snapshot(player);
             if(body.atDoor())return body.healingLockTicks()>0?"door_locked":"door_healable";
             if(body.activeMaims().isEmpty())return "general";
-            for(var maim:body.activeMaims())for(int slot=0;slot<player.getInventory().getContainerSize();slot++){
-                var stack=player.getInventory().getItem(slot);
-                if(!stack.isEmpty()&&stack.is(com.bettercontent.downedplayerrevival.InjuryItems.treatmentTag(maim.type())))return "injury_cure";
-            }
+            // Treatment is now server-owned care rather than a consumable item. The
+            // authoritative active-treatment state is the only cure cue.
+            if(com.bettercontent.downedplayerrevival.RevivalManager.isTreating(player, player))return "injury_cure";
             if(body.traumaCount()>0&&body.activeMaims().stream().anyMatch(m->m.region()!=com.bettercontent.downedplayerrevival.state.Region.HEAD)
                 &&body.functionalMultiplier()>body.tuning().restingFunctionalMultiplier())return "injury_trauma";
             return "injury_uncured";

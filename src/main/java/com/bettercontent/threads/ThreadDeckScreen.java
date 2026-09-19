@@ -19,7 +19,7 @@ public class ThreadDeckScreen extends Screen {
     private boolean detail;
     private int scrollRow,textScroll,textMaximumScroll;
     private long lastFrame;
-    private Button doorwayButton,facsimileButton,continueButton;
+    private Button doorwayButton,continueButton;
 
     ThreadDeckScreen(List<ThreadNetwork.Card> cards){this(cards,"");}
     ThreadDeckScreen(List<ThreadNetwork.Card> cards,String focusId){
@@ -36,9 +36,8 @@ public class ThreadDeckScreen extends Screen {
     @Override protected void init(){
         addRenderableWidget(Button.builder(Component.translatable("screen.better_content_threads.lessons"),b->minecraft.setScreen(new LearningLibraryScreen(cards))).bounds(8,2,68,20).build());
         doorwayButton=addRenderableWidget(Button.builder(Component.literal("Look closer"),b->{if(current()!=null)ThreadDoorways.open(current());}).bounds(0,0,100,20).build());
-        facsimileButton=addRenderableWidget(Button.builder(Component.literal("Get card copy"),b->{if(current()!=null)ThreadNetwork.request("issue",current().id());}).bounds(0,0,100,20).build());
         continueButton=addRenderableWidget(Button.builder(Component.literal("Continue"),b->advanceReader()).bounds(width-92,height-24,80,20).build());
-        doorwayButton.visible=facsimileButton.visible=continueButton.visible=false;
+        doorwayButton.visible=continueButton.visible=false;
     }
     @Override public boolean isPauseScreen(){return true;}
     private boolean unread(ThreadNetwork.Card c){return c.unread()&&!readHere.contains(c.id());}
@@ -62,7 +61,7 @@ public class ThreadDeckScreen extends Screen {
         if(detail&&reveal.advance(delta))finishDevelopment();
         renderBackground(g);g.fill(0,0,width,height,0xEF101412);
         g.drawCenteredString(font,"THREADS",width/2,10,0xFFF0E5CE);
-        doorwayButton.visible=facsimileButton.visible=continueButton.visible=false;
+        doorwayButton.visible=continueButton.visible=false;
         renderTabs(g);
         if(detail)renderDetail(g);else renderJournal(g);
         super.render(g,mx,my,partial);
@@ -108,9 +107,8 @@ public class ThreadDeckScreen extends Screen {
         text.gap();text.add("WHAT YOU CAN DO",0xFFC6A15B);text.add(c.action(),0xFFF0E5CE);
         text.gap();text.add("Discovered in "+c.generationCount()+" generation"+(c.generationCount()==1?"":"s")+(c.discovered()?" · This generation":""),0xFFBAB8AB);
         doorwayButton.visible=ThreadDoorways.available(c);doorwayButton.setMessage(ThreadDoorways.label(c));
-        int footer=doorwayButton.visible?48:24;
-        doorwayButton.setX(l.detailsX());doorwayButton.setY(l.cardY()+l.cardHeight()-44);doorwayButton.setWidth(l.panelWidth());
-        facsimileButton.visible=true;facsimileButton.setX(l.detailsX());facsimileButton.setY(l.cardY()+l.cardHeight()-20);facsimileButton.setWidth(l.panelWidth());
+        int footer=doorwayButton.visible?24:0;
+        doorwayButton.setX(l.detailsX());doorwayButton.setY(l.cardY()+l.cardHeight()-20);doorwayButton.setWidth(l.panelWidth());
         int viewport=Math.max(12,l.cardHeight()-footer);textMaximumScroll=text.maximumScroll(viewport);textScroll=Math.max(0,Math.min(textScroll,textMaximumScroll));
         text.render(g,l.detailsX(),l.cardY(),l.panelWidth(),viewport,textScroll);
         continueButton.visible=true;continueButton.setMessage(Component.literal(nextUnread()==null?"Journal":"Continue"));
