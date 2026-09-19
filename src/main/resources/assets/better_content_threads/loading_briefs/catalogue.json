@@ -8,7 +8,7 @@
       "category": "Discovery",
       "headline": "Using Threads",
       "body": "Threads records the rules you discover through play. Open it with the shown key, M by default. Select Lessons to read the survival instructions available from the start.",
-      "action": "Open Lessons for survival instructions.",
+      "action": "Press the Threads key, then choose Lessons to practice one mechanic.",
       "art": "better_content_threads:textures/gui/loading_briefs/threads.png"
     },
     {
