@@ -7,8 +7,8 @@
       "owner": "better-content-threads",
       "category": "Discovery",
       "headline": "Using Threads",
-      "body": "Threads records the rules you discover through play. Open it with the shown key, M by default. Select Lessons to read the survival instructions available from the start.",
-      "action": "Press the Threads key, then choose Lessons to practice one mechanic.",
+      "body": "Keep a spare food item on your hotbar before leaving shelter. Eat before hunger reaches zero so a long trip does not leave you unable to sprint.",
+      "action": "Carry food and eat before hunger is empty.",
       "art": "better_content_threads:textures/gui/loading_briefs/threads.png"
     },
     {
