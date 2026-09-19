@@ -14,7 +14,7 @@ import java.util.Set;
 final class LearningLibraryScreen extends Screen {
     private static final int LIST_TOP = 48;
     private static final int ROW_HEIGHT = 34;
-    private int columns() { return width < 500 ? 1 : 2; }
+    private int columns() { return ThreadLibraryLayout.calculate(width, height, briefs.size(), scrollRow).columns(); }
 
     private final List<ThreadNetwork.Card> cards;
     private final List<LoadingBrief> briefs;
@@ -97,6 +97,10 @@ final class LearningLibraryScreen extends Screen {
         int startX = (width - cellWidth * columns()) / 2;
         int visibleRows = visibleRows();
         graphics.drawCenteredString(font, "↑ ↓ Select · Enter Read · Scroll for more", width / 2, height - 10, 0xFFBAB8AB);
+        if (briefs.isEmpty()) {
+            graphics.drawCenteredString(font, "No lessons available", width / 2, Math.max(LIST_TOP, height / 2), 0xFFBAB8AB);
+            return;
+        }
         scrollRow = Math.max(0, Math.min(scrollRow, maximumScroll(visibleRows)));
         for (int index = 0; index < briefs.size(); index++) {
             int row = index / columns() - scrollRow;
