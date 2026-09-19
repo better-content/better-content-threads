@@ -332,7 +332,7 @@ public final class ThreadClient {
         var brief = session.current();
         var title = font.split(Component.literal(brief.headline()), layout.textWidth());
         var body = font.split(Component.literal(lessonBody(brief)), layout.textWidth());
-        var action = font.split(Component.literal("TRY THIS: " + brief.action()), layout.textWidth());
+        var action = font.split(Component.literal("TRY THIS: " + lessonAction(brief)), layout.textWidth());
         int needed = 34 + (title.size() + body.size() + action.size()) * 10;
         int bottom = layout.captionY() + layout.captionHeight();
         int top = Math.max(layout.barY() > 0 ? layout.barY() + 28 : 26, bottom - needed);
@@ -349,10 +349,17 @@ public final class ThreadClient {
     }
 
     static String lessonBody(LoadingBrief brief) {
-        if (!brief.id().equals("movement")) return brief.body();
-        return brief.body().replace("uses Shift", "uses " + keyLabel("key.parcool.FastRun", "Shift"))
+        if (brief.id().equals("movement")) return brief.body().replace("uses Shift", "uses " + keyLabel("key.parcool.FastRun", "Shift"))
             .replace("uses Mouse 5", "uses " + keyLabel("key.parcool.Vault", "Mouse 5"))
             .replace("uses R;", "uses " + keyLabel("key.parcool.Dodge", "R") + ";");
+        if (brief.id().equals("plonk")) return brief.body().replace("the shown key", keyLabel("key.plonk.place", "Minus"));
+        return brief.body();
+    }
+
+    static String lessonAction(LoadingBrief brief) {
+        return brief.id().equals("plonk")
+            ? brief.action().replace("the shown key", keyLabel("key.plonk.place", "Minus"))
+            : brief.action();
     }
 
     private static String keyLabel(String name, String fallback) {
@@ -370,7 +377,7 @@ public final class ThreadClient {
         text.gap();
         text.add(lessonBody(brief), 0xFFF0E5CE);
         text.gap();
-        text.add("TRY THIS: " + brief.action(), 0xFFE7CA8B);
+        text.add("TRY THIS: " + lessonAction(brief), 0xFFE7CA8B);
         return text;
     }
 

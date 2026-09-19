@@ -10,13 +10,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.function.Predicate;
 import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 
 final class LoadingBriefs implements ResourceManagerReloadListener {
     private static final Logger LOGGER = LogUtils.getLogger();
     static final ResourceLocation MANIFEST = new ResourceLocation(BetterContentThreads.MOD_ID, "loading_briefs/catalogue.json");
-    static final LoadingBrief FALLBACK = new LoadingBrief("threads", "learning.threads", "better-content-threads", "",
+    static final LoadingBrief FALLBACK = new LoadingBrief("threads", "learning.threads", "better-content-threads", "", "",
         "Orientation", "Using Threads",
         "Threads records the rules you discover through play. Press the shown key, M by default, to read them. Select Lessons for survival instructions available from the start.",
         "Open Lessons for survival instructions.",
@@ -28,6 +29,10 @@ final class LoadingBriefs implements ResourceManagerReloadListener {
 
     List<LoadingBrief> all() {
         return all;
+    }
+
+    static List<LoadingBrief> available(List<LoadingBrief> briefs, Predicate<String> loaded) {
+        return briefs.stream().filter(brief -> brief.requiresMod().isEmpty() || loaded.test(brief.requiresMod())).toList();
     }
 
     @Override
@@ -45,8 +50,8 @@ final class LoadingBriefs implements ResourceManagerReloadListener {
                 }
                 parsed.add(brief);
             }
-            if (parsed.size() != 17 || !parsed.get(0).id().equals("threads")) throw new IllegalArgumentException("loading briefs require the Threads introduction plus sixteen survival lessons");
-            all = List.copyOf(parsed);
+            if (parsed.size() < 17 || !parsed.get(0).id().equals("threads")) throw new IllegalArgumentException("loading briefs require the Threads introduction plus sixteen survival lessons");
+            all = available(parsed, mod -> net.minecraftforge.fml.ModList.get().isLoaded(mod));
         } catch (Exception failure) {
             LOGGER.error("Could not load learning briefs; using the built-in Threads introduction", failure);
             all = List.of(FALLBACK);

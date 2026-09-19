@@ -8,6 +8,7 @@ record LoadingBrief(
         String conceptId,
         String owner,
         String relatedThread,
+        String requiresMod,
         String category,
         String headline,
         String body,
@@ -21,6 +22,10 @@ record LoadingBrief(
         relatedThread = relatedThread == null ? "" : relatedThread;
         if (!relatedThread.isEmpty() && !relatedThread.matches("[a-z0-9_]{3,48}")) {
             throw new IllegalArgumentException("invalid related thread");
+        }
+        requiresMod = requiresMod == null ? "" : requiresMod;
+        if (!requiresMod.isEmpty() && !requiresMod.matches("[a-z][a-z0-9_]{1,63}")) {
+            throw new IllegalArgumentException("invalid required mod");
         }
         if (!category.matches("[A-Za-z ]{3,24}")) throw new IllegalArgumentException("invalid loading brief category");
         if (headline.isBlank() || headline.length() > 54) throw new IllegalArgumentException("invalid loading brief headline");
@@ -39,6 +44,7 @@ record LoadingBrief(
             json.get("concept_id").getAsString(),
             json.get("owner").getAsString(),
             json.has("related_thread") ? json.get("related_thread").getAsString() : "",
+            json.has("requires_mod") ? json.get("requires_mod").getAsString() : "",
             json.get("category").getAsString(),
             json.get("headline").getAsString(),
             json.get("body").getAsString(),

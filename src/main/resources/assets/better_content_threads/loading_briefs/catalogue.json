@@ -162,6 +162,17 @@
       "art": "better_content_threads:textures/gui/loading_briefs/physics.png"
     },
     {
+      "id": "plonk",
+      "concept_id": "controls.place_item_displays",
+      "owner": "plonk",
+      "requires_mod": "plonk",
+      "category": "Building",
+      "headline": "Placing Item Displays",
+      "body": "Look at a block face and press the shown key to place a held item as a display. Sneak and press the shown key with empty hands to rotate the whole display. Sneak and use an individual item to rotate it.",
+      "action": "Place a display with the shown key.",
+      "art": "better_content_threads:textures/gui/loading_briefs/physics.png"
+    },
+    {
       "id": "campaigns",
       "concept_id": "fragility.army_walks_toward_you",
       "owner": "better-content-pillager-campaigns",
