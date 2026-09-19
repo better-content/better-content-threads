@@ -244,13 +244,14 @@ public final class ThreadClient {
         var card = cards.stream().filter(c->c.known()&&c.unread()).findFirst().orElseThrow();
         String binding = readerBinding().getString();
         int keyWidth = Math.min(54, Math.max(14, Minecraft.getInstance().font.width(binding) + 8));
-        int totalWidth = 18 + 5 + keyWidth + 5;
-        int x = screenWidth - totalWidth - 6;
+        int labelWidth = Minecraft.getInstance().font.width("Threads");
+        var layout = UnreadBadgeLayout.calculate(screenWidth, keyWidth, labelWidth);
+        int x = layout.plateX();
         int y = Math.max(36, screenHeight / 2 - 14);
         renderSealedPlate(graphics, x, y, 18, 27, ThreadTopic.parse(card.topic()).color(),card.aspect().isEmpty()?ARCHIVE_GOLD:ThreadAspect.parse(card.aspect()).color(), card.id().hashCode(), false);
         graphics.drawString(Minecraft.getInstance().font, Long.toString(count), x + 13, y + 19, 0xFFF0E5CE, true);
-        drawKeycap(graphics, binding, x + 23, y + 3, keyWidth);
-        graphics.drawString(Minecraft.getInstance().font, "Threads", x + 23, y + 18, 0xFFE0D4BB, true);
+        drawKeycap(graphics, binding, layout.contentX(), y + 3, layout.contentWidth());
+        if (layout.showLabel()) graphics.drawString(Minecraft.getInstance().font, "Threads", layout.contentX(), y + 18, 0xFFE0D4BB, true);
     }
 
     static void drawKeycap(GuiGraphics graphics,String binding,int x,int y,int width){
