@@ -146,7 +146,11 @@ public class ThreadDeckScreen extends Screen {
     private String fit(String text,int max){max=Math.max(1,max);if(font.width(text)<=max)return text;while(text.length()>1&&font.width(text+"…")>max)text=text.substring(0,text.length()-1);return text+"…";}
     private static String capital(String s){return s.isEmpty()?s:Character.toUpperCase(s.charAt(0))+s.substring(1);}
     static DetailLayout detailLayout(int screenWidth, int screenHeight) {
-        int availableWidth = Math.max(1, screenWidth - DETAIL_MARGIN * 2);
+        // Reserve the four pixel panel border on both sides as well as the
+        // content margin; the previous calculation placed that border outside
+        // the viewport on compact screens.
+        int outerMargin = DETAIL_MARGIN + 4;
+        int availableWidth = Math.max(1, screenWidth - outerMargin * 2);
         int availableHeight = Math.max(1, screenHeight - 86 - 34);
         int minimumPanelWidth = Math.min(DETAIL_MIN_PANEL_WIDTH, Math.max(80, availableWidth / 2));
         int maximumCardWidth = Math.max(1, availableWidth - DETAIL_GAP - minimumPanelWidth);
