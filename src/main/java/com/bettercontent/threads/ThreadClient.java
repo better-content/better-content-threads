@@ -71,7 +71,9 @@ public final class ThreadClient {
         var minecraft = Minecraft.getInstance();
         if (arrivalPending && currentBriefs != null && minecraft.player != null && minecraft.level != null && minecraft.screen == null) {
             arrivalPending = false;
-            minecraft.setScreen(new LoadingBriefScreen(currentBriefs, ThreadClient::dismissBrief));
+            // The lesson belongs only to loading.  Once the world can accept input, do
+            // not place an opaque screen over it; commit only the exposure already earned.
+            dismissBrief();
             return;
         }
         if (OPEN.consumeClick()) ThreadNetwork.request("open", "");
