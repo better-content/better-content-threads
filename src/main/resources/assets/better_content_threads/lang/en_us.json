@@ -21,5 +21,6 @@
   "key.categories.better_content_threads": "Better Content",
   "message.better_content_threads.thread_discovered": "Discovered: %s",
   "message.better_content_threads.thread_remembered": "Remembered: %s",
-  "screen.better_content_threads.journal_status": "%1$s this generation · %2$s lineage discoveries · %3$s unread"
+  "screen.better_content_threads.journal_status": "%1$s this generation · %2$s lineage discoveries · %3$s unread",
+  "screen.better_content_threads.reader_controls": "%s opens Threads · ↑ ↓ Select · Enter Read · Scroll"
 }

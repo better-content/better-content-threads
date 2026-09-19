@@ -9,7 +9,7 @@ import java.util.*;
 
 /** Discovered-first journal. The reader advances only through explicit input. */
 public class ThreadDeckScreen extends Screen {
-    private static final int DETAIL_MARGIN=12,DETAIL_GAP=18,DETAIL_MIN_PANEL_WIDTH=96,DETAIL_MAX_PANEL_WIDTH=230;
+    private static final int DETAIL_MARGIN=12,DETAIL_GAP=18,DETAIL_MIN_PANEL_WIDTH=128,DETAIL_MAX_PANEL_WIDTH=230;
     private static final int TOP=82,ROW_HEIGHT=34;
     private final List<ThreadNetwork.Card> cards=new ArrayList<>();
     private final Set<String> readHere=new HashSet<>();
@@ -88,11 +88,12 @@ public class ThreadDeckScreen extends Screen {
             g.drawString(font,fit(c.title(),cell-34),x+26,y+5,0xFFF0E5CE,false);
             g.drawString(font,capital(c.topic())+(unread(c)?" · Unread":" · "+c.generationCount()+" generation"+(c.generationCount()==1?"":"s")),x+26,y+18,0xFFBAB8AB,false);
         }
-        g.drawCenteredString(font,"↑ ↓ Select · Enter Read · Scroll for more",width/2,height-10,0xFFBAB8AB);
+        g.drawCenteredString(font,Component.translatable("screen.better_content_threads.reader_controls", ThreadClient.readerBinding()),width/2,height-10,0xFFBAB8AB);
     }
     private void renderDetail(GuiGraphics g){
         var c=current();if(c==null)return;var l=detailLayout(width,height);
         g.drawString(font,"‹ Journal",12,68,0xFFB6A98D,false);
+        g.fill(l.detailsX()-4,l.cardY()-4,l.detailsX()+l.panelWidth()+4,l.cardY()+l.cardHeight()+4,0xD0101412);
         g.fill(l.cardX()-2,l.cardY()-2,l.cardX()+l.cardWidth()+2,l.cardY()+l.cardHeight()+2,0xFF000000|ThreadTopic.parse(c.topic()).color());
         if(reveal.phase()==ThreadRevealState.Phase.COMPLETE)ThreadClient.renderArt(g,c.art(),l.cardX(),l.cardY(),l.cardWidth(),l.cardHeight());
         else{ThreadClient.renderSealedPlate(g,l.cardX(),l.cardY(),l.cardWidth(),l.cardHeight(),ThreadTopic.parse(c.topic()).color(),ThreadClient.ARCHIVE_GOLD,c.id().hashCode(),true);
@@ -146,8 +147,9 @@ public class ThreadDeckScreen extends Screen {
     private static String capital(String s){return s.isEmpty()?s:Character.toUpperCase(s.charAt(0))+s.substring(1);}
     static DetailLayout detailLayout(int screenWidth, int screenHeight) {
         int availableWidth = Math.max(1, screenWidth - DETAIL_MARGIN * 2);
-        int availableHeight = Math.max(1, screenHeight - 120);
-        int maximumCardWidth = Math.max(1, availableWidth - DETAIL_GAP - DETAIL_MIN_PANEL_WIDTH);
+        int availableHeight = Math.max(1, screenHeight - 86 - 34);
+        int minimumPanelWidth = Math.min(DETAIL_MIN_PANEL_WIDTH, Math.max(80, availableWidth / 2));
+        int maximumCardWidth = Math.max(1, availableWidth - DETAIL_GAP - minimumPanelWidth);
         int maximumCardHeightFromWidth = Math.max(1, maximumCardWidth * 3 / 2);
         int cardHeight = Math.max(1, Math.min(300, Math.min(availableHeight, maximumCardHeightFromWidth)));
         int cardWidth = Math.max(1, cardHeight * 2 / 3);

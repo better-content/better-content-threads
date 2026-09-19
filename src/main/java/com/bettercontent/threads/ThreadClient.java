@@ -55,6 +55,9 @@ public final class ThreadClient {
 
     private ThreadClient() {}
 
+    /** Uses the live KeyMapping so remaps are reflected in every reader prompt. */
+    static Component readerBinding() { return OPEN.getTranslatedKeyMessage(); }
+
     public static void receive(ThreadNetwork.Sync sync) {
         cards = sync.cards();
         NOTICES.addAll(sync.notices());
@@ -178,7 +181,7 @@ public final class ThreadClient {
         float scale = Math.max(NOTICE_MIN_TEXT_SCALE,Math.min(NOTICE_TEXT_SCALE, (screenWidth - 24.0f) / Math.max(1, textWidth)));
         drawOutlinedCentered(graphics, message, centerX, centerY + NOTICE_TEXT_OFFSET_Y, scale, alpha);
         Component hint = Component.translatable("message.better_content_threads.thread_reader_hint",
-                OPEN.getTranslatedKeyMessage());
+                readerBinding());
         int hintWidth = Minecraft.getInstance().font.width(hint);
         float hintScale = Math.min(NOTICE_HINT_SCALE, (screenWidth - 24.0f) / Math.max(1, hintWidth));
         drawOutlinedCentered(graphics, hint, centerX, centerY + NOTICE_HINT_OFFSET_Y, hintScale, alpha * 0.82f);
@@ -237,7 +240,7 @@ public final class ThreadClient {
         long count = cards.stream().filter(card->card.known()&&card.unread()).count();
         if (count == 0L) return;
         var card = cards.stream().filter(c->c.known()&&c.unread()).findFirst().orElseThrow();
-        String binding = OPEN.getTranslatedKeyMessage().getString();
+        String binding = readerBinding().getString();
         int keyWidth = Math.min(54, Math.max(14, Minecraft.getInstance().font.width(binding) + 8));
         int totalWidth = 18 + 5 + keyWidth + 5;
         int x = screenWidth - totalWidth - 6;

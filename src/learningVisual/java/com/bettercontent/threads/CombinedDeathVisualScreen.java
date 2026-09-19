@@ -19,7 +19,7 @@ final class CombinedDeathVisualScreen extends DeathScreen {
         ((com.bettercontent.threads.visual.DeathScreenVisualAccess)(Object)this).threads$score(Component.literal("Score: 17"));
         var regions=new ArrayList<BodyView.RegionView>();
         for(var region:Region.values())regions.add(new BodyView.RegionView(region,1,0,region.ordinal()%2,.1,2,1,3));
-        var view=new BodyView(UUID.fromString("00000000-0000-0000-0000-000000000001"),"Layout fixture",0,20,false,0,3,1200,.55,.8,4,regions,List.of(),0,1,List.of(0,0,0));
+        var view=new BodyView(UUID.fromString("00000000-0000-0000-0000-000000000001"),"Layout fixture",0,20,false,0,3,1200,.55,.8,4,regions,List.of(),0,1,List.of(Region.values()),false);
         ClientRevivalState.accept(new StateSyncPacket(view,2,0,false));
     }
 }
