@@ -19,7 +19,7 @@ The four discoveries consume committed `EnteredDoor`, `Healed`, `TraumaIncreased
 
 `DeathRecapOverlay` owns death-button placement. Threads reserves its measured tip area through that provider; the recap uses the remaining area. Compact layouts show all six regions and paired active/treated counts in the shared Cracked/Burnt/Opened order. If copy cannot fit while preserving the native recap and controls, it is omitted and not recorded as seen. Notices pause while Death's Door is urgent or Body is open, preserving their remaining reading lifetime.
 
-The 17 loading/Lessons definitions include separate Death's Door and treatment/trauma fundamentals. There are no bleed-out, give-up, hunger-powered rescue, or helper-stacking instructions. Loading exposure behavior and voluntary Lessons access remain independent of Thread discovery.
+The 18 loading/Lessons definitions include separate Death's Door and treatment/trauma fundamentals. There are no bleed-out, give-up, hunger-powered rescue, or helper-stacking instructions. Loading exposure behavior and voluntary Lessons access remain independent of Thread discovery.
 
 ## Local verification
 
