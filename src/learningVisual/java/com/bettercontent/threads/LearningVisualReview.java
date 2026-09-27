@@ -128,6 +128,8 @@ public final class LearningVisualReview {
             frames.add(new Frame("generation" + suffix, scale, () -> new LearningLevelLoadingScreen(
                 new net.minecraft.server.level.progress.StoringChunkProgressListener(0),
                 new LoadingBriefSession(LoadingBriefs.INSTANCE.all(), new LoadingBriefRotation.State(Set.of(), "")))));
+            frames.add(new Frame("terrain" + suffix, scale,
+                net.minecraft.client.gui.screens.ReceivingLevelScreen::new));
 
         }
     }

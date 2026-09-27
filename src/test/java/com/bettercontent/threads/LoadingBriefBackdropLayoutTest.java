@@ -2,23 +2,12 @@ package com.bettercontent.threads;
 
 import org.junit.jupiter.api.Test;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 final class LoadingBriefBackdropLayoutTest {
-    @Test
-    void clientPlacesArtworkBehindNativeLoadingContentAndCaptionAfterIt() throws Exception {
-        String source = Files.readString(Path.of("src/main/java/com/bettercontent/threads/ThreadClient.java"));
-        assertTrue(source.contains("loadingBackground(ScreenEvent.BackgroundRendered event)"));
-        assertTrue(source.contains("renderLoadingBackdrop(event.getGuiGraphics()"));
-        assertTrue(source.contains("loadingRender(ScreenEvent.Render.Post event)"));
-        assertTrue(source.contains("renderLoadingCaption(graphics, session, layout)"));
-    }
-
     @Test
     void artworkUsesLargestCenteredTwoToOneContainRectangle() {
         for (var size : sizes()) {

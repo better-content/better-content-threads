@@ -40,7 +40,7 @@ public final class ThreadClient {
     private static List<ThreadNetwork.Card> cards = List.of();
     private static LoadingBriefSession currentBriefs;
     private static LoadingBriefRotation.State briefState;
-    private static boolean arrivalPending;
+    private static boolean briefDisplayed;
     private static boolean emiRecipeOpen;
     private static String emiRecipeTarget = "unknown";
 
@@ -59,8 +59,7 @@ public final class ThreadClient {
     public static void tick(TickEvent.ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
         var minecraft = Minecraft.getInstance();
-        if (arrivalPending && currentBriefs != null && minecraft.player != null && minecraft.level != null && minecraft.screen == null) {
-            arrivalPending = false;
+        if (briefDisplayed && currentBriefs != null && minecraft.player != null && minecraft.level != null && minecraft.screen == null) {
             // The lesson belongs only to loading.  Once the world can accept input, do
             // not place an opaque screen over it; commit only the exposure already earned.
             dismissBrief();
@@ -89,8 +88,10 @@ public final class ThreadClient {
             event.setNewScreen(new LearningLevelLoadingScreen(progress, currentBriefs));
             return;
         }
-        if (isInitialLoadScreen(event.getNewScreen()) && Minecraft.getInstance().level == null) {
+        if (isLoadingScreen(event.getNewScreen())) {
             if (event.getNewScreen() instanceof ConnectScreen || currentBriefs == null) beginBrief();
+        } else if (event.getNewScreen() != null && Minecraft.getInstance().player == null) {
+            discardBrief();
         }
     }
 
@@ -109,36 +110,8 @@ public final class ThreadClient {
     }
 
     @SubscribeEvent
-    public static void loadingBackground(ScreenEvent.BackgroundRendered event) {
-        if (currentBriefs != null && isInitialLoadScreen(event.getScreen())
-                && !(event.getScreen() instanceof LevelLoadingScreen)
-                && Minecraft.getInstance().level == null) {
-            var layout = LoadingBriefBackdropLayout.calculate(event.getScreen().width, event.getScreen().height,
-                false, nativeControlRows(event.getScreen()));
-            renderLoadingBackdrop(event.getGuiGraphics(), currentBriefs, layout,
-                event.getScreen().width, event.getScreen().height);
-        }
-    }
-
-    @SubscribeEvent
-    public static void loadingRender(ScreenEvent.Render.Post event) {
-        if (currentBriefs != null && isInitialLoadScreen(event.getScreen())
-                && !(event.getScreen() instanceof LevelLoadingScreen)
-                && Minecraft.getInstance().level == null) {
-            renderLoadingBrief(event.getGuiGraphics(), currentBriefs, event.getScreen().width, event.getScreen().height);
-        }
-    }
-
-    @SubscribeEvent
-    public static void login(ClientPlayerNetworkEvent.LoggingIn event) {
-        if (currentBriefs == null) beginBrief();
-        arrivalPending = true;
-    }
-
-    @SubscribeEvent
     public static void logout(ClientPlayerNetworkEvent.LoggingOut event) {
-        currentBriefs = null;
-        arrivalPending = false;
+        discardBrief();
         cards = List.of();
     }
 
@@ -151,8 +124,7 @@ public final class ThreadClient {
                 .bounds(x, y, 72, 20).build());
             return;
         }
-        if (currentBriefs == null || Minecraft.getInstance().level != null
-                || !isInitialLoadScreen(event.getScreen())
+        if (currentBriefs == null || !isLoadingScreen(event.getScreen())
                 || event.getScreen() instanceof LearningLevelLoadingScreen) return;
         var layout = LoadingBriefBackdropLayout.calculate(event.getScreen().width, event.getScreen().height,
             false, nativeControlRows(event.getScreen()));
@@ -171,7 +143,8 @@ public final class ThreadClient {
         renderUnread(event.getGuiGraphics(), event.getWindow().getGuiScaledWidth(), event.getWindow().getGuiScaledHeight());
     }
 
-    private static void drawOutlinedCentered(GuiGraphics graphics, Component text, int centerX, int y, float scale, float alpha) {
+    private static void drawOutlinedCentered(GuiGraphics graphics, Component text, int centerX, int y,
+            float scale, float alpha) {
         int textWidth = Minecraft.getInstance().font.width(text);
         int colorAlpha = Math.round(alpha * 255.0f) << 24;
         graphics.pose().pushPose();
@@ -218,7 +191,7 @@ public final class ThreadClient {
         graphics.drawCenteredString(Minecraft.getInstance().font,label,x+width/2,y+3,0xFFF0E5CE);
     }
 
-    private static boolean isInitialLoadScreen(net.minecraft.client.gui.screens.Screen screen) {
+    private static boolean isLoadingScreen(net.minecraft.client.gui.screens.Screen screen) {
         return screen instanceof ConnectScreen || screen instanceof ReceivingLevelScreen || screen instanceof LevelLoadingScreen;
     }
 
@@ -229,7 +202,12 @@ public final class ThreadClient {
     private static void beginBrief() {
         briefState = LoadingBriefStore.load();
         currentBriefs = new LoadingBriefSession(LoadingBriefs.INSTANCE.all(), briefState);
-        arrivalPending = false;
+        briefDisplayed = false;
+    }
+
+    private static void discardBrief() {
+        currentBriefs = null;
+        briefDisplayed = false;
     }
 
     private static void dismissBrief() {
@@ -238,11 +216,12 @@ public final class ThreadClient {
             currentBriefs.viewed(), LoadingBriefs.INSTANCE.all());
         LoadingBriefStore.save(briefState);
         currentBriefs = null;
-        arrivalPending = false;
+        briefDisplayed = false;
     }
 
     static void renderWorldGenerationBrief(GuiGraphics graphics, LoadingBriefSession session, int progress,
                                              int screenWidth, int screenHeight) {
+        if (currentBriefs == session) briefDisplayed = true;
         var layout = LoadingBriefBackdropLayout.calculate(screenWidth, screenHeight, true);
         renderLoadingBackdrop(graphics, session, layout, screenWidth, screenHeight);
         drawOutlinedCentered(graphics,
@@ -269,11 +248,26 @@ public final class ThreadClient {
         renderLoadingCaption(graphics, session, layout);
     }
 
-    private static void renderLoadingBrief(GuiGraphics graphics, LoadingBriefSession session,
-                                            int screenWidth, int screenHeight) {
+    public static boolean renderJoiningBrief(GuiGraphics graphics, Component status, int screenWidth, int screenHeight) {
+        return renderNativeLoadingBrief(graphics, status, screenWidth, screenHeight, 2);
+    }
+
+    public static boolean renderTerrainBrief(GuiGraphics graphics, int screenWidth, int screenHeight) {
+        return renderNativeLoadingBrief(graphics, Component.translatable("multiplayer.downloadingTerrain"),
+            screenWidth, screenHeight, 1);
+    }
+
+    private static boolean renderNativeLoadingBrief(GuiGraphics graphics, Component status,
+                                                     int screenWidth, int screenHeight, int controlRows) {
+        var session = currentBriefs;
+        if (session == null) return false;
+        briefDisplayed = true;
         var layout = LoadingBriefBackdropLayout.calculate(screenWidth, screenHeight, false,
-            nativeControlRows(Minecraft.getInstance().screen));
+            controlRows);
+        renderLoadingBackdrop(graphics, session, layout, screenWidth, screenHeight);
+        drawOutlinedCentered(graphics, status, screenWidth / 2, layout.headerY(), 1.0f, 1.0f);
         renderLoadingCaption(graphics, session, layout);
+        return true;
     }
 
     private static void renderLoadingBackdrop(GuiGraphics graphics, LoadingBriefSession session,
