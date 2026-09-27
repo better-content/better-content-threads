@@ -45,8 +45,5 @@ final class ThreadContractsTest {
  @Test void revealNeedsNoReadingDeadlineAndOneSkipOnlyCompletesAnimation(){
   var r=new ThreadRevealState();r.select(true);assertEquals(ThreadRevealState.Activation.STARTED,r.activate());assertFalse(r.advance(100));assertEquals(ThreadRevealState.Activation.COMPLETED,r.activate());assertEquals(ThreadRevealState.Phase.COMPLETE,r.phase());assertFalse(r.advance(999999));assertEquals(ThreadRevealState.Activation.IGNORED,r.activate());
  }
- @Test void noticesSerializeAndRetainLifetimeWhileHidden(){
-  var q=new ThreadNoticeQueue<String>(s->s);q.addAll(List.of("a","b","a"));assertEquals(2,q.size());assertTrue(q.advance(0,false).started());assertEquals(0,q.advance(10000,true).elapsedMs());assertNull(q.advance(ThreadNoticeQueue.DURATION_MS,false));assertEquals("b",q.advance(0,false).notice());q.clear();assertEquals(0,q.size());
- }
  @Test void detailLayoutRemainsInsideCompactAndWideScreens(){for(var size:List.of(new int[]{160,160},new int[]{320,240},new int[]{854,480})){var l=ThreadDeckScreen.detailLayout(size[0],size[1]);assertTrue(l.cardX()>=0);assertTrue(l.detailsX()>=0);assertTrue(l.detailsX()+l.panelWidth()<=size[0]);assertTrue(l.cardY()+l.cardHeight()<=size[1]-34);assertTrue(l.panelWidth()>=Math.min(128,Math.max(80,(size[0]-24)/2)));assertTrue(Math.abs(l.cardWidth()*3-l.cardHeight()*2)<=2);}}
 }

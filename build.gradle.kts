@@ -121,6 +121,8 @@ val betterContentApiJars = files(
 
 dependencies {
     minecraft("net.minecraftforge:forge:${property("minecraft_version")}-${property("forge_version")}")
+    compileOnly(files(betterContentJar("better-content-notifications", "better-content-notifications-1.0.0.jar")))
+    runtimeOnly(files(betterContentJar("better-content-notifications", "better-content-notifications-1.0.0.jar")))
     add(learningVisual.compileOnlyConfigurationName, files(betterContentJar("downed-player-revival", "downed-player-revival-1.0.0.jar")))
     if (providers.gradleProperty("combinedDeathVisual").map(String::toBoolean).getOrElse(false)) {
         add(learningVisual.runtimeOnlyConfigurationName, fg.deobf("com.bettercontent:downed-player-revival:1.0.0"))

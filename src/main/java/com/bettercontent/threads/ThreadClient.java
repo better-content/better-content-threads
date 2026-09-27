@@ -12,10 +12,8 @@ import net.minecraft.client.gui.screens.ConnectScreen;
 import net.minecraft.client.gui.screens.LevelLoadingScreen;
 import net.minecraft.client.gui.screens.ReceivingLevelScreen;
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraftforge.api.distmarker.Dist;
@@ -34,21 +32,12 @@ import java.util.List;
 
 @Mod.EventBusSubscriber(modid = BetterContentThreads.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class ThreadClient {
-    static final int NOTICE_GLYPH_SIZE = 8;
-    static final float NOTICE_TEXT_SCALE = 0.72f;
-    static final float NOTICE_MIN_TEXT_SCALE = 0.55f;
-    static final int NOTICE_GLYPH_OFFSET_Y = -8;
-    static final int NOTICE_TEXT_OFFSET_Y = 2;
-    static final int NOTICE_HINT_OFFSET_Y = 10;
-    static final float NOTICE_HINT_SCALE = 0.58f;
     static final int ARCHIVE_GOLD = 0xC6A15B;
     static final int ART_TEXTURE_WIDTH = 256;
     static final int ART_TEXTURE_HEIGHT = 384;
     public static final KeyMapping OPEN = new KeyMapping("key.better_content_threads.open_reader", InputConstants.Type.KEYSYM,
         GLFW.GLFW_KEY_M, "key.categories.better_content_threads");
-    private static final ThreadNoticeQueue<ThreadNetwork.Notice> NOTICES = new ThreadNoticeQueue<>(ThreadNetwork.Notice::identity);
     private static List<ThreadNetwork.Card> cards = List.of();
-    private static long lastLiveFrame;
     private static LoadingBriefSession currentBriefs;
     private static LoadingBriefRotation.State briefState;
     private static boolean arrivalPending;
@@ -62,7 +51,6 @@ public final class ThreadClient {
 
     public static void receive(ThreadNetwork.Sync sync) {
         cards = sync.cards();
-        NOTICES.addAll(sync.notices());
         if (sync.open()) Minecraft.getInstance().setScreen(new ThreadDeckScreen(cards));
         else if (Minecraft.getInstance().screen instanceof ThreadDeckScreen deck) deck.updateCards(cards);
     }
@@ -80,7 +68,6 @@ public final class ThreadClient {
         }
         if (OPEN.consumeClick()) ThreadNetwork.request("open", "");
         while (OPEN.consumeClick()) {}
-        if (minecraft.screen != null) lastLiveFrame = 0L;
     }
 
     @SubscribeEvent
@@ -153,8 +140,6 @@ public final class ThreadClient {
         currentBriefs = null;
         arrivalPending = false;
         cards = List.of();
-        NOTICES.clear();
-        lastLiveFrame = 0L;
     }
 
     @SubscribeEvent
@@ -182,39 +167,9 @@ public final class ThreadClient {
     @SubscribeEvent
     public static void render(RenderGuiEvent.Post event) {
         var minecraft = Minecraft.getInstance();
-        if (minecraft.player == null || minecraft.screen != null || ContextHintClient.suppressThreadNotice()) {
-            lastLiveFrame = 0L;
-            return;
-        }
-        long now = System.currentTimeMillis();
-        long delta = lastLiveFrame == 0L ? 0L : Math.min(100L, Math.max(0L, now - lastLiveFrame));
-        lastLiveFrame = now;
-        var frame = NOTICES.advance(delta, false);
-        if (frame != null) {
-            if (frame.started()) minecraft.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.BOOK_PAGE_TURN, 0.72f, 0.38f));
-            renderNotice(event.getGuiGraphics(), frame.notice(), frame.elapsedMs(), event.getWindow().getGuiScaledWidth(), event.getWindow().getGuiScaledHeight());
-        }
+        if (minecraft.player == null || minecraft.screen != null) return;
         renderUnread(event.getGuiGraphics(), event.getWindow().getGuiScaledWidth(), event.getWindow().getGuiScaledHeight());
     }
-
-    private static void renderNotice(GuiGraphics graphics, ThreadNetwork.Notice notice, long elapsed, int screenWidth, int screenHeight) {
-        float alpha = noticeAlpha(elapsed);
-        int centerX = screenWidth / 2;
-        int centerY = screenHeight / 3;
-        renderParticles(graphics, notice, elapsed, alpha, centerX, centerY - 5);
-        drawArchiveGlyph(graphics,centerX-4,centerY+NOTICE_GLYPH_OFFSET_Y,ARCHIVE_GOLD,alpha);
-        Component message = Component.translatable(notice.kind()==ThreadNetwork.NoticeKind.DISCOVERY?"message.better_content_threads.thread_discovered":"message.better_content_threads.thread_remembered",notice.title());
-        int textWidth = Minecraft.getInstance().font.width(message);
-        float scale = Math.max(NOTICE_MIN_TEXT_SCALE,Math.min(NOTICE_TEXT_SCALE, (screenWidth - 24.0f) / Math.max(1, textWidth)));
-        drawOutlinedCentered(graphics, message, centerX, centerY + NOTICE_TEXT_OFFSET_Y, scale, alpha);
-        Component hint = Component.translatable("message.better_content_threads.thread_reader_hint",
-                readerBinding());
-        int hintWidth = Minecraft.getInstance().font.width(hint);
-        float hintScale = Math.min(NOTICE_HINT_SCALE, (screenWidth - 24.0f) / Math.max(1, hintWidth));
-        drawOutlinedCentered(graphics, hint, centerX, centerY + NOTICE_HINT_OFFSET_Y, hintScale, alpha * 0.82f);
-    }
-
-    private static void drawArchiveGlyph(GuiGraphics graphics,int x,int y,int rgb,float alpha){int color=(Math.round(alpha*255)<<24)|rgb;int[][]rows={{3,4},{2,5},{1,3,4,6},{0,2,5,7},{0,2,5,7},{1,3,4,6},{2,5},{3,4}};for(int py=0;py<rows.length;py++)for(int px:rows[py])graphics.fill(x+px,y+py,x+px+1,y+py+1,color);}
 
     private static void drawOutlinedCentered(GuiGraphics graphics, Component text, int centerX, int y, float scale, float alpha) {
         int textWidth = Minecraft.getInstance().font.width(text);
@@ -229,30 +184,6 @@ public final class ThreadClient {
         graphics.drawString(Minecraft.getInstance().font, text, -textWidth / 2, 0,
             colorAlpha | 0xFFFFFF, false);
         graphics.pose().popPose();
-    }
-
-    static float noticeAlpha(long elapsed) {
-        if (elapsed < 400L) return elapsed / 400.0f;
-        if (elapsed < 2_600L) return 1.0f;
-        return Math.max(0.0f, (ThreadNoticeQueue.DURATION_MS - elapsed) / 600.0f);
-    }
-
-    private static void renderParticles(GuiGraphics graphics, ThreadNetwork.Notice notice, long elapsed, float noticeAlpha, int centerX, int centerY) {
-        int aspect = notice.aspect().isEmpty() ? ThreadTopic.parse(notice.topic()).color() : ThreadAspect.parse(notice.aspect()).color();
-        double progress = elapsed / (double) ThreadNoticeQueue.DURATION_MS;
-        int seed = notice.id().hashCode();
-        for (int i = 0; i < 20; i++) {
-            int mixed = mix(seed + i * 0x9E3779B9);
-            double angle = ((mixed & 0xFFFF) / 65535.0) * Math.PI * 2.0;
-            double baseRadius = 6.0 + ((mixed >>> 16) & 3);
-            double drift = progress * (4.0 + ((mixed >>> 20) & 3));
-            int x = centerX + (int) Math.round(Math.cos(angle) * (baseRadius + drift));
-            int y = centerY + (int) Math.round(Math.sin(angle) * baseRadius - progress * (6.0 + ((mixed >>> 24) & 3)));
-            float pulse = (float) (0.58 + 0.42 * Math.sin(Math.PI * Math.min(1.0, progress * 1.25 + (i % 4) * 0.06)));
-            int particleAlpha = (int) (noticeAlpha * pulse * (i < 12 ? 150 : 190));
-            int rgb = i < 12 ? aspect : ARCHIVE_GOLD;
-            graphics.fill(x, y, x + 1, y + 1, (particleAlpha << 24) | rgb);
-        }
     }
 
     private static int mix(int value) {

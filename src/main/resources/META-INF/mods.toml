@@ -36,6 +36,12 @@ versionRange="[1.0.1]"
 ordering="AFTER"
 side="BOTH"
 [[dependencies.${mod_id}]]
+modId="better_content_notifications"
+mandatory=true
+versionRange="[1.0.0,)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.${mod_id}]]
 modId="better_content_fixes"
 mandatory=false
 versionRange="[0.1.9]"
