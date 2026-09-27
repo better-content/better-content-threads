@@ -13,6 +13,12 @@ organize the discoveries: World, Body, Materials, Industry, Magic, Travel, and L
 Each definition has one event/cause/action explanation and bounded discovery routes.
 There are no gameplay reveal/completion stages, unknown slots, hourly limits, or quota scheduler.
 
+[Pending-art roster](authoring/discoveries.pending-art.json) records the approved replacement
+direction for 22 slots and revised copy for retained cards. It remains separate from the
+bundled catalogue until its 22 new illustrations and the revised Font illustration are
+reviewed. The scene and evidence fields are the art and trigger briefs; the existing
+runtime catalogue and image derivatives stay together until that review is complete.
+
 [Art grammar](authoring/art-grammar.txt) requires concrete engraved mechanisms and
 consequences. All card and loading art excludes humans, humanoids, body parts, humanlike
 spirits, silhouettes, and mannequins. Nonhumanoid creatures may appear where the scene
@@ -31,9 +37,11 @@ The model predicate uses each card's global order, 1 through 52. It is independe
 
 ## Committed evidence and persistence
 
-Native providers publish typed events after actual effects. Version-pinned third-party
-mixins observe completed output, movement, or work. Possession, proximity, inspection,
-recipe previews, and setup alone cannot substitute for the outcome.
+Native providers publish typed events after actual effects. Contextual teaching cards
+may instead open at a verified point of need, such as the first recipe screen closed,
+approaching a Font, or the first rise in cave pressure. Each route states its own
+personal trigger. Version-pinned third-party mixins observe completed output,
+movement, or work where a completed outcome is the relevant cue.
 
 ```java
 ThreadSignals.emit(player, "native_action", "bounded_value", operationToken, context);

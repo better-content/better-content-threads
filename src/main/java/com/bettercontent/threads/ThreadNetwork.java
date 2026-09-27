@@ -69,7 +69,24 @@ public final class ThreadNetwork {
     public record Action(String action,String thread){
         void encode(FriendlyByteBuf b){b.writeUtf(action,16);b.writeUtf(thread,48);}static Action decode(FriendlyByteBuf b){return new Action(b.readUtf(16),b.readUtf(48));}
         static void handle(Action m,Supplier<NetworkEvent.Context>c){var player=c.get().getSender();c.get().enqueueWork(()->handle(player,m));c.get().setPacketHandled(true);}
-        private static void handle(ServerPlayer player,Action action){if(player==null||!isReaderAction(action.action))return;if(action.action.equals("open")){sync(player,true,List.of());return;}if(!ThreadDefinitions.INSTANCE.contains(action.thread))return;var state=ThreadPlayerState.get(player);if(!state.known.contains(action.thread))return;if(state.markRead(action.thread)){state.save(player);sync(player,false,List.of());}}
+        private static void handle(ServerPlayer player,Action action){
+            if(player==null)return;
+            if(action.action.equals("emi")){
+                if(!action.thread.matches("[a-z0-9_:./-]{1,48}"))return;
+                String token=player.getUUID()+":emi:"+player.server.getTickCount();
+                ThreadSignals.emit(player,"emi_recipe_closed","first_recipe",token);
+                if(action.thread.equals("create:millstone")||action.thread.equals("create:mechanical_press"))
+                    ThreadSignals.emit(player,"emi_recipe_closed","root_machine",token);
+                if(action.thread.equals("ratlantis_logistics:courier_lattice")||action.thread.equals("prettypipes:pipe"))
+                    ThreadSignals.emit(player,"emi_recipe_closed","ratlantis_logistics",token);
+                return;
+            }
+            if(!isReaderAction(action.action))return;
+            if(action.action.equals("open")){sync(player,true,List.of());return;}
+            if(!ThreadDefinitions.INSTANCE.contains(action.thread))return;
+            var state=ThreadPlayerState.get(player);if(!state.known.contains(action.thread))return;
+            if(state.markRead(action.thread)){state.save(player);sync(player,false,List.of());}
+        }
         static boolean isReaderAction(String action) { return action.equals("open") || action.equals("read"); }
     }
     private static void writeCards(FriendlyByteBuf b,List<Card>cards){if(cards.size()>52)throw new IllegalArgumentException("too many thread cards");b.writeVarInt(cards.size());cards.forEach(c->c.encode(b));}

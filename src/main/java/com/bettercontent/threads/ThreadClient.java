@@ -52,6 +52,8 @@ public final class ThreadClient {
     private static LoadingBriefSession currentBriefs;
     private static LoadingBriefRotation.State briefState;
     private static boolean arrivalPending;
+    private static boolean emiRecipeOpen;
+    private static String emiRecipeTarget = "unknown";
 
     private ThreadClient() {}
 
@@ -83,6 +85,15 @@ public final class ThreadClient {
 
     @SubscribeEvent
     public static void opening(ScreenEvent.Opening event) {
+        boolean newRecipe = event.getNewScreen() != null
+            && event.getNewScreen().getClass().getName().equals("dev.emi.emi.screen.RecipeScreen");
+        if (emiRecipeOpen && !newRecipe) {
+            completeEmiRecipe();
+        }
+        if (newRecipe) {
+            emiRecipeOpen = true;
+            emiRecipeTarget = EmiRecipeClient.target();
+        }
         if (event.getNewScreen() instanceof LevelLoadingScreen levelLoading
                 && !(levelLoading instanceof LearningLevelLoadingScreen)
                 && Minecraft.getInstance().level == null) {
@@ -94,6 +105,20 @@ public final class ThreadClient {
         if (isInitialLoadScreen(event.getNewScreen()) && Minecraft.getInstance().level == null) {
             if (event.getNewScreen() instanceof ConnectScreen || currentBriefs == null) beginBrief();
         }
+    }
+
+    @SubscribeEvent
+    public static void closing(ScreenEvent.Closing event) {
+        if (emiRecipeOpen && event.getScreen().getClass().getName().equals("dev.emi.emi.screen.RecipeScreen")) {
+            completeEmiRecipe();
+        }
+    }
+
+    private static void completeEmiRecipe() {
+        String latest = EmiRecipeClient.target();
+        if (!latest.equals("unknown")) emiRecipeTarget = latest;
+        ThreadNetwork.request("emi", emiRecipeTarget);
+        emiRecipeOpen = false;
     }
 
     @SubscribeEvent

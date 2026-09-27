@@ -1,6 +1,6 @@
 # Teaching surfaces and authoritative advice
 
-Threads explains a committed event, its cause, and a useful response. It does not use these advice snapshots as discovery evidence. The resource `assets/better_content_threads/death_hints/catalogue.json` uses `bc.teaching_hints.v2`; each entry explicitly declares its eligible `surfaces`, optional context `requirements`, mechanical `sources`, and required mods.
+Threads explains a personal event or point of need, its cause, and a useful response. Contextual cues such as first recipe inspection, first cave-pressure rise, and Font approach can teach before the player commits to a risky operation. It does not use these advice snapshots as discovery evidence. The resource `assets/better_content_threads/death_hints/catalogue.json` uses `bc.teaching_hints.v2`; each entry explicitly declares its eligible `surfaces`, optional context `requirements`, mechanical `sources`, and required mods.
 
 ## Selection and exposure
 
@@ -15,7 +15,7 @@ Injury care follows native snapshots and treatment tags: healing lock; available
 
 ## Death's Door and Body
 
-The four discoveries consume committed `EnteredDoor`, `Healed`, `TraumaIncreased`, and self-owned `Treated` events. Trauma evidence compares the same pre-existing injuries before and after an accepted hit, excluding initial injuries, head-only risk, and saturated functional penalties. Treatment records the actual injury and medicine. The Body doorway requests the native authoritative interface.
+The pending-art roster retains one Death's Door discovery, triggered by committed `EnteredDoor`. The native Body UI and contextual advice explain persistent injuries, trauma, and treatment without spending three more card slots on those mechanics. The Body doorway requests the native authoritative interface.
 
 `DeathRecapOverlay` owns death-button placement. Threads reserves its measured tip area through that provider; the recap uses the remaining area. Compact layouts show all six regions and paired active/treated counts in the shared Cracked/Burnt/Opened order. If copy cannot fit while preserving the native recap and controls, it is omitted and not recorded as seen. Notices pause while Death's Door is urgent or Body is open, preserving their remaining reading lifetime.
 

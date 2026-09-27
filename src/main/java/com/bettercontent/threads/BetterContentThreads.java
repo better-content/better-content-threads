@@ -38,6 +38,7 @@ public final class BetterContentThreads {
         ThreadRegistry.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ThreadNetwork.register();
         MinecraftForge.EVENT_BUS.register(ThreadEvents.class);
+        MinecraftForge.EVENT_BUS.register(EarlyTeachingThreads.class);
         MinecraftForge.EVENT_BUS.register(OperationOwners.class);
         if (ModList.get().isLoaded("latent_chemlib")) MinecraftForge.EVENT_BUS.register(com.bettercontent.threads.compat.bettercontent.ChemicalDiscoveryThreads.class);
         if (ModList.get().isLoaded("depth_director")) MinecraftForge.EVENT_BUS.register(com.bettercontent.threads.compat.bettercontent.DepthDirectorThreads.class);
