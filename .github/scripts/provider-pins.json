@@ -1,5 +1,5 @@
 {
-  "schema": "bc.threads_ci_providers.v1",
+  "schema": "bc.learning_surfaces_ci_providers.v1",
   "baselineCommit": "7daccf81465d0803824831f014d695419c6e7696",
   "providers": [
     {

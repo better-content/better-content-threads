@@ -10,8 +10,8 @@ plugins {
 }
 
 mixin {
-    add(sourceSets.main.get(), "better_content_threads.refmap.json")
-    config("better_content_threads.mixins.json")
+    add(sourceSets.main.get(), "learning_surfaces.refmap.json")
+    config("learning_surfaces.mixins.json")
 }
 
 group = "com.bettercontent"
@@ -31,6 +31,11 @@ val learningVisual by sourceSets.creating {
 }
 configurations[learningVisual.implementationConfigurationName].extendsFrom(configurations.implementation.get())
 configurations[learningVisual.runtimeOnlyConfigurationName].extendsFrom(configurations.runtimeOnly.get())
+// Full-pack provider routes need their real installed mods and run in pack integration.
+// Compile their scenarios here without registering them in the isolated GameTest server.
+val packIntegration by sourceSets.creating {
+    compileClasspath += sourceSets.main.get().output + configurations.compileClasspath.get()
+}
 
 minecraft {
     mappings("official", property("minecraft_version") as String)
@@ -52,7 +57,7 @@ minecraft {
         val baseClient = create("client")
         create("learningVisual") {
             parent(baseClient)
-            args("--mixin", "better_content_threads.visual.mixins.json")
+            args("--mixin", "learning_surfaces.visual.mixins.json")
             workingDirectory(project.file("build/learning-visual"))
             args("--width", "1280", "--height", providers.gradleProperty("learningVisualHeight").orElse("720").get())
             mods { getByName(property("mod_id") as String).source(learningVisual) }
@@ -184,7 +189,7 @@ tasks.named<Jar>("jar") {
     dependsOn(tasks.named("compileJava"))
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from(layout.buildDirectory.file("tmp/compileJava/compileJava-refmap.json")) {
-        rename { "better_content_threads.refmap.json" }
+        rename { "learning_surfaces.refmap.json" }
     }
     finalizedBy("reobfJar")
 }
@@ -213,7 +218,7 @@ tasks.named<JavaCompile>("compileJava") {
 }
 
 tasks.test {
-    doFirst { systemProperty("threads.optionalCompileClasspath", configurations.compileClasspath.get().asPath) }
+    doFirst { systemProperty("learning_surfaces.optionalCompileClasspath", configurations.compileClasspath.get().asPath) }
     useJUnitPlatform()
     finalizedBy(tasks.jacocoTestReport)
 }
@@ -259,6 +264,7 @@ tasks.register("verifyFast") {
     group = "verification"
     description = "Runs deterministic unit/resource checks without Forge game tests."
     dependsOn(tasks.named("check"))
+    dependsOn(tasks.named("compilePackIntegrationJava"))
 }
 
 tasks.register("verifyFull") {
@@ -279,8 +285,8 @@ val verifyRuntimeJar by tasks.registering {
 
     doLast {
         ZipFile(runtimeJar.get().asFile).use { zip ->
-            val refmap = zip.getEntry("better_content_threads.refmap.json")
-                ?: throw GradleException("Runtime JAR is missing better_content_threads.refmap.json")
+            val refmap = zip.getEntry("learning_surfaces.refmap.json")
+                ?: throw GradleException("Runtime JAR is missing learning_surfaces.refmap.json")
             val refmapText = zip.getInputStream(refmap).bufferedReader().use { it.readText() }
             check(refmapText.contains("LevelLoadingScreenAccessor") &&
                 refmapText.contains("\"progressListener\": \"f_96138_")) {

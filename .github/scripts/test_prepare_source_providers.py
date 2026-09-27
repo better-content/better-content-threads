@@ -56,7 +56,7 @@ class ProviderBootstrapTest(unittest.TestCase):
 
     def test_dependency_cycle_is_rejected(self):
         path = self.root / 'pins.json'
-        path.write_text(json.dumps({'schema': 'bc.threads_ci_providers.v1', 'baselineCommit': 'a' * 40,
+        path.write_text(json.dumps({'schema': 'bc.learning_surfaces_ci_providers.v1', 'baselineCommit': 'a' * 40,
                                     'providers': [{**self.provider, 'dependsOn': ['example']}]}))
         with self.assertRaisesRegex(ValueError, 'dependency cycle'):
             bootstrap.plan(path)

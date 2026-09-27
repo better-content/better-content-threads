@@ -1,5 +1,5 @@
 # AGENTS.md
 
-- Mod ID: `better_content_threads`; package: `com.bettercontent.threads`.
+- Mod ID: `learning_surfaces`; package: `com.bettercontent.learningsurfaces`.
 - Run `./gradlew verifyFull stageRuntimeJar` before committing or pushing.
-- Do not add aliases or migrations for the former Better Content Fixes identity.
+- Do not add aliases or saved-history migrations for the former Better Content Threads identity.

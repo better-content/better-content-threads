@@ -18,4 +18,4 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "better-content-threads"
+rootProject.name = "learning-surfaces"

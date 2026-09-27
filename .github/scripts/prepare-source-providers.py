@@ -26,7 +26,7 @@ def digest(path):
 
 def plan(path):
     pins = json.loads(path.read_text())
-    if pins.get('schema') != 'bc.threads_ci_providers.v1':
+    if pins.get('schema') != 'bc.learning_surfaces_ci_providers.v1':
         raise ValueError('unsupported provider pins schema')
     if not re.fullmatch('[0-9a-f]{40}', pins.get('baselineCommit', '')):
         raise ValueError('baseline must be an exact source commit')
@@ -142,7 +142,7 @@ def prepare(args):
 
     def manifest():
         (output / 'providers.json').write_text(json.dumps({
-            'repository': 'better-content-threads', 'baselineCommit': pins['baselineCommit'],
+            'repository': 'learning-surfaces', 'baselineCommit': pins['baselineCommit'],
             'providers': list(payloads.values())}, indent=2) + '\n')
 
     for p in ordered:
