@@ -419,7 +419,7 @@
       "id": "purity_three",
       "concept_id": "world.water_made_safe",
       "pool": "survival",
-      "text": "Water at purity level 3 is safe to drink. Check purity before depending on a bottle for a long journey.",
+      "text": "Check a water bottle's purity before a long trip. Purity 3 is safe to drink; lower numbers need more cleaning.",
       "contexts": [
         "thirst"
       ],
@@ -443,7 +443,7 @@
       "id": "bottle_slot",
       "concept_id": "world.water_made_safe",
       "pool": "survival",
-      "text": "The water Curios slot can drink from stored water bottles as thirst drops. Fill it with safe water before leaving.",
+      "text": "The extra water-bottle slot can drink for you when you get thirsty. Put a bottle of safe water there before leaving.",
       "contexts": [
         "thirst"
       ],
@@ -515,7 +515,7 @@
       "id": "empty_bottles",
       "concept_id": "world.water_made_safe",
       "pool": "survival",
-      "text": "Water Survival provides a Curios slot for empty bottles. Keep bottles available for refilling along the way.",
+      "text": "Keep empty bottles in their extra inventory slot so you can refill them along the way.",
       "contexts": [
         "thirst"
       ],
@@ -652,7 +652,7 @@
       "id": "nutrition_groups",
       "concept_id": "survival.hunger_and_nutrition",
       "pool": "survival",
-      "text": "A full hunger bar does not mean your nutrition groups are full. Check nutrition before choosing your next meal.",
+      "text": "Food fills hunger and also builds nutrition from groups such as grains and vegetables. Eat what you can at first; try different foods as you find them.",
       "contexts": [
         "hunger"
       ],
@@ -674,7 +674,7 @@
       "id": "low_groups",
       "concept_id": "survival.hunger_and_nutrition",
       "pool": "survival",
-      "text": "Choose foods that replenish your lowest nutrition groups. Repeating one meal may leave other groups behind.",
+      "text": "Different foods build different nutrition groups. When you find a new food, check its tooltip to see what it adds.",
       "contexts": [
         "hunger"
       ],
@@ -696,7 +696,7 @@
       "id": "sugar_cost",
       "concept_id": "survival.hunger_and_nutrition",
       "pool": "survival",
-      "text": "Sugar makes nutrition drain faster. Check your food supply before relying on its short-lived benefits.",
+      "text": "Sugary food can give a short boost, but it makes your other nutrition run down faster. Bring ordinary food too.",
       "contexts": [
         "hunger",
         "combat"
@@ -814,7 +814,7 @@
       "id": "recipe_before_trip",
       "concept_id": "crafting.emi_authority",
       "pool": "discovery",
-      "text": "Check the recipe in EMI before gathering materials. Better Content changes many familiar recipes.",
+      "text": "Open the EMI recipe viewer before gathering materials. Better Content changes many familiar recipes.",
       "contexts": [],
       "required_mods": [
         "emi"
@@ -832,7 +832,7 @@
       "id": "recipe_uses",
       "concept_id": "crafting.emi_authority",
       "pool": "discovery",
-      "text": "Look up an item's uses as well as its recipe in EMI. A material you found may serve several different processes.",
+      "text": "In the EMI recipe viewer, check an item's uses as well as its recipe. One material may serve several processes.",
       "contexts": [],
       "required_mods": [
         "emi"
@@ -908,7 +908,7 @@
       "id": "life_review",
       "concept_id": "powers.life_becomes_capable",
       "pool": "discovery",
-      "text": "Life choices last for your current life. Review the resulting properties before applying points.",
+      "text": "Points you spend on the Life screen last until you die. Read the stat changes before choosing where to spend them.",
       "contexts": [],
       "required_mods": [
         "rpg_stats"
@@ -926,7 +926,7 @@
       "id": "life_after_death",
       "concept_id": "powers.life_becomes_capable",
       "pool": "discovery",
-      "text": "Death clears your Life allocations. Review the stats screen as you prepare for the next journey.",
+      "text": "After death, you can choose how to spend your Life points again. Open the stats screen before setting out.",
       "contexts": [],
       "required_mods": [
         "rpg_stats"
@@ -963,7 +963,7 @@
       "id": "font_metallurgy",
       "concept_id": "works.motion_becomes_industry",
       "pool": "discovery",
-      "text": "Materials from several Font destinations can start seared metallurgy. Check the grout routes in EMI before choosing an expedition.",
+      "text": "Some worlds reached through Dimensional Fonts have materials for a Tinkers' smeltery. Look up grout in EMI before choosing a trip.",
       "contexts": [],
       "required_mods": [
         "create",
@@ -985,7 +985,7 @@
       "id": "andesite_route",
       "concept_id": "works.motion_becomes_industry",
       "pool": "discovery",
-      "text": "Andesite Alloy has casting and alloying routes in this pack. Compare the processes in EMI before choosing your setup.",
+      "text": "You can make Andesite Alloy in more than one way. Compare its recipes in EMI before building a machine for it.",
       "contexts": [],
       "required_mods": [
         "create",
@@ -1006,7 +1006,7 @@
       "id": "assembly_order",
       "concept_id": "works.precision_has_rhythm",
       "pool": "discovery",
-      "text": "Sequenced assembly recipes need their steps in order. Check the number of repetitions before setting up the line.",
+      "text": "Some Create recipes repeat a series of machine steps. Check their order and repeat count in EMI before building the line.",
       "contexts": [],
       "required_mods": [
         "create",
@@ -1026,7 +1026,7 @@
       "id": "assembly_intermediate",
       "concept_id": "works.precision_has_rhythm",
       "pool": "discovery",
-      "text": "Follow the intermediate item through sequenced assembly. One pass through a machine may be only part of the recipe.",
+      "text": "A Create assembly recipe may need several passes before the item is finished. Follow the partly finished item in EMI to see every step.",
       "contexts": [],
       "required_mods": [
         "create",
@@ -1082,7 +1082,7 @@
       "id": "surface_signs",
       "concept_id": "world.stone_makes_promises",
       "pool": "discovery",
-      "text": "Surface ore signs point toward underground deposits. Read the deposit family before choosing where to dig.",
+      "text": "Ore signs on the surface hint at deposits below. Check which ores the sign points to before choosing where to dig.",
       "contexts": [],
       "required_mods": [
         "realistic_ores"
@@ -1101,7 +1101,7 @@
       "id": "ore_hosts",
       "concept_id": "world.stone_makes_promises",
       "pool": "discovery",
-      "text": "An ore deposit can appear in different host stones. Follow the deposit identity rather than expecting one background rock.",
+      "text": "The same ore deposit can appear inside different kinds of stone. Follow the ore signs instead of looking for one stone color.",
       "contexts": [],
       "required_mods": [
         "realistic_ores"
@@ -1120,7 +1120,7 @@
       "id": "small_chunks",
       "concept_id": "world.stone_makes_promises",
       "pool": "discovery",
-      "text": "Keep small ore chunks from prospecting. Matching small chunks can be combined into a full chunk.",
+      "text": "Keep the small ore chunks you find while searching for deposits. Small chunks of the same kind can be combined into a full chunk.",
       "contexts": [],
       "required_mods": [
         "realistic_ores"
@@ -1139,7 +1139,7 @@
       "id": "ore_processing",
       "concept_id": "works.chemistry_remembers_sequence",
       "pool": "discovery",
-      "text": "Look up your ore family in EMI before processing it. Different families follow different separation routes.",
+      "text": "Look up your ore in the EMI recipe viewer before processing it. Different ores need different steps to separate their materials.",
       "contexts": [],
       "required_mods": [
         "realistic_ores",
@@ -1159,7 +1159,7 @@
       "id": "ore_concentrates",
       "concept_id": "works.chemistry_remembers_sequence",
       "pool": "discovery",
-      "text": "Check which concentrate a process produces before building around it. One deposit can contain more than one useful material.",
+      "text": "Processing one ore can give you more than one material. Check the outputs in EMI before building the machines.",
       "contexts": [],
       "required_mods": [
         "realistic_ores",
@@ -1179,7 +1179,7 @@
       "id": "font_return",
       "concept_id": "powers.doors_borrow_worlds",
       "pool": "discovery",
-      "text": "Before using a Dimensional Font, read how its journey returns you. Prepare supplies before starting the trip.",
+      "text": "A Dimensional Font sends you to another world. Check how to return before using one, and pack supplies for the trip.",
       "contexts": [],
       "required_mods": [
         "dimension_drink"
@@ -1199,7 +1199,7 @@
       "id": "font_expedition",
       "concept_id": "powers.doors_borrow_worlds",
       "pool": "discovery",
-      "text": "Use a Font expedition to scout as well as gather. Note useful resources so a later visit has a clear purpose.",
+      "text": "When a Dimensional Font takes you to another world, note useful resources as you explore. You can plan a later trip around them.",
       "contexts": [],
       "required_mods": [
         "dimension_drink"
@@ -1239,7 +1239,7 @@
       "id": "heat_sink",
       "concept_id": "works.heat_go_somewhere",
       "pool": "discovery",
-      "text": "A heat network needs a way to lose excess heat. Check its surroundings and cooling before adding more heat sources.",
+      "text": "Connected heat pipes can become too hot. Give the system a way to cool before adding more heat sources.",
       "contexts": [],
       "required_mods": [
         "heat_sync"
@@ -1275,7 +1275,7 @@
       "id": "pressure_recipe",
       "concept_id": "works.pressure_changes_matter",
       "pool": "discovery",
-      "text": "Check the pressure required by a Pressure Chamber recipe. Having the ingredients alone is not enough.",
+      "text": "A Pressure Chamber recipe needs enough pressure as well as ingredients. Check the required pressure in EMI first.",
       "contexts": [],
       "required_mods": [
         "pneumaticcraft"
@@ -1413,7 +1413,7 @@
       "id": "anchor_supply",
       "concept_id": "powers.power_needs_anchor",
       "pool": "discovery",
-      "text": "Chunk anchors need their own resource supply. Check that supply before relying on distant machinery to keep running.",
+      "text": "A chunk anchor keeps nearby machines running while you are away, but it needs fuel or another resource. Check its supply before leaving.",
       "contexts": [],
       "required_mods": [
         "arcane_chunk_loaders"
@@ -1431,7 +1431,7 @@
       "id": "anchor_area",
       "concept_id": "powers.power_needs_anchor",
       "pool": "discovery",
-      "text": "A working chunk anchor keeps a centered three-by-three chunk area ticking. Plan the machines you want to keep active around it.",
+      "text": "A working chunk anchor keeps a three-by-three area of chunks active around it. Build the machines you need to run while away inside that area.",
       "contexts": [],
       "required_mods": [
         "arcane_chunk_loaders"
@@ -1485,7 +1485,7 @@
       "id": "encoded_patterns",
       "concept_id": "works.machines_can_remember",
       "pool": "discovery",
-      "text": "AE2 autocrafting uses encoded patterns. Teach the network a recipe before asking it to craft the result.",
+      "text": "An AE2 network can craft for you after you give it a pattern for the recipe. Set up the pattern before requesting the item.",
       "contexts": [],
       "required_mods": [
         "ae2"
@@ -1503,7 +1503,7 @@
       "id": "craft_request",
       "concept_id": "works.machines_can_remember",
       "pool": "discovery",
-      "text": "A stored pattern is the start of an autocrafting setup. Check the crafting request for missing inputs before confirming it.",
+      "text": "An AE2 crafting pattern teaches a recipe, but the network still needs its ingredients. Check what is missing before confirming a request.",
       "contexts": [],
       "required_mods": [
         "ae2"
@@ -1591,7 +1591,7 @@
       "id": "rocket_planning",
       "concept_id": "works.leave_atmosphere",
       "pool": "teaser",
-      "text": "A future rocket will need more than a launch button. Its controls let you check destination, thrust, and delta-v.",
+      "text": "Before launching a rocket, check its destination, engine power, and fuel range in the controls.",
       "contexts": [],
       "required_mods": [
         "creatingspace"
@@ -1645,7 +1645,7 @@
       "id": "factory_memory",
       "concept_id": "works.machines_can_remember",
       "pool": "teaser",
-      "text": "An AE2 network can learn recipes through encoded patterns. A future workshop could make familiar supplies on request.",
+      "text": "An AE2 network can learn recipes from patterns you give it. A future workshop could make familiar supplies when you request them.",
       "contexts": [],
       "required_mods": [
         "ae2"
@@ -1701,7 +1701,7 @@
       "id": "ratlantis_ahead",
       "concept_id": "powers.doors_borrow_worlds",
       "pool": "teaser",
-      "text": "Ratlantis is an available Font destination. Its ruins and machinery await a better-prepared expedition.",
+      "text": "A Dimensional Font can take you to Ratlantis. Prepare supplies before exploring its ruins and machinery.",
       "contexts": [],
       "required_mods": [
         "dimension_drink",
@@ -1722,7 +1722,7 @@
       "id": "bumblezone_ahead",
       "concept_id": "powers.doors_borrow_worlds",
       "pool": "teaser",
-      "text": "The Bumblezone has resources and plants of its own. A future Font trip can be more than a hunt for familiar ores.",
+      "text": "A Dimensional Font can take you to the Bumblezone. Look for its plants and other resources, not just familiar ores.",
       "contexts": [],
       "required_mods": [
         "dimension_drink",
@@ -2124,7 +2124,7 @@
       "id": "food_group_hover",
       "concept_id": "survival.hunger_and_nutrition",
       "pool": "survival",
-      "text": "Compare food-group information before choosing provisions. Two filling meals can contribute to different nutrition groups.",
+      "text": "Food tooltips show which nutrition groups a meal adds to. Try different foods as you find them, even when one meal fills your hunger.",
       "contexts": [
         "hunger"
       ],
@@ -2146,7 +2146,7 @@
       "id": "nutrition_time",
       "concept_id": "survival.hunger_and_nutrition",
       "pool": "survival",
-      "text": "Nutrition changes over time. Recheck the screen during a long trip, especially after relying on one type of food.",
+      "text": "Your food groups slowly run down over time. On a long trip, open the nutrition screen to see which groups are low, then check food tooltips.",
       "contexts": [
         "hunger"
       ],
@@ -2168,7 +2168,7 @@
       "id": "sugar_recovery",
       "concept_id": "survival.hunger_and_nutrition",
       "pool": "survival",
-      "text": "Sugar's benefits draw on your existing nutritional state. Replenish food groups instead of treating more sugar as recovery.",
+      "text": "A sugar boost can use up nutrition from other foods. When it fades, eat food from different groups instead of taking more sugar.",
       "contexts": [
         "hunger",
         "combat"
@@ -2191,7 +2191,7 @@
       "id": "meal_balance",
       "concept_id": "survival.hunger_and_nutrition",
       "pool": "survival",
-      "text": "Pack foods that cover different nutrition groups. A stack of one food is convenient, but it may leave several groups low.",
+      "text": "Bring the food you have for a trip. As you find more kinds, pack a mix so your nutrition does not depend on one group.",
       "contexts": [
         "hunger"
       ],
@@ -2256,7 +2256,7 @@
       "id": "food_merge",
       "concept_id": "survival.food_thermal_state",
       "pool": "survival",
-      "text": "Merging food stacks combines their thermal state. Recheck the resulting stack instead of assuming it stayed unchanged.",
+      "text": "Combining two stacks of the same food can change the resulting food's temperature. Check its tooltip before eating it.",
       "contexts": [
         "hunger"
       ],
@@ -2585,7 +2585,7 @@
       "id": "beetle_loaded_ground",
       "concept_id": "works.rail_beetle",
       "pool": "discovery",
-      "text": "A Rail Beetle plans through loaded terrain. Explore the area before expecting a route farther into the cave.",
+      "text": "A Rail Beetle can plan a route only through nearby terrain the game has loaded. Explore farther into the cave before extending its route.",
       "contexts": [],
       "required_mods": [
         "rail_beetle"
@@ -2699,7 +2699,7 @@
       "id": "beetle_modules",
       "concept_id": "works.rail_beetle",
       "pool": "discovery",
-      "text": "A Rail Beetle cannot install duplicate module families. Choose different upgrades for its available bays.",
+      "text": "A Rail Beetle cannot carry two upgrades of the same kind. Choose a different upgrade for each open slot.",
       "contexts": [],
       "required_mods": [
         "rail_beetle"
@@ -2788,7 +2788,7 @@
       "id": "shaft_stress",
       "concept_id": "works.transmission_loss",
       "pool": "discovery",
-      "text": "Shafts, cogs, gearboxes, and belts contribute transmission stress. Account for the route as well as the powered machines.",
+      "text": "In this pack, Create shafts, cogs, gearboxes, and belts use some of your available stress. Include them when planning how much a power source can run.",
       "contexts": [],
       "required_mods": [
         "create_transmission_loss"
@@ -2824,7 +2824,7 @@
       "id": "belt_span_cost",
       "concept_id": "works.transmission_loss",
       "pool": "discovery",
-      "text": "Belt transmission loss considers the span between pulleys. Check long belts when reviewing a network's stress use.",
+      "text": "Long Create belts use more of your available stress. Check the distance between their pulleys when a network is overloaded.",
       "contexts": [],
       "required_mods": [
         "create_transmission_loss"
@@ -3058,7 +3058,7 @@
       "id": "ore_coproducts",
       "concept_id": "works.chemistry_remembers_sequence",
       "pool": "discovery",
-      "text": "Ore processing can yield coproducts as well as the main metal. Leave storage space for the whole output.",
+      "text": "Processing ore can produce extra materials alongside the main metal. Leave storage space for everything the recipe makes.",
       "contexts": [],
       "required_mods": [
         "realistic_ores"
@@ -3242,7 +3242,7 @@
       "id": "life_preview",
       "concept_id": "powers.life_becomes_capable",
       "pool": "discovery",
-      "text": "The Life screen shows resulting properties. Review the concrete changes before committing an allocation.",
+      "text": "The Life screen shows how each point changes your stats. Read the changes before spending a point.",
       "contexts": [],
       "required_mods": [
         "rpg_stats"
@@ -3278,7 +3278,7 @@
       "id": "life_new_plan",
       "concept_id": "powers.life_becomes_capable",
       "pool": "discovery",
-      "text": "A new life is a chance to reconsider stat choices. Review your needs before repeating the previous allocation.",
+      "text": "After death, you can spend your Life points again. Review your needs before making the same choices.",
       "contexts": [],
       "required_mods": [
         "rpg_stats"
@@ -3564,7 +3564,7 @@
       "id": "door_healing_locked",
       "concept_id": "survival.door_healing_locked",
       "pool": "survival",
-      "text": "You are at Death\u2019s Door and healing is still locked. Move to safety; the next accepted hit can kill. Open Body to inspect the healing lock and your injuries.",
+      "text": "You are at Death's Door and cannot heal yet. Get to safety; another hit can kill you. Open Body to see when healing is available and which injuries you have.",
       "contexts": [
         "door_locked"
       ],
@@ -3586,7 +3586,7 @@
       "id": "door_restore_hp",
       "concept_id": "survival.door_restore_hp",
       "pool": "survival",
-      "text": "Healing is available at Death\u2019s Door. Restore HP to regain its protective buffer. Your injuries remain until treated; inspect them in Body.",
+      "text": "You can heal at Death's Door now. Restore health before another hit. Healing will not remove injuries; open Body to see how to treat them.",
       "contexts": [
         "door_healable"
       ],
@@ -3608,7 +3608,7 @@
       "id": "injury_medicine_ready",
       "concept_id": "survival.injury_medicine_ready",
       "pool": "survival",
-      "text": "You have matching injury medicine. Open Body, select the injury, and finish treatment in safety. HP healing leaves injuries.",
+      "text": "You have medicine for one of your injuries. Get to safety, then open Body, select that injury, and finish its treatment.",
       "contexts": [
         "injury_cure"
       ],
@@ -3630,7 +3630,7 @@
       "id": "trauma_penalties",
       "concept_id": "survival.trauma_penalties",
       "pool": "survival",
-      "text": "Trauma amplifies existing impairments, not injury death odds. Avoid hits while stacks expire; treat injuries in Body.",
+      "text": "Further hits can make an existing injury affect you more while the extra trauma lasts. Avoid more hits and treat the injury in Body.",
       "contexts": [
         "injury_trauma"
       ],
@@ -3652,7 +3652,7 @@
       "id": "injury_find_medicine",
       "concept_id": "survival.injury_find_medicine",
       "pool": "survival",
-      "text": "Open Body to find medicine for untreated injuries. Injury type selects the cure; region determines the impairment.",
+      "text": "Open Body to see which medicine treats each injury. The injury type determines the medicine; its location determines how it affects you.",
       "contexts": [
         "injury_uncured"
       ],
@@ -3674,7 +3674,7 @@
       "id": "door_prepare",
       "concept_id": "survival.door_prepare",
       "pool": "survival",
-      "text": "Positive HP protects you from the death roll on the hit that empties it. At Death\u2019s Door, further hits can kill. Healing restores HP; treatment removes injuries.",
+      "text": "When a hit empties your health, you enter Death's Door instead of dying immediately. Another hit can kill you. Heal to restore health; use Body to treat injuries.",
       "contexts": [],
       "required_mods": [
         "downed_player_revival"
@@ -3754,7 +3754,7 @@
       "id": "context_nutrition",
       "concept_id": "survival.context_nutrition",
       "pool": "survival",
-      "text": "At least one nutrition group is below its supported threshold. Open nutrition and choose foods that replenish your lowest groups.",
+      "text": "One of your food groups is running low. Open the nutrition screen to see which group it is, then eat a food that adds to it when you can.",
       "contexts": [
         "nutrition"
       ],
@@ -3818,7 +3818,7 @@
       "id": "context_low_health",
       "concept_id": "survival.context_low_health",
       "pool": "survival",
-      "text": "Your HP buffer is low. Find cover and restore health before taking another hit. Inspect persistent injuries separately in Body.",
+      "text": "Your health is low. Find cover and heal before another hit. Open Body to check for injuries that healing will not remove.",
       "contexts": [
         "low_health"
       ],
