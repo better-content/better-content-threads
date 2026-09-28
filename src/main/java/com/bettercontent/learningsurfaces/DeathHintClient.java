@@ -12,6 +12,7 @@ import net.minecraft.client.gui.screens.PauseScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.event.ScreenEvent;
@@ -66,6 +67,7 @@ public final class DeathHintClient {
             if (selected != null) layoutPause(event.getScreen(), selected.hint());
         }
     }
+
     @SubscribeEvent public static void render(ScreenEvent.Render.Post event) {
         var screen = event.getScreen();
         boolean menu = screen instanceof TitleScreen;
@@ -119,6 +121,7 @@ public final class DeathHintClient {
 
     /** Layout measures native widgets and is shared by the isolated visual fixtures. */
     static boolean renderHint(GuiGraphics graphics, Screen screen, DeathHint hint) {
+        if (screen instanceof TitleScreen) return renderMenuEntry(graphics, screen, hint);
         var font = Minecraft.getInstance().font;
         boolean injuryDeath=screen instanceof DeathScreen && ModList.get().isLoaded("downed_player_revival");
         var lines = font.split(text(hint), injuryDeath?Math.min(544,screen.width-32):DeathHintLayout.textWidth(screen.width));
@@ -128,30 +131,52 @@ public final class DeathHintClient {
         var layout = DeathHintLayout.calculate(screen.width, screen.height, bottom, lines.size(), font.lineHeight);
         if(screen instanceof DeathScreen && ModList.get().isLoaded("downed_player_revival"))
             layout = InjuryLayout.reserve(screen,lines.size(),font.lineHeight);
-        if(screen instanceof TitleScreen) {
-            int panelHeight=8+font.lineHeight*lines.size();
-            int top=screen.height-panelHeight-14;
-            int shift=Math.max(0,bottom+6-top);
-            int first=screen.children().stream().filter(c->c instanceof AbstractButton).map(c->(AbstractButton)c).filter(b->b.visible&&b.getHeight()>=20).mapToInt(AbstractButton::getY).min().orElse(0);
-            if(shift==0||first-shift>=76){
-                if(shift>0)for(var child:screen.children())if(child instanceof AbstractButton b&&b.getHeight()>=20)b.setY(b.getY()-shift);
-                int textWidth=DeathHintLayout.textWidth(screen.width);
-                layout=new DeathHintLayout((screen.width-textWidth)/2-8,bottom-shift+6,textWidth+16,panelHeight,screen.width>=160&&bottom-shift+6+panelHeight<=screen.height-8);
-            }
-        }
         if (!layout.visible()) return false;
-        boolean menuPanel=screen instanceof TitleScreen;
-        if(menuPanel){graphics.pose().pushPose();graphics.pose().translate(0,0,400);}
-        boolean compactMenu=menuPanel&&screen.height<=240;
-        graphics.fill(compactMenu?0:layout.x(),layout.y(),compactMenu?screen.width:layout.x()+layout.width(),compactMenu?screen.height-11:layout.y()+layout.height(),menuPanel?0xFF151310:0xCE151310);
-        if(!injuryDeath && !(screen instanceof TitleScreen)) graphics.drawString(font, Component.translatable("screen.learning_surfaces.death_hint"),
+        graphics.fill(layout.x(),layout.y(),layout.x()+layout.width(),layout.y()+layout.height(),0xCE151310);
+        if(!injuryDeath) graphics.drawString(font, Component.translatable("screen.learning_surfaces.death_hint"),
             layout.x() + 8, layout.y() + 6, 0xC6A15B, false);
-        int y = layout.y() + (injuryDeath || screen instanceof TitleScreen?4:9 + font.lineHeight);
+        int y = layout.y() + (injuryDeath?4:9 + font.lineHeight);
         for (var line : lines) {
             graphics.drawString(font, line, layout.x() + 8, y, 0xEEE8DB, false);
             y += font.lineHeight;
         }
-        if(menuPanel)graphics.pose().popPose();
+        return true;
+    }
+
+    private static boolean renderMenuEntry(GuiGraphics graphics, Screen screen, DeathHint hint) {
+        if (screen.width < 320 || screen.height < 200) return false;
+        var font = Minecraft.getInstance().font;
+        int pageX = Math.round(screen.width * .065f);
+        int pageY = Math.round(screen.height * .11f);
+        int pageWidth = Math.round(screen.width * .405f);
+        int pageBottom = Math.round(screen.height * .90f);
+        int textWidth = pageWidth - 12;
+        var lines = font.split(text(hint), textWidth);
+        int textHeight = 17 + lines.size() * font.lineHeight;
+        int textY = pageBottom - textHeight;
+        int artY = pageY + 6;
+        int artHeight = Math.max(34, Math.min(textY - artY - 9,
+                Math.round((pageWidth - 6) * 342f / 512f * 1.3f)));
+        if (artY + artHeight + 9 > textY || textY < pageY + 44) return false;
+        String artName = hint.conceptId().replace('.', '_');
+        var art = new ResourceLocation("learning_surfaces", "textures/gui/menu_sketches/" + artName + ".png");
+        graphics.pose().pushPose();
+        graphics.pose().translate(0, 0, 400);
+        graphics.fill(pageX - 3, pageY - 3, pageX + pageWidth + 3, pageBottom + 5, 0xFFF0E4C6);
+        graphics.fill(pageX, pageY, pageX + pageWidth, pageY + 1, 0xFFAA8E62);
+        int imageWidth = pageWidth - 6;
+        int sourceWidth = Math.min(512, Math.max(1, Math.round(342f * imageWidth / artHeight)));
+        int sourceX = (512 - sourceWidth) / 2;
+        graphics.blit(art, pageX + 3, artY, imageWidth, artHeight, sourceX, 0, sourceWidth, 342, 512, 342);
+        graphics.fill(pageX + 3, textY - 5, pageX + pageWidth - 3, textY - 4, 0xFFAD9467);
+        graphics.drawString(font, "FIELD NOTE / " + hint.pool().toUpperCase(java.util.Locale.ROOT),
+                pageX + 3, textY, 0xFF77634B, false);
+        int rowY = textY + 13;
+        for (var line : lines) {
+            graphics.drawString(font, line, pageX + 3, rowY, 0xFF30483E, false);
+            rowY += font.lineHeight;
+        }
+        graphics.pose().popPose();
         return true;
     }
 }
