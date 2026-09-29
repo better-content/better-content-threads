@@ -132,12 +132,16 @@ public final class DeathHintClient {
         if(screen instanceof DeathScreen && ModList.get().isLoaded("downed_player_revival"))
             layout = InjuryLayout.reserve(screen,lines.size(),font.lineHeight);
         if (!layout.visible()) return false;
-        graphics.fill(layout.x(),layout.y(),layout.x()+layout.width(),layout.y()+layout.height(),0xCE151310);
+        graphics.fill(layout.x(),layout.y(),layout.x()+layout.width(),layout.y()+layout.height(),injuryDeath?0xFFEDE0C1:0xCE151310);
+        if(injuryDeath){
+            graphics.fill(layout.x(),layout.y(),layout.x()+layout.width(),layout.y()+2,0xFFAC9163);
+            graphics.fill(layout.x(),layout.y()+layout.height()-2,layout.x()+layout.width(),layout.y()+layout.height(),0xFFAC9163);
+        }
         if(!injuryDeath) graphics.drawString(font, Component.translatable("screen.learning_surfaces.death_hint"),
             layout.x() + 8, layout.y() + 6, 0xC6A15B, false);
         int y = layout.y() + (injuryDeath?4:9 + font.lineHeight);
         for (var line : lines) {
-            graphics.drawString(font, line, layout.x() + 8, y, 0xEEE8DB, false);
+            graphics.drawString(font, line, layout.x() + 8, y, injuryDeath?0xFF254637:0xEEE8DB, false);
             y += font.lineHeight;
         }
         return true;
