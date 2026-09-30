@@ -149,6 +149,10 @@ public final class DeathHintClient {
         if(screen instanceof DeathScreen && ModList.get().isLoaded("better_deaths_door"))
             layout = InjuryLayout.reserve(screen,lines.size(),font.lineHeight);
         if (!layout.visible()) return false;
+        if (injuryDeath) {
+            graphics.pose().pushPose();
+            graphics.pose().translate(0, 0, 600);
+        }
         graphics.fill(layout.x(),layout.y(),layout.x()+layout.width(),layout.y()+layout.height(),injuryDeath?0xFFEDE0C1:0xCE151310);
         if(injuryDeath){
             graphics.fill(layout.x(),layout.y(),layout.x()+layout.width(),layout.y()+2,0xFFAC9163);
@@ -161,6 +165,7 @@ public final class DeathHintClient {
             graphics.drawString(font, line, layout.x() + 8, y, injuryDeath?0xFF254637:0xEEE8DB, false);
             y += font.lineHeight;
         }
+        if (injuryDeath) graphics.pose().popPose();
         return true;
     }
 
