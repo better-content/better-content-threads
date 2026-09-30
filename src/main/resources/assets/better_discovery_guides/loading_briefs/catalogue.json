@@ -37,7 +37,7 @@
       "owner": "better-survival-physiology",
       "category": "Nutrition",
       "headline": "Balancing Nutrition",
-      "body": "Hunger and nutrition are separate. Nutrition tracks six food groups over time. Check each group and choose foods that replenish the lowest ones.",
+      "body": "Hunger and nutrition are separate. Six lasting food groups unlock abilities at 20, 40, 60, and 80%. Meat, eggs, fruit, and dairy help early; imported seeds open grain and garden foods.",
       "action": "Open nutrition and check your lowest groups.",
       "art": "better_discovery_guides:textures/gui/loading_briefs/nutrition.png"
     },
@@ -57,8 +57,8 @@
       "owner": "better-survival-physiology",
       "category": "Metabolism",
       "headline": "Sugar and Alcohol",
-      "body": "Sugar increases speed but makes nutrition drain faster and causes a crash afterward. Moderate alcohol improves control; higher amounts cause impairment.",
-      "action": "Check your nutrition before consuming sugar.",
+      "body": "Sweetness multiplies unlocked food benefits, but raises hunger and nutrition drain sharply. Draught reduces damage and steadily impairs movement and work; too much causes a blackout.",
+      "action": "Check your nutrition before eating sweets or drinking alcohol.",
       "art": "better_discovery_guides:textures/gui/loading_briefs/metabolism.png"
     },
     {

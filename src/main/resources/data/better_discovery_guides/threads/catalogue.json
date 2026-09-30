@@ -209,8 +209,8 @@
       "topic": "world",
       "order": 11,
       "art": "better_discovery_guides:textures/gui/threads/bring_planting_stock_home.png",
-      "event": "Wild Overworld vegetables left no planting seed.",
-      "cause": "Wild produce is food, not dependable planting stock. Bumblezone cultivars provide a seed line that can be replanted after mature uprooting.",
+      "event": "You found wild food without dependable planting stock.",
+      "cause": "Forage fruit and animal foods in the Overworld. Bumblezone cultivars provide dependable grain and vegetable seed lines for a farm.",
       "action": "Find Bumblezone planting stock and establish a farm at home.",
       "discovery_routes": [
         {
@@ -230,7 +230,7 @@
       "order": 12,
       "art": "better_discovery_guides:textures/gui/threads/fruit_fuels_a_sprint.png",
       "event": "You ate your first fruit.",
-      "cause": "A varied diet matters: strong fruit nutrition supports sustained sprinting.",
+      "cause": "Orchard nutrition from fruit softens falls at 20%, improves movement, and unlocks a sprinting jump burst at 80%.",
       "action": "Pack fruit when you expect a long journey.",
       "discovery_routes": [
         {
@@ -250,7 +250,7 @@
       "order": 13,
       "art": "better_discovery_guides:textures/gui/threads/vegetables_buffer_exposure.png",
       "event": "You ate your first vegetable.",
-      "cause": "Strong vegetable nutrition helps protect against temperature swings and knockback.",
+      "cause": "Garden nutrition from vegetables protects against temperature drift at 20% and knockback at 40%.",
       "action": "Keep vegetables in your travel food mix.",
       "discovery_routes": [
         {
@@ -305,13 +305,13 @@
       "id": "sugar_crash",
       "concept_id": "body.sugar_crash",
       "owner": "better-survival-physiology",
-      "title": "A Sugar Boost Became a Crash",
+      "title": "Sweetness Drained Your Nutrition",
       "topic": "body",
       "order": 16,
       "art": "better_discovery_guides:textures/gui/threads/sugar_crash.png",
-      "event": "Your sugar boost gave way to a metabolic crash.",
-      "cause": "Sugar provides a temporary boost, but its associated metabolic debt can outlast it. The crash is a resource state, not an injury.",
-      "action": "Let the debt recover and check your nutrition before adding more sugar.",
+      "event": "Sweetness drained one of your food groups below 20%.",
+      "cause": "Sweetness multiplies unlocked food benefits while hunger and nutrition drain rise exponentially. A group below 20% loses its first ability.",
+      "action": "Eat food for the depleted group before adding more sweetness.",
       "discovery_routes": [
         {
           "id": "sugar_crash",
@@ -334,7 +334,7 @@
       "order": 17,
       "art": "better_discovery_guides:textures/gui/threads/heavy_blow.png",
       "event": "Your prepared attack triggered Heavy Blow.",
-      "cause": "High protein nutrition can strengthen a rested, charged attack. Heavy Blow has a recovery interval before it can trigger again.",
+      "cause": "Sinew nutrition unlocks a heavy charged strike at 40%. It needs four seconds since the last attack and then a 12-second recovery.",
       "action": "Maintain protein nutrition and allow the attack to recover before relying on another heavy blow.",
       "discovery_routes": [
         {
@@ -358,7 +358,7 @@
       "order": 18,
       "art": "better_discovery_guides:textures/gui/threads/work_rhythm.png",
       "event": "Your mining sequence reached full Work Rhythm.",
-      "cause": "High grain nutrition supports a mining rhythm that builds through successive valid breaks. A pause or unsuitable work interrupts the sequence.",
+      "cause": "Granary nutrition builds a mining rhythm through successive correct-tool breaks. At 60% the rhythm survives a five-second pause.",
       "action": "Keep suitable tools and provisions ready when planning a long mining session.",
       "discovery_routes": [
         {
