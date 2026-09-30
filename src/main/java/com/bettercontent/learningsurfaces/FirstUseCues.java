@@ -155,6 +155,7 @@ public final class FirstUseCues {
         ResourceLocation key = ForgeRegistries.ITEMS.getKey(stack.getItem());
         if (key == null) return;
         String item = key.toString();
+        if (item.equals("farmersdelight:straw")) once(player, "make_backpack", "straw_acquired", "first");
         if (DRYABLE.contains(item)) once(player, "dry_food_for_journey", "dryable_food_acquired", "first");
         if (item.equals("tconstruct:pickaxe")) once(player, "find_dimensional_font", "first_tinkers_tool", "assembled");
         if (item.startsWith("tconstruct:") && stack.isDamageableItem() && stack.getDamageValue() * 5 >= stack.getMaxDamage() * 4)

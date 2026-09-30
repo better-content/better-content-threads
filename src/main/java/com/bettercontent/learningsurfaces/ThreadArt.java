@@ -14,7 +14,7 @@ final class ThreadArt {
    if(!"bc.learning_surfaces.cards.v1".equals(root.get("schema").getAsString()))throw new IllegalStateException("Unsupported learning card catalogue");
    var out=new LinkedHashMap<String,ThreadDefinition>();
    root.getAsJsonArray("threads").forEach(e->{var d=ThreadDefinition.parse(e.getAsJsonObject());if(out.putIfAbsent(d.id(),d)!=null)throw new IllegalStateException("Duplicate card "+d.id());});
-   if(out.size()!=52||out.values().stream().map(ThreadDefinition::order).distinct().count()!=52)throw new IllegalStateException("Learning cards require 52 distinct orders");
+   if(out.size()!=53||out.values().stream().map(ThreadDefinition::order).distinct().count()!=53)throw new IllegalStateException("Learning cards require 53 distinct orders");
    return Collections.unmodifiableMap(out);
   }catch(java.io.IOException e){throw new IllegalStateException("Cannot read packaged card identities",e);}
  }

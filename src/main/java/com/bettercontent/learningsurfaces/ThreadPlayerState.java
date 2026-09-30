@@ -44,7 +44,7 @@ public final class ThreadPlayerState {
   readSet(root,"known",s.known);readSet(root,"unread",s.unread);s.unread.retainAll(s.known);
   readSet(root,"discovered",s.discovered);s.discovered.retainAll(s.known);readSet(root,"pendingNotices",s.pendingNotices);s.pendingNotices.retainAll(s.known);
   for(String id:s.known){s.generationCounts.put(id,Math.max(1,root.getCompound("generationCounts").getInt(id)));s.firstGeneration.put(id,Math.max(0,root.getCompound("firstGeneration").getLong(id)));s.lastGeneration.put(id,Math.max(0,root.getCompound("lastGeneration").getLong(id)));long order=Math.max(1,root.getCompound("discoveryOrder").getLong(id));s.discoveryOrder.put(id,order);s.nextOrder=Math.max(s.nextOrder,order);String context=root.getCompound("contexts").getString(id);if(context.length()<=256)s.contexts.put(id,context);}
-  root.getList("outcomes",Tag.TAG_STRING).stream().limit(52).map(Tag::getAsString).filter(v->v.length()<=177).forEach(s.outcomes::add);
+  root.getList("outcomes",Tag.TAG_STRING).stream().limit(53).map(Tag::getAsString).filter(v->v.length()<=177).forEach(s.outcomes::add);
   return s;
  }
  CompoundTag toTag(){var root=new CompoundTag();root.putInt("schema",1);root.putLong("generation",generation);root.putLong("nextOrder",nextOrder);root.put("known",strings(known));root.put("unread",strings(unread));root.put("discovered",strings(discovered));root.put("pendingNotices",strings(pendingNotices));root.put("outcomes",strings(outcomes));var counts=new CompoundTag();generationCounts.forEach(counts::putInt);root.put("generationCounts",counts);root.put("firstGeneration",longs(firstGeneration));root.put("lastGeneration",longs(lastGeneration));root.put("discoveryOrder",longs(discoveryOrder));var context=new CompoundTag();contexts.forEach(context::putString);root.put("contexts",context);return root;}
@@ -53,7 +53,7 @@ public final class ThreadPlayerState {
  private static CompoundTag read(MinecraftServer server,UUID player){if(ModList.get().isLoaded("world_lifecycle_manager")){try{return WorldLifecycleThreads.readPlayerData(server,LINEAGE_KEY,player);}catch(IOException e){throw new IllegalStateException("Cannot read lineage discoveries",e);}}return worldData(server).players.getCompound(player.toString());}
  private static WorldData worldData(MinecraftServer server){return server.overworld().getDataStorage().computeIfAbsent(WorldData::new,WorldData::new,"learning_surfaces_discoveries");}
  private static final class WorldData extends SavedData {private final CompoundTag players;WorldData(){players=new CompoundTag();}WorldData(CompoundTag tag){players=tag.getCompound("players");}@Override public CompoundTag save(CompoundTag tag){tag.put("players",players);return tag;}}
- private static void readSet(CompoundTag tag,String key,Set<String> out){tag.getList(key,Tag.TAG_STRING).stream().map(Tag::getAsString).filter(ThreadArt.BY_ID::containsKey).limit(52).forEach(out::add);}
+ private static void readSet(CompoundTag tag,String key,Set<String> out){tag.getList(key,Tag.TAG_STRING).stream().map(Tag::getAsString).filter(ThreadArt.BY_ID::containsKey).limit(53).forEach(out::add);}
  private static ListTag strings(Collection<String> values){var list=new ListTag();values.forEach(v->list.add(StringTag.valueOf(v)));return list;}
  private static CompoundTag longs(Map<String,Long> values){var out=new CompoundTag();values.forEach(out::putLong);return out;}
  public static boolean validCorrelation(String value){return value!=null&&!value.isBlank()&&value.length()<=128&&value.chars().allMatch(c->c>=0x21&&c<=0x7e);}

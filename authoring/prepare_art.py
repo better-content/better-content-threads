@@ -20,6 +20,8 @@ def convert(source, target, *options):
 for card in cards:
     name = card['id']
     source = args.review_bundle / 'masters' / (name + '.png')
+    if not source.is_file():
+        source = repo / 'authoring/masters' / (name + '.png')
     target = assets / 'textures/gui/threads' / (name + '.png')
     if not source.is_file():
         raise FileNotFoundError(f'No reviewed card master for {name}')

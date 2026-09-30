@@ -4,8 +4,8 @@ import json
 from pathlib import Path
 repo = Path(__file__).resolve().parent.parent
 cards = json.loads((repo / 'authoring/discoveries.json').read_text())['cards']
-assert len(cards) == 52 and sorted(c['order'] for c in cards) == list(range(1, 53))
-assert len({c['id'] for c in cards}) == 52
+assert len(cards) == 53 and sorted(c['order'] for c in cards) == list(range(1, 54))
+assert len({c['id'] for c in cards}) == 53
 textures = repo / 'src/main/resources/assets/learning_surfaces/textures/gui/threads'
 threads = []
 for card in cards:

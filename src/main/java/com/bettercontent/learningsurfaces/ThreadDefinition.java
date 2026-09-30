@@ -12,7 +12,7 @@ public record ThreadDefinition(String id,String conceptId,String owner,String ti
   if(id==null||!id.matches("[a-z0-9_]{1,48}"))throw new IllegalArgumentException("invalid thread id");
   bounded(title,64,"title");
   if(!conceptId.matches("[a-z0-9_.]{3,80}")||!owner.matches("[a-z0-9_.-]{1,80}"))throw new IllegalArgumentException("invalid thread ownership");
-  if(topic==null||art==null||order<1||order>52)throw new IllegalArgumentException("invalid thread identity");
+  if(topic==null||art==null||order<1||order>53)throw new IllegalArgumentException("invalid thread identity");
   bounded(event,MAX_TEXT,"event");bounded(cause,MAX_TEXT,"cause");bounded(action,MAX_TEXT,"action");
   discoveryRoutes=List.copyOf(discoveryRoutes);
   if(discoveryRoutes.isEmpty()||discoveryRoutes.stream().map(Route::id).distinct().count()!=discoveryRoutes.size())throw new IllegalArgumentException("invalid discovery routes");

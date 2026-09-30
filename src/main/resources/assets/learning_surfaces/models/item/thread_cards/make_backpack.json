@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "learning_surfaces:item/thread_cards/make_backpack"
+  }
+}
