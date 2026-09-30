@@ -85,7 +85,7 @@ public final class DeathHintClient {
         }
     }
 
-    @SubscribeEvent public static void render(ScreenEvent.Render.Post event) {
+    @SubscribeEvent(priority = EventPriority.LOWEST) public static void render(ScreenEvent.Render.Post event) {
         var screen = event.getScreen();
         boolean menu = screen instanceof TitleScreen;
         boolean pause = normalPause(screen);
