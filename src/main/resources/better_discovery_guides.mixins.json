@@ -1,0 +1,32 @@
+{
+  "required": false,
+  "minVersion": "0.8",
+  "package": "com.bettercontent.betterdiscoveryguides.mixin",
+  "plugin": "com.bettercontent.betterdiscoveryguides.mixin.LearningSurfacesMixinPlugin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "better_discovery_guides.refmap.json",
+  "client": [
+    "LevelLoadingScreenAccessor",
+    "ConnectScreenLoadingMixin",
+    "ReceivingLevelScreenLoadingMixin"
+  ],
+  "mixins": [
+    "ServerPlayerMovementMixin",
+    "Ae2CraftingCpuMixin",
+    "ArsUpdateCasterMixin",
+    "OccultismRitualBowlMixin",
+    "TinkerAlloyMixin",
+    "DynamicTreeFellingMixin",
+    "BloodAltarRecipeMixin",
+    "GoetySpellResultMixin",
+    "MalumSpiritWorkMixin",
+    "CreatePressOutcomeMixin",
+    "CreateAssemblyOutcomeMixin",
+    "GeologySifterOutcomeMixin",
+    "OreSpoutingOutcomeMixin",
+    "PressureOreOutcomeMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

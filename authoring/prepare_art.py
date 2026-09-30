@@ -9,7 +9,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('review_bundle', type=Path)
 args = parser.parse_args()
 repo = Path(__file__).resolve().parent.parent
-assets = repo / 'src/main/resources/assets/learning_surfaces'
+assets = repo / 'src/main/resources/assets/better_discovery_guides'
 cards = json.loads((repo / 'authoring/discoveries.json').read_text())['cards']
 briefs = json.loads((assets / 'loading_briefs/catalogue.json').read_text())['briefs']
 
@@ -28,12 +28,12 @@ for card in cards:
     convert(source, target, '-resize', '256x384!')
     convert(source, target.with_name(name + '_thumb.png'), '-resize', '256x384!', '-colorspace', 'GRAY')
     convert(source, assets / 'textures/item/thread_cards' / (name + '.png'), '-resize', '256x384!')
-    layer = 'learning_surfaces:item/thread_cards/' + name
+    layer = 'better_discovery_guides:item/thread_cards/' + name
     model = {'parent': 'minecraft:item/generated', 'textures': {'layer0': layer}}
     (assets / 'models/item/thread_cards' / (name + '.json')).write_text(json.dumps(model, indent=2) + '\n')
 model = {'parent': 'minecraft:item/generated', 'textures': {'layer0': 'minecraft:item/paper', 'particle': 'minecraft:item/paper'},
-         'overrides': [{'predicate': {'learning_surfaces:thread_index': c['order']},
-                        'model': 'learning_surfaces:item/thread_cards/' + c['id']} for c in cards]}
+         'overrides': [{'predicate': {'better_discovery_guides:thread_index': c['order']},
+                        'model': 'better_discovery_guides:item/thread_cards/' + c['id']} for c in cards]}
 (assets / 'models/item/thread_facsimile.json').write_text(json.dumps(model, indent=2) + '\n')
 for brief in briefs:
     source = args.review_bundle / 'lessons' / (brief['id'] + '.png')

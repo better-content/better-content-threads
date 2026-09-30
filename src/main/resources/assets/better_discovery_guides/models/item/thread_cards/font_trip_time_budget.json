@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "better_discovery_guides:item/thread_cards/font_trip_time_budget"
+  }
+}

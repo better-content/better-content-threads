@@ -18,4 +18,4 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "learning-surfaces"
+rootProject.name = "better-discovery-guides"

@@ -10,8 +10,8 @@ plugins {
 }
 
 mixin {
-    add(sourceSets.main.get(), "learning_surfaces.refmap.json")
-    config("learning_surfaces.mixins.json")
+    add(sourceSets.main.get(), "better_discovery_guides.refmap.json")
+    config("better_discovery_guides.mixins.json")
 }
 
 group = "com.bettercontent"
@@ -57,7 +57,7 @@ minecraft {
         val baseClient = create("client")
         create("learningVisual") {
             parent(baseClient)
-            args("--mixin", "learning_surfaces.visual.mixins.json")
+            args("--mixin", "better_discovery_guides.visual.mixins.json")
             workingDirectory(project.file("build/learning-visual"))
             args("--width", "1280", "--height", providers.gradleProperty("learningVisualHeight").orElse("720").get())
             mods { getByName(property("mod_id") as String).source(learningVisual) }
@@ -86,7 +86,7 @@ fun betterContentJar(repository: String, artifact: String): java.io.File {
 }
 
 repositories {
-    flatDir { dirs("../downed-player-revival/build/libs") }
+    flatDir { dirs("../better-deaths-door/build/libs") }
     maven("https://api.modrinth.com/maven") { content { includeGroup("maven.modrinth") } }
     maven("https://maven.minecraftforge.net")
     maven("https://harleyoconnor.com/maven")
@@ -99,38 +99,38 @@ repositories {
 }
 
 val betterContentApiJars = files(
-    betterContentJar("downed-player-revival", "downed-player-revival-1.0.0.jar"),
-    betterContentJar("pillager-campaigns", "pillager-campaigns-0.5.4.jar"),
-    betterContentJar("world-lifecycle-manager", "world-lifecycle-manager-0.1.0.jar"),
-    betterContentJar("dimension-drink", "dimension-drink-1.0.0.jar"),
-    betterContentJar("rpg-stats", "rpg-stats-1.0.1.jar"),
-    betterContentJar("arcane-chunk-loaders", "arcane-chunk-loaders-0.1.0.jar"),
-    betterContentJar("better-content-economy", "better-content-economy-1.0.1.jar"),
-    betterContentJar("heat-sync", "heat-sync-0.1.0.jar"),
-    betterContentJar("settlement-roads", "settlement-roads-0.1.0.jar"),
-    betterContentJar("water-survival", "water-survival-1.1.0.jar"),
-    betterContentJar("better-content-fixes", "better-content-fixes-0.1.9.jar"),
-    betterContentJar("player-traces", "player-traces-0.1.0.jar"),
-    betterContentJar("systemic-salience", "systemic-salience-0.1.1.jar"),
-    betterContentJar("realistic-ores", "realistic-ores-0.2.0.jar"),
-    betterContentJar("latent-chemlib", "latent-chemlib-0.2.0.jar"),
-    betterContentJar("depth-director", "depth-director-0.2.1.jar"),
-    betterContentJar("bumblezone-cultivars", "bumblezone-cultivars-0.1.0.jar"),
-    betterContentJar("tinkers-construct-affixes", "tinkers-construct-affixes-1.0.0.jar"),
-    betterContentJar("create-transmission-loss", "create-transmission-loss-0.1.0.jar"),
-    betterContentJar("create-train-fuel-scaling", "create-train-fuel-scaling-0.1.0.jar"),
-    betterContentJar("rail-beetle", "rail-beetle-0.1.0.jar"),
-    betterContentJar("oc2r-create-bridge", "oc2r-create-bridge-0.1.0.jar"),
-    betterContentJar("oc2r-wireless-pubsub", "oc2r-wireless-pubsub-1.0.0.jar")
+    betterContentJar("better-deaths-door", "better-deaths-door-1.0.0.jar"),
+    betterContentJar("better-pillager-campaigns", "better-pillager-campaigns-0.5.4.jar"),
+    betterContentJar("better-world-management", "better-world-management-0.1.0.jar"),
+    betterContentJar("better-dimension-fonts", "better-dimension-fonts-1.0.0.jar"),
+    betterContentJar("better-rpg-progression", "better-rpg-progression-1.0.1.jar"),
+    betterContentJar("better-magic-chunk-anchors", "better-magic-chunk-anchors-0.1.0.jar"),
+    betterContentJar("better-spirit-commerce", "better-spirit-commerce-1.0.1.jar"),
+    betterContentJar("better-industrial-heat", "better-industrial-heat-0.1.0.jar"),
+    betterContentJar("better-settlement-roads", "better-settlement-roads-0.1.0.jar"),
+    betterContentJar("better-drinking-water", "better-drinking-water-1.1.0.jar"),
+    betterContentJar("better-compat-fixes", "better-compat-fixes-0.1.9.jar"),
+    betterContentJar("better-player-traces", "better-player-traces-0.1.0.jar"),
+    betterContentJar("better-survival-physiology", "better-survival-physiology-0.1.1.jar"),
+    betterContentJar("better-ore-geology", "better-ore-geology-0.2.0.jar"),
+    betterContentJar("better-chemlib-hazards", "better-chemlib-hazards-0.2.0.jar"),
+    betterContentJar("better-cave-encounters", "better-cave-encounters-0.2.1.jar"),
+    betterContentJar("better-bumblezone-crops", "better-bumblezone-crops-0.1.0.jar"),
+    betterContentJar("better-tinkers-loot-affixes", "better-tinkers-loot-affixes-1.0.0.jar"),
+    betterContentJar("better-create-kinetic-loss", "better-create-kinetic-loss-0.1.0.jar"),
+    betterContentJar("better-create-train-fuel", "better-create-train-fuel-0.1.0.jar"),
+    betterContentJar("better-rail-beetle", "better-rail-beetle-0.1.0.jar"),
+    betterContentJar("better-oc2r-create-controls", "better-oc2r-create-controls-0.1.0.jar"),
+    betterContentJar("better-oc2r-wireless-messaging", "better-oc2r-wireless-messaging-1.0.0.jar")
 )
 
 dependencies {
     minecraft("net.minecraftforge:forge:${property("minecraft_version")}-${property("forge_version")}")
-    compileOnly(files(betterContentJar("better-content-notifications", "better-content-notifications-1.0.0.jar")))
-    runtimeOnly(files(betterContentJar("better-content-notifications", "better-content-notifications-1.0.0.jar")))
-    add(learningVisual.compileOnlyConfigurationName, files(betterContentJar("downed-player-revival", "downed-player-revival-1.0.0.jar")))
+    compileOnly(files(betterContentJar("better-gameplay-notices", "better-gameplay-notices-1.0.0.jar")))
+    runtimeOnly(files(betterContentJar("better-gameplay-notices", "better-gameplay-notices-1.0.0.jar")))
+    add(learningVisual.compileOnlyConfigurationName, files(betterContentJar("better-deaths-door", "better-deaths-door-1.0.0.jar")))
     if (providers.gradleProperty("combinedDeathVisual").map(String::toBoolean).getOrElse(false)) {
-        add(learningVisual.runtimeOnlyConfigurationName, fg.deobf("com.bettercontent:downed-player-revival:1.0.0"))
+        add(learningVisual.runtimeOnlyConfigurationName, fg.deobf("com.bettercontent:better-deaths-door:1.0.0"))
     }
     compileOnly(betterContentApiJars)
     testCompileOnly(betterContentApiJars)
@@ -189,7 +189,7 @@ tasks.named<Jar>("jar") {
     dependsOn(tasks.named("compileJava"))
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from(layout.buildDirectory.file("tmp/compileJava/compileJava-refmap.json")) {
-        rename { "learning_surfaces.refmap.json" }
+        rename { "better_discovery_guides.refmap.json" }
     }
     finalizedBy("reobfJar")
 }
@@ -218,7 +218,7 @@ tasks.named<JavaCompile>("compileJava") {
 }
 
 tasks.test {
-    doFirst { systemProperty("learning_surfaces.optionalCompileClasspath", configurations.compileClasspath.get().asPath) }
+    doFirst { systemProperty("better_discovery_guides.optionalCompileClasspath", configurations.compileClasspath.get().asPath) }
     useJUnitPlatform()
     finalizedBy(tasks.jacocoTestReport)
 }
@@ -285,8 +285,8 @@ val verifyRuntimeJar by tasks.registering {
 
     doLast {
         ZipFile(runtimeJar.get().asFile).use { zip ->
-            val refmap = zip.getEntry("learning_surfaces.refmap.json")
-                ?: throw GradleException("Runtime JAR is missing learning_surfaces.refmap.json")
+            val refmap = zip.getEntry("better_discovery_guides.refmap.json")
+                ?: throw GradleException("Runtime JAR is missing better_discovery_guides.refmap.json")
             val refmapText = zip.getInputStream(refmap).bufferedReader().use { it.readText() }
             check(refmapText.contains("LevelLoadingScreenAccessor") &&
                 refmapText.contains("\"progressListener\": \"f_96138_")) {

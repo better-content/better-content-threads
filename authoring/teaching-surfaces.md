@@ -1,13 +1,13 @@
 # Teaching surfaces and authoritative advice
 
-Learning Surfaces explains a personal event or point of need, its cause, and a useful response. Contextual cues such as first recipe inspection, first cave-pressure rise, and Font approach can teach before the player commits to a risky operation. It does not use these advice snapshots as discovery evidence. The resource `assets/learning_surfaces/death_hints/catalogue.json` uses `bc.teaching_hints.v2`; each entry explicitly declares its eligible `surfaces`, optional context `requirements`, mechanical `sources`, and required mods.
+Learning Surfaces explains a personal event or point of need, its cause, and a useful response. Contextual cues such as first recipe inspection, first cave-pressure rise, and Font approach can teach before the player commits to a risky operation. It does not use these advice snapshots as discovery evidence. The resource `assets/better_discovery_guides/death_hints/catalogue.json` uses `bc.teaching_hints.v2`; each entry explicitly declares its eligible `surfaces`, optional context `requirements`, mechanical `sources`, and required mods.
 
 ## Selection and exposure
 
 - The main menu chooses one mixed preparation/discovery tip per application launch. It remains stable across world visits, death, reconnect, and resizing. Teasers are eligible only here.
 - Esc selects practical advice on opening. Its text remains still while open. Reopening with the same context retains the tip; a changed context selects again. A heartbeat older than five seconds becomes general advice on the next opening.
 - Death uses the committed final source. With the injury mod present, only `InjuryEvent.FinalDeath` supplies that source; Forge's earlier cancellable notification cannot override it. Death tips remain fixed for reading and are deduplicated until respawn/logout.
-- Each surface has its own local exposure history (`learning-surfaces-{menu,pause,death}-hints.json`). Selection does not consume a tip. Only successfully rendered copy records exposure. Matching current evidence wins over novelty.
+- Each surface has its own local exposure history (`better-discovery-guides-{menu,pause,death}-hints.json`). Selection does not consume a tip. Only successfully rendered copy records exposure. Matching current evidence wins over novelty.
 
 The server refreshes Esc context once per second. Optional mod APIs are isolated behind loaded-mod guards; absent data never implies that a condition happened. Priority is Death's Door, active fire/low air/thirst/body thermal stress/hunger/low HP, injury care, harmful effects and metabolism, held frozen food, recent accepted damage, then the player's actual campaign phase.
 

@@ -6,12 +6,12 @@ repo = Path(__file__).resolve().parent.parent
 cards = json.loads((repo / 'authoring/discoveries.json').read_text())['cards']
 assert len(cards) == 53 and sorted(c['order'] for c in cards) == list(range(1, 54))
 assert len({c['id'] for c in cards}) == 53
-textures = repo / 'src/main/resources/assets/learning_surfaces/textures/gui/threads'
+textures = repo / 'src/main/resources/assets/better_discovery_guides/textures/gui/threads'
 threads = []
 for card in cards:
     row = {k: v for k, v in card.items() if k not in {'scene', 'evidence'}}
     if not (textures / f"{card['id']}.png").is_file():
         raise FileNotFoundError(f"Missing reviewed card art: {card['id']}")
     threads.append(row)
-output = {'schema': 'bc.learning_surfaces.cards.v1', 'threads': threads}
-(repo / 'src/main/resources/data/learning_surfaces/threads/catalogue.json').write_text(json.dumps(output, indent=2) + '\n')
+output = {'schema': 'bc.better_discovery_guides.cards.v1', 'threads': threads}
+(repo / 'src/main/resources/data/better_discovery_guides/threads/catalogue.json').write_text(json.dumps(output, indent=2) + '\n')
