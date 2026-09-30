@@ -2545,7 +2545,7 @@
     },
     {
       "id": "beetle_terminus",
-      "concept_id": "works.better_rail_beetle",
+      "concept_id": "works.rail_beetle",
       "pool": "discovery",
       "text": "Rail Beetles survey new routes at railway ends. A Beetle in the middle of a railway remains in driving mode.",
       "contexts": [],
@@ -2564,7 +2564,7 @@
     },
     {
       "id": "beetle_rails",
-      "concept_id": "works.better_rail_beetle",
+      "concept_id": "works.rail_beetle",
       "pool": "discovery",
       "text": "Load rails, support blocks, and fuel before asking a Rail Beetle to build. Its prompt identifies missing supplies.",
       "contexts": [],
@@ -2583,7 +2583,7 @@
     },
     {
       "id": "beetle_loaded_ground",
-      "concept_id": "works.better_rail_beetle",
+      "concept_id": "works.rail_beetle",
       "pool": "discovery",
       "text": "A Rail Beetle can plan a route only through nearby terrain the game has loaded. Explore farther into the cave before extending its route.",
       "contexts": [],
@@ -2602,7 +2602,7 @@
     },
     {
       "id": "beetle_obstructions",
-      "concept_id": "works.better_rail_beetle",
+      "concept_id": "works.rail_beetle",
       "pool": "discovery",
       "text": "Rail Beetles do not tunnel through solid rock. Clear a passage before planning a railway through it.",
       "contexts": [],
@@ -2621,7 +2621,7 @@
     },
     {
       "id": "beetle_water",
-      "concept_id": "works.better_rail_beetle",
+      "concept_id": "works.rail_beetle",
       "pool": "discovery",
       "text": "Rail Beetles do not plan underwater routes. Prepare a dry route if you want the machine to extend the railway.",
       "contexts": [],
@@ -2640,7 +2640,7 @@
     },
     {
       "id": "beetle_brakes",
-      "concept_id": "works.better_rail_beetle",
+      "concept_id": "works.rail_beetle",
       "pool": "discovery",
       "text": "Stop a Rail Beetle and apply its brakes before servicing engines or modules.",
       "contexts": [],
@@ -2659,7 +2659,7 @@
     },
     {
       "id": "beetle_fallback",
-      "concept_id": "works.better_rail_beetle",
+      "concept_id": "works.rail_beetle",
       "pool": "discovery",
       "text": "A Rail Beetle can burn cargo fuel when its installed engine is empty. Keep that in mind when choosing what to carry.",
       "contexts": [],
@@ -2678,7 +2678,7 @@
     },
     {
       "id": "beetle_supports",
-      "concept_id": "works.better_rail_beetle",
+      "concept_id": "works.rail_beetle",
       "pool": "discovery",
       "text": "Rail Beetles prefer non-burnable support blocks. Supplying stone helps keep useful fuel out of the supports.",
       "contexts": [],
@@ -2697,7 +2697,7 @@
     },
     {
       "id": "beetle_modules",
-      "concept_id": "works.better_rail_beetle",
+      "concept_id": "works.rail_beetle",
       "pool": "discovery",
       "text": "A Rail Beetle cannot carry two upgrades of the same kind. Choose a different upgrade for each open slot.",
       "contexts": [],
@@ -2716,7 +2716,7 @@
     },
     {
       "id": "beetle_remote",
-      "concept_id": "works.better_rail_beetle",
+      "concept_id": "works.rail_beetle",
       "pool": "discovery",
       "text": "Long-range Beetle dispatch reaches already-loaded machines. It does not keep distant chunks loaded by itself.",
       "contexts": [],
@@ -3348,7 +3348,7 @@
     },
     {
       "id": "beetle_route_beacons",
-      "concept_id": "works.better_rail_beetle",
+      "concept_id": "works.rail_beetle",
       "pool": "teaser",
       "text": "Route Beacons can guide a Rail Beetle toward a chosen destination. A railway need not grow only along its default suggestions.",
       "contexts": [],
@@ -3367,7 +3367,7 @@
     },
     {
       "id": "beetle_magic_drives",
-      "concept_id": "works.better_rail_beetle",
+      "concept_id": "works.rail_beetle",
       "pool": "teaser",
       "text": "Rail Beetles have optional drives for several power systems. A future railway can put more than furnace fuel to work.",
       "contexts": [],

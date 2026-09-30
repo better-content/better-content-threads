@@ -16,6 +16,15 @@ final class DeathHintsTest {
             if(hint.pool().equals("teaser"))assertEquals(Set.of("menu"),hint.surfaces());
             assertFalse(hint.text().toLowerCase().contains("bleed out"));assertFalse(hint.text().toLowerCase().contains("revive a downed"));}
     }
+    @Test void everyMenuHintResolvesToPackagedSketchArt() throws Exception {
+        for (var concept : catalogue().stream().map(DeathHint::conceptId).distinct().toList()) {
+            var resource = "/assets/better_discovery_guides/textures/gui/menu_sketches/"
+                + DeathHintClient.menuArtName(concept) + ".png";
+            try (var stream = DeathHintsTest.class.getResourceAsStream(resource)) {
+                assertNotNull(stream, "missing menu sketch for " + concept + " at " + resource);
+            }
+        }
+    }
     @Test void unavailableModsAndMissingEvidenceNeverInventADiagnosis() throws Exception {
         var locked=catalogue().stream().filter(h->h.id().equals("door_healing_locked")).findFirst().orElseThrow();
         assertEquals(DeathHints.FALLBACK,DeathHintRotation.select(List.of(locked),"general","pause",DeathHintRotation.State.empty(),m->true,new Random(),Set.of()).hint());

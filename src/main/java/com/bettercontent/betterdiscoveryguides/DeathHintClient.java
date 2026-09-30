@@ -21,11 +21,28 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = LearningSurfaces.MOD_ID, value = Dist.CLIENT)
 public final class DeathHintClient {
+    private static final Map<String, String> MENU_ART_ALIASES = Map.ofEntries(
+        Map.entry("survival.context_alcohol", "survival_hunger_and_nutrition"),
+        Map.entry("survival.context_campaign", "survival_hazard_preparation"),
+        Map.entry("survival.context_crash", "survival_hunger_and_nutrition"),
+        Map.entry("survival.context_frozen", "world_seasons_turn_work"),
+        Map.entry("survival.context_low_health", "survival_injury_treatment_prepare"),
+        Map.entry("survival.context_nutrition", "survival_hunger_and_nutrition"),
+        Map.entry("survival.door_healing_locked", "survival_door_prepare"),
+        Map.entry("survival.door_restore_hp", "survival_door_prepare"),
+        Map.entry("survival.injury_find_medicine", "survival_injury_treatment_prepare"),
+        Map.entry("survival.injury_medicine_ready", "survival_injury_treatment_prepare"),
+        Map.entry("survival.trauma_penalties", "survival_injury_treatment_prepare"),
+        Map.entry("works.better_rail_beetle", "works_rail_beetle"),
+        Map.entry("works.better_ratlantis_logistics", "works_ratlantis_logistics"),
+        Map.entry("world.better_bumblezone_crops", "world_bumblezone_cultivars")
+    );
     private static final Random RANDOM = new Random();
     private static HintLifecycle lifecycle;
     private static Screen layoutScreen;
@@ -162,7 +179,7 @@ public final class DeathHintClient {
         int artHeight = Math.max(34, Math.min(textY - artY - 9,
                 Math.round((pageWidth - 6) * 342f / 512f * 1.3f)));
         if (artY + artHeight + 9 > textY || textY < pageY + 44) return false;
-        String artName = hint.conceptId().replace('.', '_');
+        String artName = menuArtName(hint.conceptId());
         var art = new ResourceLocation("better_discovery_guides", "textures/gui/menu_sketches/" + artName + ".png");
         graphics.pose().pushPose();
         graphics.pose().translate(0, 0, 400);
@@ -182,5 +199,9 @@ public final class DeathHintClient {
         }
         graphics.pose().popPose();
         return true;
+    }
+
+    static String menuArtName(String conceptId) {
+        return MENU_ART_ALIASES.getOrDefault(conceptId, conceptId.replace('.', '_'));
     }
 }
