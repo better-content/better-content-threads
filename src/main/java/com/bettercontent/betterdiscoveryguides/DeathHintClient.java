@@ -1,5 +1,6 @@
 package com.bettercontent.betterdiscoveryguides;
 
+import com.bettercontent.gameplaynotices.BetterUiTheme;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -153,7 +154,7 @@ public final class DeathHintClient {
             graphics.pose().pushPose();
             graphics.pose().translate(0, 0, 600);
         }
-        graphics.fill(layout.x(),layout.y(),layout.x()+layout.width(),layout.y()+layout.height(),injuryDeath?0xFFEDE0C1:0xCE151310);
+        graphics.fill(layout.x(),layout.y(),layout.x()+layout.width(),layout.y()+layout.height(),injuryDeath?BetterUiTheme.color(0xFFEDE0C1,0xFF263A30):0xCE151310);
         if(injuryDeath){
             graphics.fill(layout.x(),layout.y(),layout.x()+layout.width(),layout.y()+2,0xFFAC9163);
             graphics.fill(layout.x(),layout.y()+layout.height()-2,layout.x()+layout.width(),layout.y()+layout.height(),0xFFAC9163);
@@ -162,7 +163,7 @@ public final class DeathHintClient {
             layout.x() + 8, layout.y() + 6, 0xC6A15B, false);
         int y = layout.y() + (injuryDeath?4:9 + font.lineHeight);
         for (var line : lines) {
-            graphics.drawString(font, line, layout.x() + 8, y, injuryDeath?0xFF254637:0xEEE8DB, false);
+            graphics.drawString(font, line, layout.x() + 8, y, injuryDeath?BetterUiTheme.color(0xFF254637,0xFFF4E6C7):0xEEE8DB, false);
             y += font.lineHeight;
         }
         if (injuryDeath) graphics.pose().popPose();
@@ -188,7 +189,7 @@ public final class DeathHintClient {
         var art = new ResourceLocation("better_discovery_guides", "textures/gui/menu_sketches/" + artName + ".png");
         graphics.pose().pushPose();
         graphics.pose().translate(0, 0, 400);
-        graphics.fill(pageX - 3, pageY - 3, pageX + pageWidth + 3, pageBottom + 5, 0xFFF0E4C6);
+        graphics.fill(pageX - 3, pageY - 3, pageX + pageWidth + 3, pageBottom + 5, BetterUiTheme.color(0xFFF0E4C6,0xFF182B26));
         graphics.fill(pageX, pageY, pageX + pageWidth, pageY + 1, 0xFFAA8E62);
         int imageWidth = pageWidth - 6;
         int sourceWidth = Math.min(512, Math.max(1, Math.round(342f * imageWidth / artHeight)));
@@ -196,10 +197,10 @@ public final class DeathHintClient {
         graphics.blit(art, pageX + 3, artY, imageWidth, artHeight, sourceX, 0, sourceWidth, 342, 512, 342);
         graphics.fill(pageX + 3, textY - 5, pageX + pageWidth - 3, textY - 4, 0xFFAD9467);
         graphics.drawString(font, "FIELD NOTE / " + hint.pool().toUpperCase(java.util.Locale.ROOT),
-                pageX + 3, textY, 0xFF77634B, false);
+                pageX + 3, textY, BetterUiTheme.color(0xFF77634B,0xFFC4B99E), false);
         int rowY = textY + 13;
         for (var line : lines) {
-            graphics.drawString(font, line, pageX + 3, rowY, 0xFF30483E, false);
+            graphics.drawString(font, line, pageX + 3, rowY, BetterUiTheme.color(0xFF30483E,0xFFF4E6C7), false);
             rowY += font.lineHeight;
         }
         graphics.pose().popPose();
